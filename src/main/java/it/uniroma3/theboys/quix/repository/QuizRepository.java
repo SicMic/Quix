@@ -5,6 +5,6 @@ import org.springframework.data.repository.CrudRepository;
 import it.uniroma3.theboys.quix.model.*;
 
 //classe per le operazioni della persistenza (CRUD: CREATE, READ, UPDATE, DELETE)
-public interface MovieRepository extends CrudRepository<Movie, Long>{
+public interface QuizRepository extends CrudRepository<Quiz, Long>{
 
 }
