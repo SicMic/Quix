@@ -1,12 +1,12 @@
-package it.uniroma3.siw.service;
+package it.uniroma3.theboys.quix.service;
 
 import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import it.uniroma3.siw.model.Movie;
-import it.uniroma3.siw.repository.MovieRepository;
+import it.uniroma3.theboys.quix.model.Movie;
+import it.uniroma3.theboys.quix.repository.MovieRepository;
 
 //classe per definire le operazioni CRUD tramite metodi java: descrive i servizi offerti
 @Service

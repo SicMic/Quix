@@ -1,4 +1,4 @@
-package it.uniroma3.siw.model;
+package it.uniroma3.theboys.quix.model;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
