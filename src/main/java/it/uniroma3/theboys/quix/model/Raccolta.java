@@ -1,10 +1,16 @@
 package it.uniroma3.theboys.quix.model;
 
+// import org.springframework.boot.autoconfigure.amqp.RabbitConnectionDetails.Address;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
+
+import java.util.List;
 
 @Entity	
 public class Raccolta { //con @Entity il framework sa che a Movie bisogna associare una tabella nel database
@@ -18,6 +24,12 @@ public class Raccolta { //con @Entity il framework sa che a Movie bisogna associ
 
 	@Column(nullable = false)
 	private String descrizione;
+
+	@OneToOne
+	private Categoria categoria;
+
+	@OneToMany
+	private List<Quiz> elencoQuiz;
 
 	public Long getId() {
 		return id;
