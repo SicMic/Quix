@@ -2,8 +2,8 @@ package it.uniroma3.theboys.quix.repository;
 
 import org.springframework.data.repository.CrudRepository;
 
-import it.uniroma3.theboys.quix.model.User;
+import it.uniroma3.theboys.quix.model.Utente;
 
-public interface UserRepository extends CrudRepository<User, Long>{
+public interface UtenteRepository extends CrudRepository<Utente, Long>{
     
 }
