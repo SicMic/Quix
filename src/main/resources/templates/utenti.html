@@ -1,0 +1,21 @@
+<!-- Definiamo le risposte, in questo caso html -->
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Utenti</title>
+	<link rel="stylesheet" href="/stile.css?version=2" />
+</head>
+
+<body>
+    <h1>Utenti</h1>
+    <div th:if="${utenti.isEmpty()}">Non ci sono film nel sistema</div>
+    <ul>
+      <li th:each="utente : ${utenti}">
+        <a th:href="@{'/utente' + '/' + ${utente.id}}"
+           th:text="${utente.nome} + ' (' + ${utente.cognome} + ')'">Up! (2000)</a>
+      </li>
+    </ul>
+  </body>
+
+</html>

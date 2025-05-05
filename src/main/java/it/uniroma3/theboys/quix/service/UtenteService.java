@@ -11,11 +11,11 @@ public class UtenteService {
 
     @Autowired UtenteRepository userRepository;
 
-    public Iterable<Utente> getAllUsers(){
+    public Iterable<Utente> getAllUtenti(){
         return userRepository.findAll();
     }
 
-    public Utente getUserById(Long id){
+    public Utente getUtenteById(Long id){
         return userRepository.findById(id).get();
     }
     

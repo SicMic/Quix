@@ -19,7 +19,16 @@ public class Quiz { //con @Entity il framework sa che a Movie bisogna associare 
 	private String quesito;
 
 	@Column(nullable = false)
-	private List <String> opzioni;
+	private String opzioneUno;
+
+	@Column(nullable = false)
+	private String opzioneDue;
+
+	@Column(nullable = false)
+	private String opzioneTre;
+
+	@Column(nullable = false)
+	private String opzioneQuattro;
 
 	@Column(nullable = false)
 	private java.time.LocalDate dataCreazione;
@@ -32,7 +41,6 @@ public class Quiz { //con @Entity il framework sa che a Movie bisogna associare 
 		this.id = id;
 	}
 
-
 	public String getQuesito() {
 		return quesito;
 	}
@@ -41,20 +49,44 @@ public class Quiz { //con @Entity il framework sa che a Movie bisogna associare 
 		this.quesito = quesito;
 	}
 
-	public List<String> getOpzioni() {
-		return opzioni;
-	}
-
-	public void setOpzioni(List<String> opzioni) {
-		this.opzioni = opzioni;
-	}
-
 	public java.time.LocalDate getDataCreazione() {
 		return dataCreazione;
 	}
 
 	public void setDataCreazione(java.time.LocalDate dataCreazione) {
 		this.dataCreazione = dataCreazione;
+	}
+
+	public String getOpzioneUno() {
+		return opzioneUno;
+	}
+
+	public void setOpzioneUno(String opzioneUno) {
+		this.opzioneUno = opzioneUno;
+	}
+
+	public String getOpzioneDue() {
+		return opzioneDue;
+	}
+
+	public void setOpzioneDue(String opzioneDue) {
+		this.opzioneDue = opzioneDue;
+	}
+
+	public String getOpzioneTre() {
+		return opzioneTre;
+	}
+
+	public void setOpzioneTre(String opzioneTre) {
+		this.opzioneTre = opzioneTre;
+	}
+
+	public String getOpzioneQuattro() {
+		return opzioneQuattro;
+	}
+
+	public void setOpzioneQuattro(String opzioneQuattro) {
+		this.opzioneQuattro = opzioneQuattro;
 	}
 
 	//Non so se ha senso creare i metodi hashCode() e equals()
