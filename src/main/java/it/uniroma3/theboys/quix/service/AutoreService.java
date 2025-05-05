@@ -15,7 +15,7 @@ public class AutoreService {
         return autoreRepository.findAll();
     }
 
-    public Autore getAutoreById (Long id){
+    public Autore getAutoreById(Long id){
         return autoreRepository.findById(id).get();
     }
 }
