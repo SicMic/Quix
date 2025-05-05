@@ -3,21 +3,21 @@ package it.uniroma3.theboys.quix.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import it.uniroma3.theboys.quix.model.User;
-import it.uniroma3.theboys.quix.repository.UserRepository;
+import it.uniroma3.theboys.quix.model.Utente;
+import it.uniroma3.theboys.quix.repository.UtenteRepository;
 
 @Service
-public class UserService {
+public class UtenteService {
 
-    @Autowired UserRepository userRepository;
+    @Autowired UtenteRepository userRepository;
 
-    public Iterable<User> getAllUsers(){
+    public Iterable<Utente> getAllUsers(){
         return userRepository.findAll();
     }
 
-    public User getUserById(Long id){
+    public Utente getUserById(Long id){
         return userRepository.findById(id).get();
     }
     
-    
+
 }
