@@ -5,9 +5,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToOne;
-
-import java.util.List;
+import jakarta.persistence.ManyToOne;
 
 @Entity	
 public class Quiz { //con @Entity il framework sa che a Movie bisogna associare una tabella nel database
@@ -34,7 +32,7 @@ public class Quiz { //con @Entity il framework sa che a Movie bisogna associare 
 	@Column(nullable = false)
 	private java.time.LocalDate dataCreazione;
 
-	@OneToOne
+	@ManyToOne
 	private Categoria categoria;
 	
 
