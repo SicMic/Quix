@@ -1,10 +1,13 @@
 package it.uniroma3.theboys.quix.model;
 
+import java.util.List;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 
 
 @Entity
@@ -26,6 +29,10 @@ public class Utente {
     /* nullable=false? */
     private String nome;
     private String cognome;
+
+
+    @OneToMany
+	private List<Quiz> elencoQuiz;
 
     
     public Long getId() {

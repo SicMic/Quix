@@ -1,10 +1,13 @@
 package it.uniroma3.theboys.quix.model;
 
+import java.util.List;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 
 
 @Entity
@@ -22,12 +25,14 @@ public class Autore {
 
     @Column(unique=true, nullable=false)
     private String email;
-    
+
     private String nome;
     private String cognome;
 
     private String biografia;
 
+	@OneToMany
+	private List<Raccolta> elencoRaccolte;
     
     public Long getId() {
         return id;
@@ -87,6 +92,14 @@ public class Autore {
 
     /* hashCode e equals generati con riferimento username e email */
     /* Vedi User e scegli soluzione migliore per entrambi */
+
+    public List<Raccolta> getElencoRaccolte() {
+        return elencoRaccolte;
+    }
+
+    public void setElencoRaccolte(List<Raccolta> elencoRaccolte) {
+        this.elencoRaccolte = elencoRaccolte;
+    }
 
     @Override
     public int hashCode() {

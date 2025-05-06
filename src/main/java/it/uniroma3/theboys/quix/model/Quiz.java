@@ -5,6 +5,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToOne;
 
 import java.util.List;
 
@@ -32,6 +33,10 @@ public class Quiz { //con @Entity il framework sa che a Movie bisogna associare 
 
 	@Column(nullable = false)
 	private java.time.LocalDate dataCreazione;
+
+	@OneToOne
+	private Categoria categoria;
+	
 
 	public Long getId() {
 		return id;
@@ -87,6 +92,14 @@ public class Quiz { //con @Entity il framework sa che a Movie bisogna associare 
 
 	public void setOpzioneQuattro(String opzioneQuattro) {
 		this.opzioneQuattro = opzioneQuattro;
+	}
+
+	public Categoria getCategoria() {
+		return categoria;
+	}
+
+	public void setCategoria(Categoria categoria) {
+		this.categoria = categoria;
 	}
 
 	//Non so se ha senso creare i metodi hashCode() e equals()

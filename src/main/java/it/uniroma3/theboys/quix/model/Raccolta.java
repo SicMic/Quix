@@ -28,6 +28,9 @@ public class Raccolta { //con @Entity il framework sa che a Movie bisogna associ
 	@OneToOne
 	private Categoria categoria;
 
+	@OneToOne
+	private Autore autore;
+
 	@OneToMany
 	private List<Quiz> elencoQuiz;
 
@@ -55,6 +58,30 @@ public class Raccolta { //con @Entity il framework sa che a Movie bisogna associ
 		this.descrizione = descrizione;
 	}
 
+	public Categoria getCategoria() {
+		return categoria;
+	}
+
+	public void setCategoria(Categoria categoria) {
+		this.categoria = categoria;
+	}
+
+	public List<Quiz> getElencoQuiz() {
+		return elencoQuiz;
+	}
+
+	public void setElencoQuiz(List<Quiz> elencoQuiz) {
+		this.elencoQuiz = elencoQuiz;
+	}
+
+	public Autore getAutore() {
+		return autore;
+	}
+
+	public void setAutore(Autore autore) {
+		this.autore = autore;
+	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -85,7 +112,5 @@ public class Raccolta { //con @Entity il framework sa che a Movie bisogna associ
 			return false;
 		return true;
 	}
-	
-	 
 
 }
