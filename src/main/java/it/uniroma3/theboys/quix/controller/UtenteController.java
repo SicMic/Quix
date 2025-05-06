@@ -5,8 +5,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import it.uniroma3.theboys.quix.service.UtenteService;
+import it.uniroma3.theboys.quix.model.Utente;
 
 @Controller
 public class UtenteController {
@@ -15,9 +17,16 @@ public class UtenteController {
 
 	@GetMapping("/login")
 	public String getLogin(Model model) {	//l'id preso dal path viene convertito in Long
-		//model.addAttribute("movie", this.movieService.getMovieById(id));	//l'id viene passato al metodo
+		model.addAttribute("utente", new Utente());
 		return "login.html";
 	}
+
+	@GetMapping("/loginDopo")
+	public String getLoginDopo(Model model, @RequestParam Utente year) {	//l'id preso dal path viene convertito in Long
+
+		return "login.html";
+	}
+
 
     @GetMapping("/utenti")
 	public String getUtenti(Model model) {	//l'id preso dal path viene convertito in Long

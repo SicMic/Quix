@@ -18,6 +18,11 @@ public class UtenteService {
     public Utente getUtenteById(Long id){
         return userRepository.findById(id).get();
     }
+
+    public boolean login(String username, String password) {
+        
+        return true;
+    }
     
 
 }
