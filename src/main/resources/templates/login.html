@@ -6,8 +6,19 @@
     <title>Login</title>
 </head>
 <body>
-    <form action="" method="post">
-
+    <form th:action="@{/loginDopo}" method="POST" th:object="${utente}">
+        <div>
+            Username: <span><input required type="text" th:field="${utente.username}" /></span>
+        </div>
+        <div>
+            Password: <span><input required type="password" th:field="${utente.password}" /></span>
+        </div>
+        <div>
+            <span><button type="reset">Annulla</button></span>
+        </div>
+        <div>
+            <span><button type="submit">Accedi</button></span>
+        </div>
     </form>
 </body>
 </html>
