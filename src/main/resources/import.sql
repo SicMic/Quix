@@ -58,13 +58,21 @@ INSERT INTO quiz (id, quesito, opzione_uno, opzione_due, opzione_tre, opzione_qu
 
 
 -- Raccolta
-
 INSERT INTO raccolta (id, nome, descrizione, categoria_id, autore_id) VALUES (1, 'Raccolta uno', 'Descrizione', 1, 1);
 INSERT INTO raccolta (id, nome, descrizione, categoria_id, autore_id) VALUES (2, 'Raccolta due', 'Descrizione', 2, 1);
 INSERT INTO raccolta (id, nome, descrizione, categoria_id, autore_id) VALUES (3, 'Raccolta tre', 'Descrizione', 3, 2);
+
+-- INSERT INTO raccolta (id, nome, descrizione, categoria_id) VALUES (1, 'Raccolta uno', 'Descrizione', 1);
+-- INSERT INTO raccolta (id, nome, descrizione, categoria_id) VALUES (2, 'Raccolta due', 'Descrizione', 2);
+-- INSERT INTO raccolta (id, nome, descrizione, categoria_id) VALUES (3, 'Raccolta tre', 'Descrizione', 3);
 
 -- Raccolta_Quiz
 INSERT INTO raccolta_elenco_quiz (elenco_quiz_id, raccolta_id) VALUES (1, 1);
 INSERT INTO raccolta_elenco_quiz (elenco_quiz_id, raccolta_id) VALUES (2, 1);
 INSERT INTO raccolta_elenco_quiz (elenco_quiz_id, raccolta_id) VALUES (3, 1);
 INSERT INTO raccolta_elenco_quiz (elenco_quiz_id, raccolta_id) VALUES (4, 1);
+
+-- Raccolta_Quiz
+INSERT INTO autore_elenco_raccolte (autore_id, elenco_raccolte_id) VALUES (1, 1);
+INSERT INTO autore_elenco_raccolte (autore_id, elenco_raccolte_id) VALUES (1, 2);
+INSERT INTO autore_elenco_raccolte (autore_id, elenco_raccolte_id) VALUES (2, 3);

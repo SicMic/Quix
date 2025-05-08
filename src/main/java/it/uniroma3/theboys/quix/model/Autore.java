@@ -7,6 +7,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
 
 
@@ -31,7 +32,8 @@ public class Autore {
 
     private String biografia;
 
-	@OneToMany
+	@OneToMany(mappedBy = "autore")
+    @JoinColumn(name = "raccolte_id")
 	private List<Raccolta> elencoRaccolte;
     
     public Long getId() {

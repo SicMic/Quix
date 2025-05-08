@@ -7,10 +7,13 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 
 import java.util.List;
+
+import org.hibernate.annotations.ManyToAny;
 
 @Entity	
 public class Raccolta { //con @Entity il framework sa che a Movie bisogna associare una tabella nel database
@@ -28,7 +31,7 @@ public class Raccolta { //con @Entity il framework sa che a Movie bisogna associ
 	@OneToOne
 	private Categoria categoria;
 
-	@OneToOne
+	@ManyToOne
 	private Autore autore;
 
 	@OneToMany

@@ -1,0 +1,108 @@
+@import "vars";
+@import "backgrounds";
+@import "borders";
+@import "buttons";
+@import "dropdown";
+@import "flex";
+@import "fonts";
+@import "form";
+@import "layout";
+@import "spaces";
+
+:root {
+  --border: #000000;
+  --background: #f1f1f1;
+  --color: #292929;
+  color-scheme: light;
+}
+
+.dark {
+  --border: #ffffff;
+  --background: #000000;
+  --color: #ffffff;
+  color-scheme: dark;
+}
+
+.brown {
+  --border: #622a16;
+  --background: #968491;
+  --color: #764351;
+  color-scheme: brown;
+}
+
+.blue {
+  --border: #0c0246;
+  --background: #0f1498;
+  --color: #4f49ff;
+  color-scheme: blue;
+}
+
+.rose {
+  --border: #c32193;
+  --background: #ff76d6;
+  --color: #d53f62;
+  color-scheme: rose;
+}
+
+body {
+  // font-family: "Playwrite NG Modern", cursive;
+  // font-optical-sizing: auto;
+  // font-weight: 100;
+  // font-style: normal;    
+}
+
+@each $name, $size in $heights {
+    .height#{$name} {
+        height: $size !important;
+    }
+}
+
+.img{
+  width: 30px;
+  height: 30px;
+  object-fit: cover;
+}
+
+.rotation:hover{
+  font-size: 25px;
+  rotate: 30deg; 
+  transition: 0.5s; 
+}
+
+.circle{
+  border-radius: 50%;
+}
+
+.lol{
+  display: flex;
+  flex-direction: column;
+  // align-items: center;
+}
+
+.icon{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  font-size: 20px;
+}
+
+.icon:hover{
+  background-color: #00000030;
+}
+
+
+
+.altro{
+    padding: 10px;
+    font-size: 10px;
+    border: 2px solid cyan;
+    width: 85%;
+}
+
+.height{
+  height: 100%;
+}

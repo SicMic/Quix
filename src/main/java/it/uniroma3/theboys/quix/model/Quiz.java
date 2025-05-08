@@ -35,6 +35,13 @@ public class Quiz { //con @Entity il framework sa che a Movie bisogna associare 
 	@ManyToOne
 	private Categoria categoria;
 	
+	public Quiz(){
+		this.quesito = "Quesito";
+		this.opzioneUno = "opzione uno";
+		this.opzioneDue = "opzione due";
+		this.opzioneTre = "opzione tre";
+		this.opzioneQuattro = "opzione quattro";
+	}
 
 	public Long getId() {
 		return id;

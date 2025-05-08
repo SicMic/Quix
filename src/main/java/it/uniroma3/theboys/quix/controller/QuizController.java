@@ -1,62 +1,37 @@
-// package it.uniroma3.theboys.quix.controller;
+package it.uniroma3.theboys.quix.controller;
 
-// import org.springframework.beans.factory.annotation.Autowired;
-// import org.springframework.stereotype.Controller;
-// import org.springframework.ui.Model;
-// import org.springframework.web.bind.annotation.GetMapping;
-// import org.springframework.web.bind.annotation.ModelAttribute;
-// import org.springframework.web.bind.annotation.PathVariable;
-// import org.springframework.web.bind.annotation.PostMapping;
-// import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
-// import it.uniroma3.theboys.quix.model.Categoria;
-// import it.uniroma3.theboys.quix.service.CategoriaService;
+import java.lang.reflect.Array;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Iterator;
 
-// //classe che gestisce le richieste http tramite metodi Java
-// @Controller
-// public class QuizController {
+import it.uniroma3.theboys.quix.model.Quiz;
+import it.uniroma3.theboys.quix.model.Raccolta;
+import it.uniroma3.theboys.quix.service.QuizService;
+import it.uniroma3.theboys.quix.service.RaccoltaService;
 
-// 	@Autowired CategoriaService categoriaService;
+//classe che gestisce le richieste http tramite metodi Java
+@Controller
+public class QuizController {
 
-// 	@GetMapping("/movie/{id}")	//risponde a una richiesta del tipo: /movie/3452
-// 	public String getMovie(@PathVariable("id") Long id, Model model) {	//l'id preso dal path viene convertito in Long
-// 		//model permette di scambiare dati tra la Vista e il Controller
-// 		//con addAttribute() mettiamo a disposizione della Vista un oggetto che sarà il riferimento a "movie" per la Vista
-// 		model.addAttribute("movie", this.categoriaService.getMovieById(id));	//l'id viene passato al metodo
-// 		//la vista è movie.html
-// 		return "movie.html";
-// 	}
+	@Autowired QuizService quizService;
+	@Autowired RaccoltaService raccoltaService;
 
-// 	@GetMapping("/movie")
-//   	public String showMovies(Model model) {
-//     	model.addAttribute("movies", this.movieService.getAllMovies());
-//     	return "movies.html";
-//   	}
+	@GetMapping("/quiz/{idRaccolta}/{indice}") 
+		public String getQuizProva(@PathVariable("idRaccolta") Long idRaccolta, @PathVariable("indice") Integer indice, Model model) { 
+		Raccolta raccolta = raccoltaService.getRaccoltaById(idRaccolta);
+		ArrayList<Quiz> quizzes = new ArrayList(raccolta.getElencoQuiz());
+		model.addAttribute("quiz", quizzes.get(--indice));
+		return "quix.html";
+	}
 
-// 	@GetMapping("/formNewMovie")
-// 		public String formNewMovie(Model model) {
-// 		model.addAttribute("movie", new Categoria());
-// 		return "formNewMovie.html";
-//   	}
-
-
-// 	@PostMapping("/movie")
-//   	public String newMovie(@ModelAttribute("movie") Categoria movie, Model model) {
-// 		this.movieService.saveNewMovie(movie);
-// 		//model.addAttribute("movie", movie);
-// 		return "redirect:movie/"+movie.getId();
-// 	}
-
-// 	@GetMapping("/formSearchMovies")
-//   	public String formSearchMovies() {
-//     	return "formSearchMovies.html";
-//   	}
-
-//   	@PostMapping("/searchMovies")
-// 	public String searchMovies(Model model, @RequestParam Integer year) {
-// 		model.addAttribute("movies", this.movieService.findByYear(year));
-// 		return "foundMovies.html";
-// 	}
-
-
-// }
+}
