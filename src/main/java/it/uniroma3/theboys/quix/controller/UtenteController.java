@@ -4,28 +4,25 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import it.uniroma3.theboys.quix.service.UtenteService;
-import it.uniroma3.theboys.quix.model.Utente;
 
 @Controller
 public class UtenteController {
  
     @Autowired UtenteService utenteService;
 
-	@GetMapping("/login")
-	public String getLogin(Model model) {	//l'id preso dal path viene convertito in Long
-		model.addAttribute("utente", new Utente());
-		return "login.html";
-	}
+	// @GetMapping("/login")
+	// public String getLogin(Model model) {	//l'id preso dal path viene convertito in Long
+	// 	model.addAttribute("utente", new Utente());
+	// 	return "login.html";
+	// }
 
-	@GetMapping("/loginDopo")
-	public String getLoginDopo(Model model, @RequestParam Utente year) {	//l'id preso dal path viene convertito in Long
+	// @GetMapping("/loginDopo")
+	// public String getLoginDopo(Model model, @RequestParam Utente year) {	//l'id preso dal path viene convertito in Long
 
-		return "login.html";
-	}
+	// 	return "login.html";
+	// }
 
 
     @GetMapping("/utenti")
