@@ -2,6 +2,8 @@ package it.uniroma3.theboys.quix.model;
 
 // import org.springframework.boot.autoconfigure.amqp.RabbitConnectionDetails.Address;
 
+import java.util.List;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -10,10 +12,6 @@ import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
-
-import java.util.List;
-
-import org.hibernate.annotations.ManyToAny;
 
 @Entity	
 public class Raccolta { //con @Entity il framework sa che a Movie bisogna associare una tabella nel database
@@ -36,6 +34,9 @@ public class Raccolta { //con @Entity il framework sa che a Movie bisogna associ
 
 	@OneToMany
 	private List<Quiz> elencoQuiz;
+
+	@ManyToOne
+	private Etichetta etichetta;
 
 	public Long getId() {
 		return id;
@@ -83,6 +84,14 @@ public class Raccolta { //con @Entity il framework sa che a Movie bisogna associ
 
 	public void setAutore(Autore autore) {
 		this.autore = autore;
+	}
+
+	public Etichetta getEtichetta() {
+		return etichetta;
+	}
+
+	public void setEtichetta(Etichetta etichetta) {
+		this.etichetta = etichetta;
 	}
 	
 	@Override
