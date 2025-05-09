@@ -27,12 +27,12 @@ public class LoginController {
     public String login(@RequestParam String username, @RequestParam String password, HttpSession session, Model model) {
         if (authService.autenticazione(username, password)) {
             session.setAttribute("user", authService.getUserByUsername(username));
+            session.setMaxInactiveInterval(60*5);                                           //timeout sessione dopo 5 minuti
             model.addAttribute("utente", session.getAttribute("user"));
-            return "prova.html";
-            //return "redirect:/dashboard";
+            return "redirect:/dashboard";
         } else {
             model.addAttribute("error", "Credenziali non valide");
-            return "login.html";
+            return "redirect:/login";
         }
     }
 

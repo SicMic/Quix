@@ -7,36 +7,46 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import it.uniroma3.theboys.quix.model.Autore;
-import it.uniroma3.theboys.quix.service.AutoreService;
+import it.uniroma3.theboys.quix.model.Utente;
+import it.uniroma3.theboys.quix.service.AuthService;
 import it.uniroma3.theboys.quix.service.UtenteService;
+import jakarta.servlet.http.HttpSession;
 
 @Controller
 public class SignupController {
 
-    @Autowired
-    AutoreService autoreService;
+    // @Autowired
+    // AutoreService autoreService;
     @Autowired
     UtenteService utenteService;
+    @Autowired
+    AuthService authService;
     
-    @GetMapping("/signUp")
+    @GetMapping("/registrazione")
 		public String registrazione(Model model) {
-		model.addAttribute("autore", new Autore());
-        //model.addAllAttributes("ruolo", new String());
+		//model.addAttribute("autore", new Autore());
+        model.addAttribute("utente", new Utente());
+        //model.addAttribute("ruolo", new String());
 		return "registrazione.html";
   	}
 
 
-	@PostMapping("/signUp")
-  	public String newMovie(@ModelAttribute("autore") Autore autore, Model model) {
+	// @PostMapping("/signUp")
+  	// public String newRegistrazione(@ModelAttribute("autore") Autore autore, @ModelAttribute("utente") Utente utente, @ModelAttribute("ruolo") String ruolo) {
+    //     if (ruolo.equals("autore"))      //da mettere equals
+	// 	    this.autoreService.saveNewAutore(autore);
+    //     else
+    //         this.utenteService.saveNewUtente(utente);
+	// 	return "redirect:dashboard"; // modificare in base a struttura url dashboard
+	// }
 
-        this.autoreService.saveNewAutore(autore);
+    @PostMapping("/signUp")
+  	public String newRegistrazione(@ModelAttribute("utente") Utente utente, HttpSession session, Model model) {
+        this.utenteService.saveNewUtente(utente);
 
-        // if (ruolo == "autore")      //da mettere equals
-		//     this.autoreService.saveNewAutore(autore);
-        // else
-        //     this.utenteService.saveNewUtente((Utente) autore);
-		return "redirect:prova"; // modificare in base a struttura url dashboard
+		session.setAttribute("user", authService.getUserByUsername(utente.getUsername()));
+        session.setMaxInactiveInterval(60*5);                                           //timeout sessione dopo 5 minuti
+        model.addAttribute("utente", session.getAttribute("user"));
+        return "redirect:dashboard"; // modificare in base a struttura url dashboard
 	}
-
 }

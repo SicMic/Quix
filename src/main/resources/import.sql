@@ -1,12 +1,12 @@
 -------* QUIX DATABASE *--------
 
 -- Autori
-INSERT INTO autore (id, nome, cognome, email, biografia, username, password) VALUES (1, 'Lorenzo', 'Ricciardi', 'lorenzo1@gmail.com', 'La mia bio.', 'lorenzo', 'password'); 
-INSERT INTO autore (id, nome, cognome, email, biografia, username, password) VALUES (2, 'Michela', 'Sicuranza', 'sicmic@gmail.com', 'La mia bio.', 'sicmic', 'password');
+INSERT INTO autore (id, nome, cognome, email, biografia, username, password) VALUES (1, 'Lorenzo', 'Ricciardi', 'lorenzo1@gmail.com', 'La mia bio.', 'lorenzo', '1Password!'); 
+INSERT INTO autore (id, nome, cognome, email, biografia, username, password) VALUES (2, 'Michela', 'Sicuranza', 'sicmic@gmail.com', 'La mia bio.', 'sicmic', '2Password!');
 
 
 -- Utenti
-INSERT INTO utente (id, nome, cognome, email, username, password) VALUES (1, 'FIlippo', 'Maialino', 'filor02@gmail.com', 'filo', 'password');
+INSERT INTO utente (id, nome, cognome, email, username, password) VALUES (1, 'FIlippo', 'Maialino', 'filor02@gmail.com', 'filo', '1Filippo!');
 
 
 -- Categorie
