@@ -9,14 +9,14 @@ import it.uniroma3.theboys.quix.repository.UtenteRepository;
 @Service
 public class UtenteService {
 
-    @Autowired UtenteRepository userRepository;
+    @Autowired UtenteRepository utenteRepository;
 
     public Iterable<Utente> getAllUtenti(){
-        return userRepository.findAll();
+        return utenteRepository.findAll();
     }
 
     public Utente getUtenteById(Long id){
-        return userRepository.findById(id).get();
+        return utenteRepository.findById(id).get();
     }
 
     public boolean login(String username, String password) {
@@ -24,5 +24,8 @@ public class UtenteService {
         return true;
     }
     
+    public Utente saveNewUtente(Utente utente){
+        return this.utenteRepository.save(utente);
+    }
 
 }

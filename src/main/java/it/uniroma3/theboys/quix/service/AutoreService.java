@@ -18,4 +18,8 @@ public class AutoreService {
     public Autore getAutoreById(Long id){
         return autoreRepository.findById(id).get();
     }
+
+    public Autore saveNewAutore(Autore autore){
+        return this.autoreRepository.save(autore);
+    }
 }
