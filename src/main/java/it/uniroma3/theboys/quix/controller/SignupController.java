@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import it.uniroma3.theboys.quix.model.Utente;
-import it.uniroma3.theboys.quix.service.AuthService;
+import it.uniroma3.theboys.quix.service.AuthServiceUtente;
 import it.uniroma3.theboys.quix.service.UtenteService;
 import jakarta.servlet.http.HttpSession;
 
@@ -18,9 +18,9 @@ public class SignupController {
     // @Autowired
     // AutoreService autoreService;
     @Autowired
-    UtenteService utenteService;
+    private UtenteService utenteService;
     @Autowired
-    AuthService authService;
+    private AuthServiceUtente authService;
     
     @GetMapping("/registrazione")
 		public String registrazione(Model model) {
@@ -47,6 +47,6 @@ public class SignupController {
 		session.setAttribute("user", authService.getUserByUsername(utente.getUsername()));
         session.setMaxInactiveInterval(60*5);                                           //timeout sessione dopo 5 minuti
         model.addAttribute("utente", session.getAttribute("user"));
-        return "redirect:dashboard"; // modificare in base a struttura url dashboard
+        return "redirect:dashboardAutore"; // modificare in base a struttura url dashboard
 	}
 }

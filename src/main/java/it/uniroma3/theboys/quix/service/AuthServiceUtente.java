@@ -11,7 +11,7 @@ import it.uniroma3.theboys.quix.repository.UtenteRepository;
 /* Servizio per l'autenticazione degli utenti e creazione della sessione */
 
 @Service
-public class AuthService {
+public class AuthServiceUtente {
     
     @Autowired
     UtenteRepository utenteRepository;

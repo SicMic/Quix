@@ -16,4 +16,8 @@ public class EtichettaService {
         return etichettaRepository.findById(id).get();
     }
 
+    public Iterable<Etichetta> getAllEtichette(){
+        return etichettaRepository.findAll();
+    }
+
 }

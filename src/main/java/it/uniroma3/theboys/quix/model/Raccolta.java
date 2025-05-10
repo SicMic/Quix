@@ -26,6 +26,8 @@ public class Raccolta { //con @Entity il framework sa che a Movie bisogna associ
 	@Column(nullable = false)
 	private String descrizione;
 
+	private String urlImage;
+
 	@OneToOne
 	private Categoria categoria;
 
@@ -92,6 +94,14 @@ public class Raccolta { //con @Entity il framework sa che a Movie bisogna associ
 
 	public void setEtichetta(Etichetta etichetta) {
 		this.etichetta = etichetta;
+	}
+
+	public String getUrlImage() {
+		return urlImage;
+	}
+
+	public void setUrlImage(String urlImage) {
+		this.urlImage = urlImage;
 	}
 	
 	@Override

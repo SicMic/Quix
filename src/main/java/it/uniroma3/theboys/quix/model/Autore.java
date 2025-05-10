@@ -4,6 +4,7 @@ import java.util.List;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -31,7 +32,7 @@ public class Autore {
 
     private String biografia;
 
-	@OneToMany(mappedBy = "autore")
+	@OneToMany(mappedBy = "autore", fetch = FetchType.EAGER)
 	private List<Raccolta> elencoRaccolte;
     
     public Long getId() {
@@ -93,7 +94,7 @@ public class Autore {
     /* hashCode e equals generati con riferimento username e email */
     /* Vedi User e scegli soluzione migliore per entrambi */
 
-    public List<Raccolta> getElencoRaccolte() {
+    public Iterable<Raccolta> getElencoRaccolte() {
         return elencoRaccolte;
     }
 

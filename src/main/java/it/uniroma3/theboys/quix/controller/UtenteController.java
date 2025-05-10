@@ -12,7 +12,8 @@ import jakarta.servlet.http.HttpSession;
 @Controller
 public class UtenteController {
  
-    @Autowired UtenteService utenteService;
+    @Autowired
+	private UtenteService utenteService;
 
 	// @GetMapping("/login")
 	// public String getLogin(Model model) {	//l'id preso dal path viene convertito in Long

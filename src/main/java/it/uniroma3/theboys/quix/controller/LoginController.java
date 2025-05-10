@@ -7,38 +7,62 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import it.uniroma3.theboys.quix.model.Autore;
 import it.uniroma3.theboys.quix.model.Utente;
-import it.uniroma3.theboys.quix.service.AuthService;
+import it.uniroma3.theboys.quix.service.AuthServiceAutore;
+import it.uniroma3.theboys.quix.service.AuthServiceUtente;
 import jakarta.servlet.http.HttpSession;
 
 @Controller
 public class LoginController {
 
     @Autowired
-    private AuthService authService;
+    private AuthServiceAutore authServiceAutore;
 
-    @GetMapping("/login")
+    @Autowired
+    private AuthServiceUtente authServiceUtente;
+
+    @GetMapping("/loginUtente")
     public String showLoginPage(Model model) {
         model.addAttribute("utente", new Utente());
-        return "login.html"; // pagina login.jsp o login.html
+        return "loginUtente.html"; // pagina login.jsp o login.html
     }
 
-    @PostMapping("/login")
-    public String login(@RequestParam String username, @RequestParam String password, HttpSession session, Model model) {
-        if (authService.autenticazione(username, password)) {
-            session.setAttribute("user", authService.getUserByUsername(username));
+    @PostMapping("/loginUtente")
+    public String loginUtente(@RequestParam String username, @RequestParam String password, HttpSession session, Model model) {
+        if (authServiceUtente.autenticazione(username, password)) {
+            session.setAttribute("user", authServiceUtente.getUserByUsername(username));
             session.setMaxInactiveInterval(60*5);                                           //timeout sessione dopo 5 minuti
             model.addAttribute("utente", session.getAttribute("user"));
-            return "redirect:/dashboard";
+            return "redirect:/dashboardUtente";
         } else {
             model.addAttribute("error", "Credenziali non valide");
-            return "redirect:/login";
+            return "redirect:/loginUtente";
         }
     }
 
-    @GetMapping("/logout")
-    public String logout(HttpSession session) {
-        session.invalidate();
-        return "redirect:/login";
+    @GetMapping("/loginAutore")
+    public String showLoginPageAutore(Model model) {
+        model.addAttribute("autore", new Autore());
+        return "loginAutore.html"; // pagina login.jsp o login.html
     }
+
+    @PostMapping("/loginAutore")
+    public String loginAutore(@RequestParam String username, @RequestParam String password, HttpSession session, Model model) {
+        if (authServiceAutore.autenticazione(username, password)) {
+            session.setAttribute("user", authServiceAutore.getAutoreByUsername(username));
+            session.setMaxInactiveInterval(60*5);                                           //timeout sessione dopo 5 minuti
+            model.addAttribute("utente", session.getAttribute("user"));
+            return "redirect:/dashboardAutore";
+        } else {
+            model.addAttribute("error", "Credenziali non valide");
+            return "redirect:/loginAutore";
+        }
+    }
+
+    // @GetMapping("/logout")
+    // public String logout(HttpSession session) {
+    //     session.invalidate();
+    //     return "redirect:/login";
+    // }
 }
