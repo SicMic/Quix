@@ -22,43 +22,43 @@ public class LoginController {
     @Autowired
     private AuthServiceUtente authServiceUtente;
 
-    @GetMapping("/loginUtente")
-    public String showLoginPage(Model model) {
-        model.addAttribute("utente", new Utente());
-        return "loginUtente.html"; // pagina login.jsp o login.html
-    }
+    // @GetMapping("/loginUtente")
+    // public String showLoginPage(Model model) {
+    //     model.addAttribute("utente", new Utente());
+    //     return "loginUtente.html"; // pagina login.jsp o login.html
+    // }
 
-    @PostMapping("/loginUtente")
-    public String loginUtente(@RequestParam String username, @RequestParam String password, HttpSession session, Model model) {
-        if (authServiceUtente.autenticazione(username, password)) {
-            session.setAttribute("user", authServiceUtente.getUserByUsername(username));
-            session.setMaxInactiveInterval(60*5);                                           //timeout sessione dopo 5 minuti
-            model.addAttribute("utente", session.getAttribute("user"));
-            return "redirect:/dashboardUtente";
-        } else {
-            model.addAttribute("error", "Credenziali non valide");
-            return "redirect:/loginUtente";
-        }
-    }
+    // @PostMapping("/loginUtente")
+    // public String loginUtente(@RequestParam String username, @RequestParam String password, HttpSession session, Model model) {
+    //     if (authServiceUtente.autenticazione(username, password)) {
+    //         session.setAttribute("user", authServiceUtente.getUserByUsername(username));
+    //         session.setMaxInactiveInterval(60*30);                                           //timeout sessione dopo 5 minuti
+    //         model.addAttribute("utente", session.getAttribute("user"));
+    //         return "redirect:/dashboardUtente";
+    //     } else {
+    //         model.addAttribute("error", "Credenziali non valide");
+    //         return "redirect:/loginUtente";
+    //     }
+    // }
 
-    @GetMapping("/loginAutore")
-    public String showLoginPageAutore(Model model) {
-        model.addAttribute("autore", new Autore());
-        return "loginAutore.html"; // pagina login.jsp o login.html
-    }
+    // @GetMapping("/loginAutore")
+    // public String showLoginPageAutore(Model model) {
+    //     model.addAttribute("autore", new Autore());
+    //     return "loginAutore.html"; // pagina login.jsp o login.html
+    // }
 
-    @PostMapping("/loginAutore")
-    public String loginAutore(@RequestParam String username, @RequestParam String password, HttpSession session, Model model) {
-        if (authServiceAutore.autenticazione(username, password)) {
-            session.setAttribute("user", authServiceAutore.getAutoreByUsername(username));
-            session.setMaxInactiveInterval(60*5);                                           //timeout sessione dopo 5 minuti
-            model.addAttribute("utente", session.getAttribute("user"));
-            return "redirect:/dashboardAutore";
-        } else {
-            model.addAttribute("error", "Credenziali non valide");
-            return "redirect:/loginAutore";
-        }
-    }
+    // @PostMapping("/loginAutore")
+    // public String loginAutore(@RequestParam String username, @RequestParam String password, HttpSession session, Model model) {
+    //     if (authServiceAutore.autenticazione(username, password)) {
+    //         session.setAttribute("user", authServiceAutore.getAutoreByUsername(username));
+    //         session.setMaxInactiveInterval(60*30);                                           //timeout sessione dopo 5 minuti
+    //         model.addAttribute("utente", session.getAttribute("user"));
+    //         return "redirect:/dashboardAutore";
+    //     } else {
+    //         model.addAttribute("error", "Credenziali non valide");
+    //         return "redirect:/loginAutore";
+    //     }
+    // }
 
     // @GetMapping("/logout")
     // public String logout(HttpSession session) {

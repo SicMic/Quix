@@ -1,25 +1,30 @@
 -------* QUIX DATABASE *--------
 
 -- Autori
-INSERT INTO autore (id, nome, cognome, email, biografia, username, password) VALUES (1, 'Lorenzo', 'Ricciardi', 'lorenzo1@gmail.com', 'La mia bio.', 'lorenzo', '1Password!'); 
-INSERT INTO autore (id, nome, cognome, email, biografia, username, password) VALUES (2, 'Michela', 'Sicuranza', 'sicmic@gmail.com', 'La mia bio.', 'sicmic', '2Password!');
+INSERT INTO autore (id, nome, cognome, email, username, password, biografia, url_image) VALUES (1, 'Lorenzo', 'Ricciardi', 'lorenzo1@gmail.com', 'lorenzo', '1Password!', 'Ciao, sono Lorenzo, un`appassionato di educazione e tecnologia. Da anni creo quiz interattivi per aiutare gli studenti a imparare in modo divertente e coinvolgente. Credo che l`apprendimento debba essere un`esperienza stimolante e cerco sempre di innovare nei miei contenuti.', 'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fres.cloudinary.com%2Fteepublic%2Fimage%2Fprivate%2Fs--xAPAsZWI--%2Ft_Preview%2Fb_rgb%3Ac8e0ec%2Cc_limit%2Cf_jpg%2Ch_630%2Cq_90%2Cw_630%2Fv1522894149%2Fproduction%2Fdesigns%2F2560124_0.jpg&f=1&nofb=1&ipt=3f717e8d9313e86bdef943c05fc5216bc2ba4cb902f41e06d8175aa80565c900'); 
+INSERT INTO autore (id, nome, cognome, email, username, password, biografia, url_image) VALUES (2, 'Michela', 'Sicuranza', 'sicmic@gmail.com', 'sicmic', '2Password!', 'Salve, sono Michela, un esperta di gamification e creazione di contenuti. Mi dedico a progettare quiz che sfidano le persone a testare le loro conoscenze su vari argomenti, rendendo l`apprendimento un gioco. La mia missione è rendere l`educazione accessibile e divertente per tutti!', 'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fpng.pngtree.com%2Fpng-clipart%2F20230405%2Foriginal%2Fpngtree-cat-cartoon-png-image_9029157.png&f=1&nofb=1&ipt=c8531a4dd100289a5b229a9344f2036dd412143a05aa738b9fac7a57eb554474');
 
 
 -- Utenti
-INSERT INTO utente (id, nome, cognome, email, username, password) VALUES (1, 'FIlippo', 'Maialino', 'filor02@gmail.com', 'filo', '1Filippo!');
+INSERT INTO utente (id, nome, cognome, email, username, password, url_image) VALUES (1, 'FIlippo', 'Maialino', 'filor02@gmail.com', 'filo', '1Filippo!');
 
+-- Etichette
+INSERT INTO etichetta (id, nome, descrizione) VALUES (1, 'Cultura generale', '');
+INSERT INTO etichetta (id, nome, descrizione) VALUES (2, 'Spettacolo', '');
+INSERT INTO etichetta (id, nome, descrizione) VALUES (3, 'Scienze', '');
+INSERT INTO etichetta (id, nome, descrizione) VALUES (4, 'Cucina', '');
 
 -- Categorie
 INSERT INTO categoria (id, nome, descrizione) VALUES (1, 'Matematica', '');
 INSERT INTO categoria (id, nome, descrizione) VALUES (2, 'Sport', '');
 INSERT INTO categoria (id, nome, descrizione) VALUES (3, 'Geografia', '');
 INSERT INTO categoria (id, nome, descrizione) VALUES (4, 'Cucina', '');
-INSERT INTO categoria (id, nome, descrizione) VALUES (5, 'Spettacolo', '');
+INSERT INTO categoria (id, nome, descrizione) VALUES (5, 'Cinema', '');
 INSERT INTO categoria (id, nome, descrizione) VALUES (6, 'Chimica', '');
 INSERT INTO categoria (id, nome, descrizione) VALUES (7, 'Fisica', '');
+INSERT INTO categoria (id, nome, descrizione) VALUES (8, 'Informatica', '');
 
 -- Quiz
-
 INSERT INTO quiz (id, quesito, opzione_uno, opzione_due, opzione_tre, opzione_quattro, data_creazione, categoria_id) VALUES (1, 'Qual è il risultato di 5 + 3?', '6', '7', '8', '9', '2023-07-15', 1);
 INSERT INTO quiz (id, quesito, opzione_uno, opzione_due, opzione_tre, opzione_quattro, data_creazione, categoria_id) VALUES (2, 'Qual è il valore di π (pi greco)?', '3.14', '3.15', '3.16', '3.17', '2023-07-15', 1);
 INSERT INTO quiz (id, quesito, opzione_uno, opzione_due, opzione_tre, opzione_quattro, data_creazione, categoria_id) VALUES (3, 'Qual è il risultato di 12 x 12?', '144', '124', '156', '132', '2023-07-15', 1);
@@ -55,24 +60,34 @@ INSERT INTO quiz (id, quesito, opzione_uno, opzione_due, opzione_tre, opzione_qu
 INSERT INTO quiz (id, quesito, opzione_uno, opzione_due, opzione_tre, opzione_quattro, data_creazione, categoria_id) VALUES (33, 'Qual è la velocità della luce nel vuoto?', '300.000 km/s', '150.000 km/s', '450.000 km/s', '600.000 km/s', '2023-07-15', 7);
 INSERT INTO quiz (id, quesito, opzione_uno, opzione_due, opzione_tre, opzione_quattro, data_creazione, categoria_id) VALUES (34, 'Qual è il principio di Archimede?', 'Un corpo immerso in un fluido subisce una spinta verso l` alto', 'La forza è uguale alla massa per l` accelerazione', 'Ogni azione ha una reazione uguale e contraria', 'La pressione è uguale alla forza per l` area', '2023-07-15', 7);
 INSERT INTO quiz (id, quesito, opzione_uno, opzione_due, opzione_tre, opzione_quattro, data_creazione, categoria_id) VALUES (35, 'Qual è l` unità di misura dell` energia nel Sistema Internazionale?', 'Joule', 'Newton', 'Watt', 'Pascal', '2023-07-15', 7);
-
+INSERT INTO quiz (id, quesito, opzione_uno, opzione_due, opzione_tre, opzione_quattro, data_creazione, categoria_id) VALUES (36, 'Qual è il linguaggio di programmazione utilizzato per lo sviluppo di applicazioni Android?', 'Java', 'C#', 'Python', 'Ruby', '2023-07-15', 8);
+INSERT INTO quiz (id, quesito, opzione_uno, opzione_due, opzione_tre, opzione_quattro, data_creazione, categoria_id) VALUES (37, 'Quale protocollo viene utilizzato per inviare email?', 'HTTP', 'FTP', 'SMTP', 'IMAP', '2023-07-15', 8);
+INSERT INTO quiz (id, quesito, opzione_uno, opzione_due, opzione_tre, opzione_quattro, data_creazione, categoria_id) VALUES (38, 'Qual è la funzione principale di un sistema operativo?', 'Gestire l’hardware', 'Eseguire applicazioni', 'Fornire sicurezza', 'Gestire la rete', '2023-07-15', 8);
+INSERT INTO quiz (id, quesito, opzione_uno, opzione_due, opzione_tre, opzione_quattro, data_creazione, categoria_id) VALUES (39, 'Cosa significa l` acronimo "HTML"?', 'HyperText Markup Language', 'HighText Machine Language', 'HyperText Markup Level', 'HighText Markup Language', '2023-07-15', 8);
+INSERT INTO quiz (id, quesito, opzione_uno, opzione_due, opzione_tre, opzione_quattro, data_creazione, categoria_id) VALUES (40, 'Qual è il principale scopo di un firewall?', 'Proteggere la rete', 'Accelerare la connessione', 'Monitorare il traffico', 'Archiviare dati', '2023-07-15', 8);
 
 -- Raccolta
-INSERT INTO raccolta (id, nome, descrizione, categoria_id, autore_id) VALUES (1, 'Raccolta uno', 'Descrizione', 1, 1);
-INSERT INTO raccolta (id, nome, descrizione, categoria_id, autore_id) VALUES (2, 'Raccolta due', 'Descrizione', 2, 1);
-INSERT INTO raccolta (id, nome, descrizione, categoria_id, autore_id) VALUES (3, 'Raccolta tre', 'Descrizione', 3, 2);
-
--- INSERT INTO raccolta (id, nome, descrizione, categoria_id) VALUES (1, 'Raccolta uno', 'Descrizione', 1);
--- INSERT INTO raccolta (id, nome, descrizione, categoria_id) VALUES (2, 'Raccolta due', 'Descrizione', 2);
--- INSERT INTO raccolta (id, nome, descrizione, categoria_id) VALUES (3, 'Raccolta tre', 'Descrizione', 3);
+INSERT INTO raccolta (id, nome, descrizione, etichetta_id, autore_id, url_image) VALUES (1, 'Raccolta uno', 'Descrizione', 1, 1, 'https://plus.unsplash.com/premium_photo-1661432575489-b0400f4fea58?q=80&w=2072&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+INSERT INTO raccolta (id, nome, descrizione, etichetta_id, autore_id, url_image) VALUES (2, 'Raccolta due', 'Descrizione', 2, 1, 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2072&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+INSERT INTO raccolta (id, nome, descrizione, etichetta_id, autore_id, url_image) VALUES (3, 'Raccolta tre', 'Descrizione', 3, 2, 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2072&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
 
 -- Raccolta_Quiz
 INSERT INTO raccolta_elenco_quiz (elenco_quiz_id, raccolta_id) VALUES (1, 1);
 INSERT INTO raccolta_elenco_quiz (elenco_quiz_id, raccolta_id) VALUES (2, 1);
 INSERT INTO raccolta_elenco_quiz (elenco_quiz_id, raccolta_id) VALUES (3, 1);
 INSERT INTO raccolta_elenco_quiz (elenco_quiz_id, raccolta_id) VALUES (4, 1);
+INSERT INTO raccolta_elenco_quiz (elenco_quiz_id, raccolta_id) VALUES (5, 2);
+INSERT INTO raccolta_elenco_quiz (elenco_quiz_id, raccolta_id) VALUES (6, 2);
+INSERT INTO raccolta_elenco_quiz (elenco_quiz_id, raccolta_id) VALUES (7, 2);
+INSERT INTO raccolta_elenco_quiz (elenco_quiz_id, raccolta_id) VALUES (8, 2);
+INSERT INTO raccolta_elenco_quiz (elenco_quiz_id, raccolta_id) VALUES (9, 2);
+INSERT INTO raccolta_elenco_quiz (elenco_quiz_id, raccolta_id) VALUES (10, 2);
+INSERT INTO raccolta_elenco_quiz (elenco_quiz_id, raccolta_id) VALUES (11, 2);
+INSERT INTO raccolta_elenco_quiz (elenco_quiz_id, raccolta_id) VALUES (12, 3);
+INSERT INTO raccolta_elenco_quiz (elenco_quiz_id, raccolta_id) VALUES (13, 3);
+INSERT INTO raccolta_elenco_quiz (elenco_quiz_id, raccolta_id) VALUES (14, 3);
 
--- Raccolta_Quiz
-INSERT INTO autore_elenco_raccolte (autore_id, elenco_raccolte_id) VALUES (1, 1);
-INSERT INTO autore_elenco_raccolte (autore_id, elenco_raccolte_id) VALUES (1, 2);
-INSERT INTO autore_elenco_raccolte (autore_id, elenco_raccolte_id) VALUES (2, 3);
+-- -- Atuore_Quiz
+-- INSERT INTO autore_elenco_raccolte (autore_id, elenco_raccolte_id) VALUES (1, 1);
+-- INSERT INTO autore_elenco_raccolte (autore_id, elenco_raccolte_id) VALUES (1, 2);
+-- INSERT INTO autore_elenco_raccolte (autore_id, elenco_raccolte_id) VALUES (2, 3);

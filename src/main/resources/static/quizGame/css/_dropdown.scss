@@ -1,0 +1,48 @@
+details {
+    overflow: hidden;
+  }
+  
+  details[open] article {
+    animation: animateUp .5s linear forwards;;
+  }
+  
+  summary {
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 15px;
+    font-weight: bold;
+  }
+  
+  summary::after {
+    content: '';
+    width: 18px;
+    height: 10px;
+    background: url('https://uploads.sitepoint.com/wp-content/uploads/2023/10/1697699669arrow.svg') no-repeat;
+    background-size: cover;
+    transition: 0.2s;
+    transform: rotate(-90deg);
+  }
+  
+  details[open] > summary {border-bottom: 2px solid #fff9f1;}
+  
+  details[open] > summary::after {
+    transform: rotate(0deg);
+  }
+  
+  summary::-webkit-details-marker {
+    display: none;
+  }
+  
+  summary {
+    color: #30353b;
+    border-radius: 5px;
+  }
+  
+  details[open] summary {border-radius: 5px 5px 0 0;}
+  
+  details {
+    background: #eeebdc;
+    border-radius: 5px;
+  }

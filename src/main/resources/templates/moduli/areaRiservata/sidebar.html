@@ -1,0 +1,68 @@
+<!-- sidebar.html -->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Sidebar Fragment</title>
+</head>
+
+<body>
+    <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar" th:fragment="sidebar">
+
+        <!-- Sidebar - Brand -->
+        <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/index">
+            <div class="sidebar-brand-icon rotate-n-15">
+                <i class="fas fa-laugh-wink"></i>
+            </div>
+            <div class="sidebar-brand-text mx-3">Quix</div>
+        </a>
+
+        <!-- Divider -->
+        <hr class="sidebar-divider my-0">
+
+        <!-- Nav Item - Dashboard -->
+        <li class="nav-item">
+            <a class="nav-link" href="/dashboardAutore">
+                <i class="fas fa-fw fa-tachometer-alt"></i>
+                <span>Dashboard</span></a>
+        </li>
+
+        <!-- Nav Item - Raccolte -->
+        <li class="nav-item">
+            <a class="nav-link" href="/raccolte">
+                <i class="fas fa-fw fa-box"></i>
+                <span>Raccolte</span></a>
+        </li>
+
+        <!-- Nav Item - Elenco Quiz -->
+        <li class="nav-item">
+            <a class="nav-link" href="/elencoQuiz">
+                <i class="fas fa-fw fa-list"></i>
+                <span>ElencoQuiz</span></a>
+        </li>
+
+        <!-- Divider -->
+        <hr class="sidebar-divider">
+
+        <!-- Heading -->
+        <div class="sidebar-heading">
+            Altro
+        </div>
+
+        <!-- Nav Item - Pages Collapse Menu -->
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                <i class="fas fa-fw fa-cog"></i>
+                <span>Operazioni veloci</span>
+            </a>
+            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <a class="collapse-item" href="creaQuiz.html">Crea nuovo quiz</a>
+                </div>
+            </div>
+        </li>
+
+    </ul>
+</body>
+
+</html>

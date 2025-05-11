@@ -28,8 +28,11 @@ public class Utente {
     
     /* nullable=false? */
     private String nome;
+    
     private String cognome;
 
+    @Column(length = 500)
+    private String urlImage;
 
     @OneToMany
 	private List<Quiz> elencoQuiz;
@@ -83,7 +86,21 @@ public class Utente {
         this.cognome = cognome;
     }
 
+    public String getUrlImage() {
+        return urlImage;
+    }
 
+    public void setUrlImage(String urlImage) {
+        this.urlImage = urlImage;
+    }
+
+    public List<Quiz> getElencoQuiz() {
+        return elencoQuiz;
+    }
+
+    public void setElencoQuiz(List<Quiz> elencoQuiz) {
+        this.elencoQuiz = elencoQuiz;
+    }
 
     /* HashCode e equals generati usando l'email come campo di riferimento */
     /* Mettere anche username dato che deve essere univoco? */

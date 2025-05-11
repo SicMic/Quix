@@ -31,7 +31,15 @@ public class QuizController {
 		Raccolta raccolta = raccoltaService.getRaccoltaById(idRaccolta);
 		ArrayList<Quiz> quizzes = new ArrayList(raccolta.getElencoQuiz());
 		model.addAttribute("quiz", quizzes.get(--indice));
-		return "quix.html";
+		return "quiz.html";
 	}
+
+	@PostMapping("/quiz")
+    public String submitQuiz(@RequestParam String risposta, @RequestParam Integer idRaccolta, @RequestParam Integer indice) {
+		//Passo uno mi salvo il punteggio in una variabile di sessione
+        indice = indice + 1;
+        return "redirect:" + idRaccolta.toString() + "/" + indice.toString();
+    }
+
 
 }

@@ -40,7 +40,7 @@
 
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-gray-800">Lista completa quesiti</h1>
+                    <h1 class="h3 mb-3 text-gray-800" th:text="'Lista dei quesiti della raccolta `' + ${nomeRaccolta} + '`'">Lista dei quesiti della raccolta X</h1>
 
                     <div class="row mb-4" th:each="quiz : ${elenco}">
 
@@ -63,8 +63,8 @@
                                 </div>
                             </div>
                         </div>
-
                     </div>
+
                 </div>
                 <!-- /.container-fluid -->
 
@@ -135,6 +135,30 @@
                 document.getElementById(e.target.id.replace("hide-", "")).style.display = "none"
 
         })
+
+        document.addEventListener('click', function (e) {
+            if (e.target.id.includes("delete-quiz")) {
+                sendAnswer(e.target.id.replace("delete-quiz", ""))
+            }
+        });
+
+        function sendAnswer(idQuiz) {
+            alert(idQuiz)
+            fetch('/eliminazioneQuiz/' + idQuiz, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                body: 'idQuiz=' + encodeURIComponent(idQuiz) // Aggiunto idQuiz nel corpo della richiesta
+            })
+                .then(response => response.text())
+                .then(data => {
+                    console.log(data);
+                    location.reload(); 
+                })
+                .catch(error => console.error('Errore:', error));
+        }
+
     </script>
 
 </body>

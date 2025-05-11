@@ -1,0 +1,88 @@
+@each $name, $color in $systemColors {
+  .btn-#{$name} {
+      background-color: $color !important;
+  }
+}
+
+.btn{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid var(--border);
+  border-radius: 5px;
+  background-color: var(--background);
+  color: var(--color);
+  padding: 6px 10px;
+  cursor: pointer;
+}
+
+.btn-square{
+  margin-left: 5px;
+  margin-right: 5px;
+  width: 28px !important;
+  height: 28px !important;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid var(--border);
+  border-radius: 5px;
+  background-color: var(--background);
+  color: var(--color);
+  cursor: pointer;
+}
+
+.btn:hover{
+  filter: brightness(30%);
+  filter: saturate(120%);
+}
+
+.btn:active{
+  filter: brightness(40%);
+  filter: saturate(140%);
+}
+
+.btn-square:hover{
+  filter: brightness(30%);
+  filter: saturate(120%);
+}
+
+.btn-square:active{
+  filter: brightness(40%);
+  filter: saturate(140%);
+}
+
+.btn-action{
+  box-shadow: 0 0 0 3px #ffa807ff;
+  border: 1px solid var(--border);
+  background-color: #9645ff;
+}
+
+.btn-lol{
+  border: none !important;
+  background: none;
+}
+
+.btn-lol:hover{
+  background-color: #9645ff;
+}
+
+
+// .btn-square{
+//   width: 35px !important;
+//   height: 35px !important;
+// }
+
+
+// .btn:hover{
+//   background-color: #1c1c1c31 !important;
+// }
+
+// .btn-square:hover{
+// background-color: #1c1c1c31 !important;
+// }
+
+// .btn:active{
+// background-color: #23032b46 !important;
+// }
+
+

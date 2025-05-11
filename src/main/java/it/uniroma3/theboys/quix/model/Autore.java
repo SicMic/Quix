@@ -28,11 +28,19 @@ public class Autore {
     private String email;
 
     private String nome;
+
     private String cognome;
 
+    @Column(length = 500)
     private String biografia;
 
-	@OneToMany(mappedBy = "autore", fetch = FetchType.EAGER)
+    @Column(length = 500)
+    private String urlImage;
+
+    @OneToMany(mappedBy = "autore", fetch = FetchType.EAGER)
+	private List<Quiz> elencoQuiz;
+
+    @OneToMany(mappedBy = "autore", fetch = FetchType.EAGER)
 	private List<Raccolta> elencoRaccolte;
     
     public Long getId() {
@@ -91,8 +99,27 @@ public class Autore {
         this.biografia = biografia;
     }
 
+    
+    public String getUrlImage() {
+        return urlImage;
+    }
+
+    public void setUrlImage(String urlImage) {
+        this.urlImage = urlImage;
+    }
+
+
     /* hashCode e equals generati con riferimento username e email */
     /* Vedi User e scegli soluzione migliore per entrambi */
+
+
+    public Iterable<Quiz> getElencoQuiz() {
+        return elencoQuiz;
+    }
+
+    public void setElencoQuiz(List<Quiz> elencoQuiz) {
+        this.elencoQuiz = elencoQuiz;
+    }
 
     public Iterable<Raccolta> getElencoRaccolte() {
         return elencoRaccolte;
@@ -131,6 +158,5 @@ public class Autore {
             return false;
         return true;
     }
-
     
 }

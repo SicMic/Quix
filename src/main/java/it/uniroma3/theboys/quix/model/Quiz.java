@@ -34,6 +34,9 @@ public class Quiz { //con @Entity il framework sa che a Movie bisogna associare 
 
 	@ManyToOne
 	private Categoria categoria;
+
+	@ManyToOne
+	private Autore autore;
 	
 	public Quiz(){
 		this.quesito = "Quesito";
