@@ -17,6 +17,7 @@ public class Etichetta {
     private String nome;
     private String descrizione;
 
+    /* Utile per la ricerca con filtro  --- da rimuovere se si usa la query definita dentro la repository */
     @OneToMany(mappedBy="etichetta")
     private List<Raccolta> elencoRaccolte;
 

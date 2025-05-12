@@ -38,9 +38,6 @@ public class Autore {
     private String urlImage;
 
     @OneToMany(mappedBy = "autore", fetch = FetchType.EAGER)
-	private List<Quiz> elencoQuiz;
-
-    @OneToMany(mappedBy = "autore", fetch = FetchType.EAGER)
 	private List<Raccolta> elencoRaccolte;
     
     public Long getId() {
@@ -98,7 +95,6 @@ public class Autore {
     public void setBiografia(String biografia) {
         this.biografia = biografia;
     }
-
     
     public String getUrlImage() {
         return urlImage;
@@ -108,18 +104,8 @@ public class Autore {
         this.urlImage = urlImage;
     }
 
-
     /* hashCode e equals generati con riferimento username e email */
     /* Vedi User e scegli soluzione migliore per entrambi */
-
-
-    public Iterable<Quiz> getElencoQuiz() {
-        return elencoQuiz;
-    }
-
-    public void setElencoQuiz(List<Quiz> elencoQuiz) {
-        this.elencoQuiz = elencoQuiz;
-    }
 
     public Iterable<Raccolta> getElencoRaccolte() {
         return elencoRaccolte;
@@ -137,6 +123,7 @@ public class Autore {
         result = prime * result + ((email == null) ? 0 : email.hashCode());
         return result;
     }
+
     @Override
     public boolean equals(Object obj) {
         if (this == obj)

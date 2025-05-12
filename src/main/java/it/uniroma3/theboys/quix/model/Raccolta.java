@@ -11,7 +11,6 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
-import jakarta.persistence.OneToOne;
 
 @Entity	
 public class Raccolta { //con @Entity il framework sa che a Movie bisogna associare una tabella nel database
@@ -28,13 +27,10 @@ public class Raccolta { //con @Entity il framework sa che a Movie bisogna associ
 
 	private String urlImage;
 
-	@OneToOne
-	private Categoria categoria;
-
 	@ManyToOne
 	private Autore autore;
 
-	@OneToMany
+	@OneToMany(mappedBy="raccolta")
 	private List<Quiz> elencoQuiz;
 
 	@ManyToOne
@@ -62,14 +58,6 @@ public class Raccolta { //con @Entity il framework sa che a Movie bisogna associ
 
 	public void setDescrizione(String descrizione) {
 		this.descrizione = descrizione;
-	}
-
-	public Categoria getCategoria() {
-		return categoria;
-	}
-
-	public void setCategoria(Categoria categoria) {
-		this.categoria = categoria;
 	}
 
 	public List<Quiz> getElencoQuiz() {

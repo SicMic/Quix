@@ -7,7 +7,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.ManyToMany;
 
 
 @Entity
@@ -34,9 +34,8 @@ public class Utente {
     @Column(length = 500)
     private String urlImage;
 
-    @OneToMany
-	private List<Quiz> elencoQuiz;
-
+    @ManyToMany
+	private List<Raccolta> elencoRaccolte;  //si può mettere anche set
     
     public Long getId() {
         return id;
@@ -94,12 +93,12 @@ public class Utente {
         this.urlImage = urlImage;
     }
 
-    public List<Quiz> getElencoQuiz() {
-        return elencoQuiz;
+    public List<Raccolta> getElencoRaccolte() {
+        return elencoRaccolte;
     }
 
-    public void setElencoQuiz(List<Quiz> elencoQuiz) {
-        this.elencoQuiz = elencoQuiz;
+    public void setElencoRaccolte(List<Raccolta> elencoRaccolte) {
+        this.elencoRaccolte = elencoRaccolte;
     }
 
     /* HashCode e equals generati usando l'email come campo di riferimento */

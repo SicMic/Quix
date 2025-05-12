@@ -24,19 +24,25 @@ INSERT INTO categoria (id, nome, descrizione) VALUES (6, 'Chimica', '');
 INSERT INTO categoria (id, nome, descrizione) VALUES (7, 'Fisica', '');
 INSERT INTO categoria (id, nome, descrizione) VALUES (8, 'Informatica', '');
 
+-- Raccolta
+INSERT INTO raccolta (id, nome, descrizione, etichetta_id, autore_id, url_image) VALUES (1, 'Raccolta uno', 'Descrizione', 1, 10, 'https://plus.unsplash.com/premium_photo-1661432575489-b0400f4fea58?q=80&w=2072&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+INSERT INTO raccolta (id, nome, descrizione, etichetta_id, autore_id, url_image) VALUES (2, 'Raccolta due', 'Descrizione', 2, 10, 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2072&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+INSERT INTO raccolta (id, nome, descrizione, etichetta_id, autore_id, url_image) VALUES (3, 'Raccolta tre', 'Descrizione', 3, 2, 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2072&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+
+
 -- Quiz
-INSERT INTO quiz (id, quesito, opzione_uno, opzione_due, opzione_tre, opzione_quattro, data_creazione, categoria_id) VALUES (1, 'Qual è il risultato di 5 + 3?', '6', '7', '8', '9', '2023-07-15', 1);
-INSERT INTO quiz (id, quesito, opzione_uno, opzione_due, opzione_tre, opzione_quattro, data_creazione, categoria_id) VALUES (2, 'Qual è il valore di π (pi greco)?', '3.14', '3.15', '3.16', '3.17', '2023-07-15', 1);
-INSERT INTO quiz (id, quesito, opzione_uno, opzione_due, opzione_tre, opzione_quattro, data_creazione, categoria_id) VALUES (3, 'Qual è il risultato di 12 x 12?', '144', '124', '156', '132', '2023-07-15', 1);
-INSERT INTO quiz (id, quesito, opzione_uno, opzione_due, opzione_tre, opzione_quattro, data_creazione, categoria_id) VALUES (4, 'Qual è la radice quadrata di 81?', '7', '8', '9', '10', '2023-07-15', 1);
-INSERT INTO quiz (id, quesito, opzione_uno, opzione_due, opzione_tre, opzione_quattro, data_creazione, categoria_id) VALUES (5, 'Qual è il risultato di 15 - 6?', '7', '8', '9', '10', '2023-07-15', 1);
-INSERT INTO quiz (id, quesito, opzione_uno, opzione_due, opzione_tre, opzione_quattro, data_creazione, categoria_id) VALUES (6, 'Qual è il numero di giocatori in una squadra di calcio?', '10', '11', '12', '13', '2023-07-15', 2);
-INSERT INTO quiz (id, quesito, opzione_uno, opzione_due, opzione_tre, opzione_quattro, data_creazione, categoria_id) VALUES (7, 'In quale sport si usa una racchetta?', 'Calcio', 'Tennis', 'Basket', 'Pallavolo', '2023-07-15', 2);
-INSERT INTO quiz (id, quesito, opzione_uno, opzione_due, opzione_tre, opzione_quattro, data_creazione, categoria_id) VALUES (8, 'Qual è il paese di origine del judo?', 'Cina', 'Giappone', 'Corea', 'Thailandia', '2023-07-15', 2);
-INSERT INTO quiz (id, quesito, opzione_uno, opzione_due, opzione_tre, opzione_quattro, data_creazione, categoria_id) VALUES (9, 'Qual è il record di medaglie d` oro alle Olimpiadi?', 'Michael Phelps', 'Usain Bolt', 'Carl Lewis', 'Mark Spitz', '2023-07-15', 2);
-INSERT INTO quiz (id, quesito, opzione_uno, opzione_due, opzione_tre, opzione_quattro, data_creazione, categoria_id) VALUES (10, 'In quale sport si gioca a "pallone"?', 'Calcio', 'Rugby', 'Basket', 'Hockey', '2023-07-15', 2);
-INSERT INTO quiz (id, quesito, opzione_uno, opzione_due, opzione_tre, opzione_quattro, data_creazione, categoria_id) VALUES (11, 'Qual è la capitale della Francia?', 'Londra', 'Berlino', 'Parigi', 'Madrid', '2023-07-15', 3);
-INSERT INTO quiz (id, quesito, opzione_uno, opzione_due, opzione_tre, opzione_quattro, data_creazione, categoria_id) VALUES (12, 'Qual è il fiume più lungo del mondo?', 'Nilo', 'Amazonas', 'Yangtze', 'Mississippi', '2023-07-15', 3);
+INSERT INTO quiz (id, quesito, opzione_uno, opzione_due, opzione_tre, opzione_quattro, data_creazione, categoria_id, raccolta_id) VALUES (1, 'Qual è il risultato di 5 + 3?', '6', '7', '8', '9', '2023-07-15', 1, 1);
+INSERT INTO quiz (id, quesito, opzione_uno, opzione_due, opzione_tre, opzione_quattro, data_creazione, categoria_id, raccolta_id) VALUES (2, 'Qual è il valore di π (pi greco)?', '3.14', '3.15', '3.16', '3.17', '2023-07-15', 1, 1);
+INSERT INTO quiz (id, quesito, opzione_uno, opzione_due, opzione_tre, opzione_quattro, data_creazione, categoria_id, raccolta_id) VALUES (3, 'Qual è il risultato di 12 x 12?', '144', '124', '156', '132', '2023-07-15', 1, 1);
+INSERT INTO quiz (id, quesito, opzione_uno, opzione_due, opzione_tre, opzione_quattro, data_creazione, categoria_id, raccolta_id) VALUES (4, 'Qual è la radice quadrata di 81?', '7', '8', '9', '10', '2023-07-15', 1, 1);
+INSERT INTO quiz (id, quesito, opzione_uno, opzione_due, opzione_tre, opzione_quattro, data_creazione, categoria_id, raccolta_id) VALUES (5, 'Qual è il risultato di 15 - 6?', '7', '8', '9', '10', '2023-07-15', 1, 2);
+INSERT INTO quiz (id, quesito, opzione_uno, opzione_due, opzione_tre, opzione_quattro, data_creazione, categoria_id, raccolta_id) VALUES (6, 'Qual è il numero di giocatori in una squadra di calcio?', '10', '11', '12', '13', '2023-07-15', 2, 2);
+INSERT INTO quiz (id, quesito, opzione_uno, opzione_due, opzione_tre, opzione_quattro, data_creazione, categoria_id, raccolta_id) VALUES (7, 'In quale sport si usa una racchetta?', 'Calcio', 'Tennis', 'Basket', 'Pallavolo', '2023-07-15', 2, 2);
+INSERT INTO quiz (id, quesito, opzione_uno, opzione_due, opzione_tre, opzione_quattro, data_creazione, categoria_id, raccolta_id) VALUES (8, 'Qual è il paese di origine del judo?', 'Cina', 'Giappone', 'Corea', 'Thailandia', '2023-07-15', 2, 2);
+INSERT INTO quiz (id, quesito, opzione_uno, opzione_due, opzione_tre, opzione_quattro, data_creazione, categoria_id, raccolta_id) VALUES (9, 'Qual è il record di medaglie d` oro alle Olimpiadi?', 'Michael Phelps', 'Usain Bolt', 'Carl Lewis', 'Mark Spitz', '2023-07-15', 2, 2);
+INSERT INTO quiz (id, quesito, opzione_uno, opzione_due, opzione_tre, opzione_quattro, data_creazione, categoria_id, raccolta_id) VALUES (10, 'In quale sport si gioca a "pallone"?', 'Calcio', 'Rugby', 'Basket', 'Hockey', '2023-07-15', 2, 2);
+INSERT INTO quiz (id, quesito, opzione_uno, opzione_due, opzione_tre, opzione_quattro, data_creazione, categoria_id, raccolta_id) VALUES (11, 'Qual è la capitale della Francia?', 'Londra', 'Berlino', 'Parigi', 'Madrid', '2023-07-15', 3, 2);
+INSERT INTO quiz (id, quesito, opzione_uno, opzione_due, opzione_tre, opzione_quattro, data_creazione, categoria_id, raccolta_id) VALUES (12, 'Qual è il fiume più lungo del mondo?', 'Nilo', 'Amazonas', 'Yangtze', 'Mississippi', '2023-07-15', 3, 3);
 INSERT INTO quiz (id, quesito, opzione_uno, opzione_due, opzione_tre, opzione_quattro, data_creazione, categoria_id) VALUES (13, 'Qual è il continente più grande?', 'Africa', 'Asia', 'America', 'Europa', '2023-07-15', 3);
 INSERT INTO quiz (id, quesito, opzione_uno, opzione_due, opzione_tre, opzione_quattro, data_creazione, categoria_id) VALUES (14, 'Qual è la montagna più alta del mondo?', 'K2', 'Kangchenjunga', 'Everest', 'Lhotse', '2023-07-15', 3);
 INSERT INTO quiz (id, quesito, opzione_uno, opzione_due, opzione_tre, opzione_quattro, data_creazione, categoria_id) VALUES (15, 'Qual è il mare che separa l` Europa dall` Africa?', 'Mar Mediterraneo', 'Mar Rosso', 'Oceano Atlantico', 'Oceano Indiano', '2023-07-15', 3);
@@ -66,10 +72,6 @@ INSERT INTO quiz (id, quesito, opzione_uno, opzione_due, opzione_tre, opzione_qu
 INSERT INTO quiz (id, quesito, opzione_uno, opzione_due, opzione_tre, opzione_quattro, data_creazione, categoria_id) VALUES (39, 'Cosa significa l` acronimo "HTML"?', 'HyperText Markup Language', 'HighText Machine Language', 'HyperText Markup Level', 'HighText Markup Language', '2023-07-15', 8);
 INSERT INTO quiz (id, quesito, opzione_uno, opzione_due, opzione_tre, opzione_quattro, data_creazione, categoria_id) VALUES (40, 'Qual è il principale scopo di un firewall?', 'Proteggere la rete', 'Accelerare la connessione', 'Monitorare il traffico', 'Archiviare dati', '2023-07-15', 8);
 
--- Raccolta
-INSERT INTO raccolta (id, nome, descrizione, etichetta_id, autore_id, url_image) VALUES (1, 'Raccolta uno', 'Descrizione', 1, 10, 'https://plus.unsplash.com/premium_photo-1661432575489-b0400f4fea58?q=80&w=2072&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
-INSERT INTO raccolta (id, nome, descrizione, etichetta_id, autore_id, url_image) VALUES (2, 'Raccolta due', 'Descrizione', 2, 10, 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2072&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
-INSERT INTO raccolta (id, nome, descrizione, etichetta_id, autore_id, url_image) VALUES (3, 'Raccolta tre', 'Descrizione', 3, 2, 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2072&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
 
 -- Raccolta_Quiz
 INSERT INTO raccolta_elenco_quiz (elenco_quiz_id, raccolta_id) VALUES (1, 1);
@@ -87,7 +89,7 @@ INSERT INTO raccolta_elenco_quiz (elenco_quiz_id, raccolta_id) VALUES (12, 3);
 INSERT INTO raccolta_elenco_quiz (elenco_quiz_id, raccolta_id) VALUES (13, 3);
 INSERT INTO raccolta_elenco_quiz (elenco_quiz_id, raccolta_id) VALUES (14, 3);
 
--- -- Atuore_Quiz
+-- -- Autore_Quiz
 -- INSERT INTO autore_elenco_raccolte (autore_id, elenco_raccolte_id) VALUES (1, 1);
 -- INSERT INTO autore_elenco_raccolte (autore_id, elenco_raccolte_id) VALUES (1, 2);
 -- INSERT INTO autore_elenco_raccolte (autore_id, elenco_raccolte_id) VALUES (2, 3);

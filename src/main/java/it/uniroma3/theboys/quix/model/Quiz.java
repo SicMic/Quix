@@ -33,10 +33,10 @@ public class Quiz { //con @Entity il framework sa che a Movie bisogna associare 
 	private java.time.LocalDate dataCreazione;
 
 	@ManyToOne
-	private Categoria categoria;
+	private Raccolta raccolta;
 
 	@ManyToOne
-	private Autore autore;
+	private Categoria categoria;
 	
 	public Quiz(){
 		this.quesito = "Quesito";
@@ -110,6 +110,61 @@ public class Quiz { //con @Entity il framework sa che a Movie bisogna associare 
 		this.categoria = categoria;
 	}
 
-	//Non so se ha senso creare i metodi hashCode() e equals()
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((quesito == null) ? 0 : quesito.hashCode());
+		result = prime * result + ((opzioneUno == null) ? 0 : opzioneUno.hashCode());
+		result = prime * result + ((opzioneDue == null) ? 0 : opzioneDue.hashCode());
+		result = prime * result + ((opzioneTre == null) ? 0 : opzioneTre.hashCode());
+		result = prime * result + ((opzioneQuattro == null) ? 0 : opzioneQuattro.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Quiz other = (Quiz) obj;
+		if (quesito == null) {
+			if (other.quesito != null)
+				return false;
+		} else if (!quesito.equals(other.quesito))
+			return false;
+		if (opzioneUno == null) {
+			if (other.opzioneUno != null)
+				return false;
+		} else if (!opzioneUno.equals(other.opzioneUno))
+			return false;
+		if (opzioneDue == null) {
+			if (other.opzioneDue != null)
+				return false;
+		} else if (!opzioneDue.equals(other.opzioneDue))
+			return false;
+		if (opzioneTre == null) {
+			if (other.opzioneTre != null)
+				return false;
+		} else if (!opzioneTre.equals(other.opzioneTre))
+			return false;
+		if (opzioneQuattro == null) {
+			if (other.opzioneQuattro != null)
+				return false;
+		} else if (!opzioneQuattro.equals(other.opzioneQuattro))
+			return false;
+		return true;
+	}
+
+    public Raccolta getRaccolta() {
+        return raccolta;
+    }
+
+    public void setRaccolta(Raccolta raccolta) {
+        this.raccolta = raccolta;
+    }
 
 }

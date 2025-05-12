@@ -84,9 +84,25 @@ public class AutoreController {
 			return "redirect:/loginAutore";
 
 		model.addAttribute("utente", session.getAttribute("user"));
-		model.addAttribute("elenco", ((Autore) session.getAttribute("user")).getElencoQuiz());
+		model.addAttribute("elenco", this.autoreService.getAllQuizAutore(((Autore) session.getAttribute("user")).getId()));
 		return "elencoQuiz.html";
 	}
+
+
+
+	@GetMapping("/elencoQuiz/{nomeCategoria}")
+	public String getElencoQuiz(Model model, HttpSession session, @RequestParam String nomeCategoria) {
+
+		if (session.getAttribute("user") == null)
+			return "redirect:/loginAutore";
+
+		model.addAttribute("utente", session.getAttribute("user"));
+		model.addAttribute("elenco", this.autoreService.getAllQuizAutoreOfCategoria(((Autore) session.getAttribute("user")).getId(), nomeCategoria));
+		return "elencoQuiz.html";
+	}
+
+
+
 
 	@PostMapping("/eliminazioneQuiz/{idQuiz}")
 	public void eliminazioneQuiz(Model model, @RequestParam Long idQuiz) {
