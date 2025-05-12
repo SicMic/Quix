@@ -22,4 +22,5 @@ public class AutoreService {
     public Autore saveNewAutore(Autore autore){
         return this.autoreRepository.save(autore);
     }
+
 }

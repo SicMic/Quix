@@ -24,4 +24,8 @@ public class QuizService {
 		return this.quizRepository.save(q);
 	}
 
+	public void deleteQuiz(Long id){
+		this.quizRepository.deleteById(id);
+	}
+
 }

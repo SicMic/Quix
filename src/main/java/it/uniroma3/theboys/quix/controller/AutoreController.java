@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import it.uniroma3.theboys.quix.model.Autore;
 import it.uniroma3.theboys.quix.service.AuthServiceAutore;
 import it.uniroma3.theboys.quix.service.AutoreService;
+import it.uniroma3.theboys.quix.service.QuizService;
 import it.uniroma3.theboys.quix.service.RaccoltaService;
 import jakarta.servlet.http.HttpSession;
 
@@ -27,6 +28,9 @@ public class AutoreController {
 	@Autowired
 	private AuthServiceAutore authServiceAutore;
 
+	@Autowired
+	private QuizService quizService;
+
     
     @GetMapping("/registrazioneAutore")
 		public String getRegistrazione(Model model) {
@@ -37,9 +41,9 @@ public class AutoreController {
     @PostMapping("/registrazioneAutore")
   	public String newRegistrazione(@ModelAttribute("utente") Autore autore, HttpSession session, Model model) {
         this.autoreService.saveNewAutore(autore);
-		// session.setAttribute("user", authServiceAutore.getAutoreByUsername(autore.getUsername()));
-        // session.setMaxInactiveInterval(60*5);                                          
-        // model.addAttribute("utente", session.getAttribute("user"));
+		session.setAttribute("user", authServiceAutore.getAutoreByUsername(autore.getUsername()));
+        session.setMaxInactiveInterval(60*5);                                          
+        model.addAttribute("utente", session.getAttribute("user"));
         return "redirect:dashboardAutore"; // modificare in base a struttura url dashboard
 	}
 
@@ -85,8 +89,8 @@ public class AutoreController {
 	}
 
 	@PostMapping("/eliminazioneQuiz/{idQuiz}")
-	public void eliminazioneQuiz(Model model, @RequestParam Integer idQuiz) {
-		//REMOVE QUIZ CON SERVICE
+	public void eliminazioneQuiz(Model model, @RequestParam Long idQuiz) {
+		this.quizService.deleteQuiz(idQuiz);
 	}
 
 
@@ -144,5 +148,4 @@ public class AutoreController {
 		model.addAttribute("utente", session.getAttribute("user"));
 		return "impostazioni.html";
 	}
-
 }
