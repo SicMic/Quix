@@ -38,12 +38,24 @@ public class Quiz { //con @Entity il framework sa che a Movie bisogna associare 
 	@ManyToOne
 	private Categoria categoria;
 	
+	//		DA TOGLIERE SE NON SERVE
 	public Quiz(){
 		this.quesito = "Quesito";
 		this.opzioneUno = "opzione uno";
 		this.opzioneDue = "opzione due";
 		this.opzioneTre = "opzione tre";
 		this.opzioneQuattro = "opzione quattro";
+	}
+
+	public Quiz(String quesito, String opzioneUno, String opzioneDue, String opzioneTre, String opzioneQuattro, Raccolta raccolta, Categoria categoria, java.time.LocalDate dataCreazione){
+		this.quesito = quesito;
+		this.opzioneUno = opzioneUno;
+		this.opzioneDue = opzioneDue;
+		this.opzioneTre = opzioneTre;
+		this.opzioneQuattro = opzioneQuattro;
+		this.raccolta = raccolta;
+		this.categoria = categoria;
+		this.dataCreazione = dataCreazione;
 	}
 
 	public Long getId() {

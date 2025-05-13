@@ -6,4 +6,5 @@ import it.uniroma3.theboys.quix.model.Etichetta;
 
 public interface EtichettaRepository extends CrudRepository<Etichetta, Long>{
     
+    public Etichetta findEtichettaByNome(String nome);
 }

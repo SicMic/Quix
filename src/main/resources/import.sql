@@ -89,7 +89,5 @@ INSERT INTO raccolta_elenco_quiz (elenco_quiz_id, raccolta_id) VALUES (12, 3);
 INSERT INTO raccolta_elenco_quiz (elenco_quiz_id, raccolta_id) VALUES (13, 3);
 INSERT INTO raccolta_elenco_quiz (elenco_quiz_id, raccolta_id) VALUES (14, 3);
 
--- -- Autore_Quiz
--- INSERT INTO autore_elenco_raccolte (autore_id, elenco_raccolte_id) VALUES (1, 1);
--- INSERT INTO autore_elenco_raccolte (autore_id, elenco_raccolte_id) VALUES (1, 2);
--- INSERT INTO autore_elenco_raccolte (autore_id, elenco_raccolte_id) VALUES (2, 3);
+--   FARE PER CIASCUNA TABELLA 
+SELECT setval('quiz_seq', (SELECT MAX(id) FROM quiz));

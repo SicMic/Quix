@@ -36,6 +36,16 @@ public class Raccolta { //con @Entity il framework sa che a Movie bisogna associ
 	@ManyToOne
 	private Etichetta etichetta;
 
+	public Raccolta(){				// controllare se serve inserire istruzioni
+	}
+
+	public Raccolta(String nome, String urlImage, Etichetta etichetta, String descrizione){
+		this.nome = nome;
+		this.urlImage = urlImage;
+		this.etichetta = etichetta;
+		this.descrizione = descrizione;
+	}
+
 	public Long getId() {
 		return id;
 	}
