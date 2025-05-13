@@ -2,7 +2,7 @@
 <html lang="it">
 
 <head>
-    <title>Dashboard</title>
+    <title>Elenco quiz</title>
     <th:block th:replace="~{/moduli/areaRiservata/head :: head}"></th:block>
     <style>
         .overlay {
@@ -40,9 +40,10 @@
 
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-gray-800" th:if="${nomeCategoria != null}" th:text="'Lista quiz della categoria ' + ${nomeCategoria}">Lista completa categoria</h1>
-                    <h1 class="h3 mb-2 text-gray-800" th:if="${nomeCategoria == null}">Lista completa quesiti</h1>
-
+                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                        <h1 id="categoryQuiz" class="h3 mb-2 text-gray-800" th:if="${nomeCategoria != null}" th:text="'Lista quiz della categoria ' + ${nomeCategoria}">Lista completa categoria</h1>
+                        <h1 id="allQuiz" class="h3 mb-2 text-gray-800" th:if="${nomeCategoria == null}">Lista completa quesiti</h1>
+                    </div>
                     <div class="row mb-4" th:each="quiz : ${elenco}">
 
                         <!-- Righe quiz -->
@@ -88,50 +89,47 @@
         <i class="fas fa-angle-up"></i>
     </a>
 
-    <!-- Editor -->
+    <!-- Editor - Start -->
     <div th:each="quiz : ${elenco}">
         <div class="overlay" th:id="'editor-quiz' + ${quiz.id}">
-            <form class="user" th:action="@{/loginUtente}" method="POST" th:object="${utente}">
-                <div class="modal-dialog modal-lg" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <input type="text" class="form-control form-control-user" required th:placeholder="${quiz.quesito}">
-                            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true" th:id="'hide-editor-quiz' + ${quiz.id}">×</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            <div class="form-group row">
-                                <div class="col-sm-6 mb-3 mb-sm-0">
-                                    <input type="text" class="form-control form-control-user" required th:placeholder="${quiz.opzioneUno}">
-                                </div>
-                                <div class="col-sm-6">
-                                    <input type="text" class="form-control form-control-user" required th:placeholder="${quiz.opzioneDue}">
-                                </div>
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <p type="text" class="form-control form-control-user" contenteditable="true" required th:text="${quiz.quesito}" th:id="'quesito-quiz' + ${quiz.id}">Quesito</p>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group row">
+                            <div class="col-sm-6 mb-3 mb-sm-0">
+                                <p type="text" class="form-control form-control-user" contenteditable="true" required th:text="${quiz.opzioneUno}" th:id="'opzioneUno-quiz' + ${quiz.id}">opzioneUno</p>
                             </div>
-                            <div class="form-group row">
-                                <div class="col-sm-6 mb-3 mb-sm-0">
-                                    <input type="text" class="form-control form-control-user" required th:placeholder="${quiz.opzioneTre}">
-                                </div>
-                                <div class="col-sm-6">
-                                    <input type="text" class="form-control form-control-user" required th:placeholder="${quiz.opzioneQuattro}">
-                                </div>
+                            <div class="col-sm-6">
+                                <p type="text" class="form-control form-control-user" contenteditable="true" required th:text="${quiz.opzioneDue}" th:id="'opzioneDue-quiz' + ${quiz.id}">opzioneDue</p>
                             </div>
                         </div>
-                        <div class="modal-footer">
-                            <button class="btn btn-secondary" type="reset" data-dismiss="modal" th:id="'hide-editor-quiz' + ${quiz.id}">Annulla</button>
-                            <button class="btn btn-primary" type="submit" data-dismiss="modal" th:id="'save-quiz' + ${quiz.id}">Salva</button>
+                        <div class="form-group row">
+                            <div class="col-sm-6 mb-3 mb-sm-0">
+                                <p type="text" class="form-control form-control-user" contenteditable="true" required th:text="${quiz.opzioneTre}" th:id="'opzioneTre-quiz' + ${quiz.id}">opzioneTre</p>
+                            </div>
+                            <div class="col-sm-6">
+                                <p type="text" class="form-control form-control-user" contenteditable="true" required th:text="${quiz.opzioneQuattro}" th:id="'opzioneQuattro-quiz' + ${quiz.id}">opzioneQuattro</p>
+                            </div>
                         </div>
                     </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-secondary" type="reset" data-dismiss="modal" th:id="'hide-editor-quiz' + ${quiz.id}">Annulla</button>
+                        <button class="btn btn-primary" type="button" data-dismiss="modal" th:id="'save-quiz' + ${quiz.id}">Aggiorna</button>
+                    </div>
                 </div>
-            </form>
+            </div>
         </div>
     </div>
+    <!-- Editor - End -->
+
 
     <th:block th:replace="~{moduli/areaRiservata/logout :: logout}"></th:block>
 
     <th:block th:replace="~{moduli/areaRiservata/scripts :: scripts}"></th:block>
-    
+
     <script>
         function provina(idQuiz) {
             fetch('/eliminazioneQuiz/', {
@@ -140,7 +138,7 @@
                     'Content-Type': 'application/x-www-form-urlencoded'
                 },
                 body: new URLSearchParams({
-                    'idQuiz' : idQuiz
+                    'idQuiz': idQuiz
                 })
             })
                 .then(response => response.text())
@@ -148,24 +146,25 @@
                     //Approccio molto precario [TEMPORANEO - DA RIVEDERE]
                     //console.log(data)
                     // const jsonObject = JSON.parse(data);
-                    window.location.replace("/elencoQuiz");
+                    window.location.reload()
                 })
                 .catch(error => console.error('Errore:', error));
         }
 
         function provolona(idQuiz, quesito, opzioneUno, opzioneDue, opzioneTre, opzioneQuattro) {
-            fetch('/aggiornamentoQuiz/', {
+            fetch('/aggiornamentoQuiz', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded'
                 },
                 body: new URLSearchParams({
-                    'idQuiz' : idQuiz,
-                    'quesito' : quesito,
-                    'opzioneUno' : opzioneUno,
-                    'opzineDue' : opzioneDue,
-                    'opzioneTre' : opzioneTre,
-                    'opzioneQuattro' : opzioneQuattro
+                    'idQuiz': idQuiz,
+                    'quesito': quesito,
+                    'opzioneUno': opzioneUno,
+                    'opzioneDue': opzioneDue,
+                    'opzioneTre': opzioneTre,
+                    'opzioneQuattro': opzioneQuattro
+
                 })
             })
                 .then(response => response.text())
@@ -173,7 +172,7 @@
                     //Approccio molto precario [TEMPORANEO - DA RIVEDERE]
                     //console.log(data)
                     // const jsonObject = JSON.parse(data);
-                    // window.location.replace("/elencoQuiz");
+                    window.location.reload()
                 })
                 .catch(error => console.error('Errore:', error));
         }
@@ -185,12 +184,17 @@
                 document.getElementById(e.target.id.replace("hide-", "")).style.display = "none"
             if (e.target.id.includes("delete"))
                 provina(e.target.id.replace("delete-quiz", ""))
-            if (e.target.id.includes("save")){
-                alert()
-                provolona(e.target.id.replace("save-quiz", ""), "a", "b", "c", "d", "e")
+            if (e.target.id.includes("save")) {
+                const quesito = document.getElementById("quesito-quiz" + e.target.id.replace("save-quiz", ""))
+                const opzioneUno = document.getElementById("opzioneUno-quiz" + e.target.id.replace("save-quiz", ""))
+                const opzioneDue = document.getElementById("opzioneDue-quiz" + e.target.id.replace("save-quiz", ""))
+                const opzioneTre = document.getElementById("opzioneTre-quiz" + e.target.id.replace("save-quiz", ""))
+                const opzioneQuattro = document.getElementById("opzioneQuattro-quiz" + e.target.id.replace("save-quiz", ""))
+                provolona(e.target.id.replace("save-quiz", ""), quesito.innerText, opzioneUno.innerText, opzioneDue.innerText, opzioneTre.innerText, opzioneQuattro.innerText)
             }
-
         })
+
+
     </script>
 
 </body>

@@ -2,8 +2,20 @@
 <html lang="it">
 
 <head>
-    <title>Dashboard</title>
+    <title>Raccolte</title>
     <th:block th:replace="~{moduli/areaRiservata/head :: head}"></th:block>
+    <style>
+        .overlay {
+            z-index: 10;
+            position: fixed;
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            display: none;
+        }
+    </style>
 </head>
 
 <body id="page-top">
@@ -27,7 +39,10 @@
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-gray-800">Le mie raccolte</h1>
+                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                        <h1 class="h3 mb-2 text-gray-800">Le mie raccolte</h1>
+                        <a id="showRaccoltaModal" class="d-none d-sm-inline-block btn btn btn-primary shadow-sm"><i class="fas fa-plus fa-sm text-white-50"></i> Crea raccolta</a>
+                    </div>
 
                     <div class="row">
                         <div class="col-xl-3 col-lg-4" th:each="raccolta :${raccolte}">
@@ -64,6 +79,45 @@
     </div>
     <!-- End of Page Wrapper -->
 
+
+
+    <!-- New Raccolta Maker - Start -->
+    <div id="newRaccoltaModal" class="overlay">
+        <form th:action="@{/aggiuntaRaccolta}" method="post">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <input id="nameRaccolta" class="form-control form-control-user" placeholder="Nome raccolta" required>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group row">
+                            <div class="col-sm">
+                                <input id="descriptionRaccolta" class="form-control form-control-user" placeholder="Descrizione" required>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-sm">
+                                <input id="urlImageRaccolta" class="form-control form-control-user" placeholder="URL Copertina" required>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <select class="form-control">
+                                <option value="0">select option</option>
+                                <option th:each="etichetta : ${etichette}" th:value="${etichetta.nome}" th:text="${etichetta.nome}"></option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button id="hideRaccoltaModal" class="btn btn-secondary" type="reset" data-dismiss="modal">Annulla</button>
+                        <button class="btn btn-primary" type="submit" data-dismiss="modal">Creax</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <!-- New Raccolta Maker - End -->
+
+
     <!-- Scroll to Top Button-->
     <a class="scroll-to-top rounded" href="#page-top">
         <i class="fas fa-angle-up"></i>
@@ -74,5 +128,16 @@
     <th:block th:replace="~{moduli/areaRiservata/scripts :: scripts}"></th:block>
 
 </body>
+
+
+<script>
+
+    document.addEventListener("click", function (e) {
+        if (e.target.id.includes("showRaccoltaModal"))
+            document.getElementById("newRaccoltaModal").style.display = "block"
+        if (e.target.id.includes("hideRaccoltaModal"))
+            document.getElementById("newRaccoltaModal").style.display = "none"
+    })
+</script>
 
 </html>
