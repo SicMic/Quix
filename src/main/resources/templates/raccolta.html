@@ -83,42 +83,47 @@
     <!-- End of Page Wrapper -->
 
 
-    <!-- New Raccolta Maker - Start -->
+    <!-- New Quiz of Maker - Start -->
     <div id="newQuizModal" class="overlay">
         <form th:action="@{/aggiuntaQuiz}" method="post">
             <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <input id="nameRaccolta" class="form-control form-control-user" placeholder="Nome raccolta" required>
+                        <input name="quesito" type="text" class="form-control form-control-user" contenteditable="true" required placeholder="Quesito">
                     </div>
                     <div class="modal-body">
                         <div class="form-group row">
-                            <div class="col-sm">
-                                <input id="descriptionRaccolta" class="form-control form-control-user" placeholder="Descrizione" required>
+                            <div class="col-sm-6 mb-3 mb-sm-0">
+                                <input name="opzioneUno" type="text" class="form-control form-control-user" contenteditable="true" required placeholder="opzioneUno">
+                            </div>
+                            <div class="col-sm-6">
+                                <input name="opzioneDue" type="text" class="form-control form-control-user" contenteditable="true" required placeholder="opzioneDue">
                             </div>
                         </div>
                         <div class="form-group row">
-                            <div class="col-sm">
-                                <input id="urlImageRaccolta" class="form-control form-control-user" placeholder="URL Copertina" required>
+                            <div class="col-sm-6 mb-3 mb-sm-0">
+                                <input name="opzioneTre" type="text" class="form-control form-control-user" contenteditable="true" required placeholder="opzioneTre">
+                            </div>
+                            <div class="col-sm-6">
+                                <input name="opzioneQuattro" type="text" class="form-control form-control-user" contenteditable="true" required placeholder="opzioneQuattro">
                             </div>
                         </div>
-                        <div class="form-group row">
-                            <select class="form-control">
-                                <option value="0">select option</option>
-                                <option th:each="etichetta : ${etichette}" th:value="${etichetta.nome}" th:text="${etichetta.nome}"></option>
-                            </select>
-                        </div>
+                        <select class="form-control" id="dropDownList">
+                            <option value="0">select option</option>
+                            <option th:each="categoria : ${categorie}" th:value="${categoria.nome}" th:text="${categoria.nome}"></option>
+                        </select>
+                        <input name="idRaccolta" type="hidden" class="form-control form-control-user" contenteditable="true" required placeholder="opzioneQuattro">
                     </div>
                     <div class="modal-footer">
                         <button id="hideQuizModal" class="btn btn-secondary" type="reset" data-dismiss="modal">Annulla</button>
-                        <button class="btn btn-primary" type="submit" data-dismiss="modal">Creax</button>
+                        <button class="btn btn-primary" type="submit" data-dismiss="modal">Aggiungi</button>
                     </div>
                 </div>
             </div>
         </form>
     </div>
-    <!-- New Raccolta Maker - End -->
-     
+    <!-- New Quiz of Raccolta Maker - End -->
+
     <!-- Scroll to Top Button-->
     <a class="scroll-to-top rounded" href="#page-top">
         <i class="fas fa-angle-up"></i>
@@ -131,6 +136,70 @@
 
     <script>
 
+        function provina(idQuiz) {
+            fetch('/eliminazioneQuiz/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                body: new URLSearchParams({
+                    'idQuiz': idQuiz
+                })
+            })
+                .then(response => response.text())
+                .then(data => {
+                    //Approccio molto precario [TEMPORANEO - DA RIVEDERE]
+                    //console.log(data)
+                    // const jsonObject = JSON.parse(data);
+                    window.location.reload()
+                })
+                .catch(error => console.error('Errore:', error));
+        }
+
+        function provolona(idQuiz, quesito, opzioneUno, opzioneDue, opzioneTre, opzioneQuattro) {
+            fetch('/aggiornamentoQuiz', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                body: new URLSearchParams({
+                    'idQuiz': idQuiz,
+                    'quesito': quesito,
+                    'opzioneUno': opzioneUno,
+                    'opzioneDue': opzioneDue,
+                    'opzioneTre': opzioneTre,
+                    'opzioneQuattro': opzioneQuattro
+
+                })
+            })
+                .then(response => response.text())
+                .then(data => {
+                    //Approccio molto precario [TEMPORANEO - DA RIVEDERE]
+                    //console.log(data)
+                    // const jsonObject = JSON.parse(data);
+                    window.location.reload()
+                })
+                .catch(error => console.error('Errore:', error));
+        }
+
+        document.addEventListener("click", function (e) {
+            if (e.target.id.includes("edit-quiz"))
+                document.getElementById("editor-" + e.target.id.replace("edit-", "")).style.display = "block"
+            if (e.target.id.includes("hide-editor"))
+                document.getElementById(e.target.id.replace("hide-", "")).style.display = "none"
+            if (e.target.id.includes("delete"))
+                provina(e.target.id.replace("delete-quiz", ""))
+            if (e.target.id.includes("save")) {
+                const quesito = document.getElementById("quesito-quiz" + e.target.id.replace("save-quiz", ""))
+                const opzioneUno = document.getElementById("opzioneUno-quiz" + e.target.id.replace("save-quiz", ""))
+                const opzioneDue = document.getElementById("opzioneDue-quiz" + e.target.id.replace("save-quiz", ""))
+                const opzioneTre = document.getElementById("opzioneTre-quiz" + e.target.id.replace("save-quiz", ""))
+                const opzioneQuattro = document.getElementById("opzioneQuattro-quiz" + e.target.id.replace("save-quiz", ""))
+                provolona(e.target.id.replace("save-quiz", ""), quesito.innerText, opzioneUno.innerText, opzioneDue.innerText, opzioneTre.innerText, opzioneQuattro.innerText)
+            }
+        })
+
+
         document.addEventListener("click", function (e) {
             if (e.target.id.includes("showQuizaModal"))
                 document.getElementById("newQuizModal").style.display = "block"
@@ -138,7 +207,7 @@
                 document.getElementById("newQuizModal").style.display = "none"
         })
     </script>
-    
+
 </body>
 
 </html>
