@@ -34,6 +34,6 @@ public class AutoreService {
     }
 
     public Iterable<Quiz> getAllQuizAutoreOfCategoria(Long autoreId, String nomeCategoria){
-        return this.quizRepository.findQuizByAutoreOfCategoriaIdNative(autoreId, nomeCategoria);
+        return this.quizRepository.findQuizByAutoreOfCategoriaIdNative(autoreId,nomeCategoria);
     }
 }

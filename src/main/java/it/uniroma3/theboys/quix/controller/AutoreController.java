@@ -16,6 +16,7 @@ import it.uniroma3.theboys.quix.service.QuizService;
 import it.uniroma3.theboys.quix.service.RaccoltaService;
 import jakarta.servlet.http.HttpSession;
 
+
 @Controller
 public class AutoreController {
 
@@ -91,23 +92,29 @@ public class AutoreController {
 
 
 	@GetMapping("/elencoQuiz/{nomeCategoria}")
-	public String getElencoQuiz(Model model, HttpSession session, @RequestParam String nomeCategoria) {
+	public String getElencoQuiz(Model model, HttpSession session, @PathVariable("nomeCategoria") String nomeCategoria) {
 
 		if (session.getAttribute("user") == null)
 			return "redirect:/loginAutore";
 
 		model.addAttribute("utente", session.getAttribute("user"));
-		model.addAttribute("elenco", this.autoreService.getAllQuizAutoreOfCategoria(((Autore) session.getAttribute("user")).getId(), nomeCategoria));
+		model.addAttribute("nomeCategoria", nomeCategoria);
+		model.addAttribute("elenco", this.autoreService.getAllQuizAutoreOfCategoria(((Autore) session.getAttribute("user")).getId(),nomeCategoria));
 		return "elencoQuiz.html";
 	}
 
 
 
 
-	@PostMapping("/eliminazioneQuiz/{idQuiz}")
-	public void eliminazioneQuiz(Model model, @RequestParam Long idQuiz) {
+	@PostMapping("/eliminazioneQuiz/")
+	public void eliminazioneQuiz(@RequestParam Long idQuiz) {
 		this.quizService.deleteQuiz(idQuiz);
 	}
+
+	// @GetMapping("/eliminazioneQuiz/{idQuiz}")
+	// public void eliminazioneQuiz(Model model, @PathVariable("idQuiz") Long idQuiz) {
+	// 	this.quizService.deleteQuiz(idQuiz);
+	// }
 
 
 	@GetMapping("/raccolte")
@@ -132,6 +139,12 @@ public class AutoreController {
 		model.addAttribute("elenco", raccoltaService.getRaccoltaById(idRaccolta).getElencoQuiz());
 		return "raccolta.html";
 	}
+
+	@PostMapping("/aggiornamentoQuiz")
+	public void postAggiornamentoQuiz(@RequestParam Long idQuiz, @RequestParam String quesito, @RequestParam String opzioneUno, @RequestParam String opzioneDue, @RequestParam String opzioneTre, @RequestParam String opzioneQuattro) {
+		this.quizService.updateQuiz(idQuiz, quesito, opzioneUno, opzioneDue, opzioneTre, opzioneQuattro);
+	}
+	
 
 	@GetMapping("/creaQuiz")
 	public String getCreaQuiz(Model model, HttpSession session) {

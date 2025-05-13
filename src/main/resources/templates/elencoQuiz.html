@@ -40,7 +40,8 @@
 
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-gray-800">Lista completa quesiti</h1>
+                    <h1 class="h3 mb-2 text-gray-800" th:if="${nomeCategoria != null}" th:text="'Lista quiz della categoria ' + ${nomeCategoria}">Lista completa categoria</h1>
+                    <h1 class="h3 mb-2 text-gray-800" th:if="${nomeCategoria == null}">Lista completa quesiti</h1>
 
                     <div class="row mb-4" th:each="quiz : ${elenco}">
 
@@ -54,7 +55,7 @@
                                                 <a class="bg-primary text-white p-1" th:text="${quiz.categoria.nome}" th:href="'/elencoQuiz/' + ${quiz.categoria.nome}">Categoria</a>
                                             </div>
                                             <div class="text-xs font-weight-bold text-primary text-uppercase mb-1" style="display: inline;">
-                                                <a class="bg-primary text-white p-1" th:text="${quiz.raccolta.nome}">Raccolta</a>
+                                                <a class="bg-primary text-white p-1" th:text="${quiz.raccolta.nome}" th:href="'/raccolta/' + ${quiz.raccolta.id}">Raccolta</a>
                                             </div>
                                             <div class="h5 mb-0 font-weight-bold text-gray-800 mt-2" th:text="${quiz.quesito}">Quesito</div>
                                         </div>
@@ -119,7 +120,7 @@
                         </div>
                         <div class="modal-footer">
                             <button class="btn btn-secondary" type="reset" data-dismiss="modal" th:id="'hide-editor-quiz' + ${quiz.id}">Annulla</button>
-                            <button class="btn btn-primary" type="submit" data-dismiss="modal">Salva</button>
+                            <button class="btn btn-primary" type="submit" data-dismiss="modal" th:id="'save-quiz' + ${quiz.id}">Salva</button>
                         </div>
                     </div>
                 </div>
@@ -130,12 +131,64 @@
     <th:block th:replace="~{moduli/areaRiservata/logout :: logout}"></th:block>
 
     <th:block th:replace="~{moduli/areaRiservata/scripts :: scripts}"></th:block>
+    
     <script>
+        function provina(idQuiz) {
+            fetch('/eliminazioneQuiz/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                body: new URLSearchParams({
+                    'idQuiz' : idQuiz
+                })
+            })
+                .then(response => response.text())
+                .then(data => {
+                    //Approccio molto precario [TEMPORANEO - DA RIVEDERE]
+                    //console.log(data)
+                    // const jsonObject = JSON.parse(data);
+                    window.location.replace("/elencoQuiz");
+                })
+                .catch(error => console.error('Errore:', error));
+        }
+
+        function provolona(idQuiz, quesito, opzioneUno, opzioneDue, opzioneTre, opzioneQuattro) {
+            fetch('/aggiornamentoQuiz/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                body: new URLSearchParams({
+                    'idQuiz' : idQuiz,
+                    'quesito' : quesito,
+                    'opzioneUno' : opzioneUno,
+                    'opzineDue' : opzioneDue,
+                    'opzioneTre' : opzioneTre,
+                    'opzioneQuattro' : opzioneQuattro
+                })
+            })
+                .then(response => response.text())
+                .then(data => {
+                    //Approccio molto precario [TEMPORANEO - DA RIVEDERE]
+                    //console.log(data)
+                    // const jsonObject = JSON.parse(data);
+                    // window.location.replace("/elencoQuiz");
+                })
+                .catch(error => console.error('Errore:', error));
+        }
+
         document.addEventListener("click", function (e) {
             if (e.target.id.includes("edit-quiz"))
                 document.getElementById("editor-" + e.target.id.replace("edit-", "")).style.display = "block"
             if (e.target.id.includes("hide-editor"))
                 document.getElementById(e.target.id.replace("hide-", "")).style.display = "none"
+            if (e.target.id.includes("delete"))
+                provina(e.target.id.replace("delete-quiz", ""))
+            if (e.target.id.includes("save")){
+                alert()
+                provolona(e.target.id.replace("save-quiz", ""), "a", "b", "c", "d", "e")
+            }
 
         })
     </script>

@@ -28,4 +28,14 @@ public class QuizService {
 		this.quizRepository.deleteById(id);
 	}
 
+	public void updateQuiz(Long id, String quesito, String opzioneUno, String opzioneDue, String opzioneTre, String opzioneQuattro){
+		Quiz q = this.getQuizById(id);
+		q.setQuesito(quesito);
+		q.setOpzioneUno(opzioneUno);
+		q.setOpzioneDue(opzioneDue);
+		q.setOpzioneTre(opzioneTre);
+		q.setOpzioneQuattro(opzioneQuattro);
+		this.quizRepository.save(q);
+	}
+
 }

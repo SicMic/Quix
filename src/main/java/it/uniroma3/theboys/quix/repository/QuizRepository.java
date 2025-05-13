@@ -32,5 +32,5 @@ public interface QuizRepository extends CrudRepository<Quiz, Long>{
     """, nativeQuery = true)
     public Iterable<Quiz> findQuizByAutoreOfCategoriaIdNative(@Param("autoreId") Long autoreId, @Param("nomeCategoria") String nomeCategoria);
 
-    
+
 }
