@@ -1,5 +1,8 @@
 package it.uniroma3.theboys.quix.controller;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import it.uniroma3.theboys.quix.model.Autore;
+import it.uniroma3.theboys.quix.model.Etichetta;
 import it.uniroma3.theboys.quix.model.Quiz;
 import it.uniroma3.theboys.quix.model.Raccolta;
 import it.uniroma3.theboys.quix.repository.CategoriaRepository;
@@ -140,6 +144,10 @@ public class AutoreController {
 
 		model.addAttribute("utente", session.getAttribute("user"));
 		model.addAttribute("raccolte", ((Autore) session.getAttribute("user")).getElencoRaccolte());
+		Map<String, String> mappaEtichette = new HashMap<>();
+		for(Etichetta e : etichettaService.getAllEtichette())
+			mappaEtichette.put(e.getNome(), e.getNome().replace(" ", "+"));
+		model.addAttribute("mappaEtichette", mappaEtichette);
 		model.addAttribute("etichette", etichettaService.getAllEtichette());
 
 		return "raccolte.html";
@@ -153,7 +161,7 @@ public class AutoreController {
 
 		model.addAttribute("utente", session.getAttribute("user"));
 		model.addAttribute("nomeEtichetta", nomeEtichetta);
-		model.addAttribute("raccolte", this.autoreService.getAllRaccolteAutoreOfEtichetta(((Autore) session.getAttribute("user")).getId(),nomeEtichetta));
+		model.addAttribute("raccolte", this.autoreService.getAllRaccolteAutoreOfEtichetta(((Autore) session.getAttribute("user")).getId(), nomeEtichetta.replace("+", " ")));
 		return "raccolte.html";
 	}
 
