@@ -38,6 +38,12 @@
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
 
+                    <div class="row mb-3">
+                        <div class="col">
+                            <a class="d-none d-sm-inline-block btn btn btn-primary shadow-sm mr-1" th:each="etichetta : ${etichette}" th:text="${etichetta.nome}" th:href="@{'/raccolte' + '/' + ${mappaEtichette[etichetta.nome]}}">Eticchetta</a>
+                        </div>
+                    </div>
+
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
                         <h1 class="h3 mb-2 text-gray-800">Le mie raccolte</h1>
@@ -45,7 +51,7 @@
                     </div>
 
                     <div class="row">
-                        <div class="col-xl-3 col-lg-4" th:each="raccolta :${raccolte}">
+                        <div class="col-xl-3 col-lg-4" th:each="raccolta : ${raccolte}">
                             <a th:href="@{'/raccolta' + '/' + ${raccolta.id}}">
                                 <div class="card shadow mb-4">
                                     <!-- Card Header - Dropdown -->

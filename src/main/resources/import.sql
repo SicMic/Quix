@@ -27,7 +27,11 @@ INSERT INTO categoria (id, nome, descrizione) VALUES (8, 'Informatica', '');
 -- Raccolta
 INSERT INTO raccolta (id, nome, descrizione, etichetta_id, autore_id, url_image) VALUES (1, 'Raccolta uno', 'Descrizione', 1, 10, 'https://plus.unsplash.com/premium_photo-1661432575489-b0400f4fea58?q=80&w=2072&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
 INSERT INTO raccolta (id, nome, descrizione, etichetta_id, autore_id, url_image) VALUES (2, 'Raccolta due', 'Descrizione', 2, 10, 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2072&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
-INSERT INTO raccolta (id, nome, descrizione, etichetta_id, autore_id, url_image) VALUES (3, 'Raccolta tre', 'Descrizione', 3, 2, 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2072&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+INSERT INTO raccolta (id, nome, descrizione, etichetta_id, autore_id, url_image) VALUES (3, 'Raccolta tre', 'Descrizione', 3, 10, 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2072&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+INSERT INTO raccolta (id, nome, descrizione, etichetta_id, autore_id, url_image) VALUES (4, 'Raccolta quattro', 'Descrizione', 1, 10, 'https://plus.unsplash.com/premium_photo-1661432575489-b0400f4fea58?q=80&w=2072&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+INSERT INTO raccolta (id, nome, descrizione, etichetta_id, autore_id, url_image) VALUES (5, 'Raccolta cinque', 'Descrizione', 2, 10, 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2072&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+INSERT INTO raccolta (id, nome, descrizione, etichetta_id, autore_id, url_image) VALUES (6, 'Raccolta sei', 'Descrizione', 3, 10, 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2072&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+
 
 
 -- Quiz
@@ -78,7 +82,7 @@ INSERT INTO raccolta_elenco_quiz (elenco_quiz_id, raccolta_id) VALUES (1, 1);
 INSERT INTO raccolta_elenco_quiz (elenco_quiz_id, raccolta_id) VALUES (2, 1);
 INSERT INTO raccolta_elenco_quiz (elenco_quiz_id, raccolta_id) VALUES (3, 1);
 INSERT INTO raccolta_elenco_quiz (elenco_quiz_id, raccolta_id) VALUES (4, 1);
-INSERT INTO raccolta_elenco_quiz (elenco_quiz_id, raccolta_id) VALUES (5, 2);
+INSERT INTO raccolta_elenco_quiz (elenco_quiz_id, raccolta_id) VALUES (5, 1);
 INSERT INTO raccolta_elenco_quiz (elenco_quiz_id, raccolta_id) VALUES (6, 2);
 INSERT INTO raccolta_elenco_quiz (elenco_quiz_id, raccolta_id) VALUES (7, 2);
 INSERT INTO raccolta_elenco_quiz (elenco_quiz_id, raccolta_id) VALUES (8, 2);
@@ -87,7 +91,11 @@ INSERT INTO raccolta_elenco_quiz (elenco_quiz_id, raccolta_id) VALUES (10, 2);
 INSERT INTO raccolta_elenco_quiz (elenco_quiz_id, raccolta_id) VALUES (11, 2);
 INSERT INTO raccolta_elenco_quiz (elenco_quiz_id, raccolta_id) VALUES (12, 3);
 INSERT INTO raccolta_elenco_quiz (elenco_quiz_id, raccolta_id) VALUES (13, 3);
-INSERT INTO raccolta_elenco_quiz (elenco_quiz_id, raccolta_id) VALUES (14, 3);
+INSERT INTO raccolta_elenco_quiz (elenco_quiz_id, raccolta_id) VALUES (14, 4);
+INSERT INTO raccolta_elenco_quiz (elenco_quiz_id, raccolta_id) VALUES (11, 4);
+INSERT INTO raccolta_elenco_quiz (elenco_quiz_id, raccolta_id) VALUES (12, 5);
+INSERT INTO raccolta_elenco_quiz (elenco_quiz_id, raccolta_id) VALUES (13, 5);
+INSERT INTO raccolta_elenco_quiz (elenco_quiz_id, raccolta_id) VALUES (14, 6);
 
 --   FARE PER CIASCUNA TABELLA 
 SELECT setval('quiz_seq', (SELECT MAX(id) FROM quiz));

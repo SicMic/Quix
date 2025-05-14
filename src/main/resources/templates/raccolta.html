@@ -45,9 +45,8 @@
                         <a id="showQuizModal" class="d-none d-sm-inline-block btn btn btn-primary shadow-sm"><i class="fas fa-plus fa-sm text-white-50"></i> Aggiungi quiz</a>
                     </div>
 
-                    <div class="row mb-4" th:each="quiz : ${elenco}">
-
-                        <!-- Righe quiz -->
+                    <!-- Quiz Row - Start -->
+                    <div class="row mb-4" th:id="'quizRow' + ${quiz.id}" th:each="quiz : ${elenco}">
                         <div class="col">
                             <div class="card border-left-primary shadow h-100 py-2">
                                 <div class="card-body">
@@ -56,7 +55,7 @@
                                             <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
                                                 <a class="bg-primary text-white" th:text="${quiz.categoria.nome}">Categoria</a>
                                             </div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800" th:text="${quiz.quesito}">Quesito</div>
+                                            <div th:id="'quesito' + ${quiz.id}" class="h5 mb-0 font-weight-bold text-gray-800" th:text="${quiz.quesito}">Quesito</div>
                                         </div>
                                         <div class="col-auto">
                                             <i class="fas fa-pen fa-2x text-primary mr-3 pe-auto" style="cursor: pointer" th:id="'edit-quiz' + ${quiz.id}"></i>
@@ -67,6 +66,7 @@
                             </div>
                         </div>
                     </div>
+                    <!-- Quiz Row - End -->
 
                 </div>
                 <!-- /.container-fluid -->
@@ -207,10 +207,25 @@
                 document.getElementById("newQuizModal").style.display = "none"
         })
 
-        
+
         const idRaccolta = document.getElementById("idRaccolta")
         idRaccolta.value = window.location.pathname.split("/")[2]
-        
+
+
+        document.addEventListener("keyup", function (e) {
+            if (e.target.id == "searchInput") {
+                const ricerca = e.target.value.toUpperCase()
+                for (let contatore = 1; contatore <= 4; contatore++) {
+                    const quesito = document.getElementById("quesito" + contatore)
+                    console.log(quesito.innerText)
+                    if (quesito.innerText.toUpperCase().indexOf(ricerca) > -1)
+                        document.getElementById("quizRow" + contatore).style.display = "block"
+                    else
+                        document.getElementById("quizRow" + contatore).style.display = "none"
+                }
+            }
+
+        })
     </script>
 
 </body>
