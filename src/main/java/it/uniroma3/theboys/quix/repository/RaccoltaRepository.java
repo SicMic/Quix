@@ -12,4 +12,5 @@ public interface RaccoltaRepository extends CrudRepository<Raccolta, Long>{
     /* Utile per ricerca con filtro ---- da eliminare se si usa la relazione */
     public List<Raccolta> findRaccoltaByEtichettaId(Long etichettaId);
 
+    public Iterable<Raccolta> findRaccoltaByAutoreIdAndEtichettaId(Long autoreId, Long etichettaId);
 }

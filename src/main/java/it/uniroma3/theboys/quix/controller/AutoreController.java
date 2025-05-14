@@ -145,6 +145,18 @@ public class AutoreController {
 		return "raccolte.html";
 	}
 
+	@GetMapping("/raccolte/{nomeEtichetta}")
+	public String getRacccolteEtichetta(Model model, HttpSession session, @PathVariable("nomeEtichetta") String nomeEtichetta) {
+
+		if (session.getAttribute("user") == null)
+			return "redirect:/loginAutore";
+
+		model.addAttribute("utente", session.getAttribute("user"));
+		model.addAttribute("nomeEtichetta", nomeEtichetta);
+		model.addAttribute("raccolte", this.autoreService.getAllRaccolteAutoreOfEtichetta(((Autore) session.getAttribute("user")).getId(),nomeEtichetta));
+		return "raccolte.html";
+	}
+
 	@GetMapping("/raccolta/{idRaccolta}")
 	public String getRaccolta(Model model, HttpSession session, @PathVariable("idRaccolta") Long idRaccolta) {
 

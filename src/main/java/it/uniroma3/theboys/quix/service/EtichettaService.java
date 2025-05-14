@@ -20,4 +20,7 @@ public class EtichettaService {
         return etichettaRepository.findAll();
     }
 
+    public Etichetta getEtichettaByNome(String nomeEtichetta){
+        return etichettaRepository.findEtichettaByNome(nomeEtichetta);
+    }
 }
