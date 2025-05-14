@@ -203,4 +203,14 @@ public class AutoreController {
 		model.addAttribute("utente", session.getAttribute("user"));
 		return "impostazioni.html";
 	}
+
+	@GetMapping("/logout")
+	public String logout(HttpSession session){
+		if (session.getAttribute("user") == null)
+			return "redirect:/login";
+		
+		session.invalidate();
+		return "redirect:/";
+
+	}
 }
