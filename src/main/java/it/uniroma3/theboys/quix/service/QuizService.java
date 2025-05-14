@@ -12,6 +12,8 @@ public class QuizService {
 	@Autowired
 	private QuizRepository quizRepository;	//istanza costruita e inizializzata dal framework
 
+	private CategoriaService categoriaService;
+
     public Quiz getQuizById(Long id) {
         return quizRepository.findById(id).get();
     }
@@ -28,13 +30,14 @@ public class QuizService {
 		this.quizRepository.deleteById(id);
 	}
 
-	public void updateQuiz(Long id, String quesito, String opzioneUno, String opzioneDue, String opzioneTre, String opzioneQuattro){
+	public void updateQuiz(Long id, String quesito, String opzioneUno, String opzioneDue, String opzioneTre, String opzioneQuattro, String nomeCategoria){
 		Quiz q = this.getQuizById(id);
 		q.setQuesito(quesito);
 		q.setOpzioneUno(opzioneUno);
 		q.setOpzioneDue(opzioneDue);
 		q.setOpzioneTre(opzioneTre);
 		q.setOpzioneQuattro(opzioneQuattro);
+		q.setCategoria(categoriaService.getQuizByName(nomeCategoria));
 		this.quizRepository.save(q);
 	}
 

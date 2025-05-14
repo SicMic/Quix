@@ -23,4 +23,5 @@ public class EtichettaService {
     public Etichetta getEtichettaByNome(String nomeEtichetta){
         return etichettaRepository.findEtichettaByNome(nomeEtichetta);
     }
+    
 }

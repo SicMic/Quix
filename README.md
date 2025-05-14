@@ -16,7 +16,7 @@
 Quix è un sistema di quiz accessibile da internet e sviluppato usando telcolgie come:
 - Java Springboot
 - Thymeleaf
-- Bootstring 5
+- Bootstrap 5
 
 ## 1. Modello di dominio
 

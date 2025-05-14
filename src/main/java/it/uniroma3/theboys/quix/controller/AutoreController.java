@@ -20,6 +20,7 @@ import it.uniroma3.theboys.quix.repository.CategoriaRepository;
 import it.uniroma3.theboys.quix.repository.EtichettaRepository;
 import it.uniroma3.theboys.quix.service.AuthServiceAutore;
 import it.uniroma3.theboys.quix.service.AutoreService;
+import it.uniroma3.theboys.quix.service.CategoriaService;
 import it.uniroma3.theboys.quix.service.EtichettaService;
 import it.uniroma3.theboys.quix.service.QuizService;
 import it.uniroma3.theboys.quix.service.RaccoltaService;
@@ -44,7 +45,9 @@ public class AutoreController {
 
 	@Autowired private CategoriaRepository categoriaRepository;
 
-    
+	@Autowired private CategoriaService categoriaService;
+
+	
     @GetMapping("/registrazioneAutore")
 		public String getRegistrazione(Model model) {
         model.addAttribute("utente", new Autore());
@@ -101,6 +104,8 @@ public class AutoreController {
 
 		model.addAttribute("utente", session.getAttribute("user"));
 		model.addAttribute("elenco", this.autoreService.getAllQuizAutore(((Autore) session.getAttribute("user")).getId()));
+		model.addAttribute("categorie", categoriaService.getAllCategories());
+	
 		return "elencoQuiz.html";
 	}
 
@@ -113,15 +118,16 @@ public class AutoreController {
 		model.addAttribute("utente", session.getAttribute("user"));
 		model.addAttribute("nomeCategoria", nomeCategoria);
 		model.addAttribute("elenco", this.autoreService.getAllQuizAutoreOfCategoria(((Autore) session.getAttribute("user")).getId(),nomeCategoria));
+		model.addAttribute("categorie", categoriaService.getAllCategories());
 		return "elencoQuiz.html";
 	}
 
 
-	// ----- attenzione a etichetta @RequestParam
 	@PostMapping("/aggiuntaRaccolta")
-	public void aggiuntaNuovaRaccolta(@RequestParam String nomeRaccolta, @RequestParam String urlImage, @RequestParam String etichetta, @RequestParam String descrizione){
-		Raccolta raccolta = new Raccolta(nomeRaccolta, urlImage, etichettaRepository.findEtichettaByNome(etichetta), descrizione);
+	public String aggiuntaNuovaRaccolta(@RequestParam String nome, @RequestParam String urlImage, @RequestParam String etichetta, @RequestParam String descrizione){
+		Raccolta raccolta = new Raccolta(nome, urlImage, etichettaRepository.findEtichettaByNome("Natura"), descrizione);
 		this.raccoltaService.save(raccolta);
+		return "redirect:/raccolte/" + raccolta.getId();
 	}
 
 
@@ -182,8 +188,8 @@ public class AutoreController {
 	}
 
 	@PostMapping("/aggiornamentoQuiz")
-	public void postAggiornamentoQuiz(@RequestParam Long idQuiz, @RequestParam String quesito, @RequestParam String opzioneUno, @RequestParam String opzioneDue, @RequestParam String opzioneTre, @RequestParam String opzioneQuattro) {
-		this.quizService.updateQuiz(idQuiz, quesito, opzioneUno, opzioneDue, opzioneTre, opzioneQuattro);
+	public void postAggiornamentoQuiz(@RequestParam Long idQuiz, @RequestParam String quesito, @RequestParam String opzioneUno, @RequestParam String opzioneDue, @RequestParam String opzioneTre, @RequestParam String opzioneQuattro, @RequestParam String categoria) {
+		this.quizService.updateQuiz(idQuiz, quesito, opzioneUno, opzioneDue, opzioneTre, opzioneQuattro, categoria);
 	}
 
 	@GetMapping("/profilo")

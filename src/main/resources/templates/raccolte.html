@@ -4,18 +4,6 @@
 <head>
     <title>Raccolte</title>
     <th:block th:replace="~{moduli/areaRiservata/head :: head}"></th:block>
-    <style>
-        .overlay {
-            z-index: 10;
-            position: fixed;
-            left: 0;
-            right: 0;
-            top: 0;
-            bottom: 0;
-            background: rgba(0, 0, 0, 0.5);
-            display: none;
-        }
-    </style>
 </head>
 
 <body id="page-top">
@@ -85,37 +73,36 @@
     </div>
     <!-- End of Page Wrapper -->
 
-
-
     <!-- New Raccolta Maker - Start -->
     <div id="newRaccoltaModal" class="overlay">
         <form th:action="@{/aggiuntaRaccolta}" method="post">
             <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <input id="nameRaccolta" class="form-control form-control-user" placeholder="Nome raccolta" required>
+                        <input name="nome" class="form-control form-control-user" placeholder="Nome raccolta" required>
                     </div>
                     <div class="modal-body">
                         <div class="form-group row">
                             <div class="col-sm">
-                                <input id="descriptionRaccolta" class="form-control form-control-user" placeholder="Descrizione" required>
+                                <input name="descrizione" class="form-control form-control-user" placeholder="Raccolta di quiz ..." required>
                             </div>
                         </div>
                         <div class="form-group row">
                             <div class="col-sm">
-                                <input id="urlImageRaccolta" class="form-control form-control-user" placeholder="URL Copertina" required>
+                                <input name="urlImage" class="form-control form-control-user" placeholder="URL Copertina" required>
                             </div>
                         </div>
                         <div class="form-group row">
-                            <select class="form-control">
-                                <option value="0">select option</option>
-                                <option th:each="etichetta : ${etichette}" th:value="${etichetta.nome}" th:text="${etichetta.nome}"></option>
-                            </select>
+                            <div class="col-sm">
+                                <select name="etichetta" class="form-control">
+                                    <option th:each="etichetta : ${etichette}" th:value="${etichetta.nome}" th:text="${etichetta.nome}"></option>
+                                </select>
+                            </div>
                         </div>
                     </div>
                     <div class="modal-footer">
                         <button id="hideRaccoltaModal" class="btn btn-secondary" type="reset" data-dismiss="modal">Annulla</button>
-                        <button class="btn btn-primary" type="submit" data-dismiss="modal">Creax</button>
+                        <button class="btn btn-primary" type="submit" data-dismiss="modal">Crea</button>
                     </div>
                 </div>
             </div>
@@ -138,12 +125,12 @@
 
 <script>
 
-    document.addEventListener("click", function (e) {
-        if (e.target.id.includes("showRaccoltaModal"))
-            document.getElementById("newRaccoltaModal").style.display = "block"
-        if (e.target.id.includes("hideRaccoltaModal"))
-            document.getElementById("newRaccoltaModal").style.display = "none"
-    })
+    // document.addEventListener("click", function (e) {
+    //     if (e.target.id.includes("showRaccoltaModal"))
+    //         document.getElementById("newRaccoltaModal").style.display = "block"
+    //     if (e.target.id.includes("hideRaccoltaModal"))
+    //         document.getElementById("newRaccoltaModal").style.display = "none"
+    // })
 </script>
 
 </html>

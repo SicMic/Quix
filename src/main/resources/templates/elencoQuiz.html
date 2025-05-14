@@ -4,18 +4,6 @@
 <head>
     <title>Elenco quiz</title>
     <th:block th:replace="~{/moduli/areaRiservata/head :: head}"></th:block>
-    <style>
-        .overlay {
-            z-index: 10;
-            position: fixed;
-            left: 0;
-            right: 0;
-            top: 0;
-            bottom: 0;
-            background: rgba(0, 0, 0, 0.5);
-            display: none;
-        }
-    </style>
 </head>
 
 <body id="page-top">
@@ -84,41 +72,41 @@
     </div>
     <!-- End of Page Wrapper -->
 
-    <!-- Scroll to Top Button-->
-    <a class="scroll-to-top rounded" href="#page-top">
-        <i class="fas fa-angle-up"></i>
-    </a>
-
     <!-- Editor - Start -->
-    <div th:each="quiz : ${elenco}">
-        <div class="overlay" th:id="'editor-quiz' + ${quiz.id}">
-            <div class="modal-dialog modal-lg" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <p type="text" class="form-control form-control-user" contenteditable="true" required th:text="${quiz.quesito}" th:id="'quesito-quiz' + ${quiz.id}">Quesito</p>
-                    </div>
-                    <div class="modal-body">
-                        <div class="form-group row">
-                            <div class="col-sm-6 mb-3 mb-sm-0">
-                                <p type="text" class="form-control form-control-user" contenteditable="true" required th:text="${quiz.opzioneUno}" th:id="'opzioneUno-quiz' + ${quiz.id}">opzioneUno</p>
-                            </div>
-                            <div class="col-sm-6">
-                                <p type="text" class="form-control form-control-user" contenteditable="true" required th:text="${quiz.opzioneDue}" th:id="'opzioneDue-quiz' + ${quiz.id}">opzioneDue</p>
-                            </div>
+    <div class="overlay" th:id="'editor-quiz' + ${quiz.id}" th:each="quiz : ${elenco}">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <p type="text" class="form-control form-control-user" contenteditable="true" required th:text="${quiz.quesito}" th:id="'quesito-quiz' + ${quiz.id}">Quesito</p>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group row">
+                        <div class="col-sm-6 mb-3 mb-sm-0">
+                            <p type="text" class="form-control form-control-user" contenteditable="true" required th:text="${quiz.opzioneUno}" th:id="'opzioneUno-quiz' + ${quiz.id}">opzioneUno</p>
                         </div>
-                        <div class="form-group row">
-                            <div class="col-sm-6 mb-3 mb-sm-0">
-                                <p type="text" class="form-control form-control-user" contenteditable="true" required th:text="${quiz.opzioneTre}" th:id="'opzioneTre-quiz' + ${quiz.id}">opzioneTre</p>
-                            </div>
-                            <div class="col-sm-6">
-                                <p type="text" class="form-control form-control-user" contenteditable="true" required th:text="${quiz.opzioneQuattro}" th:id="'opzioneQuattro-quiz' + ${quiz.id}">opzioneQuattro</p>
-                            </div>
+                        <div class="col-sm-6">
+                            <p type="text" class="form-control form-control-user" contenteditable="true" required th:text="${quiz.opzioneDue}" th:id="'opzioneDue-quiz' + ${quiz.id}">opzioneDue</p>
                         </div>
                     </div>
-                    <div class="modal-footer">
-                        <button class="btn btn-secondary" type="reset" data-dismiss="modal" th:id="'hide-editor-quiz' + ${quiz.id}">Annulla</button>
-                        <button class="btn btn-primary" type="button" data-dismiss="modal" th:id="'save-quiz' + ${quiz.id}">Aggiorna</button>
+                    <div class="form-group row">
+                        <div class="col-sm-6 mb-3 mb-sm-0">
+                            <p type="text" class="form-control form-control-user" contenteditable="true" required th:text="${quiz.opzioneTre}" th:id="'opzioneTre-quiz' + ${quiz.id}">opzioneTre</p>
+                        </div>
+                        <div class="col-sm-6">
+                            <p type="text" class="form-control form-control-user" contenteditable="true" required th:text="${quiz.opzioneQuattro}" th:id="'opzioneQuattro-quiz' + ${quiz.id}">opzioneQuattro</p>
+                        </div>
                     </div>
+                    <div class="form-group row">
+                        <div class="col-sm">
+                            <select name="categoria" class="form-control">
+                                <option th:each="categoria : ${categorie}" th:value="${categoria.nome}" th:text="${categoria.nome}" th:id="'categoria-qui' + ${quiz.id}"></option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="reset" data-dismiss="modal" th:id="'hide-editor-quiz' + ${quiz.id}">Annulla</button>
+                    <button class="btn btn-primary" type="button" data-dismiss="modal" th:id="'save-quiz' + ${quiz.id}">Aggiorna</button>
                 </div>
             </div>
         </div>
@@ -130,72 +118,12 @@
 
     <th:block th:replace="~{moduli/areaRiservata/scripts :: scripts}"></th:block>
 
-    <script>
-        function provina(idQuiz) {
-            fetch('/eliminazioneQuiz/', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded'
-                },
-                body: new URLSearchParams({
-                    'idQuiz': idQuiz
-                })
-            })
-                .then(response => response.text())
-                .then(data => {
-                    //Approccio molto precario [TEMPORANEO - DA RIVEDERE]
-                    //console.log(data)
-                    // const jsonObject = JSON.parse(data);
-                    window.location.reload()
-                })
-                .catch(error => console.error('Errore:', error));
-        }
 
-        function provolona(idQuiz, quesito, opzioneUno, opzioneDue, opzioneTre, opzioneQuattro) {
-            fetch('/aggiornamentoQuiz', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded'
-                },
-                body: new URLSearchParams({
-                    'idQuiz': idQuiz,
-                    'quesito': quesito,
-                    'opzioneUno': opzioneUno,
-                    'opzioneDue': opzioneDue,
-                    'opzioneTre': opzioneTre,
-                    'opzioneQuattro': opzioneQuattro
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
 
-                })
-            })
-                .then(response => response.text())
-                .then(data => {
-                    //Approccio molto precario [TEMPORANEO - DA RIVEDERE]
-                    //console.log(data)
-                    // const jsonObject = JSON.parse(data);
-                    window.location.reload()
-                })
-                .catch(error => console.error('Errore:', error));
-        }
-
-        document.addEventListener("click", function (e) {
-            if (e.target.id.includes("edit-quiz"))
-                document.getElementById("editor-" + e.target.id.replace("edit-", "")).style.display = "block"
-            if (e.target.id.includes("hide-editor"))
-                document.getElementById(e.target.id.replace("hide-", "")).style.display = "none"
-            if (e.target.id.includes("delete"))
-                provina(e.target.id.replace("delete-quiz", ""))
-            if (e.target.id.includes("save")) {
-                const quesito = document.getElementById("quesito-quiz" + e.target.id.replace("save-quiz", ""))
-                const opzioneUno = document.getElementById("opzioneUno-quiz" + e.target.id.replace("save-quiz", ""))
-                const opzioneDue = document.getElementById("opzioneDue-quiz" + e.target.id.replace("save-quiz", ""))
-                const opzioneTre = document.getElementById("opzioneTre-quiz" + e.target.id.replace("save-quiz", ""))
-                const opzioneQuattro = document.getElementById("opzioneQuattro-quiz" + e.target.id.replace("save-quiz", ""))
-                provolona(e.target.id.replace("save-quiz", ""), quesito.innerText, opzioneUno.innerText, opzioneDue.innerText, opzioneTre.innerText, opzioneQuattro.innerText)
-            }
-        })
-
-
-    </script>
 
 </body>
 

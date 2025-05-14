@@ -1,38 +1,36 @@
 -------* QUIX DATABASE *--------
 
 -- Autori
-INSERT INTO autore (id, nome, cognome, email, username, password, biografia, url_image) VALUES (10, 'Lorenzo', 'Ricciardi', 'lorenzo1@gmail.com', 'lorenzo', '1Password!', 'Ciao, sono Lorenzo, un`appassionato di educazione e tecnologia. Da anni creo quiz interattivi per aiutare gli studenti a imparare in modo divertente e coinvolgente. Credo che l`apprendimento debba essere un`esperienza stimolante e cerco sempre di innovare nei miei contenuti.', 'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fres.cloudinary.com%2Fteepublic%2Fimage%2Fprivate%2Fs--xAPAsZWI--%2Ft_Preview%2Fb_rgb%3Ac8e0ec%2Cc_limit%2Cf_jpg%2Ch_630%2Cq_90%2Cw_630%2Fv1522894149%2Fproduction%2Fdesigns%2F2560124_0.jpg&f=1&nofb=1&ipt=3f717e8d9313e86bdef943c05fc5216bc2ba4cb902f41e06d8175aa80565c900'); 
+INSERT INTO autore (id, nome, cognome, email, username, password, biografia, url_image) VALUES (1, 'Lorenzo', 'Ricciardi', 'lorenzo1@gmail.com', 'lorenzo', '1Password!', 'Ciao, sono Lorenzo, un`appassionato di educazione e tecnologia. Da anni creo quiz interattivi per aiutare gli studenti a imparare in modo divertente e coinvolgente. Credo che l`apprendimento debba essere un`esperienza stimolante e cerco sempre di innovare nei miei contenuti.', 'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fres.cloudinary.com%2Fteepublic%2Fimage%2Fprivate%2Fs--xAPAsZWI--%2Ft_Preview%2Fb_rgb%3Ac8e0ec%2Cc_limit%2Cf_jpg%2Ch_630%2Cq_90%2Cw_630%2Fv1522894149%2Fproduction%2Fdesigns%2F2560124_0.jpg&f=1&nofb=1&ipt=3f717e8d9313e86bdef943c05fc5216bc2ba4cb902f41e06d8175aa80565c900'); 
 INSERT INTO autore (id, nome, cognome, email, username, password, biografia, url_image) VALUES (2, 'Michela', 'Sicuranza', 'sicmic@gmail.com', 'sicmic', '2Password!', 'Salve, sono Michela, un esperta di gamification e creazione di contenuti. Mi dedico a progettare quiz che sfidano le persone a testare le loro conoscenze su vari argomenti, rendendo l`apprendimento un gioco. La mia missione è rendere l`educazione accessibile e divertente per tutti!', 'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fpng.pngtree.com%2Fpng-clipart%2F20230405%2Foriginal%2Fpngtree-cat-cartoon-png-image_9029157.png&f=1&nofb=1&ipt=c8531a4dd100289a5b229a9344f2036dd412143a05aa738b9fac7a57eb554474');
 
-
 -- Utenti
-INSERT INTO utente (id, nome, cognome, email, username, password, url_image) VALUES (1, 'FIlippo', 'Maialino', 'filor02@gmail.com', 'filo', '1Filippo!');
+INSERT INTO utente (id, nome, cognome, email, username, password, url_image) VALUES (1, 'FIlippo', 'Maialino', 'filor02@gmail.com', 'filo', '1Filippo!', 'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fpngimg.com%2Fuploads%2Fflags%2Fflags_PNG14629.png&f=1&nofb=1&ipt=6018221fccb258f46e875a28897b0a4026756f78ab53705259e5d307cbf2edab');
 
 -- Etichette
 INSERT INTO etichetta (id, nome, descrizione) VALUES (1, 'Cultura generale', '');
 INSERT INTO etichetta (id, nome, descrizione) VALUES (2, 'Spettacolo', '');
 INSERT INTO etichetta (id, nome, descrizione) VALUES (3, 'Scienze', '');
 INSERT INTO etichetta (id, nome, descrizione) VALUES (4, 'Cucina', '');
+INSERT INTO etichetta (id, nome, descrizione) VALUES (5, 'Natura', '');
 
 -- Categorie
 INSERT INTO categoria (id, nome, descrizione) VALUES (1, 'Matematica', '');
 INSERT INTO categoria (id, nome, descrizione) VALUES (2, 'Sport', '');
 INSERT INTO categoria (id, nome, descrizione) VALUES (3, 'Geografia', '');
-INSERT INTO categoria (id, nome, descrizione) VALUES (4, 'Cucina', '');
+INSERT INTO categoria (id, nome, descrizione) VALUES (4, 'Alimentazione', '');
 INSERT INTO categoria (id, nome, descrizione) VALUES (5, 'Cinema', '');
 INSERT INTO categoria (id, nome, descrizione) VALUES (6, 'Chimica', '');
 INSERT INTO categoria (id, nome, descrizione) VALUES (7, 'Fisica', '');
 INSERT INTO categoria (id, nome, descrizione) VALUES (8, 'Informatica', '');
 
 -- Raccolta
-INSERT INTO raccolta (id, nome, descrizione, etichetta_id, autore_id, url_image) VALUES (1, 'Raccolta uno', 'Descrizione', 1, 10, 'https://plus.unsplash.com/premium_photo-1661432575489-b0400f4fea58?q=80&w=2072&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
-INSERT INTO raccolta (id, nome, descrizione, etichetta_id, autore_id, url_image) VALUES (2, 'Raccolta due', 'Descrizione', 2, 10, 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2072&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
-INSERT INTO raccolta (id, nome, descrizione, etichetta_id, autore_id, url_image) VALUES (3, 'Raccolta tre', 'Descrizione', 3, 10, 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2072&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
-INSERT INTO raccolta (id, nome, descrizione, etichetta_id, autore_id, url_image) VALUES (4, 'Raccolta quattro', 'Descrizione', 1, 10, 'https://plus.unsplash.com/premium_photo-1661432575489-b0400f4fea58?q=80&w=2072&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
-INSERT INTO raccolta (id, nome, descrizione, etichetta_id, autore_id, url_image) VALUES (5, 'Raccolta cinque', 'Descrizione', 2, 10, 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2072&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
-INSERT INTO raccolta (id, nome, descrizione, etichetta_id, autore_id, url_image) VALUES (6, 'Raccolta sei', 'Descrizione', 3, 10, 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2072&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
-
-
+INSERT INTO raccolta (id, nome, descrizione, etichetta_id, autore_id, url_image) VALUES (1, 'Raccolta uno', 'Descrizione', 1, 1, 'https://plus.unsplash.com/premium_photo-1661432575489-b0400f4fea58?q=80&w=2072&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+INSERT INTO raccolta (id, nome, descrizione, etichetta_id, autore_id, url_image) VALUES (2, 'Raccolta due', 'Descrizione', 3, 1, 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2072&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+INSERT INTO raccolta (id, nome, descrizione, etichetta_id, autore_id, url_image) VALUES (3, 'Raccolta tre', 'Descrizione', 5, 1, 'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fimages.ctfassets.net%2Frt5zmd3ipxai%2F25pHfG94sGlRALOqbRvSxl%2F9f591d8263607fdf923b962cbfcde2a9%2FNVA-panda.jpg&f=1&nofb=1&ipt=cf2500d344cc765544f816d037cd99ac8bfa6af4d965366eafb4e82426c16bf3');
+INSERT INTO raccolta (id, nome, descrizione, etichetta_id, autore_id, url_image) VALUES (4, 'Raccolta quattro', 'Descrizione', 5, 1, 'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fcdn.pixabay.com%2Fphoto%2F2022%2F07%2F10%2F17%2F55%2Fsunflowers-7313486__480.jpg&f=1&nofb=1&ipt=b52eb28d8b9d0ae9c3fd57a1ff10f55df53d0814ad385deea235fcd13e8b01a5');
+INSERT INTO raccolta (id, nome, descrizione, etichetta_id, autore_id, url_image) VALUES (5, 'Raccolta cinque', 'Descrizione', 4, 1, 'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fquifinanza.it%2Fwp-content%2Fuploads%2Fsites%2F5%2F2023%2F02%2Fdati-spreco-alimentare-Italia.jpg&f=1&nofb=1&ipt=16f4864c2908f280f4d36e013de1e9963da9a9a49b8fe0b887f5d303e6df27bb');
+INSERT INTO raccolta (id, nome, descrizione, etichetta_id, autore_id, url_image) VALUES (6, 'Raccolta uno', 'Descrizione', 2, 2, 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2072&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
 
 -- Quiz
 INSERT INTO quiz (id, quesito, opzione_uno, opzione_due, opzione_tre, opzione_quattro, data_creazione, categoria_id, raccolta_id) VALUES (1, 'Qual è il risultato di 5 + 3?', '6', '7', '8', '9', '2023-07-15', 1, 1);
@@ -76,26 +74,30 @@ INSERT INTO quiz (id, quesito, opzione_uno, opzione_due, opzione_tre, opzione_qu
 INSERT INTO quiz (id, quesito, opzione_uno, opzione_due, opzione_tre, opzione_quattro, data_creazione, categoria_id) VALUES (39, 'Cosa significa l` acronimo "HTML"?', 'HyperText Markup Language', 'HighText Machine Language', 'HyperText Markup Level', 'HighText Markup Language', '2023-07-15', 8);
 INSERT INTO quiz (id, quesito, opzione_uno, opzione_due, opzione_tre, opzione_quattro, data_creazione, categoria_id) VALUES (40, 'Qual è il principale scopo di un firewall?', 'Proteggere la rete', 'Accelerare la connessione', 'Monitorare il traffico', 'Archiviare dati', '2023-07-15', 8);
 
-
 -- Raccolta_Quiz
-INSERT INTO raccolta_elenco_quiz (elenco_quiz_id, raccolta_id) VALUES (1, 1);
-INSERT INTO raccolta_elenco_quiz (elenco_quiz_id, raccolta_id) VALUES (2, 1);
-INSERT INTO raccolta_elenco_quiz (elenco_quiz_id, raccolta_id) VALUES (3, 1);
-INSERT INTO raccolta_elenco_quiz (elenco_quiz_id, raccolta_id) VALUES (4, 1);
-INSERT INTO raccolta_elenco_quiz (elenco_quiz_id, raccolta_id) VALUES (5, 1);
-INSERT INTO raccolta_elenco_quiz (elenco_quiz_id, raccolta_id) VALUES (6, 2);
-INSERT INTO raccolta_elenco_quiz (elenco_quiz_id, raccolta_id) VALUES (7, 2);
-INSERT INTO raccolta_elenco_quiz (elenco_quiz_id, raccolta_id) VALUES (8, 2);
-INSERT INTO raccolta_elenco_quiz (elenco_quiz_id, raccolta_id) VALUES (9, 2);
-INSERT INTO raccolta_elenco_quiz (elenco_quiz_id, raccolta_id) VALUES (10, 2);
-INSERT INTO raccolta_elenco_quiz (elenco_quiz_id, raccolta_id) VALUES (11, 2);
-INSERT INTO raccolta_elenco_quiz (elenco_quiz_id, raccolta_id) VALUES (12, 3);
-INSERT INTO raccolta_elenco_quiz (elenco_quiz_id, raccolta_id) VALUES (13, 3);
-INSERT INTO raccolta_elenco_quiz (elenco_quiz_id, raccolta_id) VALUES (14, 4);
-INSERT INTO raccolta_elenco_quiz (elenco_quiz_id, raccolta_id) VALUES (11, 4);
-INSERT INTO raccolta_elenco_quiz (elenco_quiz_id, raccolta_id) VALUES (12, 5);
-INSERT INTO raccolta_elenco_quiz (elenco_quiz_id, raccolta_id) VALUES (13, 5);
-INSERT INTO raccolta_elenco_quiz (elenco_quiz_id, raccolta_id) VALUES (14, 6);
+-- INSERT INTO raccolta_elenco_quiz (elenco_quiz_id, raccolta_id) VALUES (1, 1);
+-- INSERT INTO raccolta_elenco_quiz (elenco_quiz_id, raccolta_id) VALUES (2, 1);
+-- INSERT INTO raccolta_elenco_quiz (elenco_quiz_id, raccolta_id) VALUES (3, 1);
+-- INSERT INTO raccolta_elenco_quiz (elenco_quiz_id, raccolta_id) VALUES (4, 1);
+-- INSERT INTO raccolta_elenco_quiz (elenco_quiz_id, raccolta_id) VALUES (5, 1);
+-- INSERT INTO raccolta_elenco_quiz (elenco_quiz_id, raccolta_id) VALUES (6, 2);
+-- INSERT INTO raccolta_elenco_quiz (elenco_quiz_id, raccolta_id) VALUES (7, 2);
+-- INSERT INTO raccolta_elenco_quiz (elenco_quiz_id, raccolta_id) VALUES (8, 2);
+-- INSERT INTO raccolta_elenco_quiz (elenco_quiz_id, raccolta_id) VALUES (9, 2);
+-- INSERT INTO raccolta_elenco_quiz (elenco_quiz_id, raccolta_id) VALUES (10, 2);
+-- INSERT INTO raccolta_elenco_quiz (elenco_quiz_id, raccolta_id) VALUES (11, 2);
+-- INSERT INTO raccolta_elenco_quiz (elenco_quiz_id, raccolta_id) VALUES (12, 3);
+-- INSERT INTO raccolta_elenco_quiz (elenco_quiz_id, raccolta_id) VALUES (13, 3);
+-- INSERT INTO raccolta_elenco_quiz (elenco_quiz_id, raccolta_id) VALUES (14, 4);
+-- INSERT INTO raccolta_elenco_quiz (elenco_quiz_id, raccolta_id) VALUES (11, 4);
+-- INSERT INTO raccolta_elenco_quiz (elenco_quiz_id, raccolta_id) VALUES (12, 5);
+-- INSERT INTO raccolta_elenco_quiz (elenco_quiz_id, raccolta_id) VALUES (13, 5);
+-- INSERT INTO raccolta_elenco_quiz (elenco_quiz_id, raccolta_id) VALUES (14, 6);
 
---   FARE PER CIASCUNA TABELLA 
+-- Aggiorna il counter degli id delle varie tabelle
+SELECT setval('autore_seq', (SELECT MAX(id) FROM autore));
+SELECT setval('utente_seq', (SELECT MAX(id) FROM utente));
+SELECT setval('etichetta_seq', (SELECT MAX(id) FROM etichetta));
+SELECT setval('categoria_seq', (SELECT MAX(id) FROM categoria));
+SELECT setval('raccolta_seq', (SELECT MAX(id) FROM raccolta));
 SELECT setval('quiz_seq', (SELECT MAX(id) FROM quiz));
