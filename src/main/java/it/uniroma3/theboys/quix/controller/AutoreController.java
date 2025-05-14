@@ -61,7 +61,10 @@ public class AutoreController {
 	}
 
 	@GetMapping("/loginAutore")
-	public String getLoginAutore(Model model) {
+	public String getLoginAutore(Model model, HttpSession session) {
+		if (session.getAttribute("user") != null)
+			return "redirect:/dashboardAutore";
+
 		model.addAttribute("autore", new Autore());
 		return "loginAutore.html"; // pagina login.jsp o login.html
 	}
