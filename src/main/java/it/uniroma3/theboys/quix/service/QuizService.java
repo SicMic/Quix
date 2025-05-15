@@ -9,25 +9,36 @@ import it.uniroma3.theboys.quix.repository.QuizRepository;
 //classe per definire le operazioni CRUD tramite metodi java: descrive i servizi offerti
 @Service
 public class QuizService {
-	@Autowired
-	private QuizRepository quizRepository;	//istanza costruita e inizializzata dal framework
+	@Autowired private QuizRepository quizRepository;	//istanza costruita e inizializzata dal framework
 
-	private CategoriaService categoriaService;
+	@Autowired private CategoriaService categoriaService;
 
     public Quiz getQuizById(Long id) {
-        return quizRepository.findById(id).get();
+        return this.quizRepository.findById(id).get();
     }
 
 	public Iterable<Quiz> getAllQuizzes(){
-		return quizRepository.findAll();
+		return this.quizRepository.findAll();
 	}
 	
-	public Quiz save(Quiz q){
+	public Quiz saveNewQuiz(Quiz q){
 		return this.quizRepository.save(q);
 	}
 
 	public void deleteQuiz(Long id){
 		this.quizRepository.deleteById(id);
+	}
+
+	public Iterable<Quiz> getQuizByCategoriaId(Long categoriaId){
+		return this.quizRepository.findByCategoriaId(categoriaId);
+	}
+
+	public Iterable<Quiz> getQuizByAutoreId(Long autoreId){
+		return this.quizRepository.findByAutoreIdNative(autoreId);
+	}
+
+	public Iterable<Quiz> getQuizByAutoreIdAndCategoriaNome(Long autoreId, String nomeCategoria){
+		return this.quizRepository.findByAutoreIdAndCategoriaNomeNative(autoreId, nomeCategoria);
 	}
 
 	public void updateQuiz(Long id, String quesito, String opzioneUno, String opzioneDue, String opzioneTre, String opzioneQuattro, String nomeCategoria){
@@ -37,7 +48,7 @@ public class QuizService {
 		q.setOpzioneDue(opzioneDue);
 		q.setOpzioneTre(opzioneTre);
 		q.setOpzioneQuattro(opzioneQuattro);
-		q.setCategoria(categoriaService.getQuizByName(nomeCategoria));
+		q.setCategoria(categoriaService.getQuizByNome(nomeCategoria));
 		this.quizRepository.save(q);
 	}
 

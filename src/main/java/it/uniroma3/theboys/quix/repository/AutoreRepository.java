@@ -8,5 +8,5 @@ import it.uniroma3.theboys.quix.model.Autore;
 
 public interface AutoreRepository extends CrudRepository<Autore, Long>{
     
-    public Optional<Autore> findAutoreByUsername(String username);
+    public Optional<Autore> findByUsername(String username);
 }

@@ -9,6 +9,6 @@ import it.uniroma3.theboys.quix.model.Utente;
 
 public interface UtenteRepository extends CrudRepository<Utente, Long>{
 
-    public Optional<Utente> findUtenteByUsername(String username);
+    public Optional<Utente> findByUsername(String username);
     
 }

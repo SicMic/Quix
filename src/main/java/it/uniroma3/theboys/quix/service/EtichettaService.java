@@ -9,19 +9,21 @@ import it.uniroma3.theboys.quix.repository.EtichettaRepository;
 @Service
 public class EtichettaService {
     
-    @Autowired
-    private EtichettaRepository etichettaRepository;
+    @Autowired private EtichettaRepository etichettaRepository;
 
     public Etichetta getEtichettaById(Long id){
-        return etichettaRepository.findById(id).get();
+        return this.etichettaRepository.findById(id).get();
     }
 
     public Iterable<Etichetta> getAllEtichette(){
-        return etichettaRepository.findAll();
+        return this.etichettaRepository.findAll();
     }
 
     public Etichetta getEtichettaByNome(String nomeEtichetta){
-        return etichettaRepository.findEtichettaByNome(nomeEtichetta);
+        return this.etichettaRepository.findByNome(nomeEtichetta).get();
     }
-    
+
+    public Etichetta saveNewEtichetta(Etichetta e){
+        return this.etichettaRepository.save(e);
+    }
 }

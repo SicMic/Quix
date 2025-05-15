@@ -13,15 +13,14 @@ import it.uniroma3.theboys.quix.repository.UtenteRepository;
 @Service
 public class AuthServiceUtente {
     
-    @Autowired
-    UtenteRepository utenteRepository;
+    @Autowired UtenteRepository utenteRepository;
 
     public boolean autenticazione(String username, String password){
-        Optional<Utente> utenteOpt = utenteRepository.findUtenteByUsername(username);
+        Optional<Utente> utenteOpt = utenteRepository.findByUsername(username);
         return utenteOpt.map(utente -> utente.getPassword().equals(password)).orElse(false);
     }
 
     public Utente getUserByUsername(String username) {
-        return utenteRepository.findUtenteByUsername(username).orElse(null);
+        return this.utenteRepository.findByUsername(username).orElse(null);
     }
 }

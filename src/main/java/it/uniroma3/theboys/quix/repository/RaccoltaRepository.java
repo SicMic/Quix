@@ -1,7 +1,5 @@
 package it.uniroma3.theboys.quix.repository;
 
-import java.util.List;
-
 import org.springframework.data.repository.CrudRepository;
 
 import it.uniroma3.theboys.quix.model.Raccolta;
@@ -10,7 +8,7 @@ import it.uniroma3.theboys.quix.model.Raccolta;
 public interface RaccoltaRepository extends CrudRepository<Raccolta, Long>{
 
     /* Utile per ricerca con filtro ---- da eliminare se si usa la relazione */
-    public List<Raccolta> findRaccoltaByEtichettaId(Long etichettaId);
+    public Iterable<Raccolta> findByEtichettaId(Long etichettaId);
 
-    public Iterable<Raccolta> findRaccoltaByAutoreIdAndEtichettaId(Long autoreId, Long etichettaId);
+    public Iterable<Raccolta> findByAutoreIdAndEtichettaId(Long autoreId, Long etichettaId);
 }

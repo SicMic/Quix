@@ -9,6 +9,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 
@@ -28,6 +29,7 @@ public class Raccolta { //con @Entity il framework sa che a Movie bisogna associ
 	private String urlImage;
 
 	@ManyToOne
+	@JoinColumn(name="autore_id", nullable=false)
 	private Autore autore;
 
 	@OneToMany(mappedBy="raccolta")
@@ -39,11 +41,12 @@ public class Raccolta { //con @Entity il framework sa che a Movie bisogna associ
 	public Raccolta(){				// controllare se serve inserire istruzioni
 	}
 
-	public Raccolta(String nome, String urlImage, Etichetta etichetta, String descrizione){
+	public Raccolta(String nome, String urlImage, Etichetta etichetta, String descrizione, Autore autore){
 		this.nome = nome;
 		this.urlImage = urlImage;
 		this.etichetta = etichetta;
 		this.descrizione = descrizione;
+		this.autore = autore;
 	}
 
 	public Long getId() {

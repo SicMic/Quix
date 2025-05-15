@@ -16,8 +16,6 @@ import it.uniroma3.theboys.quix.model.Autore;
 import it.uniroma3.theboys.quix.model.Etichetta;
 import it.uniroma3.theboys.quix.model.Quiz;
 import it.uniroma3.theboys.quix.model.Raccolta;
-import it.uniroma3.theboys.quix.repository.CategoriaRepository;
-import it.uniroma3.theboys.quix.repository.EtichettaRepository;
 import it.uniroma3.theboys.quix.service.AuthServiceAutore;
 import it.uniroma3.theboys.quix.service.AutoreService;
 import it.uniroma3.theboys.quix.service.CategoriaService;
@@ -30,8 +28,6 @@ import jakarta.servlet.http.HttpSession;
 @Controller
 public class AutoreController {
 
-	/*  Verificare la correttezza dell'utilizzo di repository di entità al posto di service  */
-
 	@Autowired private AutoreService autoreService;
 
 	@Autowired private RaccoltaService raccoltaService;
@@ -40,10 +36,7 @@ public class AutoreController {
 
 	@Autowired private QuizService quizService;
 
-	@Autowired private EtichettaRepository etichettaRepository;
 	@Autowired private EtichettaService etichettaService;
-
-	@Autowired private CategoriaRepository categoriaRepository;
 
 	@Autowired private CategoriaService categoriaService;
 
@@ -104,7 +97,7 @@ public class AutoreController {
 
 		model.addAttribute("utente", session.getAttribute("user"));
 		model.addAttribute("elenco", this.autoreService.getAllQuizAutore(((Autore) session.getAttribute("user")).getId()));
-		model.addAttribute("categorie", categoriaService.getAllCategories());
+		model.addAttribute("categorie", categoriaService.getAllCategorie());
 	
 		return "elencoQuiz.html";
 	}
@@ -118,23 +111,23 @@ public class AutoreController {
 		model.addAttribute("utente", session.getAttribute("user"));
 		model.addAttribute("nomeCategoria", nomeCategoria);
 		model.addAttribute("elenco", this.autoreService.getAllQuizAutoreOfCategoria(((Autore) session.getAttribute("user")).getId(),nomeCategoria));
-		model.addAttribute("categorie", categoriaService.getAllCategories());
+		model.addAttribute("categorie", categoriaService.getAllCategorie());
 		return "elencoQuiz.html";
 	}
 
 
 	@PostMapping("/aggiuntaRaccolta")
-	public String aggiuntaNuovaRaccolta(@RequestParam String nome, @RequestParam String urlImage, @RequestParam String etichetta, @RequestParam String descrizione){
-		Raccolta raccolta = new Raccolta(nome, urlImage, etichettaRepository.findEtichettaByNome("Natura"), descrizione);
-		this.raccoltaService.save(raccolta);
-		return "redirect:/raccolte/" + raccolta.getId();
+	public String aggiuntaNuovaRaccolta(HttpSession session, @RequestParam String nome, @RequestParam String urlImage, @RequestParam String etichetta, @RequestParam String descrizione){
+		Raccolta raccolta = new Raccolta(nome, urlImage, etichettaService.getEtichettaByNome(etichetta), descrizione, ((Autore) session.getAttribute("user")));
+		this.raccoltaService.saveNewRaccolta(raccolta);
+		return "redirect:/raccolte";
 	}
 
 
 	@PostMapping("/aggiuntaQuiz")
 	public String aggiuntaNuovoQuiz(@RequestParam("quesito") String quesito, @RequestParam("opzioneUno") String opzioneUno, @RequestParam("opzioneDue") String opzioneDue, @RequestParam("opzioneTre") String opzioneTre, @RequestParam("opzioneQuattro") String opzioneQuattro, @RequestParam("idRaccolta") Long idRaccolta, @RequestParam("categoria") String categoria){
-		Quiz quiz = new Quiz(quesito, opzioneUno, opzioneDue, opzioneTre, opzioneQuattro, this.raccoltaService.getRaccoltaById(idRaccolta), categoriaRepository.findCategoriaByNome(categoria), java.time.LocalDate.now());
-		this.quizService.save(quiz);
+		Quiz quiz = new Quiz(quesito, opzioneUno, opzioneDue, opzioneTre, opzioneQuattro, this.raccoltaService.getRaccoltaById(idRaccolta), categoriaService.getQuizByNome(categoria), java.time.LocalDate.now());
+		this.quizService.saveNewQuiz(quiz);
 		return "redirect:/raccolta/" + idRaccolta;
 	}
 
@@ -145,6 +138,8 @@ public class AutoreController {
 		this.quizService.deleteQuiz(idQuiz);
 	}
 
+
+	
 	@GetMapping("/raccolte")
 	public String getRaccolte(Model model, HttpSession session) {
 
@@ -183,7 +178,7 @@ public class AutoreController {
 		model.addAttribute("utente", session.getAttribute("user"));
 		model.addAttribute("nomeRaccolta", raccoltaService.getRaccoltaById(idRaccolta).getNome());
 		model.addAttribute("elenco", raccoltaService.getRaccoltaById(idRaccolta).getElencoQuiz());
-		model.addAttribute("categorie", categoriaRepository.findAll());
+		model.addAttribute("categorie", categoriaService.getAllCategorie());
 		return "raccolta.html";
 	}
 
