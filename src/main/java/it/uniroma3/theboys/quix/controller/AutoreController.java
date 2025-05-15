@@ -138,6 +138,10 @@ public class AutoreController {
 		this.quizService.deleteQuiz(idQuiz);
 	}
 
+	@PostMapping("/eliminazioneRaccolta/")
+	public void eliminazioneRaccolta(@RequestParam Long idRaccolta) {
+		this.raccoltaService.deleteRaccolta(idRaccolta);
+	}
 
 	
 	@GetMapping("/raccolte")
@@ -185,6 +189,11 @@ public class AutoreController {
 	@PostMapping("/aggiornamentoQuiz")
 	public void postAggiornamentoQuiz(@RequestParam Long idQuiz, @RequestParam String quesito, @RequestParam String opzioneUno, @RequestParam String opzioneDue, @RequestParam String opzioneTre, @RequestParam String opzioneQuattro, @RequestParam String categoria) {
 		this.quizService.updateQuiz(idQuiz, quesito, opzioneUno, opzioneDue, opzioneTre, opzioneQuattro, categoria);
+	}
+
+	@PostMapping("/aggiornamentoRaccolta")
+	public void postAggiornamentoRaccolta(@RequestParam Long idRaccolta, @RequestParam String nome, @RequestParam String descrizione, @RequestParam String urlImage, @RequestParam String etichetta) {
+		this.raccoltaService.updateRaccolta(idRaccolta, nome, descrizione, urlImage, etichetta);
 	}
 
 	@GetMapping("/profilo")
