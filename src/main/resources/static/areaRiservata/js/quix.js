@@ -1,7 +1,25 @@
+/*** - START ***/
+
+// Creazione input hidden con valore idRaccolta
 if (window.location.pathname.includes("raccolta")) {
     const idRaccolta = document.getElementById("idRaccolta")
     idRaccolta.value = window.location.pathname.split("/")[2]
 }
+
+// Imposta nel tag containerRows il numero di figli come attributo valore 
+if (window.location.pathname.includes("elencoQuiz") || window.location.pathname.includes("raccolta") || window.location.pathname.includes("raccolte")) {
+    const container = document.getElementById("containerRows")
+    container.setAttribute("valore", container.childElementCount)
+}
+
+// Imposta nel tag containerRows il numero di figli come attributo valore 
+if (window.location.pathname.includes("elencoQuiz") || window.location.pathname.includes("raccolte")) {
+    const container = document.getElementById("containerRows")
+    container.setAttribute("valore", document.querySelectorAll(".img-fluid").length)
+}
+
+
+/*** - END ***/
 
 /***  Listener - START ***/
 
@@ -39,6 +57,7 @@ document.addEventListener("click", function (e) {
         const opzioneTre = document.getElementById("opzioneTre-quiz" + e.target.id.replace("save-quiz", ""))
         const opzioneQuattro = document.getElementById("opzioneQuattro-quiz" + e.target.id.replace("save-quiz", ""))
         const categoria = document.getElementById("categoria-quiz" + e.target.id.replace("save-quiz", ""))
+        console.log(categoria)
         aggiornamentoQuiz(e.target.id.replace("save-quiz", ""), quesito.innerText, opzioneUno.innerText, opzioneDue.innerText, opzioneTre.innerText, opzioneQuattro.innerText, categoria.value)
     }
 })
@@ -47,19 +66,32 @@ document.addEventListener("click", function (e) {
 
 // Topbar search input
 document.addEventListener("keyup", function (e) {
-    if (e.target.id == "searchInput") {
-        const ricerca = e.target.value.toUpperCase()
-        for (let contatore = 1; contatore <= 4; contatore++) {
-            const quesito = document.getElementById("quesito" + contatore)
-            console.log(quesito.innerText)
-            if (quesito.innerText.toUpperCase().indexOf(ricerca) > -1)
-                document.getElementById("quizRow" + contatore).style.display = "block"
-            else
-                document.getElementById("quizRow" + contatore).style.display = "none"
+    const righe = document.getElementById("containerRows").getAttribute("valore")
+    if (e.target.id == "searchInput")
+        if (window.location.pathname.includes("elencoQuiz") || window.location.pathname.includes("raccolta")) {
+            const ricerca = e.target.value.toUpperCase()
+            for (let contatore = 0; contatore < righe; contatore++) {
+                const quesito = document.getElementById("quesito" + contatore)
+                if (quesito.innerText.toUpperCase().indexOf(ricerca) > -1)
+                    document.getElementById("quizRow" + contatore).style.display = "block"
+                else
+                    document.getElementById("quizRow" + contatore).style.display = "none"
+            }
+        } else {
+            if (window.location.pathname.includes("raccolte")) {
+                const ricerca = e.target.value.toUpperCase()
+                console.log(righe)
+                for (let contatore = 0; contatore < righe; contatore++) {
+                    const raccolta = document.getElementById("nomeRaccolta" + contatore)
+                    if (raccolta.innerText.toUpperCase().indexOf(ricerca) > -1)
+                        document.getElementById("raccoltaRow" + contatore).style.display = "block"
+                    else
+                        document.getElementById("raccoltaRow" + contatore).style.display = "none"
+                }
+            }
         }
-    }
-
 })
+
 /***  Listener - END ***/
 
 
@@ -101,7 +133,7 @@ function aggiornamentoQuiz(idQuiz, quesito, opzioneUno, opzioneDue, opzioneTre, 
     })
         .then(response => response.text())
         .then(data => {
-            window.location.reload()
+            //window.location.reload()
         })
         .catch(error => console.error('Errore:', error));
 }
