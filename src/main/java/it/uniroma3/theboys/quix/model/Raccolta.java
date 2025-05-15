@@ -4,6 +4,7 @@ package it.uniroma3.theboys.quix.model;
 
 import java.util.List;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -32,7 +33,7 @@ public class Raccolta { //con @Entity il framework sa che a Movie bisogna associ
 	@JoinColumn(name="autore_id", nullable=false)
 	private Autore autore;
 
-	@OneToMany(mappedBy="raccolta")
+	@OneToMany(mappedBy="raccolta", cascade = CascadeType.REMOVE)
 	private List<Quiz> elencoQuiz;
 
 	@ManyToOne
