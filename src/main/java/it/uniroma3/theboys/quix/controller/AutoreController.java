@@ -86,6 +86,11 @@ public class AutoreController {
 
 		model.addAttribute("utente", session.getAttribute("user"));
 		model.addAttribute("raccolte", ((Autore) session.getAttribute("user")).getElencoRaccolte());
+		model.addAttribute("numeroRaccolte",this.raccoltaService.getNumeroRaccolteAutore(((Autore) session.getAttribute("user")).getId()));
+		model.addAttribute("numeroQuiz", this.quizService.getNumeroQuizAutore(((Autore) session.getAttribute("user")).getId()));
+		model.addAttribute("etichetta", this.raccoltaService.getEtichettaPiuUsata(((Autore) session.getAttribute("user")).getId()));
+		model.addAttribute("categoria", this.quizService.getCategoriaPiuUsata(((Autore) session.getAttribute("user")).getId()));
+
 		return "dashboardAutore.html";
 	}
 
