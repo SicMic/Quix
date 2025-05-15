@@ -3,22 +3,35 @@
 ## Indice
 1. [Intro](#intro)
 2. [Modello di dominio](#1-modello-di-dominio)
-3. [Operazioni di sistema](#2-operazioni-di-sistema)
-    1. [Registrazione](#i-operazione-registrazione)
-    2. [Creazione raccolta](#ii-operazione-creazione-raccolta)
-    3. [Modifica quiz](#iii-operazione-modifica-quiz)
+3. [Casi d'uso](#2-casi-duso)
+    - [Casi d'uso dell'Autore](#casi-duso-dellautore)
+        1. [Registrazione di un autore](#a-registrazione-di-un-autore)
+        2. [Login di un autore](#b-login-di-un-autore)
+        3. [Creazione di una raccolta](#c-creazione-di-una-raccolta)
+        4. [Creazione di un quiz](#d-creazione-di-un-quiz)
+        5. [Modifica di una raccolta](#e-modifica-di-una-raccolta)
+        6. [Modifica di un quiz](#f-modifica-di-un-quiz)
+    - [Giocatore](#giocatore)
+        1. [Registrazione di un giocatre](#a-registrazione-di-un-autore)
 4. [Contratti](#3-contratti)
-    - [Registrazione](#i-contratto-registrazione)
-    - [Creazione raccolta](#ii-contratto-creazione-raccolta)
 5. [Diagramma delle classi](#iii-diagramma-delle-classi)
 
 ## Intro
-Quix è un sistema di quiz accessibile da internet e sviluppato usando telcolgie come:
+Quix è un sistema di quiz accessibile da internet e sviluppato usando tecnologie come:
 - Java Springboot
 - Thymeleaf
 - Bootstrap 5
 
 ## 1. Modello di dominio
+Le classi concettuali evidenziate in questo progetto sono:
+- **Quix:**
+- **Autore:** classe che modella l'entità fisica della persona che si occupa di creare delleraccolte di quiz
+- **Giocatore:** classe che modella l'entità fisica della persona che interagisce giocando le raccolte di quiz
+- **Raccolta:** classe che modella dei contenitori che raccolgono uno o più quiz
+- **Eticheta:** classe che modella le etichette assegnabili alle raccolte e che hanno il compito di catalogare per tiopologia le raccolte
+- **Quiz:** classe che modella i quiz
+- **Categoria:** classe che modella le categorie assegnabili ai quiz e che hanno il compito di catalogare per tiopologia i quiz
+
 
 ```mermaid
 classDiagram
@@ -38,7 +51,7 @@ classDiagram
         Immagine profilo
     }
 
-    class Utente {
+    class Giocatore {
         ID
         Nome
         Cognome
@@ -79,37 +92,51 @@ classDiagram
     }
 
     Quix "1" -- "*" Autore : è registrato su
-    Quix "1" -- "*" Utente : è registrato su
+    Quix "1" -- "*" Giocatore : è registrato su
     Quix "1" -- "*" Etichetta : offre
     Quix "1" -- "*" Categoria : offre
     Autore "1" -- "*" Raccolta : ha creato
-    Utente "*" -- "*" Raccolta : ha svolto
-    Raccolta "*" -- "*" Etichetta : appartiene a
+    Giocatore "*" -- "*" Raccolta : ha svolto
+    Raccolta "*" -- "1" Etichetta : appartiene a
     Raccolta "1" *-- "*" Quiz : è composto da
     Categoria "1" -- "*" Quiz : appartiene a
 ```
 
-## 2. Operazioni di sistema
-### i. Operazione Registrazione
+## 2. Casi d'uso
+Seguono i principali casi d'uso delle due tipologie di utene: Autore e Giocatore.
+### Casi d'uso dell'Autore
+#### a. Registrazione di un autore
+Operazione che indica la registrazione di un utente di tipo Autore o Giocatore
 
 ```mermaid
 sequenceDiagram
-    participant U as Utente
-    participant S as Sistema
+    participant A as a : Autore
+    participant S as : Sistema
 
-    U->>S: iniziaRegistrazione()
-    U->>S: inserisciCredenziali(nome, cognome, email, username, password)
-    U->>S: confermaRegistrazioneOperazione()
-    S-->>U: Messaggio di sistema
+    A->>S: iniziaRegistrazione()
+    A->>S: inserisciCredenziali(nome, cognome, email, username, password)
+    A->>S: confermaRegistrazione()
+    S-->>A: Registrazione avvenuta con successo
 ```
 
-### ii. Operazione Creazione raccolta
+#### b. Login di un autore
+```mermaid
+sequenceDiagram
+    participant A as a : Autore
+    participant S as Sistema
+
+    A->>S: iniziaLogin()
+    A->>S: inserisciCredenziali(username, password)
+    A->>S: confermaLogin()
+    S-->>A: Login avvenuto con successo
+```
+
+#### c. Creazione di una raccolta
 ```mermaid
 sequenceDiagram
     participant A as Autore
     participant S as Sistema
 
-    A->>S: login()
     A->>S: iniziaCreazioneRaccolta(nome, etichetta, descrizione, copertina)
 
     loop Aggiungi quiz
@@ -117,11 +144,34 @@ sequenceDiagram
     end
 
     A->>S: confermaCreazioneRaccolta()
-    S-->>A: Messaggio di sistema
+    S-->>A: Creazione della raccolta avvenuta con successo
 ```
 
 
-### iii. Operazione Modifica quiz
+#### d. Creazione di un quiz
+```mermaid
+sequenceDiagram
+    participant A as Autore
+    participant S as Sistema
+
+    A->>S: inserisciQuiz(nome, opzioneUno, opzioneDue, opzioneTre, opzioneQuattro, categoria)
+    S-->>A: Creazione della raccolta avvenuta con successo
+```
+
+#### e. Modifica di una raccolta
+
+```mermaid
+sequenceDiagram
+    participant A as Autore
+    participant S as Sistema
+    
+    A->>S: slezionaRaccolta(nome, opzioneUno, opzioneDue, opzioneTre, opzioneQuattro, categoria)
+    A->>S: inserisciQuiz(nome, opzioneUno, opzioneDue, opzioneTre, opzioneQuattro, categoria)
+    S-->>A: Creazione della raccolta avvenuta con successo
+```
+
+#### f. Modifica di un quiz
+
 ```mermaid
 sequenceDiagram
     participant A as Autore
@@ -179,7 +229,7 @@ classDiagram
         + setImmagineProfilo(immagine: string)
     }
 
-    class Utente {
+    class Giocatore {
         - ID: int
         - Nome: string
         - Cognome: string
@@ -271,13 +321,23 @@ classDiagram
 
 
     Quix "1" -- "*" Autore : è registrato su
-    Quix "1" -- "*" Utente : è registrato su
+    Quix "1" -- "*" Giocatore : è registrato su
     Quix "1" -- "*" Etichetta : offre
     Quix "1" -- "*" Categoria : offre
     Autore "1" -- "*" Raccolta : ha creato
-    Utente "*" -- "*" Raccolta : ha svolto
+    Giocatore "*" -- "*" Raccolta : ha svolto
     Raccolta "*" -- "*" Etichetta : appartiene a
     Raccolta "1" *-- "*" Quiz : è composto da
     Categoria "1" -- "*" Quiz : appartiene a
+
+```
+
+```mermaid
+
+flowchart LR
+    O{" "}-->|"login(id, pwd)"| A
+    A[: ACME Pizza] -->|"t = getTitolare(id)"| B
+    B[: Pizza Delivery]-->|"t = find()"|C 
+    C[titolari : Collection<'Titotare>]
 
 ```

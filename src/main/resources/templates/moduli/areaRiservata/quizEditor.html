@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Quiz editor</title>
+</head>
+
+<div th:fragment="quizEditor">
+    <!-- Editor - Start -->
+    <div th:each="quiz : ${elenco}">
+        <div class="overlay" th:id="'editor-quiz' + ${quiz.id}">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <p type="text" class="form-control form-control-user" contenteditable="true" required th:text="${quiz.quesito}" th:id="'quesito-quiz' + ${quiz.id}">Quesito</p>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group row">
+                            <div class="col-sm-6 mb-3 mb-sm-0">
+                                <p type="text" class="form-control form-control-user" contenteditable="true" required th:text="${quiz.opzioneUno}" th:id="'opzioneUno-quiz' + ${quiz.id}">opzioneUno</p>
+                            </div>
+                            <div class="col-sm-6">
+                                <p type="text" class="form-control form-control-user" contenteditable="true" required th:text="${quiz.opzioneDue}" th:id="'opzioneDue-quiz' + ${quiz.id}">opzioneDue</p>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-sm-6 mb-3 mb-sm-0">
+                                <p type="text" class="form-control form-control-user" contenteditable="true" required th:text="${quiz.opzioneTre}" th:id="'opzioneTre-quiz' + ${quiz.id}">opzioneTre</p>
+                            </div>
+                            <div class="col-sm-6">
+                                <p type="text" class="form-control form-control-user" contenteditable="true" required th:text="${quiz.opzioneQuattro}" th:id="'opzioneQuattro-quiz' + ${quiz.id}">opzioneQuattro</p>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-sm">
+                                <select name="categoria" class="form-control" th:id="'categoria-quiz' + ${quiz.id}">
+                                    <option th:each="categoria : ${categorie}" th:value="${categoria.nome}" th:text="${categoria.nome}"></option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-secondary" type="reset" data-dismiss="modal" th:id="'hide-editor-quiz' + ${quiz.id}">Annulla</button>
+                        <button class="btn btn-primary" type="button" data-dismiss="modal" th:id="'update-quiz' + ${quiz.id}">Aggiorna</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Editor - End -->
+</div>
+
+
+</html>

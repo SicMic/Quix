@@ -2,6 +2,7 @@ package it.uniroma3.theboys.quix.model;
 
 import java.util.List;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -37,7 +38,7 @@ public class Autore {
     @Column(length = 500)
     private String urlImage;
 
-    @OneToMany(mappedBy = "autore", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "autore", fetch = FetchType.EAGER, cascade = CascadeType.REFRESH)
 	private List<Raccolta> elencoRaccolte;
     
     public Long getId() {

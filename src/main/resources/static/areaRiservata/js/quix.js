@@ -6,18 +6,11 @@ if (window.location.pathname.includes("raccolta")) {
     idRaccolta.value = window.location.pathname.split("/")[2]
 }
 
-// Imposta nel tag containerRows il numero di figli come attributo valore 
+// Imposta nel tag con id containerRows il numero di figli come attributo valore 
 if (window.location.pathname.includes("elencoQuiz") || window.location.pathname.includes("raccolta") || window.location.pathname.includes("raccolte")) {
     const container = document.getElementById("containerRows")
     container.setAttribute("valore", container.childElementCount)
 }
-
-// Imposta nel tag containerRows il numero di figli come attributo valore 
-if (window.location.pathname.includes("elencoQuiz") || window.location.pathname.includes("raccolte")) {
-    const container = document.getElementById("containerRows")
-    container.setAttribute("valore", document.querySelectorAll(".img-fluid").length)
-}
-
 
 /*** - END ***/
 
@@ -26,43 +19,49 @@ if (window.location.pathname.includes("elencoQuiz") || window.location.pathname.
 document.addEventListener("click", function (e) {
 
     //raccolte.html - start
-    if (e.target.id.includes("showRaccoltaModal"))
-        document.getElementById("newRaccoltaModal").style.display = "block"
-    if (e.target.id.includes("hideRaccoltaModal"))
-        document.getElementById("newRaccoltaModal").style.display = "none"
+    if (window.location.pathname.includes("raccolte")) {
+        if (e.target.id.includes("showRaccoltaModal"))
+            document.getElementById("newRaccoltaModal").style.display = "block"
+        if (e.target.id.includes("hideRaccoltaModal"))
+            document.getElementById("newRaccoltaModal").style.display = "none"
+        if (e.target.id.includes("edit-raccolta"))
+            document.getElementById("editor-" + e.target.id.replace("edit-", "")).style.display = "block"
+        if (e.target.id.includes("delete-raccolta"))
+            eliminazioneRaccolta(e.target.id.replace("delete-raccolta", ""))
+    }
     //raccolte.html - end
 
 
-    //elencoQuiz.html e raccolta.html - start
-    if (e.target.id.includes("edit-quiz"))
-        document.getElementById("editor-" + e.target.id.replace("edit-", "")).style.display = "block"
-    if (e.target.id.includes("hide-editor"))
-        document.getElementById(e.target.id.replace("hide-", "")).style.display = "none"
-    if (e.target.id.includes("delete"))
-        eliminazioneQuiz(e.target.id.replace("delete-quiz", ""))
-    //elencoQuiz.html e raccolta.html - end
+    //Modifica e Eliminazione quiz in elencoQuiz.html e raccolta.html - start
+    if (window.location.pathname.includes("elencoQuiz") || window.location.pathname.includes("raccolta")) {
+        if (e.target.id.includes("edit-quiz"))
+            document.getElementById("editor-" + e.target.id.replace("edit-", "")).style.display = "block"
+        if (e.target.id.includes("hide-editor"))
+            document.getElementById(e.target.id.replace("hide-", "")).style.display = "none"
+        if (e.target.id.includes("delete-quiz"))
+            eliminazioneQuiz(e.target.id.replace("delete-quiz", ""))
+    }
+    if (e.target.id.includes("update-quiz")) {
+        const quesito = document.getElementById("quesito-quiz" + e.target.id.replace("update-quiz", ""))
+        const opzioneUno = document.getElementById("opzioneUno-quiz" + e.target.id.replace("update-quiz", ""))
+        const opzioneDue = document.getElementById("opzioneDue-quiz" + e.target.id.replace("update-quiz", ""))
+        const opzioneTre = document.getElementById("opzioneTre-quiz" + e.target.id.replace("update-quiz", ""))
+        const opzioneQuattro = document.getElementById("opzioneQuattro-quiz" + e.target.id.replace("update-quiz", ""))
+        const categoria = document.getElementById("categoria-quiz" + e.target.id.replace("update-quiz", ""))
+        aggiornamentoQuiz(e.target.id.replace("update-quiz", ""), quesito.innerText, opzioneUno.innerText, opzioneDue.innerText, opzioneTre.innerText, opzioneQuattro.innerText, categoria.value)
+    }
+    //Modifica e Eliminazione quiz in elencoQuiz.html e raccolta.html - end
 
     //raccolta.html - start
-    if (e.target.id.includes("showQuizModal"))
-        document.getElementById("newQuizModal").style.display = "block"
-    if (e.target.id.includes("hideQuizModal"))
-        document.getElementById("newQuizModal").style.display = "none"
+    if (window.location.pathname.includes("elencoQuiz") || window.location.pathname.includes("raccolta")) {
+        if (e.target.id.includes("showQuizModal"))
+            document.getElementById("newQuizModal").style.display = "block"
+        if (e.target.id.includes("hideQuizModal"))
+            document.getElementById("newQuizModal").style.display = "none"
+    }
     //raccolta.html - end
 
-
-    if (e.target.id.includes("save")) {
-        const quesito = document.getElementById("quesito-quiz" + e.target.id.replace("save-quiz", ""))
-        const opzioneUno = document.getElementById("opzioneUno-quiz" + e.target.id.replace("save-quiz", ""))
-        const opzioneDue = document.getElementById("opzioneDue-quiz" + e.target.id.replace("save-quiz", ""))
-        const opzioneTre = document.getElementById("opzioneTre-quiz" + e.target.id.replace("save-quiz", ""))
-        const opzioneQuattro = document.getElementById("opzioneQuattro-quiz" + e.target.id.replace("save-quiz", ""))
-        const categoria = document.getElementById("categoria-quiz" + e.target.id.replace("save-quiz", ""))
-        console.log(categoria)
-        aggiornamentoQuiz(e.target.id.replace("save-quiz", ""), quesito.innerText, opzioneUno.innerText, opzioneDue.innerText, opzioneTre.innerText, opzioneQuattro.innerText, categoria.value)
-    }
 })
-
-
 
 // Topbar search input
 document.addEventListener("keyup", function (e) {
@@ -98,6 +97,26 @@ document.addEventListener("keyup", function (e) {
 
 /***  Funzioni POST js - START ***/
 
+function eliminazioneRaccolta(idRaccolta) {
+    console.log(idRaccolta)
+    fetch('/eliminazioneRaccolta/', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        body: new URLSearchParams({
+            'idRaccolta': idRaccolta
+        })
+    })
+        .then(response => response.text())
+        .then(data => {
+            console.log(data)
+            window.location.reload()
+        })
+        .catch(error => console.error('Errore:', error));
+}
+
+
 function eliminazioneQuiz(idQuiz) {
     fetch('/eliminazioneQuiz/', {
         method: 'POST',
@@ -114,6 +133,30 @@ function eliminazioneQuiz(idQuiz) {
         })
         .catch(error => console.error('Errore:', error));
 }
+
+function aggiornamentoRaccolta(idRaccolta, nome, descrizione, urlImage, etichetta) {
+    fetch('/aggiornamentoRaccolta', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        body: new URLSearchParams({
+            'idQuiz': idQuiz,
+            'quesito': quesito,
+            'opzioneUno': opzioneUno,
+            'opzioneDue': opzioneDue,
+            'opzioneTre': opzioneTre,
+            'opzioneQuattro': opzioneQuattro,
+            'categoria': categoria
+        })
+    })
+        .then(response => response.text())
+        .then(data => {
+            window.location.reload()
+        })
+        .catch(error => console.error('Errore:', error));
+}
+
 
 function aggiornamentoQuiz(idQuiz, quesito, opzioneUno, opzioneDue, opzioneTre, opzioneQuattro, categoria) {
     fetch('/aggiornamentoQuiz', {
@@ -133,7 +176,7 @@ function aggiornamentoQuiz(idQuiz, quesito, opzioneUno, opzioneDue, opzioneTre, 
     })
         .then(response => response.text())
         .then(data => {
-            //window.location.reload()
+            window.location.reload()
         })
         .catch(error => console.error('Errore:', error));
 }

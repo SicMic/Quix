@@ -63,3 +63,15 @@ Start Bootstrap is based on the [Bootstrap](https://getbootstrap.com/) framework
 ## Copyright and License
 
 Copyright 2013-2021 Start Bootstrap LLC. Code released under the [MIT](https://github.com/StartBootstrap/startbootstrap-resume/blob/master/LICENSE) license.
+
+
+
+```mermaid
+
+flowchart LR
+    O{" "}-->|"login(id, pwd)"| A
+    A[: ACME Pizza] -->|"t = getTitolare(id)"| B
+    B[: Pizza Delivery]-->|"t = find()"|C 
+    C[titolari : Collection<'Titotare>]
+
+```

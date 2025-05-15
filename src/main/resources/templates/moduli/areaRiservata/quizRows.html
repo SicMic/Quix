@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Quiz rows</title>
+</head>
+
+<div th:fragment="quizRows">
+    <!-- Quiz Row - Start -->
+    <div id="containerRows">
+        <div class="row mb-4" th:id="'quizRow' + ${iterStat.index}" th:each="quiz, iterStat : ${elenco}">
+            <div class="col">
+                <div class="card border-left-primary shadow h-100 py-2">
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                    <a class="bg-primary text-white quix-tag" th:text="${quiz.categoria.nome}">Categoria</a>
+                                </div>
+                                <div class="h4 mt-2 mb-0 font-weight-bold text-gray-800" th:id="'quesito' + ${iterStat.index}" th:text="${quiz.quesito}">Quesito</div>
+                            </div>
+                            <div class="col-auto">
+                                <i class="fas fa-pen fa-2x text-primary mr-3 pe-auto" style="cursor: pointer" th:id="'edit-quiz' + ${quiz.id}"></i>
+                                <i class="fas fa-trash fa-2x text-danger" style="cursor: pointer" th:id="'delete-quiz' + ${quiz.id}"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Quiz Row - End -->
+</div>
+
+
+</html>

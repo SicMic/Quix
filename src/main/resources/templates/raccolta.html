@@ -2,7 +2,7 @@
 <html lang="it">
 
 <head>
-    <title>Raccolta</title>
+    <title>Quix - Raccolta</title>
     <th:block th:replace="~{moduli/areaRiservata/head :: head}"></th:block>
 </head>
 
@@ -33,30 +33,7 @@
                         <a id="showQuizModal" class="d-none d-sm-inline-block btn btn btn-primary shadow-sm"><i class="fas fa-plus fa-sm text-white-50"></i> Aggiungi quiz</a>
                     </div>
 
-                    <!-- Quiz Row - Start -->
-                    <div id="containerRows">
-                        <div class="row mb-4" th:id="'quizRow' + ${iterStat.index}" th:each="quiz, iterStat : ${elenco}">
-                            <div class="col">
-                                <div class="card border-left-primary shadow h-100 py-2">
-                                    <div class="card-body">
-                                        <div class="row no-gutters align-items-center">
-                                            <div class="col mr-2">
-                                                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                                    <a class="bg-primary text-white" th:text="${quiz.categoria.nome}">Categoria</a>
-                                                </div>
-                                                <div class="h5 mb-0 font-weight-bold text-gray-800" th:id="'quesito' + ${iterStat.index}" th:text="${quiz.quesito}">Quesito</div>
-                                            </div>
-                                            <div class="col-auto">
-                                                <i class="fas fa-pen fa-2x text-primary mr-3 pe-auto" style="cursor: pointer" th:id="'edit-quiz' + ${quiz.id}"></i>
-                                                <i class="fas fa-trash fa-2x text-danger" style="cursor: pointer" th:id="'delete-quiz' + ${quiz.id}"></i>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Quiz Row - End -->
+                    <th:block th:replace="~{moduli/areaRiservata/quizRows :: quizRows}"></th:block>
 
                 </div>
                 <!-- /.container-fluid -->
@@ -72,125 +49,18 @@
     </div>
     <!-- End of Page Wrapper -->
 
+    <th:block th:replace="~{moduli/areaRiservata/quizNew :: quizNew}"></th:block>
 
-    <!-- New Quiz of Maker - Start -->
-    <div id="newQuizModal" class="overlay">
-        <form th:action="@{/aggiuntaQuiz}" method="post">
-            <div class="modal-dialog modal-lg" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <input name="quesito" type="text" class="form-control form-control-user" required placeholder="Quesito">
-                    </div>
-                    <div class="modal-body">
-                        <div class="form-group row">
-                            <div class="col-sm-6 mb-3 mb-sm-0">
-                                <input name="opzioneUno" type="text" class="form-control form-control-user" required placeholder="opzioneUno">
-                            </div>
-                            <div class="col-sm-6">
-                                <input name="opzioneDue" type="text" class="form-control form-control-user" required placeholder="opzioneDue">
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <div class="col-sm-6 mb-3 mb-sm-0">
-                                <input name="opzioneTre" type="text" class="form-control form-control-user" required placeholder="opzioneTre">
-                            </div>
-                            <div class="col-sm-6">
-                                <input name="opzioneQuattro" type="text" class="form-control form-control-user" required placeholder="opzioneQuattro">
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <div class="col-sm">
-                                <select name="categoria" class="form-control">
-                                    <option th:each="categoria : ${categorie}" th:value="${categoria.nome}" th:text="${categoria.nome}"></option>
-                                </select>
-                            </div>
-                        </div>
-                        <input id="idRaccolta" name="idRaccolta" type="hidden" value="0" class="form-control form-control-user">
-                    </div>
-                    <div class="modal-footer">
-                        <button id="hideQuizModal" class="btn btn-secondary" type="reset" data-dismiss="modal">Annulla</button>
-                        <button class="btn btn-primary" type="submit" data-dismiss="modal">Aggiungi</button>
-                    </div>
-                </div>
-            </div>
-        </form>
-    </div>
-    <!-- New Quiz of Raccolta Maker - End -->
-
-    <!-- Editor - Start -->
-    <div th:each="quiz : ${elenco}">
-        <div class="overlay" th:id="'editor-quiz' + ${quiz.id}">
-            <div class="modal-dialog modal-lg" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <p type="text" class="form-control form-control-user" contenteditable="true" required th:text="${quiz.quesito}" th:id="'quesito-quiz' + ${quiz.id}">Quesito</p>
-                    </div>
-                    <div class="modal-body">
-                        <div class="form-group row">
-                            <div class="col-sm-6 mb-3 mb-sm-0">
-                                <p type="text" class="form-control form-control-user" contenteditable="true" required th:text="${quiz.opzioneUno}" th:id="'opzioneUno-quiz' + ${quiz.id}">opzioneUno</p>
-                            </div>
-                            <div class="col-sm-6">
-                                <p type="text" class="form-control form-control-user" contenteditable="true" required th:text="${quiz.opzioneDue}" th:id="'opzioneDue-quiz' + ${quiz.id}">opzioneDue</p>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <div class="col-sm-6 mb-3 mb-sm-0">
-                                <p type="text" class="form-control form-control-user" contenteditable="true" required th:text="${quiz.opzioneTre}" th:id="'opzioneTre-quiz' + ${quiz.id}">opzioneTre</p>
-                            </div>
-                            <div class="col-sm-6">
-                                <p type="text" class="form-control form-control-user" contenteditable="true" required th:text="${quiz.opzioneQuattro}" th:id="'opzioneQuattro-quiz' + ${quiz.id}">opzioneQuattro</p>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <div class="col-sm">
-                                <select name="categoria" class="form-control" th:id="'categoria-quiz' + ${quiz.id}">
-                                    <option th:each="categoria : ${categorie}" th:value="${categoria.nome}" th:text="${categoria.nome}"></option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button class="btn btn-secondary" type="reset" data-dismiss="modal" th:id="'hide-editor-quiz' + ${quiz.id}">Annulla</button>
-                        <button class="btn btn-primary" type="button" data-dismiss="modal" th:id="'save-quiz' + ${quiz.id}">Aggiorna</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Editor - End -->
-
-
-    <!-- Scroll to Top Button-->
-    <a class="scroll-to-top rounded" href="#page-top">
-        <i class="fas fa-angle-up"></i>
-    </a>
+    <th:block th:replace="~{moduli/areaRiservata/quizEditor :: quizEditor}"></th:block>
 
     <th:block th:replace="~{moduli/areaRiservata/logout :: logout}"></th:block>
 
     <th:block th:replace="~{moduli/areaRiservata/scripts :: scripts}"></th:block>
 
-
-    <script>
-
-
-
-
-        // document.addEventListener("keyup", function (e) {
-        //     if (e.target.id == "searchInput") {
-        //         const ricerca = e.target.value.toUpperCase()
-        //         for (let contatore = 1; contatore <= 4; contatore++) {
-        //             const quesito = document.getElementById("quesito" + contatore)
-        //             console.log(quesito.innerText)
-        //             if (quesito.innerText.toUpperCase().indexOf(ricerca) > -1)
-        //                 document.getElementById("quizRow" + contatore).style.display = "block"
-        //             else
-        //                 document.getElementById("quizRow" + contatore).style.display = "none"
-        //         }
-        //     }
-
-        // })
-    </script>
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
 
 </body>
 

@@ -2,7 +2,7 @@
 <html lang="it">
 
 <head>
-    <title>Elenco quiz</title>
+    <title>Quix - Elenco quiz</title>
     <th:block th:replace="~{/moduli/areaRiservata/head :: head}"></th:block>
 </head>
 
@@ -33,36 +33,8 @@
                         <h1 id="allQuiz" class="h3 mb-2 text-gray-800" th:if="${nomeCategoria == null}">Lista completa quesiti</h1>
                     </div>
 
-                    <!-- Quiz Row - Start -->
-                    <div id="containerRows" valore="el">
-                        <div class="row mb-4" th:id="'quizRow' + ${iterStat.index}" th:each="quiz, iterStat : ${elenco}">
-                            <div class="col">
-                                <div class="card border-left-primary shadow h-100 py-2">
-                                    <div class="card-body">
-                                        <div class="row no-gutters align-items-center">
-                                            <div class="col mr-2">
-                                                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1 mr-2" style="display: inline;">
-                                                    <a class="bg-primary text-white p-1" th:text="${quiz.categoria.nome}" th:href="'/elencoQuiz/' + ${quiz.categoria.nome}">Categoria</a>
-                                                </div>
-                                                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1" style="display: inline;">
-                                                    <a class="bg-primary text-white p-1" th:text="${quiz.raccolta.nome}" th:href="'/raccolta/' + ${quiz.raccolta.id}">Raccolta</a>
-                                                </div>
-                                                <div class="h5 mb-0 font-weight-bold text-gray-800 mt-2" th:id="'quesito' + ${iterStat.index}" th:text="${quiz.quesito}">Quesito</div>
-                                            </div>
-                                            <div class="col-auto">
-                                                <i class="fas fa-pen fa-2x text-primary mr-3 pe-auto" style="cursor: pointer" th:id="'edit-quiz' + ${quiz.id}"></i>
-                                                <i class="fas fa-trash fa-2x text-danger" style="cursor: pointer" th:id="'delete-quiz' + ${quiz.id}"></i>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                    <th:block th:replace="~{moduli/areaRiservata/quizRows :: quizRows}"></th:block>
 
-                        <!-- Quiz Row - End -->
-
-
-                    </div>
                 </div>
                 <!-- /.container-fluid -->
 
@@ -77,47 +49,7 @@
     </div>
     <!-- End of Page Wrapper -->
 
-    <!-- Editor - Start -->
-    <div class="overlay" th:id="'editor-quiz' + ${quiz.id}" th:each="quiz : ${elenco}">
-        <div class="modal-dialog modal-lg" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <p type="text" class="form-control form-control-user" contenteditable="true" required th:text="${quiz.quesito}" th:id="'quesito-quiz' + ${quiz.id}">Quesito</p>
-                </div>
-                <div class="modal-body">
-                    <div class="form-group row">
-                        <div class="col-sm-6 mb-3 mb-sm-0">
-                            <p type="text" class="form-control form-control-user" contenteditable="true" required th:text="${quiz.opzioneUno}" th:id="'opzioneUno-quiz' + ${quiz.id}">opzioneUno</p>
-                        </div>
-                        <div class="col-sm-6">
-                            <p type="text" class="form-control form-control-user" contenteditable="true" required th:text="${quiz.opzioneDue}" th:id="'opzioneDue-quiz' + ${quiz.id}">opzioneDue</p>
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <div class="col-sm-6 mb-3 mb-sm-0">
-                            <p type="text" class="form-control form-control-user" contenteditable="true" required th:text="${quiz.opzioneTre}" th:id="'opzioneTre-quiz' + ${quiz.id}">opzioneTre</p>
-                        </div>
-                        <div class="col-sm-6">
-                            <p type="text" class="form-control form-control-user" contenteditable="true" required th:text="${quiz.opzioneQuattro}" th:id="'opzioneQuattro-quiz' + ${quiz.id}">opzioneQuattro</p>
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <div class="col-sm">
-                            <select name="categoria" class="form-control">
-                                <option th:each="categoria : ${categorie}" th:value="${categoria.nome}" th:text="${categoria.nome}" th:id="'categoria-qui' + ${quiz.id}"></option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button class="btn btn-secondary" type="reset" data-dismiss="modal" th:id="'hide-editor-quiz' + ${quiz.id}">Annulla</button>
-                    <button class="btn btn-primary" type="button" data-dismiss="modal" th:id="'save-quiz' + ${quiz.id}">Aggiorna</button>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Editor - End -->
-
+    <th:block th:replace="~{moduli/areaRiservata/quizEditor :: quizEditor}"></th:block>
 
     <th:block th:replace="~{moduli/areaRiservata/logout :: logout}"></th:block>
 

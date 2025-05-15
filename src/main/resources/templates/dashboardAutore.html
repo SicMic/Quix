@@ -2,7 +2,7 @@
 <html lang="it">
 
 <head>
-    <title>Dashboard</title>
+    <title>Quix - Dashboard</title>
     <th:block th:replace="~{moduli/areaRiservata/head :: head}"></th:block>
 </head>
 
@@ -26,52 +26,153 @@
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
 
-                    <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-gray-800">Le mie raccolte</h1>
-
-                    <div class="row">
-                        <div class="col-xl-3 col-lg-4" th:each="raccolta :${raccolte}">
-                            <a th:href="@{'/raccolta' + '/' + ${raccolta.id}}">
-                                <div class="card shadow mb-4">
-                                    <!-- Card Header - Dropdown -->
-                                    <div class="card-header py-3">
-                                        <h6 class="m-0 font-weight-bold text-primary" th:text="${raccolta.nome}">Nome raccolta</h6>
-                                    </div>
-                                    <!-- Card Body -->
-                                    <div class="card-body">
-                                        <div class="text-center">
-                                            <img class="img-fluid" style="width: 25rem;" alt="..." th:src="${raccolta.urlImage}">
+                    <!-- Numeri Statistiche - Start -->
+                    <h1 class="h3 mb-3 text-gray-800">Statistiche</h1>
+                    <div class="row mb-5">
+                        <div class="col-3">
+                            <div class="card border-left-primary shadow h-100 py-2">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Raccolte create</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800" th:text="${utente.nome}">3</div>
                                         </div>
-                                        <hr>
-                                        <a class="bg-primary text-white" th:text="${raccolta.etichetta.nome}"></a>
-                                        <p th:text="${raccolta.descrizione}"> Descrizione </p>
                                     </div>
                                 </div>
-                            </a>
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <div class="card border-left-primary shadow h-100 py-2">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Raccolte create</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800" th:text="${utente.nome}">3</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <div class="card border-left-primary shadow h-100 py-2">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Raccolta più giocata</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800" th:text="${utente.nome}">3</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <div class="card border-left-primary shadow h-100 py-2">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">...</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800" th:text="${utente.cognome}">5</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
+                    <!-- Numeri Statistiche - End -->
+
+                    <!-- Ultime Raccolte Row - Start -->
+                    <h1 class="h3 mb-3 text-gray-800">Ultime raccolte create</h1>
+                    <div id="containerRows">
+                        <div class="row">
+                            <div class="col-xl-3 col-lg-4" th:id="'raccoltaRow' + ${iterStat.index}" th:each="raccolta, iterStat : ${raccolte}">
+                                <a th:href="@{'/raccolta' + '/' + ${raccolta.id}}">
+                                    <div class="card shadow mb-4">
+                                        <!-- Card Header - Dropdown -->
+                                        <div class="card-header py-3 edit-raccolta">
+                                            <div class="row">
+                                                <div class="col-10">
+                                                    <h5 class="m-0 font-weight-bold text-primary" th:id="'nomeRaccolta' + ${iterStat.index}" th:text="${raccolta.nome}">Nome raccolta</h5>
+                                                </div>
+                                                <div class="col-2 edit-raccolta-buttons">
+                                                    <div class="row">
+                                                        <div class="col-6">
+                                                            <i class="fas fa-pen fa-1x text-primary mr-3 pe-auto" style="cursor: pointer; font-size: 20px;"></i>
+                                                        </div>
+                                                        <div class="col-6">
+                                                            <i class="fas fa-trash fa-1x text-danger mr-3 pe-auto" style="cursor: pointer; font-size: 20px;"></i>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <!-- Card Body -->
+                                        <div class="card-body">
+                                            <div class="text-center">
+                                                <img class="img-fluid" style="width: 25rem;" alt="..." th:src="${raccolta.urlImage}">
+                                            </div>
+                                            <hr>
+                                            <a class="bg-primary text-white" th:text="${raccolta.etichetta.nome}"></a>
+                                            <p th:text="${raccolta.descrizione}"> Descrizione </p>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Ultime Raccolte Row - End -->
+
+
+
+                    <!-- Ultimi Quiz Row - Start -->
+                    <h1 class="h3 mb-2 text-gray-800">Ultimi quiz creati</h1>
+                    <div id="containerRows">
+                        <div class="row mb-4" th:id="'quizRow' + ${iterStat.index}" th:each="quiz, iterStat : ${elenco}">
+                            <div class="col">
+                                <div class="card border-left-primary shadow h-100 py-2">
+                                    <div class="card-body">
+                                        <div class="row no-gutters align-items-center">
+                                            <div class="col mr-2">
+                                                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1 mr-2" style="display: inline;">
+                                                    <a class="bg-primary text-white p-1" th:text="${quiz.categoria.nome}" th:href="'/elencoQuiz/' + ${quiz.categoria.nome}">Categoria</a>
+                                                </div>
+                                                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1" style="display: inline;">
+                                                    <a class="bg-primary text-white p-1" th:text="${quiz.raccolta.nome}" th:href="'/raccolta/' + ${quiz.raccolta.id}">Raccolta</a>
+                                                </div>
+                                                <div class="h5 mb-0 font-weight-bold text-gray-800 mt-2" th:id="'quesito' + ${iterStat.index}" th:text="${quiz.quesito}">Quesito</div>
+                                            </div>
+                                            <div class="col-auto">
+                                                <i class="fas fa-pen fa-2x text-primary mr-3 pe-auto" style="cursor: pointer" th:id="'edit-quiz' + ${quiz.id}"></i>
+                                                <i class="fas fa-trash fa-2x text-danger" style="cursor: pointer" th:id="'delete-quiz' + ${quiz.id}"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Ultimi Quiz Row - End -->
+                    </div>
+                    <!-- /.container-fluid -->
+
                 </div>
-                <!-- /.container-fluid -->
+                <!-- End of Main Content -->
+
+                <th:block th:replace="~{moduli/areaRiservata/footer :: footer}"></th:block>
 
             </div>
-            <!-- End of Main Content -->
-
-            <th:block th:replace="~{moduli/areaRiservata/footer :: footer}"></th:block>
+            <!-- End of Content Wrapper -->
 
         </div>
-        <!-- End of Content Wrapper -->
+        <!-- End of Page Wrapper -->
 
-    </div>
-    <!-- End of Page Wrapper -->
+        <!-- Scroll to Top Button-->
+        <a class="scroll-to-top rounded" href="#page-top">
+            <i class="fas fa-angle-up"></i>
+        </a>
 
-    <!-- Scroll to Top Button-->
-    <a class="scroll-to-top rounded" href="#page-top">
-        <i class="fas fa-angle-up"></i>
-    </a>
+        <th:block th:replace="~{moduli/areaRiservata/logout :: logout}"></th:block>
 
-    <th:block th:replace="~{moduli/areaRiservata/logout :: logout}"></th:block>    
-
-    <th:block th:replace="~{moduli/areaRiservata/scripts :: scripts}"></th:block>
+        <th:block th:replace="~{moduli/areaRiservata/scripts :: scripts}"></th:block>
 
 </body>
 

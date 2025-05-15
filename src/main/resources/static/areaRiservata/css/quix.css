@@ -8,3 +8,16 @@
     background: rgba(0, 0, 0, 0.5);
     display: none;
 }
+
+.edit-raccolta-buttons {
+    display: none;
+}
+
+.edit-raccolta:hover .edit-raccolta-buttons {
+    display: block;
+}
+
+.quix-tag{
+    border-radius: 9px !important;
+    padding: 4px 6px 4px 6px !important;
+}

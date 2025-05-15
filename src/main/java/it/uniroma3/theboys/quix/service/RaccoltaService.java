@@ -41,8 +41,8 @@ public class RaccoltaService {
 		return this.raccoltaRepository.save(r);
 	}
 
-	public void deleteRaccolta(Long idRaccolta){
-		this.raccoltaRepository.deleteById(idRaccolta);
+	public void deleteRaccolta(Long id){
+		this.raccoltaRepository.deleteById(id);
 	}
 
 	public void updateRaccolta(Long id, String nome, String descrizione, String urlImage, String etichetta){
