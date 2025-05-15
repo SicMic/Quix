@@ -1,5 +1,7 @@
 package it.uniroma3.theboys.quix.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -50,6 +52,17 @@ public class QuizService {
 		q.setOpzioneQuattro(opzioneQuattro);
 		q.setCategoria(categoriaService.getQuizByNome(nomeCategoria));
 		this.quizRepository.save(q);
+	}
+
+	public Long getNumeroQuizAutore(Long idAutore){
+		return this.quizRepository.countQuizByAutoreId(idAutore);
+	}
+
+	public String getCategoriaPiuUsata(Long idAutore){
+		List<Object[]> risultati = this.quizRepository.countQuizPerCategoriaOrderByDesc(idAutore);
+		if(! risultati.isEmpty())
+			return (String) risultati.get(0)[0];
+		return "Nessuna categoria trovata";
 	}
 
 }

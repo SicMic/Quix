@@ -1,5 +1,7 @@
 package it.uniroma3.theboys.quix.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -50,6 +52,18 @@ public class RaccoltaService {
 		r.setUrlImage(urlImage);
 		r.setEtichetta(etichettaService.getEtichettaByNome(etichetta));
 		this.raccoltaRepository.save(r);
+	}
+
+	public Long getNumeroRaccolteAutore(Long autoreId){
+		return this.raccoltaRepository.countByAutoreId(autoreId);
+	}
+
+	public String getEtichettaPiuUsata(Long autoreId){
+		List<Object[]> risultati = raccoltaRepository.findEtichettaNomeWithMaxCountByAutore(autoreId);
+		if (!risultati.isEmpty()) {
+			return (String) risultati.get(0)[0];
+		}
+		return "Nessuna etichetta trovata";
 	}
 
 }

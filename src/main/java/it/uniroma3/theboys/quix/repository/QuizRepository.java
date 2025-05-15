@@ -1,5 +1,7 @@
 package it.uniroma3.theboys.quix.repository;
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
@@ -30,5 +32,19 @@ public interface QuizRepository extends CrudRepository<Quiz, Long>{
     """, nativeQuery = true)
     public Iterable<Quiz> findByAutoreIdAndCategoriaNomeNative(@Param("autoreId") Long autoreId, @Param("nomeCategoria") String nomeCategoria);
 
+    @Query("SELECT COUNT(q) FROM Quiz q JOIN q.raccolta r WHERE r.autore.id = :autoreId")
+    Long countQuizByAutoreId(@Param("autoreId") Long autoreId);
+
+    @Query(value = """
+    SELECT c.nome, COUNT(q)
+    FROM quiz q
+    JOIN categoria c ON c.id = q.categoria_id 
+    JOIN raccolta r ON r.id = q.raccolta_id
+    JOIN autore a ON a.id = r.autore_id
+    WHERE a.id = :autoreId
+    GROUP BY c.nome
+    ORDER BY COUNT(q) DESC
+    """, nativeQuery = true)
+    List<Object[]> countQuizPerCategoriaOrderByDesc(@Param("autoreId") Long autoreId);
 
 }
