@@ -2,7 +2,7 @@
 
 ## Indice
 1. [Intro](#intro)
-2. [Modello di dominio](#1-modello-di-dominio)
+2. [Modello di dominio](#modello-di-dominio)
 3. [Casi d'uso](#2-casi-duso)
     - [Casi d'uso dell'Autore](#casi-duso-dellautore)
         1. [Registrazione di un autore](#a-registrazione-di-un-autore)
@@ -11,10 +11,12 @@
         4. [Creazione di un quiz](#d-creazione-di-un-quiz)
         5. [Modifica di una raccolta](#e-modifica-di-una-raccolta)
         6. [Modifica di un quiz](#f-modifica-di-un-quiz)
-    - [Giocatore](#giocatore)
-        1. [Registrazione di un giocatre](#a-registrazione-di-un-autore)
-4. [Contratti](#3-contratti)
-5. [Diagramma delle classi](#iii-diagramma-delle-classi)
+    - [Casi d'uso del Giocatore](#casi-duso-delgiocatore)
+        1. [Registrazione di un giocatore](#a-registrazione-di-un-giocatore)
+        2. [Login di un giocatore](#b-login-di-un-giocatore)
+4. [Contratti](#contratti)
+5. [Diagramma di comunicazione](#diagramma-di-comunicazione)
+6. [Diagramma delle classi](#diagramma-delle-classi)
 
 ## Intro
 Quix è un sistema di quiz accessibile da internet e sviluppato usando tecnologie come:
@@ -22,7 +24,7 @@ Quix è un sistema di quiz accessibile da internet e sviluppato usando tecnologi
 - Thymeleaf
 - Bootstrap 5
 
-## 1. Modello di dominio
+## Modello di dominio
 Le classi concettuali evidenziate in questo progetto sono:
 - **Quix:**
 - **Autore:** classe che modella l'entità fisica della persona che si occupa di creare delleraccolte di quiz
@@ -102,7 +104,7 @@ classDiagram
     Categoria "1" -- "*" Quiz : appartiene a
 ```
 
-## 2. Casi d'uso
+## Casi d'uso
 Seguono i principali casi d'uso delle due tipologie di utene: Autore e Giocatore.
 ### Casi d'uso dell'Autore
 #### a. Registrazione di un autore
@@ -114,7 +116,7 @@ sequenceDiagram
     participant S as : Sistema
 
     A->>S: iniziaRegistrazione()
-    A->>S: inserisciCredenziali(nome, cognome, email, username, password)
+    A->>S: inserisciCredenziali(nome, cognome, email, biografia, username, password)
     A->>S: confermaRegistrazione()
     S-->>A: Registrazione avvenuta con successo
 ```
@@ -182,7 +184,32 @@ sequenceDiagram
     A->>S: confermaModificaQuiz()
     S-->>A: Messaggio di sistema
 ```
+### Casi d'uso del Giocatore
+#### a. Registrazione di un giocatore
+Operazione che indica la registrazione di un utente di tipo Giocatore.
 
+```mermaid
+sequenceDiagram
+    participant G as g : Giocatore
+    participant S as : Sistema
+
+    G->>S: iniziaRegistrazione()
+    G->>S: inserisciCredenziali(nome, cognome, email, username, password)
+    G->>S: confermaRegistrazione()
+    S-->>G: Registrazione avvenuta con successo
+```
+
+#### b. Login di un giocatore
+```mermaid
+sequenceDiagram
+    participant G as g : Giocatore
+    participant S as Sistema
+
+    G->>S: iniziaLogin()
+    G->>S: inserisciCredenziali(username, password)
+    G->>S: confermaLogin()
+    S-->>G: Login avvenuto con successo
+```
 
 ## Contratti
 ### Registrazione
@@ -193,7 +220,34 @@ sequenceDiagram
 **post-condizioni:**
 - testo 
 
-## 4. Diagramma delle classi
+
+## Diagramma di comunicazione
+### b. Login di un giocatore
+
+```mermaid
+
+flowchart LR
+    O{" "}-->|"login(id, pwd)"| A
+    A[: ACME Pizza] -->|"t = getTitolare(id)"| B
+    B[: Pizza Delivery]-->|"t = find()"| C 
+    C[titolari : Collection<'Titolare>]
+
+    %% Commenti visibili
+    subgraph Commenti
+        direction TB
+        C1["Commento: Inizio del flusso di login"]
+        C2["Commento: Recupero del titolare"]
+        C3["Commento: Ricerca dei titolari"]
+    end
+
+    %% Posizionamento dei commenti
+    C1 --> O
+    C2 --> A
+    C3 --> B
+
+```
+
+## Diagramma delle classi
 
 ```mermaid
 
@@ -329,15 +383,5 @@ classDiagram
     Raccolta "*" -- "*" Etichetta : appartiene a
     Raccolta "1" *-- "*" Quiz : è composto da
     Categoria "1" -- "*" Quiz : appartiene a
-
-```
-
-```mermaid
-
-flowchart LR
-    O{" "}-->|"login(id, pwd)"| A
-    A[: ACME Pizza] -->|"t = getTitolare(id)"| B
-    B[: Pizza Delivery]-->|"t = find()"|C 
-    C[titolari : Collection<'Titotare>]
 
 ```

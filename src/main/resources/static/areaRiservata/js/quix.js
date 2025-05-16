@@ -19,7 +19,7 @@ if (window.location.pathname.includes("elencoQuiz") || window.location.pathname.
 document.addEventListener("click", function (e) {
 
     //raccolte.html - start
-    if (window.location.pathname.includes("raccolte")) {
+    if (window.location.pathname.includes("raccolte") || window.location.pathname.includes("dashboardAutore")) {
         if (e.target.id.includes("showRaccoltaModal"))
             document.getElementById("newRaccoltaModal").style.display = "block"
         if (e.target.id.includes("hideRaccoltaModal"))
@@ -28,6 +28,8 @@ document.addEventListener("click", function (e) {
             document.getElementById("editor-" + e.target.id.replace("edit-", "")).style.display = "block"
         if (e.target.id.includes("delete-raccolta"))
             eliminazioneRaccolta(e.target.id.replace("delete-raccolta", ""))
+        if (e.target.id.includes("hide-editor"))
+            document.getElementById(e.target.id.replace("hide-", "")).style.display = "none"
     }
     //raccolte.html - end
 

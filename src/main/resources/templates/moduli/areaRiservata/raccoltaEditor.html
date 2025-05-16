@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Raccolta editor</title>
+</head>
+
+<div th:fragment="raccoltaEditor">
+    <!-- Raccolta Editor - Start ZIOS-->
+    <div th:each="raccolta : ${raccolte}">
+        <div class="overlay" th:id="'editor-raccolta' + ${raccolta.id}">
+            <!-- <form th:action="@{/aggiuntaRaccolta}" method="post"> -->
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <p type="text" class="form-control form-control-user" contenteditable="true" required th:text="${raccolta.nome}" th:id="'nome-raccolta' + ${raccolta.id}">Nome raccolta</p>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group row">
+                            <div class="col-sm">
+                                <p type="text" class="form-control form-control-user" contenteditable="true" required th:text="${raccolta.descrizione}" th:id="'descrizione' + ${raccolta.id}">Descrizione</p>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-sm">
+                                <p type="text" class="form-control form-control-user" contenteditable="true" required th:text="${raccolta.urlImage}" th:id="'urlImage' + ${raccolta.id}">Descrizione</p>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-sm">
+                                <select name="etichetta" class="form-control">
+                                    <option th:each="etichetta : ${etichette}" th:value="${etichetta.nome}" th:text="${etichetta.nome}"  th:selected="${etichetta.nome == raccolta.etichetta.nome}"></option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button th:id="'hide-editor-raccolta' + ${raccolta.id}" class="btn btn-secondary" type="reset" data-dismiss="modal">Annulla</button>
+                        <button class="btn btn-primary" type="button" data-dismiss="modal">Aggiorna</button>
+                    </div>
+                </div>
+            </div>
+            <!-- </form> -->
+        </div>
+    </div>
+
+    <!-- Raccolta Editor - End -->
+</div>
+
+
+</html>

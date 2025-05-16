@@ -103,7 +103,8 @@ public class AutoreController {
 		model.addAttribute("utente", session.getAttribute("user"));
 		model.addAttribute("elenco", this.autoreService.getAllQuizAutore(((Autore) session.getAttribute("user")).getId()));
 		model.addAttribute("categorie", categoriaService.getAllCategorie());
-	
+		model.addAttribute("paginaCorrente", "elencoQuiz");
+
 		return "elencoQuiz.html";
 	}
 
@@ -117,6 +118,8 @@ public class AutoreController {
 		model.addAttribute("nomeCategoria", nomeCategoria);
 		model.addAttribute("elenco", this.autoreService.getAllQuizAutoreOfCategoria(((Autore) session.getAttribute("user")).getId(),nomeCategoria));
 		model.addAttribute("categorie", categoriaService.getAllCategorie());
+		model.addAttribute("paginaCorrente", "elencoQuiz/nomeCategoria");
+
 		return "elencoQuiz.html";
 	}
 
@@ -175,6 +178,7 @@ public class AutoreController {
 		model.addAttribute("utente", session.getAttribute("user"));
 		model.addAttribute("nomeEtichetta", nomeEtichetta);
 		model.addAttribute("raccolte", this.autoreService.getAllRaccolteAutoreOfEtichetta(((Autore) session.getAttribute("user")).getId(), nomeEtichetta.replace("+", " ")));
+
 		return "raccolte.html";
 	}
 
@@ -188,6 +192,8 @@ public class AutoreController {
 		model.addAttribute("nomeRaccolta", raccoltaService.getRaccoltaById(idRaccolta).getNome());
 		model.addAttribute("elenco", raccoltaService.getRaccoltaById(idRaccolta).getElencoQuiz());
 		model.addAttribute("categorie", categoriaService.getAllCategorie());
+		model.addAttribute("paginaCorrente", "raccolta");
+
 		return "raccolta.html";
 	}
 

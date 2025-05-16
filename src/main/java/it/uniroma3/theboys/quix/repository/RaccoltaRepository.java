@@ -19,11 +19,11 @@ public interface RaccoltaRepository extends CrudRepository<Raccolta, Long>{
     public Long countByAutoreId(Long autoreId);
 
     @Query(value = """
-    SELECT r.etichetta.nome, COUNT(r)
+    SELECT e.nome, COUNT(r)
     FROM raccolta r
     JOIN etichetta e ON e.id = r.etichetta_id
-    WHERE r.autore.id = :autoreId
-    GROUP BY r.etichetta.id
+    WHERE r.autore_id = :autoreId
+    GROUP BY e.nome, r.etichetta_id
     ORDER BY COUNT(r) DESC
     """, nativeQuery = true)
     List<Object[]> findEtichettaNomeWithMaxCountByAutore(@Param("autoreId") Long autoreId);
