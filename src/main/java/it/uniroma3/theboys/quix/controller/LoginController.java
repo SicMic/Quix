@@ -8,9 +8,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import it.uniroma3.theboys.quix.model.Autore;
-import it.uniroma3.theboys.quix.model.Utente;
+import it.uniroma3.theboys.quix.model.Giocatore;
 import it.uniroma3.theboys.quix.service.AuthServiceAutore;
-import it.uniroma3.theboys.quix.service.AuthServiceUtente;
+import it.uniroma3.theboys.quix.service.AuthServiceGiocatore;
 import jakarta.servlet.http.HttpSession;
 
 @Controller
@@ -20,7 +20,7 @@ public class LoginController {
     private AuthServiceAutore authServiceAutore;
 
     @Autowired
-    private AuthServiceUtente authServiceUtente;
+    private AuthServiceGiocatore authServiceUtente;
 
     // @GetMapping("/loginUtente")
     // public String showLoginPage(Model model) {

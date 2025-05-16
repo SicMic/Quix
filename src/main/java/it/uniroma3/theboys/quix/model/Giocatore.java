@@ -11,7 +11,7 @@ import jakarta.persistence.ManyToMany;
 
 
 @Entity
-public class Utente {
+public class Giocatore {
     
     @Id
     @GeneratedValue (strategy=GenerationType.AUTO)
@@ -120,7 +120,7 @@ public class Utente {
             return false;
         if (getClass() != obj.getClass())
             return false;
-        Utente other = (Utente) obj;
+        Giocatore other = (Giocatore) obj;
         if (email == null) {
             if (other.email != null)
                 return false;

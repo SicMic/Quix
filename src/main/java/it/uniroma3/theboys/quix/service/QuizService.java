@@ -65,4 +65,8 @@ public class QuizService {
 		return "Nessuna categoria trovata";
 	}
 
+	public Long getNumeroRaccolteGiocatore(Long idAutore){
+		return this.quizRepository.countQuizByAutoreId(idAutore);
+	}
+
 }

@@ -5,7 +5,9 @@ INSERT INTO autore (id, nome, cognome, email, username, password, biografia, url
 INSERT INTO autore (id, nome, cognome, email, username, password, biografia, url_image) VALUES (2, 'Michela', 'Sicuranza', 'sicmic@gmail.com', 'sicmic', '2Password!', 'Salve, sono Michela, un esperta di gamification e creazione di contenuti. Mi dedico a progettare quiz che sfidano le persone a testare le loro conoscenze su vari argomenti, rendendo l`apprendimento un gioco. La mia missione è rendere l`educazione accessibile e divertente per tutti!', 'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fpng.pngtree.com%2Fpng-clipart%2F20230405%2Foriginal%2Fpngtree-cat-cartoon-png-image_9029157.png&f=1&nofb=1&ipt=c8531a4dd100289a5b229a9344f2036dd412143a05aa738b9fac7a57eb554474');
 
 -- Utenti
-INSERT INTO utente (id, nome, cognome, email, username, password, url_image) VALUES (1, 'FIlippo', 'Maialino', 'filor02@gmail.com', 'filo', '1Filippo!', 'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fpngimg.com%2Fuploads%2Fflags%2Fflags_PNG14629.png&f=1&nofb=1&ipt=6018221fccb258f46e875a28897b0a4026756f78ab53705259e5d307cbf2edab');
+INSERT INTO giocatore (id, nome, cognome, email, username, password, url_image) VALUES (1, 'FIlippo', 'Maialino', 'filor02@gmail.com', 'filo', '1Filippo!', 'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fpngimg.com%2Fuploads%2Fflags%2Fflags_PNG14629.png&f=1&nofb=1&ipt=6018221fccb258f46e875a28897b0a4026756f78ab53705259e5d307cbf2edab');
+INSERT INTO giocatore (id, nome, cognome, email, username, password, url_image) VALUES (2, 'Marco', 'Chiodino', 'chido02@gmail.com', 'marcolino', '1Marco!', 'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fpngimg.com%2Fuploads%2Fflags%2Fflags_PNG14629.png&f=1&nofb=1&ipt=6018221fccb258f46e875a28897b0a4026756f78ab53705259e5d307cbf2edab');
+INSERT INTO giocatore (id, nome, cognome, email, username, password, url_image) VALUES (3, 'Laura', 'Strofinacci', 'lauretta02@gmail.com', 'lauretta', '1Laura!', 'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fpngimg.com%2Fuploads%2Fflags%2Fflags_PNG14629.png&f=1&nofb=1&ipt=6018221fccb258f46e875a28897b0a4026756f78ab53705259e5d307cbf2edab');
 
 -- Etichette
 INSERT INTO etichetta (id, nome, descrizione) VALUES (1, 'Cultura generale', '');
@@ -94,9 +96,22 @@ INSERT INTO quiz (id, quesito, opzione_uno, opzione_due, opzione_tre, opzione_qu
 -- INSERT INTO raccolta_elenco_quiz (elenco_quiz_id, raccolta_id) VALUES (13, 5);
 -- INSERT INTO raccolta_elenco_quiz (elenco_quiz_id, raccolta_id) VALUES (14, 6);
 
+-- giocatore - Raccollte giocate
+INSERT INTO giocatore_elenco_raccolte (giocatore_id, elenco_raccolte_id) VALUES(1,1);
+INSERT INTO giocatore_elenco_raccolte (giocatore_id, elenco_raccolte_id) VALUES(1,2);
+INSERT INTO giocatore_elenco_raccolte (giocatore_id, elenco_raccolte_id) VALUES(1,3);
+INSERT INTO giocatore_elenco_raccolte (giocatore_id, elenco_raccolte_id) VALUES(1,4);
+INSERT INTO giocatore_elenco_raccolte (giocatore_id, elenco_raccolte_id) VALUES(1,5);
+INSERT INTO giocatore_elenco_raccolte (giocatore_id, elenco_raccolte_id) VALUES(2,1);
+INSERT INTO giocatore_elenco_raccolte (giocatore_id, elenco_raccolte_id) VALUES(2,2);
+INSERT INTO giocatore_elenco_raccolte (giocatore_id, elenco_raccolte_id) VALUES(2,6);
+INSERT INTO giocatore_elenco_raccolte (giocatore_id, elenco_raccolte_id) VALUES(3,1);
+INSERT INTO giocatore_elenco_raccolte (giocatore_id, elenco_raccolte_id) VALUES(3,3);
+INSERT INTO giocatore_elenco_raccolte (giocatore_id, elenco_raccolte_id) VALUES(3,6);
+
 -- Aggiorna il counter degli id delle varie tabelle
 SELECT setval('autore_seq', (SELECT MAX(id) FROM autore));
-SELECT setval('utente_seq', (SELECT MAX(id) FROM utente));
+SELECT setval('giocatore_seq', (SELECT MAX(id) FROM giocatore));
 SELECT setval('etichetta_seq', (SELECT MAX(id) FROM etichetta));
 SELECT setval('categoria_seq', (SELECT MAX(id) FROM categoria));
 SELECT setval('raccolta_seq', (SELECT MAX(id) FROM raccolta));

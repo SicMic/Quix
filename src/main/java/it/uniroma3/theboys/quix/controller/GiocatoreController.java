@@ -5,14 +5,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import it.uniroma3.theboys.quix.service.UtenteService;
+import it.uniroma3.theboys.quix.service.GiocatoreService;
 import jakarta.servlet.http.HttpSession;
 
 
 @Controller
-public class UtenteController {
+public class GiocatoreController {
  
-    @Autowired private UtenteService utenteService;
+    @Autowired private GiocatoreService utenteService;
 
 	// @GetMapping("/login")
 	// public String getLogin(Model model) {	//l'id preso dal path viene convertito in Long
@@ -27,20 +27,20 @@ public class UtenteController {
 	// }
 
 
-    @GetMapping("/utenti")
-	public String getUtenti(Model model) {	//l'id preso dal path viene convertito in Long
-		model.addAttribute("utenti", this.utenteService.getAllUtenti());	//l'id viene passato al metodo
-		return "utenti.html";
-	}
+    // @GetMapping("/utenti")
+	// public String getUtenti(Model model) {	//l'id preso dal path viene convertito in Long
+	// 	model.addAttribute("utenti", this.utenteService.getAllUtenti());	//l'id viene passato al metodo
+	// 	return "utenti.html";
+	// }
 
-	@GetMapping("/dashboard")
+	@GetMapping("/dashboardGiocatore")
 	public String getDashboard(Model model, HttpSession session) {
 		
-		if(session.getAttribute("user") == null)
-			return "redirect:/login";
+		// if(session.getAttribute("user") == null)
+		// 	return "redirect:/login";
 		
-		model.addAttribute("utente", session.getAttribute("user"));
-		return "dashboard.html";
+		//model.addAttribute("utente", session.getAttribute("user"));
+		return "dashboardGiocatore.html";
 	}
 	
     

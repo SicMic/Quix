@@ -5,22 +5,22 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import it.uniroma3.theboys.quix.model.Utente;
-import it.uniroma3.theboys.quix.repository.UtenteRepository;
+import it.uniroma3.theboys.quix.model.Giocatore;
+import it.uniroma3.theboys.quix.repository.GiocatoreRepository;
 
 /* Servizio per l'autenticazione degli utenti e creazione della sessione */
 
 @Service
-public class AuthServiceUtente {
+public class AuthServiceGiocatore {
     
-    @Autowired UtenteRepository utenteRepository;
+    @Autowired GiocatoreRepository utenteRepository;
 
     public boolean autenticazione(String username, String password){
-        Optional<Utente> utenteOpt = utenteRepository.findByUsername(username);
+        Optional<Giocatore> utenteOpt = utenteRepository.findByUsername(username);
         return utenteOpt.map(utente -> utente.getPassword().equals(password)).orElse(false);
     }
 
-    public Utente getUserByUsername(String username) {
+    public Giocatore getUserByUsername(String username) {
         return this.utenteRepository.findByUsername(username).orElse(null);
     }
 }

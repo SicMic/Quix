@@ -7,9 +7,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import it.uniroma3.theboys.quix.model.Utente;
-import it.uniroma3.theboys.quix.service.AuthServiceUtente;
-import it.uniroma3.theboys.quix.service.UtenteService;
+import it.uniroma3.theboys.quix.model.Giocatore;
+import it.uniroma3.theboys.quix.service.AuthServiceGiocatore;
+import it.uniroma3.theboys.quix.service.GiocatoreService;
 import jakarta.servlet.http.HttpSession;
 
 @Controller
@@ -18,9 +18,9 @@ public class SignupController {
     // @Autowired
     // AutoreService autoreService;
     @Autowired
-    private UtenteService utenteService;
+    private GiocatoreService utenteService;
     @Autowired
-    private AuthServiceUtente authService;
+    private AuthServiceGiocatore authService;
     
     // @GetMapping("/registrazione")
 	// 	public String registrazione(Model model) {
