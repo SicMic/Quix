@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/quizGame/css/main.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playwrite+NG+Modern:wght@100..400&display=swap" rel="stylesheet">
+    <title>Quix</title>
+</head>
+
+<body class="bg-pink">
+    <div class="quiz-container border-violet border-width-3 border-radius-4 bg-yellow">
+        <div class="m-4 border-purple border-radius-5 bg-green">
+            <p class="fs-3 text-center" th:text="${quiz.quesito}">Quesito</p>
+        </div>
+        <div class="row">
+            <div class="col-6 p-4">
+                <button class="quix-option fs-5 border-violet border-width-2 bg-one" th:text="${quiz.opzioneUno}" th:value="${quiz.opzioneUno}">opzione uno</button>
+            </div>
+            <div class="col-6 p-4">
+                <button type="submit" class="quix-option fs-5 border-violet border-width-2 bg-two" th:text="${quiz.opzioneDue}" th:value="${quiz.opzioneDue}">opzione due</button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6 p-4">
+                <button class="quix-option fs-5 border-violet border-width-2 bg-three" th:text="${quiz.opzioneTre}" th:value="${quiz.opzioneTre}">opzione tre</button>
+            </div>
+            <div class="col-6 p-4">
+                <button class="quix-option fs-5 border-violet border-width-2 bg-four" th:text="${quiz.opzioneQuattro}" th:value="${quiz.opzioneQuattro}">opzione quattro</button>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="/quizGame/script/main.js"></script>
+
+</html>

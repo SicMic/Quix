@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Raccolta rows</title>
+</head>
+
+<div th:fragment="raccoltaRows">
+    <!-- Quiz Row - Start -->
+    <div id="containerRows">
+        <div class="row">
+            <div class="col-xl-3 col-lg-4" th:id="'raccoltaRow' + ${iterStat.index}" th:each="raccolta, iterStat : ${raccolte}">
+                <div class="card shadow mb-4">
+                    <!-- Card Header - Dropdown -->
+                    <div class="card-header py-3 edit-raccolta">
+                        <div class="row">
+                            <div class="col-10">
+                                <a th:href="@{'/quiz' + '/' + ${raccolta.id} + '/1'}">
+                                    <h5 class="m-0 font-weight-bold text-primary" th:id="'nomeRaccolta' + ${iterStat.index}" th:text="${raccolta.nome}">Nome raccolta</h5>
+                                </a>
+                            </div>
+                            <div class="col-2 edit-raccolta-buttons">
+                                <div class="row">
+                                    <div class="col-6">
+                                        <i class="fas fa-pen fa-1x text-primary mr-3 pe-auto" style="cursor: pointer; font-size: 20px;" th:id="'edit-raccolta' + ${raccolta.id}"></i>
+                                    </div>
+                                    <div class="col-6">
+                                        <i class="fas fa-trash fa-1x text-danger mr-3 pe-auto" style="cursor: pointer; font-size: 20px;" th:id="'delete-raccolta' + ${raccolta.id}"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <a th:href="@{'/quiz' + '/' + ${raccolta.id} + '/1'}" style="text-decoration: none;">
+                        <!-- Card Body -->
+                        <div class="card-body">
+                            <div class="text-center">
+                                <img class="img-fluid" style="width: 25rem;" alt="..." th:src="${raccolta.urlImage}">
+                            </div>
+                            <hr>
+                            <span class="bg-primary text-white quix-tag" th:text="${raccolta.etichetta.nome}"></span>
+                            <p th:text="${raccolta.descrizione}"> Descrizione </p>
+                        </div>
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!-- Quiz Row - End -->
+</div>
+
+
+</html>
