@@ -6,14 +6,19 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
-@Entity	
-public class Quiz { //con @Entity il framework sa che a Movie bisogna associare una tabella nel database
-	
+@Entity
+public class Quiz { // con @Entity il framework sa che a Movie bisogna associare una tabella nel
+					// database
+
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)	//ogni volta che viene inserita un'entità 'Movie' nella tabella deve esserci la chiave 'id'
-	private Long id;	//chiave primaria	
-	
+	@GeneratedValue(strategy = GenerationType.AUTO) // ogni volta che viene inserita un'entità 'Movie' nella tabella
+													// deve esserci la chiave 'id'
+	private Long id; // chiave primaria
+
 	@Column(nullable = false)
 	private String quesito;
 
@@ -37,9 +42,9 @@ public class Quiz { //con @Entity il framework sa che a Movie bisogna associare 
 
 	@ManyToOne
 	private Categoria categoria;
-	
-	//		DA TOGLIERE SE NON SERVE
-	public Quiz(){
+
+	// DA TOGLIERE SE NON SERVE
+	public Quiz() {
 		this.quesito = "Quesito";
 		this.opzioneUno = "opzione uno";
 		this.opzioneDue = "opzione due";
@@ -47,7 +52,8 @@ public class Quiz { //con @Entity il framework sa che a Movie bisogna associare 
 		this.opzioneQuattro = "opzione quattro";
 	}
 
-	public Quiz(String quesito, String opzioneUno, String opzioneDue, String opzioneTre, String opzioneQuattro, Raccolta raccolta, Categoria categoria, java.time.LocalDate dataCreazione){
+	public Quiz(String quesito, String opzioneUno, String opzioneDue, String opzioneTre, String opzioneQuattro,
+			Raccolta raccolta, Categoria categoria, java.time.LocalDate dataCreazione) {
 		this.quesito = quesito;
 		this.opzioneUno = opzioneUno;
 		this.opzioneDue = opzioneDue;
@@ -61,7 +67,7 @@ public class Quiz { //con @Entity il framework sa che a Movie bisogna associare 
 	public Long getId() {
 		return id;
 	}
-	
+
 	public void setId(Long id) {
 		this.id = id;
 	}
@@ -171,12 +177,28 @@ public class Quiz { //con @Entity il framework sa che a Movie bisogna associare 
 		return true;
 	}
 
-    public Raccolta getRaccolta() {
-        return raccolta;
-    }
+	public Raccolta getRaccolta() {
+		return raccolta;
+	}
 
-    public void setRaccolta(Raccolta raccolta) {
-        this.raccolta = raccolta;
-    }
+	public void setRaccolta(Raccolta raccolta) {
+		this.raccolta = raccolta;
+	}
+
+	public void shuffle() {
+		List<String> opzioni = new ArrayList<>();
+		opzioni.add(opzioneUno);
+		opzioni.add(opzioneDue);
+		opzioni.add(opzioneTre);
+		opzioni.add(opzioneQuattro);
+
+		Collections.shuffle(opzioni);
+
+		// Assegna le opzioni mescolate di nuovo ai campi
+		opzioneUno = opzioni.get(0);
+		opzioneDue = opzioni.get(1);
+		opzioneTre = opzioni.get(2);
+		opzioneQuattro = opzioni.get(3);
+	}
 
 }

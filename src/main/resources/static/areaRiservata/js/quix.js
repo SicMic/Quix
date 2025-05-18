@@ -101,7 +101,7 @@ document.addEventListener("keyup", function (e) {
 
 function eliminazioneRaccolta(idRaccolta) {
     console.log(idRaccolta)
-    fetch('/eliminazioneRaccolta/', {
+    fetch('/eliminazioneRaccolta', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded'
@@ -120,7 +120,7 @@ function eliminazioneRaccolta(idRaccolta) {
 
 
 function eliminazioneQuiz(idQuiz) {
-    fetch('/eliminazioneQuiz/', {
+    fetch('/eliminazioneQuiz', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded'
@@ -131,6 +131,7 @@ function eliminazioneQuiz(idQuiz) {
     })
         .then(response => response.text())
         .then(data => {
+            console.log(data)
             window.location.reload()
         })
         .catch(error => console.error('Errore:', error));
