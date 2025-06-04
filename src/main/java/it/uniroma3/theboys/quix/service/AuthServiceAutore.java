@@ -15,12 +15,12 @@ public class AuthServiceAutore {
     
     @Autowired private AutoreRepository autoreRepository;
 
-    public boolean autenticazione(String username, String password){
-        Optional<Autore> autoreOpt = autoreRepository.findByUsername(username);
-        return autoreOpt.map(autore -> autore.getPassword().equals(password)).orElse(false);
-    }
+    // public boolean autenticazione(String username, String password){
+    //     Optional<Autore> autoreOpt = autoreRepository.findByUsername(username);
+    //     return autoreOpt.map(autore -> autore.getPassword().equals(password)).orElse(false);
+    // }
 
-    public Autore getAutoreByUsername(String username) {
-        return this.autoreRepository.findByUsername(username).orElse(null);
-    }
+    // public Autore getAutoreByUsername(String username) {
+    //     return this.autoreRepository.findByUsername(username).orElse(null);
+    // }
 }

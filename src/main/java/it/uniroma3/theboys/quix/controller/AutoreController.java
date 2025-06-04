@@ -14,10 +14,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import it.uniroma3.theboys.quix.model.Credenziali;
 import it.uniroma3.theboys.quix.model.Autore;
 import it.uniroma3.theboys.quix.model.Etichetta;
 import it.uniroma3.theboys.quix.model.Quiz;
 import it.uniroma3.theboys.quix.model.Raccolta;
+import it.uniroma3.theboys.quix.model.Utente;
 import it.uniroma3.theboys.quix.service.AuthServiceAutore;
 import it.uniroma3.theboys.quix.service.AutoreService;
 import it.uniroma3.theboys.quix.service.CategoriaService;
@@ -47,238 +49,194 @@ public class AutoreController {
 	@Autowired
 	private CategoriaService categoriaService;
 
-	@GetMapping("/registrazioneAutore")
-	public String getRegistrazione(Model model) {
-		model.addAttribute("utente", new Autore());
-		return "registrazioneAutore.html";
+
+	@GetMapping("/autore/dashboard")
+	public String getDashboard(Model model) {
+		Autore autore = (Autore) model.getAttribute("utente");
+		// model.addAttribute("utente", crede);
+		model.addAttribute("raccolte", autore.getElencoRaccolte());
+		//model.addAttribute("numeroRaccolte", session.getAttribute("user")).getId());
+		model.addAttribute("numeroQuiz", this.quizService.getNumeroQuizAutore(autore.getId()));
+		model.addAttribute("etichetta", this.raccoltaService.getEtichettaPiuUsata(autore.getId()));
+		model.addAttribute("categoria", this.quizService.getCategoriaPiuUsata(autore.getId()));
+
+		return "dashboard.html";
 	}
 
-	@PostMapping("/registrazioneAutore")
-	public String newRegistrazione(@ModelAttribute("utente") Autore autore, HttpSession session, Model model) {
-		this.autoreService.saveNewAutore(autore);
-		session.setAttribute("user", authServiceAutore.getAutoreByUsername(autore.getUsername()));
-		session.setMaxInactiveInterval(60 * 5);
-		model.addAttribute("utente", session.getAttribute("user"));
-		return "redirect:dashboardAutore"; // modificare in base a struttura url dashboard
-	}
+	// @GetMapping("/elencoQuiz")
+	// public String getElencoQuiz(Model model, HttpSession session) {
 
-	@GetMapping("/loginAutore")
-	public String getLoginAutore(Model model, HttpSession session) {
-		if (session.getAttribute("user") != null)
-			return "redirect:/dashboardAutore";
+	// 	if (session.getAttribute("user") == null)
+	// 		return "redirect:/loginAutore";
 
-		model.addAttribute("autore", new Autore());
-		return "loginAutore.html"; // pagina login.jsp o login.html
-	}
+	// 	model.addAttribute("utente", session.getAttribute("user"));
+	// 	model.addAttribute("elenco",
+	// 			this.autoreService.getAllQuizAutore(((Autore) session.getAttribute("user")).getId()));
+	// 	model.addAttribute("categorie", categoriaService.getAllCategorie());
+	// 	model.addAttribute("paginaCorrente", "elencoQuiz");
 
-	@PostMapping("/loginAutore")
-	public String loginAutore(@RequestParam String username, @RequestParam String password, HttpSession session,
-			Model model) {
-		if (authServiceAutore.autenticazione(username, password)) {
-			session.setAttribute("user", authServiceAutore.getAutoreByUsername(username));
-			session.setMaxInactiveInterval(60 * 30); // timeout sessione dopo 5 minuti
-			model.addAttribute("utente", session.getAttribute("user"));
-			return "redirect:/dashboardAutore";
-		} else {
-			model.addAttribute("error", "Credenziali non valide");
-			return "redirect:/loginAutore";
-		}
-	}
-
-	@GetMapping("/dashboardAutore")
-	public String getDashboard(Model model, HttpSession session) {
-
-		if (session.getAttribute("user") == null)
-			return "redirect:/loginAutore";
-
-		model.addAttribute("utente", session.getAttribute("user"));
-		model.addAttribute("raccolte", ((Autore) session.getAttribute("user")).getElencoRaccolte());
-		model.addAttribute("numeroRaccolte",
-				this.raccoltaService.getNumeroRaccolteAutore(((Autore) session.getAttribute("user")).getId()));
-		model.addAttribute("numeroQuiz",
-				this.quizService.getNumeroQuizAutore(((Autore) session.getAttribute("user")).getId()));
-		model.addAttribute("etichetta",
-				this.raccoltaService.getEtichettaPiuUsata(((Autore) session.getAttribute("user")).getId()));
-		model.addAttribute("categoria",
-				this.quizService.getCategoriaPiuUsata(((Autore) session.getAttribute("user")).getId()));
-
-		return "dashboardAutore.html";
-	}
-
-	@GetMapping("/elencoQuiz")
-	public String getElencoQuiz(Model model, HttpSession session) {
-
-		if (session.getAttribute("user") == null)
-			return "redirect:/loginAutore";
-
-		model.addAttribute("utente", session.getAttribute("user"));
-		model.addAttribute("elenco",
-				this.autoreService.getAllQuizAutore(((Autore) session.getAttribute("user")).getId()));
-		model.addAttribute("categorie", categoriaService.getAllCategorie());
-		model.addAttribute("paginaCorrente", "elencoQuiz");
-
-		return "elencoQuiz.html";
-	}
-
-	@GetMapping("/elencoQuiz/{nomeCategoria}")
-	public String getElencoQuiz(Model model, HttpSession session, @PathVariable("nomeCategoria") String nomeCategoria) {
-
-		if (session.getAttribute("user") == null)
-			return "redirect:/loginAutore";
-
-		model.addAttribute("utente", session.getAttribute("user"));
-		model.addAttribute("nomeCategoria", nomeCategoria);
-		model.addAttribute("elenco", this.autoreService
-				.getAllQuizAutoreOfCategoria(((Autore) session.getAttribute("user")).getId(), nomeCategoria));
-		model.addAttribute("categorie", categoriaService.getAllCategorie());
-		model.addAttribute("paginaCorrente", "elencoQuiz/nomeCategoria");
-
-		return "elencoQuiz.html";
-	}
-
-	@PostMapping("/aggiuntaRaccolta")
-	public String aggiuntaNuovaRaccolta(HttpSession session, @RequestParam String nome, @RequestParam String urlImage,
-			@RequestParam String etichetta, @RequestParam String descrizione) {
-		Raccolta raccolta = new Raccolta(nome, urlImage, etichettaService.getEtichettaByNome(etichetta), descrizione,
-				((Autore) session.getAttribute("user")));
-		this.raccoltaService.saveNewRaccolta(raccolta);
-		return "redirect:/raccolte";
-	}
-
-	@PostMapping("/aggiuntaQuiz")
-	public String aggiuntaNuovoQuiz(@RequestParam("quesito") String quesito,
-			@RequestParam("opzioneUno") String opzioneUno, @RequestParam("opzioneDue") String opzioneDue,
-			@RequestParam("opzioneTre") String opzioneTre, @RequestParam("opzioneQuattro") String opzioneQuattro,
-			@RequestParam("idRaccolta") Long idRaccolta, @RequestParam("categoria") String categoria) {
-		Quiz quiz = new Quiz(quesito, opzioneUno, opzioneDue, opzioneTre, opzioneQuattro,
-				this.raccoltaService.getRaccoltaById(idRaccolta), categoriaService.getQuizByNome(categoria),
-				java.time.LocalDate.now());
-		this.quizService.saveNewQuiz(quiz);
-		return "redirect:/raccolta/" + idRaccolta;
-	}
-
-	// @PostMapping("/eliminazioneQuiz/")
-	// public void eliminazioneQuiz(@RequestParam Long idQuiz) {
-	// this.quizService.deleteQuiz(idQuiz);
+	// 	return "elencoQuiz.html";
 	// }
 
-	@PostMapping("/eliminazioneQuiz")
-	public ResponseEntity<String> eliminazioneQuiz(@RequestParam Long idQuiz) {
-		try {
-			this.quizService.deleteQuiz(idQuiz);
-			return ResponseEntity.ok("Quiz eliminato con successo");
-		} catch (Exception e) {
-			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-					.body("Errore durante l'eliminazione del quiz: " + e.getMessage());
-		}
-	}
+	// @GetMapping("/elencoQuiz/{nomeCategoria}")
+	// public String getElencoQuiz(Model model, HttpSession session, @PathVariable("nomeCategoria") String nomeCategoria) {
 
-	// @PostMapping("/eliminazioneRaccolta/")
-	// public void eliminazioneRaccolta(@RequestParam Long idRaccolta) {
-	// this.raccoltaService.deleteRaccolta(idRaccolta);
+	// 	if (session.getAttribute("user") == null)
+	// 		return "redirect:/loginAutore";
+
+	// 	model.addAttribute("utente", session.getAttribute("user"));
+	// 	model.addAttribute("nomeCategoria", nomeCategoria);
+	// 	model.addAttribute("elenco", this.autoreService
+	// 			.getAllQuizAutoreOfCategoria(((Autore) session.getAttribute("user")).getId(), nomeCategoria));
+	// 	model.addAttribute("categorie", categoriaService.getAllCategorie());
+	// 	model.addAttribute("paginaCorrente", "elencoQuiz/nomeCategoria");
+
+	// 	return "elencoQuiz.html";
 	// }
 
-	@PostMapping("/eliminazioneRaccolta")
-	public ResponseEntity<Map<String, String>> eliminazioneRaccolta(@RequestParam Long idRaccolta) {
-		Map<String, String> response = new HashMap<>();
-		try {
-			this.raccoltaService.deleteRaccolta(idRaccolta);
-			response.put("message", "Raccolta eliminata con successo");
-			return ResponseEntity.ok(response);
-		} catch (Exception e) {
-			response.put("error", "Errore durante l'eliminazione della raccolta: " + e.getMessage());
-			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
-		}
-	}
+	// @PostMapping("/aggiuntaRaccolta")
+	// public String aggiuntaNuovaRaccolta(HttpSession session, @RequestParam String nome, @RequestParam String urlImage,
+	// 		@RequestParam String etichetta, @RequestParam String descrizione) {
+	// 	Raccolta raccolta = new Raccolta(nome, urlImage, etichettaService.getEtichettaByNome(etichetta), descrizione,
+	// 			((Autore) session.getAttribute("user")));
+	// 	this.raccoltaService.saveNewRaccolta(raccolta);
+	// 	return "redirect:/raccolte";
+	// }
 
-	@GetMapping("/raccolte")
-	public String getRaccolte(Model model, HttpSession session) {
+	// @PostMapping("/aggiuntaQuiz")
+	// public String aggiuntaNuovoQuiz(@RequestParam("quesito") String quesito,
+	// 		@RequestParam("opzioneUno") String opzioneUno, @RequestParam("opzioneDue") String opzioneDue,
+	// 		@RequestParam("opzioneTre") String opzioneTre, @RequestParam("opzioneQuattro") String opzioneQuattro,
+	// 		@RequestParam("idRaccolta") Long idRaccolta, @RequestParam("categoria") String categoria) {
+	// 	Quiz quiz = new Quiz(quesito, opzioneUno, opzioneDue, opzioneTre, opzioneQuattro,
+	// 			this.raccoltaService.getRaccoltaById(idRaccolta), categoriaService.getQuizByNome(categoria),
+	// 			java.time.LocalDate.now());
+	// 	this.quizService.saveNewQuiz(quiz);
+	// 	return "redirect:/raccolta/" + idRaccolta;
+	// }
 
-		if (session.getAttribute("user") == null)
-			return "redirect:/loginAutore";
+	// // @PostMapping("/eliminazioneQuiz/")
+	// // public void eliminazioneQuiz(@RequestParam Long idQuiz) {
+	// // this.quizService.deleteQuiz(idQuiz);
+	// // }
 
-		model.addAttribute("utente", session.getAttribute("user"));
-		model.addAttribute("raccolte", ((Autore) session.getAttribute("user")).getElencoRaccolte());
-		Map<String, String> mappaEtichette = new HashMap<>();
-		for (Etichetta e : etichettaService.getAllEtichette())
-			mappaEtichette.put(e.getNome(), e.getNome().replace(" ", "+"));
-		model.addAttribute("mappaEtichette", mappaEtichette);
-		model.addAttribute("etichette", etichettaService.getAllEtichette());
+	// @PostMapping("/eliminazioneQuiz")
+	// public ResponseEntity<String> eliminazioneQuiz(@RequestParam Long idQuiz) {
+	// 	try {
+	// 		this.quizService.deleteQuiz(idQuiz);
+	// 		return ResponseEntity.ok("Quiz eliminato con successo");
+	// 	} catch (Exception e) {
+	// 		return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+	// 				.body("Errore durante l'eliminazione del quiz: " + e.getMessage());
+	// 	}
+	// }
 
-		return "raccolte.html";
-	}
+	// // @PostMapping("/eliminazioneRaccolta/")
+	// // public void eliminazioneRaccolta(@RequestParam Long idRaccolta) {
+	// // this.raccoltaService.deleteRaccolta(idRaccolta);
+	// // }
 
-	@GetMapping("/raccolte/{nomeEtichetta}")
-	public String getRacccolteEtichetta(Model model, HttpSession session,
-			@PathVariable("nomeEtichetta") String nomeEtichetta) {
+	// @PostMapping("/eliminazioneRaccolta")
+	// public ResponseEntity<Map<String, String>> eliminazioneRaccolta(@RequestParam Long idRaccolta) {
+	// 	Map<String, String> response = new HashMap<>();
+	// 	try {
+	// 		this.raccoltaService.deleteRaccolta(idRaccolta);
+	// 		response.put("message", "Raccolta eliminata con successo");
+	// 		return ResponseEntity.ok(response);
+	// 	} catch (Exception e) {
+	// 		response.put("error", "Errore durante l'eliminazione della raccolta: " + e.getMessage());
+	// 		return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
+	// 	}
+	// }
 
-		if (session.getAttribute("user") == null)
-			return "redirect:/loginAutore";
+	// @GetMapping("/raccolte")
+	// public String getRaccolte(Model model, HttpSession session) {
 
-		model.addAttribute("utente", session.getAttribute("user"));
-		model.addAttribute("nomeEtichetta", nomeEtichetta);
-		model.addAttribute("raccolte", this.autoreService.getAllRaccolteAutoreOfEtichetta(
-				((Autore) session.getAttribute("user")).getId(), nomeEtichetta.replace("+", " ")));
+	// 	if (session.getAttribute("user") == null)
+	// 		return "redirect:/loginAutore";
 
-		return "raccolte.html";
-	}
+	// 	model.addAttribute("utente", session.getAttribute("user"));
+	// 	model.addAttribute("raccolte", ((Autore) session.getAttribute("user")).getElencoRaccolte());
+	// 	Map<String, String> mappaEtichette = new HashMap<>();
+	// 	for (Etichetta e : etichettaService.getAllEtichette())
+	// 		mappaEtichette.put(e.getNome(), e.getNome().replace(" ", "+"));
+	// 	model.addAttribute("mappaEtichette", mappaEtichette);
+	// 	model.addAttribute("etichette", etichettaService.getAllEtichette());
 
-	@GetMapping("/raccolta/{idRaccolta}")
-	public String getRaccolta(Model model, HttpSession session, @PathVariable("idRaccolta") Long idRaccolta) {
+	// 	return "raccolte.html";
+	// }
 
-		if (session.getAttribute("user") == null)
-			return "redirect:/loginAutore";
+	// @GetMapping("/raccolte/{nomeEtichetta}")
+	// public String getRacccolteEtichetta(Model model, HttpSession session,
+	// 		@PathVariable("nomeEtichetta") String nomeEtichetta) {
 
-		model.addAttribute("utente", session.getAttribute("user"));
-		model.addAttribute("nomeRaccolta", raccoltaService.getRaccoltaById(idRaccolta).getNome());
-		model.addAttribute("elenco", raccoltaService.getRaccoltaById(idRaccolta).getElencoQuiz());
-		model.addAttribute("categorie", categoriaService.getAllCategorie());
-		model.addAttribute("paginaCorrente", "raccolta");
+	// 	if (session.getAttribute("user") == null)
+	// 		return "redirect:/loginAutore";
 
-		return "raccolta.html";
-	}
+	// 	model.addAttribute("utente", session.getAttribute("user"));
+	// 	model.addAttribute("nomeEtichetta", nomeEtichetta);
+	// 	model.addAttribute("raccolte", this.autoreService.getAllRaccolteAutoreOfEtichetta(
+	// 			((Autore) session.getAttribute("user")).getId(), nomeEtichetta.replace("+", " ")));
 
-	@PostMapping("/aggiornamentoQuiz")
-	public void postAggiornamentoQuiz(@RequestParam Long idQuiz, @RequestParam String quesito,
-			@RequestParam String opzioneUno, @RequestParam String opzioneDue, @RequestParam String opzioneTre,
-			@RequestParam String opzioneQuattro, @RequestParam String categoria) {
-		this.quizService.updateQuiz(idQuiz, quesito, opzioneUno, opzioneDue, opzioneTre, opzioneQuattro, categoria);
-	}
+	// 	return "raccolte.html";
+	// }
 
-	@PostMapping("/aggiornamentoRaccolta")
-	public void postAggiornamentoRaccolta(@RequestParam Long idRaccolta, @RequestParam String nome,
-			@RequestParam String descrizione, @RequestParam String urlImage, @RequestParam String etichetta) {
-		this.raccoltaService.updateRaccolta(idRaccolta, nome, descrizione, urlImage, etichetta);
-	}
+	// @GetMapping("/raccolta/{idRaccolta}")
+	// public String getRaccolta(Model model, HttpSession session, @PathVariable("idRaccolta") Long idRaccolta) {
 
-	@GetMapping("/profilo")
-	public String getProfilo(Model model, HttpSession session) {
+	// 	if (session.getAttribute("user") == null)
+	// 		return "redirect:/loginAutore";
 
-		if (session.getAttribute("user") == null)
-			return "redirect:/loginAutore";
+	// 	model.addAttribute("utente", session.getAttribute("user"));
+	// 	model.addAttribute("nomeRaccolta", raccoltaService.getRaccoltaById(idRaccolta).getNome());
+	// 	model.addAttribute("elenco", raccoltaService.getRaccoltaById(idRaccolta).getElencoQuiz());
+	// 	model.addAttribute("categorie", categoriaService.getAllCategorie());
+	// 	model.addAttribute("paginaCorrente", "raccolta");
 
-		model.addAttribute("utente", session.getAttribute("user"));
-		model.addAttribute("raccolte", ((Autore) session.getAttribute("user")).getElencoRaccolte());
-		return "profilo.html";
-	}
+	// 	return "raccolta.html";
+	// }
 
-	@GetMapping("/impostazioni")
-	public String getImpostazioni(Model model, HttpSession session) {
+	// @PostMapping("/aggiornamentoQuiz")
+	// public void postAggiornamentoQuiz(@RequestParam Long idQuiz, @RequestParam String quesito,
+	// 		@RequestParam String opzioneUno, @RequestParam String opzioneDue, @RequestParam String opzioneTre,
+	// 		@RequestParam String opzioneQuattro, @RequestParam String categoria) {
+	// 	this.quizService.updateQuiz(idQuiz, quesito, opzioneUno, opzioneDue, opzioneTre, opzioneQuattro, categoria);
+	// }
 
-		if (session.getAttribute("user") == null)
-			return "redirect:/login";
+	// @PostMapping("/aggiornamentoRaccolta")
+	// public void postAggiornamentoRaccolta(@RequestParam Long idRaccolta, @RequestParam String nome,
+	// 		@RequestParam String descrizione, @RequestParam String urlImage, @RequestParam String etichetta) {
+	// 	this.raccoltaService.updateRaccolta(idRaccolta, nome, descrizione, urlImage, etichetta);
+	// }
 
-		model.addAttribute("utente", session.getAttribute("user"));
-		return "impostazioni.html";
-	}
+	// @GetMapping("/profilo")
+	// public String getProfilo(Model model, HttpSession session) {
 
-	@GetMapping("/logout")
-	public String logout(HttpSession session) {
-		if (session.getAttribute("user") == null)
-			return "redirect:/login";
+	// 	if (session.getAttribute("user") == null)
+	// 		return "redirect:/loginAutore";
 
-		session.invalidate();
-		return "redirect:/";
+	// 	model.addAttribute("utente", session.getAttribute("user"));
+	// 	model.addAttribute("raccolte", ((Autore) session.getAttribute("user")).getElencoRaccolte());
+	// 	return "profilo.html";
+	// }
 
-	}
+	// @GetMapping("/impostazioni")
+	// public String getImpostazioni(Model model, HttpSession session) {
+
+	// 	if (session.getAttribute("user") == null)
+	// 		return "redirect:/login";
+
+	// 	model.addAttribute("utente", session.getAttribute("user"));
+	// 	return "impostazioni.html";
+	// }
+
+	// @GetMapping("/logout")
+	// public String logout(HttpSession session) {
+	// 	if (session.getAttribute("user") == null)
+	// 		return "redirect:/login";
+
+	// 	session.invalidate();
+	// 	return "redirect:/";
+
+	// }
 }

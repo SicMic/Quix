@@ -1,15 +1,25 @@
--------* QUIX DATABASE *--------
+-- CREDEZIALI
+INSERT INTO credenziali (id, username, role, password) VALUES (1, 'lorenzo', 'AUTORE', '$2a$12$HtNgYhzZ0Gy.Si8DF9dHfOvTZBAc9E7c6rsqfBE90a3Mt21LZAkhi'); -- pw: "1Password!"
+INSERT INTO credenziali (id, username, role, password) VALUES (2, 'michela','AUTORE', '$2a$12$HtNgYhzZ0Gy.Si8DF9dHfOvTZBAc9E7c6rsqfBE90a3Mt21LZAkhi');
+INSERT INTO credenziali (id, username, role, password) VALUES (3, 'filippo', 'AUTORE', '$2a$12$HtNgYhzZ0Gy.Si8DF9dHfOvTZBAc9E7c6rsqfBE90a3Mt21LZAkhi');
+INSERT INTO credenziali (id, username, role, password) VALUES (4, 'marco', 'GIOCATORE', '$2a$12$HtNgYhzZ0Gy.Si8DF9dHfOvTZBAc9E7c6rsqfBE90a3Mt21LZAkhi');
+INSERT INTO credenziali (id, username, role, password) VALUES (5, 'mirco', 'GIOCATORE', '$2a$12$HtNgYhzZ0Gy.Si8DF9dHfOvTZBAc9E7c6rsqfBE90a3Mt21LZAkhi');
 
--- Autori
-INSERT INTO autore (id, nome, cognome, email, username, password, biografia, url_image) VALUES (1, 'Lorenzo', 'Ricciardi', 'lorenzo1@gmail.com', 'lorenzo', '1Password!', 'Ciao, sono Lorenzo, un`appassionato di educazione e tecnologia. Da anni creo quiz interattivi per aiutare gli studenti a imparare in modo divertente e coinvolgente. Credo che l`apprendimento debba essere un`esperienza stimolante e cerco sempre di innovare nei miei contenuti.', 'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fres.cloudinary.com%2Fteepublic%2Fimage%2Fprivate%2Fs--xAPAsZWI--%2Ft_Preview%2Fb_rgb%3Ac8e0ec%2Cc_limit%2Cf_jpg%2Ch_630%2Cq_90%2Cw_630%2Fv1522894149%2Fproduction%2Fdesigns%2F2560124_0.jpg&f=1&nofb=1&ipt=3f717e8d9313e86bdef943c05fc5216bc2ba4cb902f41e06d8175aa80565c900'); 
-INSERT INTO autore (id, nome, cognome, email, username, password, biografia, url_image) VALUES (2, 'Michela', 'Sicuranza', 'sicmic@gmail.com', 'sicmic', '2Password!', 'Salve, sono Michela, un esperta di gamification e creazione di contenuti. Mi dedico a progettare quiz che sfidano le persone a testare le loro conoscenze su vari argomenti, rendendo l`apprendimento un gioco. La mia missione è rendere l`educazione accessibile e divertente per tutti!', 'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fpng.pngtree.com%2Fpng-clipart%2F20230405%2Foriginal%2Fpngtree-cat-cartoon-png-image_9029157.png&f=1&nofb=1&ipt=c8531a4dd100289a5b229a9344f2036dd412143a05aa738b9fac7a57eb554474');
-INSERT INTO autore (id, nome, cognome, email, username, password, biografia, url_image) VALUES (3, 'Stefano', 'Foderaro', 'colon@gmail.com', 'colonnello', '3Password!', 'Salve, sono il Colonnello Trentini, un esperta di gamification e creazione di contenuti. Mi dedico a progettare quiz che sfidano le persone a testare le loro conoscenze su vari argomenti, rendendo l`apprendimento un gioco. La mia missione è rendere l`educazione accessibile e divertente per tutti!', 'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fpng.pngtree.com%2Fpng-clipart%2F20230405%2Foriginal%2Fpngtree-cat-cartoon-png-image_9029157.png&f=1&nofb=1&ipt=c8531a4dd100289a5b229a9344f2036dd412143a05aa738b9fac7a57eb554474');
+-- UTENTE
+INSERT INTO utente (id, credenziali_id, nome, cognome, email) VALUES (1, 1, 'Lorenzo', 'Rossi', 'lorenzo@example.com');
+INSERT INTO utente (id, credenziali_id, nome, cognome, email) VALUES (2, 2, 'Michela', 'Bianchi', 'michela@example.com');
+INSERT INTO utente (id, credenziali_id, nome, cognome, email) VALUES (3, 3, 'Filippo', 'Verdi', 'filippo@example.com');
+INSERT INTO utente (id, credenziali_id, nome, cognome, email) VALUES (4, 4, 'Marco', 'Gialli', 'marco@example.com');
+INSERT INTO utente (id, credenziali_id, nome, cognome, email) VALUES (5, 5, 'Mirco', 'Gialli', 'mirco@example.com');
 
--- Utenti
-INSERT INTO giocatore (id, nome, cognome, email, username, password, url_image) VALUES (1, 'FIlippo', 'Maialino', 'filor02@gmail.com', 'filo', '1Filippo!', 'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fpngimg.com%2Fuploads%2Fflags%2Fflags_PNG14629.png&f=1&nofb=1&ipt=6018221fccb258f46e875a28897b0a4026756f78ab53705259e5d307cbf2edab');
-INSERT INTO giocatore (id, nome, cognome, email, username, password, url_image) VALUES (2, 'Marco', 'Chiodino', 'chido02@gmail.com', 'marcolino', '1Marco!', 'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fpngimg.com%2Fuploads%2Fflags%2Fflags_PNG14629.png&f=1&nofb=1&ipt=6018221fccb258f46e875a28897b0a4026756f78ab53705259e5d307cbf2edab');
-INSERT INTO giocatore (id, nome, cognome, email, username, password, url_image) VALUES (3, 'Laura', 'Straccetti', 'lauretta02@gmail.com', 'lauretta', '1Laura!', 'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fpngimg.com%2Fuploads%2Fflags%2Fflags_PNG14629.png&f=1&nofb=1&ipt=6018221fccb258f46e875a28897b0a4026756f78ab53705259e5d307cbf2edab');
-INSERT INTO giocatore (id, nome, cognome, email, username, password, url_image) VALUES (4, 'Vittorio', 'Vermicelli', 'vic@gmail.com', 'victor', '1Victor!', 'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fpngimg.com%2Fuploads%2Fflags%2Fflags_PNG14629.png&f=1&nofb=1&ipt=6018221fccb258f46e875a28897b0a4026756f78ab53705259e5d307cbf2edab');
+-- AUTORE (sottoclasse di UTENTE)
+INSERT INTO autore (id, biografia, url_image) VALUES (1, 'Autore di quiz', 'https://img.com/lorenzo.jpg');
+INSERT INTO autore (id, biografia, url_image) VALUES (2, 'Esperta di narrativa', 'https://img.com/michela.jpg');
+
+-- GIOCATORE (sottoclasse di UTENTE)
+INSERT INTO giocatore (id, url_image) VALUES (3, 'https://img.com/filippo.jpg');
+INSERT INTO giocatore (id, url_image) VALUES (4, 'https://img.com/marco.jpg');
+INSERT INTO giocatore (id, url_image) VALUES (5, 'https://img.com/marco.jpg');
 
 -- Etichette
 INSERT INTO etichetta (id, nome, descrizione) VALUES (1, 'Cultura generale', '');
@@ -100,23 +110,26 @@ INSERT INTO quiz (id, quesito, opzione_uno, opzione_due, opzione_tre, opzione_qu
 -- INSERT INTO raccolta_elenco_quiz (elenco_quiz_id, raccolta_id) VALUES (13, 5);
 -- INSERT INTO raccolta_elenco_quiz (elenco_quiz_id, raccolta_id) VALUES (14, 6);
 
--- giocatore - Raccollte giocate
-INSERT INTO giocatore_elenco_raccolte (giocatore_id, elenco_raccolte_id) VALUES(1,1);
-INSERT INTO giocatore_elenco_raccolte (giocatore_id, elenco_raccolte_id) VALUES(1,2);
-INSERT INTO giocatore_elenco_raccolte (giocatore_id, elenco_raccolte_id) VALUES(1,3);
-INSERT INTO giocatore_elenco_raccolte (giocatore_id, elenco_raccolte_id) VALUES(1,4);
-INSERT INTO giocatore_elenco_raccolte (giocatore_id, elenco_raccolte_id) VALUES(1,5);
-INSERT INTO giocatore_elenco_raccolte (giocatore_id, elenco_raccolte_id) VALUES(2,1);
-INSERT INTO giocatore_elenco_raccolte (giocatore_id, elenco_raccolte_id) VALUES(2,2);
-INSERT INTO giocatore_elenco_raccolte (giocatore_id, elenco_raccolte_id) VALUES(2,6);
-INSERT INTO giocatore_elenco_raccolte (giocatore_id, elenco_raccolte_id) VALUES(3,1);
-INSERT INTO giocatore_elenco_raccolte (giocatore_id, elenco_raccolte_id) VALUES(3,3);
-INSERT INTO giocatore_elenco_raccolte (giocatore_id, elenco_raccolte_id) VALUES(3,6);
+-- giocatore - Raccolte giocate
+INSERT INTO giocatore_elenco_raccolte (giocatore_id, elenco_raccolte_id) VALUES(4,1);
+INSERT INTO giocatore_elenco_raccolte (giocatore_id, elenco_raccolte_id) VALUES(4,2);
+INSERT INTO giocatore_elenco_raccolte (giocatore_id, elenco_raccolte_id) VALUES(4,3);
+INSERT INTO giocatore_elenco_raccolte (giocatore_id, elenco_raccolte_id) VALUES(4,4);
+INSERT INTO giocatore_elenco_raccolte (giocatore_id, elenco_raccolte_id) VALUES(4,5);
+INSERT INTO giocatore_elenco_raccolte (giocatore_id, elenco_raccolte_id) VALUES(4,1);
+INSERT INTO giocatore_elenco_raccolte (giocatore_id, elenco_raccolte_id) VALUES(5,2);
+INSERT INTO giocatore_elenco_raccolte (giocatore_id, elenco_raccolte_id) VALUES(5,6);
+INSERT INTO giocatore_elenco_raccolte (giocatore_id, elenco_raccolte_id) VALUES(5,1);
+INSERT INTO giocatore_elenco_raccolte (giocatore_id, elenco_raccolte_id) VALUES(5,3);
+INSERT INTO giocatore_elenco_raccolte (giocatore_id, elenco_raccolte_id) VALUES(5,6);
 
 -- Aggiorna il counter degli id delle varie tabelle
+SELECT setval('credenziali_seq', (SELECT MAX(id) FROM credenziali));
+SELECT setval('utente_seq', (SELECT MAX(id) FROM utente));
 SELECT setval('autore_seq', (SELECT MAX(id) FROM autore));
 SELECT setval('giocatore_seq', (SELECT MAX(id) FROM giocatore));
 SELECT setval('etichetta_seq', (SELECT MAX(id) FROM etichetta));
 SELECT setval('categoria_seq', (SELECT MAX(id) FROM categoria));
 SELECT setval('raccolta_seq', (SELECT MAX(id) FROM raccolta));
 SELECT setval('quiz_seq', (SELECT MAX(id) FROM quiz));
+

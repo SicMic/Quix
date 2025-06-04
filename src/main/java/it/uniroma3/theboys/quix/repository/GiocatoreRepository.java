@@ -8,7 +8,5 @@ import it.uniroma3.theboys.quix.model.Giocatore;
 
 
 public interface GiocatoreRepository extends CrudRepository<Giocatore, Long>{
-
-    public Optional<Giocatore> findByUsername(String username);
     
 }

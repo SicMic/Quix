@@ -15,12 +15,12 @@ public class AuthServiceGiocatore {
     
     @Autowired GiocatoreRepository utenteRepository;
 
-    public boolean autenticazione(String username, String password){
-        Optional<Giocatore> utenteOpt = utenteRepository.findByUsername(username);
-        return utenteOpt.map(utente -> utente.getPassword().equals(password)).orElse(false);
-    }
+    // public boolean autenticazione(String username, String password){
+    //     Optional<Giocatore> utenteOpt = utenteRepository.findByUsername(username);
+    //     return utenteOpt.map(utente -> utente.getPassword().equals(password)).orElse(false);
+    // }
 
-    public Giocatore getUserByUsername(String username) {
-        return this.utenteRepository.findByUsername(username).orElse(null);
-    }
+    // public Giocatore getUserByUsername(String username) {
+    //     return this.utenteRepository.findByUsername(username).orElse(null);
+    // }
 }
