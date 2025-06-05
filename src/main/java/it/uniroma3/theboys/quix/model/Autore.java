@@ -12,9 +12,6 @@ public class Autore extends Utente {
     @Column(length = 500)
     private String biografia;
 
-    @Column(length = 500)
-    private String urlImage;
-
     @OneToMany(mappedBy = "autore", cascade = CascadeType.REFRESH)
     private List<Raccolta> elencoRaccolte;
 
@@ -24,14 +21,6 @@ public class Autore extends Utente {
 
     public void setBiografia(String biografia) {
         this.biografia = biografia;
-    }
-
-    public String getUrlImage() {
-        return urlImage;
-    }
-
-    public void setUrlImage(String urlImage) {
-        this.urlImage = urlImage;
     }
 
     public Iterable<Raccolta> getElencoRaccolte() {

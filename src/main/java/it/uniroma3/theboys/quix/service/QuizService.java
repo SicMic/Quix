@@ -36,11 +36,11 @@ public class QuizService {
 	}
 
 	public Iterable<Quiz> getQuizByAutoreId(Long autoreId){
-		return this.quizRepository.findByAutoreIdNative(autoreId);
+		return this.quizRepository.findByAutoreId(autoreId);
 	}
 
 	public Iterable<Quiz> getQuizByAutoreIdAndCategoriaNome(Long autoreId, String nomeCategoria){
-		return this.quizRepository.findByAutoreIdAndCategoriaNomeNative(autoreId, nomeCategoria);
+		return this.quizRepository.findByAutoreIdAndCategoriaNome(autoreId, nomeCategoria);
 	}
 
 	public void updateQuiz(Long id, String quesito, String opzioneUno, String opzioneDue, String opzioneTre, String opzioneQuattro, String nomeCategoria){
@@ -64,9 +64,5 @@ public class QuizService {
 			return (String) risultati.get(0)[0];
 		return "Nessuna categoria trovata";
 	}
-
-	public Long getNumeroRaccolteGiocatore(Long idAutore){
-		return this.quizRepository.countQuizByAutoreId(idAutore);
-	}
-
+	
 }

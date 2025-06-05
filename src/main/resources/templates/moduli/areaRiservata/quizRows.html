@@ -16,7 +16,7 @@
                             <div class="col mr-2">
                                 <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
                                     <a class="bg-primary text-white mr-1 quix-tag" th:text="${quiz.raccolta.nome}" th:href="@{'/raccolta/' + ${quiz.raccolta.id}}" th:if="${paginaCorrente == 'elencoQuiz' || paginaCorrente == 'elencoQuiz/nomeCategoria'}">Raccolta</a>
-                                    <a class="bg-primary text-white quix-tag" th:text="${quiz.categoria.nome}" th:href="@{'/elencoQuiz/' + ${quiz.categoria.nome}}" th:if="${paginaCorrente != 'elencoQuiz/nomeCategoria'}">Categoria</a>
+                                    <a class="bg-primary text-white quix-tag" th:text="${quiz.categoria.nome}" th:href="'/' + ${ruolo} + @{'/elencoQuiz/' + ${quiz.categoria.nome}}" th:if="${paginaCorrente != 'elencoQuiz/nomeCategoria'}">Categoria</a>
                                 </div>
                                 <div class="h4 mt-2 mb-0 font-weight-bold text-gray-800" th:id="'quesito' + ${iterStat.index}" th:text="${quiz.quesito}">Quesito</div>
                             </div>

@@ -7,73 +7,110 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-
-import it.uniroma3.theboys.quix.model.Autore;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import it.uniroma3.theboys.quix.model.Giocatore;
 import it.uniroma3.theboys.quix.model.Etichetta;
+import it.uniroma3.theboys.quix.model.Quiz;
+import it.uniroma3.theboys.quix.model.Raccolta;
+import it.uniroma3.theboys.quix.service.AutoreService;
+import it.uniroma3.theboys.quix.service.CategoriaService;
 import it.uniroma3.theboys.quix.service.EtichettaService;
-import it.uniroma3.theboys.quix.service.GiocatoreService;
+import it.uniroma3.theboys.quix.service.QuizService;
 import it.uniroma3.theboys.quix.service.RaccoltaService;
-import jakarta.servlet.http.HttpSession;
 
 @Controller
 public class GiocatoreController {
 
 	@Autowired
-	private GiocatoreService utenteService;
+	private RaccoltaService raccoltaService;
+
+	@Autowired
+	private QuizService quizService;
 
 	@Autowired
 	private EtichettaService etichettaService;
 
 	@Autowired
-	private RaccoltaService raccoltaService;
+	private CategoriaService categoriaService;
 
-	// // @GetMapping("/login")
-	// // public String getLogin(Model model) { //l'id preso dal path viene convertito
-	// // in Long
-	// // model.addAttribute("utente", new Utente());
-	// // return "login.html";
-	// // }
+	@GetMapping("/giocatore/dashboard")
+	public String getDashboardGiocatore(Model model) {
+		Giocatore autore = (Giocatore) model.getAttribute("utente");
+		model.addAttribute("raccolte", autore.getElencoRaccolte());
+		model.addAttribute("numeroRaccolte", 2);
+		// model.addAttribute("numeroQuiz", this.quizService.getNumeroQuizAutore(autore.getId()));
+		// model.addAttribute("etichetta", this.raccoltaService.getEtichettaPiuUsata(autore.getId()));
+		// model.addAttribute("categoria", this.quizService.getCategoriaPiuUsata(autore.getId()));
 
-	// // @GetMapping("/loginDopo")
-	// // public String getLoginDopo(Model model, @RequestParam Utente year) { //l'id
-	// // preso dal path viene convertito in Long
+		return "dashboard.html";
+	}
 
-	// // return "login.html";
-	// // }
+	// QUIZ- START
+	//...
+	// QUIZ- END
 
-	// // @GetMapping("/utenti")
-	// // public String getUtenti(Model model) { //l'id preso dal path viene convertito
-	// // in Long
-	// // model.addAttribute("utenti", this.utenteService.getAllUtenti()); //l'id viene
-	// // passato al metodo
-	// // return "utenti.html";
-	// // }
+	// ELENCO QUIZ- START
 
-	// @GetMapping("/dashboardGiocatore")
-	// public String getDashboard(Model model, HttpSession session) {
-
-	// 	// if(session.getAttribute("user") == null)
-	// 	// return "redirect:/login";
-
-	// 	// model.addAttribute("utente", session.getAttribute("user"));
-	// 	return "dashboardGiocatore.html";
+	// @GetMapping("/autore/elencoQuiz/{nomeCategoria}")
+	// public String getElencoQuiz(Model model, @PathVariable("nomeCategoria") String nomeCategoria) {
+	// 	Autore autore = (Autore) model.getAttribute("utente");
+	// 	model.addAttribute("nomeCategoria", nomeCategoria);
+	// 	model.addAttribute("elenco", this.autoreService
+	// 			.getAllQuizAutoreOfCategoria(autore.getId(), nomeCategoria));
+	// 	model.addAttribute("categorie", categoriaService.getAllCategorie());
+	// 	// model.addAttribute("paginaCorrente", "elencoQuiz/nomeCategoria");
+	// 	return "elencoQuiz.html";
 	// }
 
-	// @GetMapping("giocatore/raccolte")
-	// public String getRaccolte(Model model, HttpSession session) {
+	// ELENCO QUIZ- END
 
-	// 	if (session.getAttribute("user") == null)
-	// 		return "redirect:/loginAutore";
+	// RACCOLTE - START
+	@GetMapping("/giocatore/raccolte")
+	public String getRaccolteGiocatore(Model model) {
+		model.addAttribute("raccolte", this.raccoltaService.getAllRaccolte());
+		Map<String, String> mappaEtichette = new HashMap<>();
+		for (Etichetta e : etichettaService.getAllEtichette())
+			mappaEtichette.put(e.getNome(), e.getNome().replace(" ", "+"));
+		model.addAttribute("mappaEtichette", mappaEtichette);
+		model.addAttribute("etichette", etichettaService.getAllEtichette());
+		return "raccolte.html";
+	}
 
-	// 	model.addAttribute("utente", session.getAttribute("user"));
-	// 	model.addAttribute("raccolte", raccoltaService.getAllRaccolte());
-	// 	Map<String, String> mappaEtichette = new HashMap<>();
-	// 	for (Etichetta e : etichettaService.getAllEtichette())
-	// 		mappaEtichette.put(e.getNome(), e.getNome().replace(" ", "+"));
-	// 	model.addAttribute("mappaEtichette", mappaEtichette);
-	// 	model.addAttribute("etichette", etichettaService.getAllEtichette());
-
-	// 	return "raccolteG.html";
+	// @GetMapping("/giocatore/raccolte/{nomeEtichetta}")
+	// public String getRacccolteEtichetta(Model model, @PathVariable("nomeEtichetta") String nomeEtichetta) {
+	// 	model.addAttribute("raccolte", this.raccoltaService.getAllRaccolte());
+	// 	model.addAttribute("nomeEtichetta", nomeEtichetta);
+	// 	model.addAttribute("raccolte",
+	// 			this.autoreService.getAllRaccolteAutoreOfEtichetta(autore.getId(), nomeEtichetta.replace("+", "")));
+	// 	return "raccolte.html";
 	// }
+	// RACCOLTE - END
+
+
+	// ALTRO - START
+	@GetMapping("/giocatore/profilo")
+	public String getProfiloGiocatore(Model model) {
+		Giocatore autore = (Giocatore) model.getAttribute("utente");
+		model.addAttribute("username", autore.getCredenziali().getUsername());
+		return "profilo.html";
+	}
+
+	@GetMapping("/giocatore/impostazioni")
+	public String getImpostazioniGiocatore(Model model) {
+		return "impostazioni.html";
+	}
+
+	// @GetMapping("/logout")
+	// public String logout() {
+	// // if (session.getAttribute("user") == null)
+	// // return "redirect:/login";
+
+	// // session.invalidate();
+	// return "redirect:/";
+
+	// }
+	// ALTRO - END
 
 }

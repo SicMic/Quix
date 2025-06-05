@@ -20,7 +20,7 @@ public interface QuizRepository extends CrudRepository<Quiz, Long>{
         JOIN autore a ON r.autore_id = a.id
         WHERE a.id = :autoreId
     """, nativeQuery = true)
-    public Iterable<Quiz> findByAutoreIdNative(@Param("autoreId") Long autoreId);
+    public Iterable<Quiz> findByAutoreId(@Param("autoreId") Long autoreId);
 
     @Query(value = """
         SELECT q.*
@@ -30,10 +30,10 @@ public interface QuizRepository extends CrudRepository<Quiz, Long>{
         JOIN categoria c ON q.categoria_id = c.id
         WHERE a.id = :autoreId and c.nome = :nomeCategoria
     """, nativeQuery = true)
-    public Iterable<Quiz> findByAutoreIdAndCategoriaNomeNative(@Param("autoreId") Long autoreId, @Param("nomeCategoria") String nomeCategoria);
+    public Iterable<Quiz> findByAutoreIdAndCategoriaNome(@Param("autoreId") Long autoreId, @Param("nomeCategoria") String nomeCategoria);
 
     @Query("SELECT COUNT(q) FROM Quiz q JOIN q.raccolta r WHERE r.autore.id = :autoreId")
-    Long countQuizByAutoreId(@Param("autoreId") Long autoreId);
+    public Long countQuizByAutoreId(@Param("autoreId") Long autoreId);
 
     @Query(value = """
         SELECT c.nome, COUNT(q)
@@ -45,16 +45,7 @@ public interface QuizRepository extends CrudRepository<Quiz, Long>{
         GROUP BY c.nome
         ORDER BY COUNT(q) DESC
     """, nativeQuery = true)
-    List<Object[]> countQuizPerCategoriaOrderByDesc(@Param("autoreId") Long autoreId);
+    public List<Object[]> countQuizPerCategoriaOrderByDesc(@Param("autoreId") Long autoreId);
 
-
-    @Query(value = """
-        SELECT COUNT(ue.id) 
-        FROM utente_elenco_raccolte ue
-        JOIN raccolta r ON r.id = ue.elenco_raccolte_id
-        JOIN utente u ON u.id = ue.utente_id
-        WHERE u.id = :utenteId
-    """, nativeQuery = true)
-    Long countRaccolteUtente(@Param("utenteId") Long utenteId);
 
 }

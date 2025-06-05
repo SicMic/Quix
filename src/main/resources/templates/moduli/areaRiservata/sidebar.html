@@ -35,7 +35,7 @@
         </li>
 
         <!-- Nav Item - Elenco Quiz -->
-        <li class="nav-item">
+        <li class="nav-item" th:if="${ruolo.equals('autore')}">
             <a class="nav-link" th:href="'/' + ${ruolo} + '/elencoQuiz'">
                 <i class="fas fa-fw fa-list"></i>
                 <span>ElencoQuiz</span></a>

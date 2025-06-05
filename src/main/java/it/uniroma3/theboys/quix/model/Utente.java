@@ -12,19 +12,22 @@ import jakarta.persistence.OneToOne;
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
 abstract public class Utente {
- 
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(nullable=false)
+    @Column(nullable = false)
     private String nome;
 
-    @Column(nullable=false)
+    @Column(nullable = false)
     private String cognome;
 
-    @Column(unique=true, nullable=false)
+    @Column(unique = true, nullable = false)
     private String email;
+
+    @Column(length = 500)
+    private String urlImage;
 
     @OneToOne
     private Credenziali credenziali;
@@ -69,6 +72,14 @@ abstract public class Utente {
         this.credenziali = credenziali;
     }
 
+    public String getUrlImage() {
+        return urlImage;
+    }
+
+    public void setUrlImage(String urlImage) {
+        this.urlImage = urlImage;
+    }
+
     @Override
     public int hashCode() {
         final int prime = 31;
@@ -94,6 +105,4 @@ abstract public class Utente {
         return true;
     }
 
-   
-    
 }

@@ -1,25 +1,25 @@
 -- CREDEZIALI
 INSERT INTO credenziali (id, username, role, password) VALUES (1, 'lorenzo', 'AUTORE', '$2a$12$HtNgYhzZ0Gy.Si8DF9dHfOvTZBAc9E7c6rsqfBE90a3Mt21LZAkhi'); -- pw: "1Password!"
 INSERT INTO credenziali (id, username, role, password) VALUES (2, 'michela','AUTORE', '$2a$12$HtNgYhzZ0Gy.Si8DF9dHfOvTZBAc9E7c6rsqfBE90a3Mt21LZAkhi');
-INSERT INTO credenziali (id, username, role, password) VALUES (3, 'filippo', 'AUTORE', '$2a$12$HtNgYhzZ0Gy.Si8DF9dHfOvTZBAc9E7c6rsqfBE90a3Mt21LZAkhi');
+INSERT INTO credenziali (id, username, role, password) VALUES (3, 'filippo', 'GIOCATORE', '$2a$12$HtNgYhzZ0Gy.Si8DF9dHfOvTZBAc9E7c6rsqfBE90a3Mt21LZAkhi');
 INSERT INTO credenziali (id, username, role, password) VALUES (4, 'marco', 'GIOCATORE', '$2a$12$HtNgYhzZ0Gy.Si8DF9dHfOvTZBAc9E7c6rsqfBE90a3Mt21LZAkhi');
 INSERT INTO credenziali (id, username, role, password) VALUES (5, 'mirco', 'GIOCATORE', '$2a$12$HtNgYhzZ0Gy.Si8DF9dHfOvTZBAc9E7c6rsqfBE90a3Mt21LZAkhi');
 
 -- UTENTE
-INSERT INTO utente (id, credenziali_id, nome, cognome, email) VALUES (1, 1, 'Lorenzo', 'Rossi', 'lorenzo@example.com');
-INSERT INTO utente (id, credenziali_id, nome, cognome, email) VALUES (2, 2, 'Michela', 'Bianchi', 'michela@example.com');
-INSERT INTO utente (id, credenziali_id, nome, cognome, email) VALUES (3, 3, 'Filippo', 'Verdi', 'filippo@example.com');
-INSERT INTO utente (id, credenziali_id, nome, cognome, email) VALUES (4, 4, 'Marco', 'Gialli', 'marco@example.com');
-INSERT INTO utente (id, credenziali_id, nome, cognome, email) VALUES (5, 5, 'Mirco', 'Gialli', 'mirco@example.com');
+INSERT INTO utente (id, credenziali_id, nome, cognome, email, url_image) VALUES (1, 1, 'Lorenzo', 'Rossi', 'lorenzo@example.com', 'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fres.cloudinary.com%2Fteepublic%2Fimage%2Fprivate%2Fs--xAPAsZWI--%2Ft_Preview%2Fb_rgb%3Ac8e0ec%2Cc_limit%2Cf_jpg%2Ch_630%2Cq_90%2Cw_630%2Fv1522894149%2Fproduction%2Fdesigns%2F2560124_0.jpg&f=1&nofb=1&ipt=3f717e8d9313e86bdef943c05fc5216bc2ba4cb902f41e06d8175aa80565c900');
+INSERT INTO utente (id, credenziali_id, nome, cognome, email, url_image) VALUES (2, 2, 'Michela', 'Bianchi', '@example.com',  'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fpng.pngtree.com%2Fpng-clipart%2F20230405%2Foriginal%2Fpngtree-cat-cartoon-png-image_9029157.png&f=1&nofb=1&ipt=c8531a4dd100289a5b229a9344f2036dd412143a05aa738b9fac7a57eb554474');
+INSERT INTO utente (id, credenziali_id, nome, cognome, email, url_image) VALUES (3, 3, 'Filippo', 'Maialino', 'filippo@example.com', 'https://media.licdn.com/dms/image/v2/D4D03AQEHCIheojtWSw/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1724238234684?e=2147483647&v=beta&t=w3L5dsK4axuQhPQMDrP8JRbJjJLFMvuvW3kaVesa3LY');
+INSERT INTO utente (id, credenziali_id, nome, cognome, email, url_image) VALUES (4, 4, 'Marco', 'Chiodino', 'marco@example.com', 'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fpngimg.com%2Fuploads%2Fflags%2Fflags_PNG14629.png&f=1&nofb=1&ipt=6018221fccb258f46e875a28897b0a4026756f78ab53705259e5d307cbf2edab');
+INSERT INTO utente (id, credenziali_id, nome, cognome, email, url_image) VALUES (5, 5, 'Laura', 'Straccetti', 'laura@example.com', 'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fpngimg.com%2Fuploads%2Fflags%2Fflags_PNG14629.png&f=1&nofb=1&ipt=6018221fccb258f46e875a28897b0a4026756f78ab53705259e5d307cbf2edab');
 
 -- AUTORE (sottoclasse di UTENTE)
-INSERT INTO autore (id, biografia, url_image) VALUES (1, 'Autore di quiz', 'https://img.com/lorenzo.jpg');
-INSERT INTO autore (id, biografia, url_image) VALUES (2, 'Esperta di narrativa', 'https://img.com/michela.jpg');
+INSERT INTO autore (id, biografia) VALUES (1, 'Ciao, sono Lorenzo, un`appassionato di educazione e tecnologia. Da anni creo quiz interattivi per aiutare gli studenti a imparare in modo divertente e coinvolgente. Credo che l`apprendimento debba essere un`esperienza stimolante e cerco sempre di innovare nei miei contenuti.');
+INSERT INTO autore (id, biografia) VALUES (2,  'Salve, sono Michela, un esperta di gamification e creazione di contenuti. Mi dedico a progettare quiz che sfidano le persone a testare le loro conoscenze su vari argomenti, rendendo l`apprendimento un gioco. La mia missione è rendere l`educazione accessibile e divertente per tutti!');
 
 -- GIOCATORE (sottoclasse di UTENTE)
-INSERT INTO giocatore (id, url_image) VALUES (3, 'https://img.com/filippo.jpg');
-INSERT INTO giocatore (id, url_image) VALUES (4, 'https://img.com/marco.jpg');
-INSERT INTO giocatore (id, url_image) VALUES (5, 'https://img.com/marco.jpg');
+INSERT INTO giocatore (id) VALUES (3);
+INSERT INTO giocatore (id) VALUES (4);
+INSERT INTO giocatore (id) VALUES (5);
 
 -- Etichette
 INSERT INTO etichetta (id, nome, descrizione) VALUES (1, 'Cultura generale', '');
@@ -46,7 +46,7 @@ INSERT INTO raccolta (id, nome, descrizione, etichetta_id, autore_id, url_image)
 INSERT INTO raccolta (id, nome, descrizione, etichetta_id, autore_id, url_image) VALUES (5, 'Raccolta cinque', 'Descrizione', 4, 1, 'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fquifinanza.it%2Fwp-content%2Fuploads%2Fsites%2F5%2F2023%2F02%2Fdati-spreco-alimentare-Italia.jpg&f=1&nofb=1&ipt=16f4864c2908f280f4d36e013de1e9963da9a9a49b8fe0b887f5d303e6df27bb');
 INSERT INTO raccolta (id, nome, descrizione, etichetta_id, autore_id, url_image) VALUES (6, 'Raccolta uno', 'Descrizione', 2, 2, 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2072&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
 INSERT INTO raccolta (id, nome, descrizione, etichetta_id, autore_id, url_image) VALUES (7, 'Raccolta forti', 'Descrizione', 2, 2, 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2072&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
-INSERT INTO raccolta (id, nome, descrizione, etichetta_id, autore_id, url_image) VALUES (8, 'Raccolta pappapero', 'Descrizione', 2, 3, 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2072&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+INSERT INTO raccolta (id, nome, descrizione, etichetta_id, autore_id, url_image) VALUES (8, 'Raccolta pappapero', 'Descrizione', 2, 2, 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2072&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
 
 -- Quiz
 INSERT INTO quiz (id, quesito, opzione_uno, opzione_due, opzione_tre, opzione_quattro, data_creazione, categoria_id, raccolta_id) VALUES (1, 'Qual è il risultato di 5 + 3?', '8', '6', '7', '9', '2023-07-15', 1, 1);
@@ -89,26 +89,6 @@ INSERT INTO quiz (id, quesito, opzione_uno, opzione_due, opzione_tre, opzione_qu
 INSERT INTO quiz (id, quesito, opzione_uno, opzione_due, opzione_tre, opzione_quattro, data_creazione, categoria_id, raccolta_id) VALUES (38, 'Qual è la funzione principale di un sistema operativo?', 'Gestire l’hardware', 'Eseguire applicazioni', 'Fornire sicurezza', 'Gestire la rete', '2023-07-15', 8, 8);
 INSERT INTO quiz (id, quesito, opzione_uno, opzione_due, opzione_tre, opzione_quattro, data_creazione, categoria_id, raccolta_id) VALUES (39, 'Cosa significa l` acronimo "HTML"?', 'HyperText Markup Language', 'HighText Machine Language', 'HyperText Markup Level', 'HighText Markup Language', '2023-07-15', 8, 6);
 INSERT INTO quiz (id, quesito, opzione_uno, opzione_due, opzione_tre, opzione_quattro, data_creazione, categoria_id, raccolta_id) VALUES (40, 'Qual è il principale scopo di un firewall?', 'Proteggere la rete', 'Accelerare la connessione', 'Monitorare il traffico', 'Archiviare dati', '2023-07-15', 8, 6);
-
--- Raccolta_Quiz
--- INSERT INTO raccolta_elenco_quiz (elenco_quiz_id, raccolta_id) VALUES (1, 1);
--- INSERT INTO raccolta_elenco_quiz (elenco_quiz_id, raccolta_id) VALUES (2, 1);
--- INSERT INTO raccolta_elenco_quiz (elenco_quiz_id, raccolta_id) VALUES (3, 1);
--- INSERT INTO raccolta_elenco_quiz (elenco_quiz_id, raccolta_id) VALUES (4, 1);
--- INSERT INTO raccolta_elenco_quiz (elenco_quiz_id, raccolta_id) VALUES (5, 1);
--- INSERT INTO raccolta_elenco_quiz (elenco_quiz_id, raccolta_id) VALUES (6, 2);
--- INSERT INTO raccolta_elenco_quiz (elenco_quiz_id, raccolta_id) VALUES (7, 2);
--- INSERT INTO raccolta_elenco_quiz (elenco_quiz_id, raccolta_id) VALUES (8, 2);
--- INSERT INTO raccolta_elenco_quiz (elenco_quiz_id, raccolta_id) VALUES (9, 2);
--- INSERT INTO raccolta_elenco_quiz (elenco_quiz_id, raccolta_id) VALUES (10, 2);
--- INSERT INTO raccolta_elenco_quiz (elenco_quiz_id, raccolta_id) VALUES (11, 2);
--- INSERT INTO raccolta_elenco_quiz (elenco_quiz_id, raccolta_id) VALUES (12, 3);
--- INSERT INTO raccolta_elenco_quiz (elenco_quiz_id, raccolta_id) VALUES (13, 3);
--- INSERT INTO raccolta_elenco_quiz (elenco_quiz_id, raccolta_id) VALUES (14, 4);
--- INSERT INTO raccolta_elenco_quiz (elenco_quiz_id, raccolta_id) VALUES (11, 4);
--- INSERT INTO raccolta_elenco_quiz (elenco_quiz_id, raccolta_id) VALUES (12, 5);
--- INSERT INTO raccolta_elenco_quiz (elenco_quiz_id, raccolta_id) VALUES (13, 5);
--- INSERT INTO raccolta_elenco_quiz (elenco_quiz_id, raccolta_id) VALUES (14, 6);
 
 -- giocatore - Raccolte giocate
 INSERT INTO giocatore_elenco_raccolte (giocatore_id, elenco_raccolte_id) VALUES(4,1);

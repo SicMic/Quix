@@ -26,14 +26,14 @@
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
 
-                    <div class="row mb-3">
+                    <div class="row mb-3" th:if="${ruolo.equals('autore')}">
                         <div class="col">
-                            <a class="d-none d-sm-inline-block btn btn btn-primary shadow-sm mr-1" th:each="etichetta : ${etichette}" th:text="${etichetta.nome}" th:href="@{'/raccolte' + '/' + ${mappaEtichette[etichetta.nome]}}">Eticchetta</a>
+                            <a class="d-none d-sm-inline-block btn btn btn-primary shadow-sm mr-1" th:each="etichetta : ${etichette}" th:text="${etichetta.nome}" th:href="'/' + ${ruolo} +  @{'/raccolte' + '/' + ${mappaEtichette[etichetta.nome]}}">Eticchetta</a>
                         </div>
                     </div>
 
                     <!-- Page Heading -->
-                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                    <div class="d-sm-flex align-items-center justify-content-between mb-4" th:if="${ruolo.equals('autore')}">
                         <h1 class="h3 mb-2 text-gray-800">Le mie raccolte</h1>
                         <a id="showRaccoltaModal" class="d-none d-sm-inline-block btn btn btn-primary shadow-sm"><i class="fas fa-plus fa-sm text-white-50"></i> Crea raccolta</a>
                     </div>

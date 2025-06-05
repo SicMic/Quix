@@ -15,23 +15,37 @@
                     <div class="card-header py-3 edit-raccolta">
                         <div class="row">
                             <div class="col-10">
-                                <a th:href="@{'/raccolta' + '/' + ${raccolta.id}}">
+                                <a th:if="${ruolo.equals('autore')}" th:href="@{'/' + ${ruolo} +'/raccolta' + '/' + ${raccolta.id}}">
+                                    <h5 class="m-0 font-weight-bold text-primary" th:id="'nomeRaccolta' + ${iterStat.index}" th:text="${raccolta.nome}">Nome raccolta</h5>
+                                </a>
+                                <a th:if="${ruolo.equals('giocatore')}" th:href="@{'/quiz/' + ${raccolta.id} + '/1/1'}">
                                     <h5 class="m-0 font-weight-bold text-primary" th:id="'nomeRaccolta' + ${iterStat.index}" th:text="${raccolta.nome}">Nome raccolta</h5>
                                 </a>
                             </div>
                             <div class="col-2 edit-raccolta-buttons">
                                 <div class="row">
                                     <div class="col-6">
-                                        <i class="fas fa-pen fa-1x text-primary mr-3 pe-auto" style="cursor: pointer; font-size: 20px;" th:id="'edit-raccolta' + ${raccolta.id}"></i>
+                                        <i class="fas fa-pen fa-1x text-primary mr-3 pe-auto" style="cursor: pointer; font-size: 20px;" th:if="${ruolo.equals('autore')}" th:id="'edit-raccolta' + ${raccolta.id}"></i>
                                     </div>
                                     <div class="col-6">
-                                        <i class="fas fa-trash fa-1x text-danger mr-3 pe-auto" style="cursor: pointer; font-size: 20px;" th:id="'delete-raccolta' + ${raccolta.id}"></i>
+                                        <i class="fas fa-trash fa-1x text-danger mr-3 pe-auto" style="cursor: pointer; font-size: 20px;" th:if="${ruolo.equals('autore')}" th:id="'delete-raccolta' + ${raccolta.id}"></i>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <a th:href="@{'/raccolta' + '/' + ${raccolta.id}}" style="text-decoration: none;">
+                    <a th:if="${ruolo.equals('autore')}" th:href="@{'/' + ${ruolo} + '/raccolta' + '/' + ${raccolta.id}}" style="text-decoration: none;">
+                        <!-- Card Body -->
+                        <div class="card-body">
+                            <div class="text-center">
+                                <img class="img-fluid" style="width: 25rem;" alt="..." th:src="${raccolta.urlImage}">
+                            </div>
+                            <hr>
+                            <span class="bg-primary text-white quix-tag" th:text="${raccolta.etichetta.nome}"></span>
+                            <p th:text="${raccolta.descrizione}"> Descrizione </p>
+                        </div>
+                    </a>
+                    <a th:if="${ruolo.equals('giocatore')}" th:href="@{'/quiz/' + ${raccolta.id} + '/1/1'}" style="text-decoration: none;">
                         <!-- Card Body -->
                         <div class="card-body">
                             <div class="text-center">

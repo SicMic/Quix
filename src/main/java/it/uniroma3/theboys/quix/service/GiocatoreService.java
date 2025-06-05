@@ -4,23 +4,37 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import it.uniroma3.theboys.quix.model.Giocatore;
+import it.uniroma3.theboys.quix.model.Quiz;
+import it.uniroma3.theboys.quix.model.Raccolta;
+import it.uniroma3.theboys.quix.repository.AutoreRepository;
 import it.uniroma3.theboys.quix.repository.GiocatoreRepository;
 
 @Service
 public class GiocatoreService {
 
-    @Autowired private GiocatoreRepository utenteRepository;
+    @Autowired
+    private GiocatoreRepository giocatoreRepository;
 
-    public Iterable<Giocatore> getAllUtenti(){
-        return utenteRepository.findAll();
+    @Autowired
+    private QuizService quizService;
+
+    @Autowired
+    private RaccoltaService raccoltaService;
+
+    public Iterable<Giocatore> getAllGiocatori() {
+        return this.giocatoreRepository.findAll();
     }
 
-    public Giocatore getUtenteById(Long id){
-        return utenteRepository.findById(id).get();
+    public Giocatore getGicatoreById(Long id) {
+        return this.giocatoreRepository.findById(id).get();
     }
-    
-    public Giocatore saveNewUtente(Giocatore utente){
-        return this.utenteRepository.save(utente);
+
+    public Giocatore saveNewGiocatore(Giocatore giocatore) {
+        return this.giocatoreRepository.save(giocatore);
     }
+
+    // public Iterable<Quiz> getAllQuizGiocatore(Long giocatoreId) {
+    //     return this.quizService.getQuizByGiocatoreId(giocatoreId);
+    // }
 
 }
