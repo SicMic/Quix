@@ -6,6 +6,9 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OrderBy;
+
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -35,7 +38,7 @@ public class Quiz { // con @Entity il framework sa che a Movie bisogna associare
 	private String opzioneQuattro;
 
 	@Column(nullable = false)
-	private java.time.LocalDate dataCreazione;
+	private java.time.LocalDateTime dataCreazione;
 
 	@ManyToOne
 	private Raccolta raccolta;
@@ -50,10 +53,11 @@ public class Quiz { // con @Entity il framework sa che a Movie bisogna associare
 		this.opzioneDue = "opzione due";
 		this.opzioneTre = "opzione tre";
 		this.opzioneQuattro = "opzione quattro";
+		this.dataCreazione = java.time.LocalDateTime.now();
 	}
 
 	public Quiz(String quesito, String opzioneUno, String opzioneDue, String opzioneTre, String opzioneQuattro,
-			Raccolta raccolta, Categoria categoria, java.time.LocalDate dataCreazione) {
+			Raccolta raccolta, Categoria categoria) {
 		this.quesito = quesito;
 		this.opzioneUno = opzioneUno;
 		this.opzioneDue = opzioneDue;
@@ -61,7 +65,7 @@ public class Quiz { // con @Entity il framework sa che a Movie bisogna associare
 		this.opzioneQuattro = opzioneQuattro;
 		this.raccolta = raccolta;
 		this.categoria = categoria;
-		this.dataCreazione = dataCreazione;
+		this.dataCreazione = java.time.LocalDateTime.now();
 	}
 
 	public Long getId() {
@@ -80,11 +84,11 @@ public class Quiz { // con @Entity il framework sa che a Movie bisogna associare
 		this.quesito = quesito;
 	}
 
-	public java.time.LocalDate getDataCreazione() {
+	public java.time.LocalDateTime getDataCreazione() {
 		return dataCreazione;
 	}
 
-	public void setDataCreazione(java.time.LocalDate dataCreazione) {
+	public void setDataCreazione(java.time.LocalDateTime dataCreazione) {
 		this.dataCreazione = dataCreazione;
 	}
 

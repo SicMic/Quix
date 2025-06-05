@@ -1,5 +1,7 @@
 package it.uniroma3.theboys.quix.model;
 
+import java.time.LocalDateTime;
+
 // import org.springframework.boot.autoconfigure.amqp.RabbitConnectionDetails.Address;
 
 import java.util.List;
@@ -13,6 +15,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.OrderBy;
 
 @Entity	
 public class Raccolta { //con @Entity il framework sa che a Movie bisogna associare una tabella nel database
@@ -27,6 +30,8 @@ public class Raccolta { //con @Entity il framework sa che a Movie bisogna associ
 	@Column(nullable = false)
 	private String descrizione;
 
+	private LocalDateTime dataCreazione;
+
 	private String urlImage;
 
 	@ManyToOne
@@ -34,15 +39,18 @@ public class Raccolta { //con @Entity il framework sa che a Movie bisogna associ
 	private Autore autore;
 
 	@OneToMany(mappedBy="raccolta", cascade = CascadeType.REMOVE)
+	@OrderBy("dataCreazione DESC")
 	private List<Quiz> elencoQuiz;
 
 	@ManyToOne
 	private Etichetta etichetta;
 
 	public Raccolta(){				// controllare se serve inserire istruzioni
+		this.dataCreazione = java.time.LocalDateTime.now();
 	}
 
 	public Raccolta(String nome, String urlImage, Etichetta etichetta, String descrizione, Autore autore){
+		this();
 		this.nome = nome;
 		this.urlImage = urlImage;
 		this.etichetta = etichetta;
@@ -104,6 +112,14 @@ public class Raccolta { //con @Entity il framework sa che a Movie bisogna associ
 
 	public void setUrlImage(String urlImage) {
 		this.urlImage = urlImage;
+	}
+
+	public LocalDateTime getDataCreazione() {
+		return dataCreazione;
+	}
+
+	public void setDataCreazione(LocalDateTime dataCreazione) {
+		this.dataCreazione = dataCreazione;
 	}
 	
 	@Override

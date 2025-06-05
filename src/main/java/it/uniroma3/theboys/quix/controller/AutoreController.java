@@ -1,6 +1,7 @@
 package it.uniroma3.theboys.quix.controller;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
 import it.uniroma3.theboys.quix.model.Autore;
 import it.uniroma3.theboys.quix.model.Etichetta;
 import it.uniroma3.theboys.quix.model.Quiz;
@@ -43,11 +45,15 @@ public class AutoreController {
 	@GetMapping("/autore/dashboard")
 	public String getDashboardAutore(Model model) {
 		Autore autore = (Autore) model.getAttribute("utente");
-		model.addAttribute("raccolte", autore.getElencoRaccolte());
-		model.addAttribute("numeroRaccolte", 2);
+		List<Raccolta> elencoRaccolte = autore.getElencoRaccolte();
+		model.addAttribute("numeroRaccolte", elencoRaccolte.size());
 		model.addAttribute("numeroQuiz", this.quizService.getNumeroQuizAutore(autore.getId()));
 		model.addAttribute("etichetta", this.raccoltaService.getEtichettaPiuUsata(autore.getId()));
 		model.addAttribute("categoria", this.quizService.getCategoriaPiuUsata(autore.getId()));
+		model.addAttribute("raccolteGiocate", this.autoreService.getRaccoltePiuGiocate(autore.getId()));
+		//da controllare comportamento -- se non ordinate corretamente va fatto sort con Comparator su dataCreazione
+		model.addAttribute("ultimiQuiz", this.autoreService.getAllQuizAutore(autore.getId()));
+		model.addAttribute("raccolte", elencoRaccolte);
 
 		return "dashboard.html";
 	}
@@ -62,8 +68,7 @@ public class AutoreController {
 		Quiz quiz = new Quiz(quesito, opzioneUno, opzioneDue, opzioneTre,
 				opzioneQuattro,
 				this.raccoltaService.getRaccoltaById(idRaccolta),
-				categoriaService.getQuizByNome(categoria),
-				java.time.LocalDate.now());
+				categoriaService.getQuizByNome(categoria));
 		this.quizService.saveNewQuiz(quiz);
 		return "redirect:/raccolta/" + idRaccolta;
 	}

@@ -1,4 +1,7 @@
 package it.uniroma3.theboys.quix.service;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -38,5 +41,14 @@ public class AutoreService {
 
     public Iterable<Raccolta> getAllRaccolteAutoreOfEtichetta(Long autoreId, String nomeEtichetta){
         return this.raccoltaService.getRaccoltaByEtichettaNomeAndAutore(autoreId, nomeEtichetta);
+    }
+
+    public List<Raccolta> getRaccoltePiuGiocate(Long autoreId){
+        List<Raccolta> quattroRaccolte= new ArrayList<>();
+        List<Object[]> raccolte = this.autoreRepository.getQuattroRaccoltePiuGiocate(autoreId);
+        for(Object[] raccolta : raccolte){
+            quattroRaccolte.add(this.raccoltaService.getRaccoltaById((Long)raccolta[0]));
+        }
+        return quattroRaccolte;
     }
 }
