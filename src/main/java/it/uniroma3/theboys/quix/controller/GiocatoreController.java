@@ -1,6 +1,7 @@
 package it.uniroma3.theboys.quix.controller;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import it.uniroma3.theboys.quix.model.Giocatore;
+import it.uniroma3.theboys.quix.model.Autore;
 import it.uniroma3.theboys.quix.model.Etichetta;
 import it.uniroma3.theboys.quix.model.Quiz;
 import it.uniroma3.theboys.quix.model.Raccolta;
@@ -23,24 +25,27 @@ import it.uniroma3.theboys.quix.service.RaccoltaService;
 @Controller
 public class GiocatoreController {
 
-	@Autowired
-	private RaccoltaService raccoltaService;
+	@Autowired private RaccoltaService raccoltaService;
 
-	@Autowired
-	private QuizService quizService;
+	@Autowired private QuizService quizService;
 
-	@Autowired
-	private EtichettaService etichettaService;
+	@Autowired private EtichettaService etichettaService;
 
-	@Autowired
-	private CategoriaService categoriaService;
+	@Autowired private CategoriaService categoriaService;
 
 	@GetMapping("/giocatore/dashboard")
 	public String getDashboardGiocatore(Model model) {
-		Giocatore autore = (Giocatore) model.getAttribute("utente");
-		model.addAttribute("raccolte", autore.getElencoRaccolte());
-		model.addAttribute("numeroRaccolte", 2);
-		// model.addAttribute("numeroQuiz", this.quizService.getNumeroQuizAutore(autore.getId()));
+		Giocatore giocatore = (Giocatore) model.getAttribute("utente");
+		List<Raccolta> elencoRaccolte = giocatore.getElencoRaccolte();
+		model.addAttribute("raccolteGiocate", elencoRaccolte);
+		model.addAttribute("numeroRaccolteGiocate", elencoRaccolte.size());
+		//vedere se funziona, se no va fatta la query in service e repository
+		int numeroQuiz = 0;
+		for(Raccolta raccolta : elencoRaccolte)
+			numeroQuiz += raccolta.getElencoQuiz().size();
+		model.addAttribute("numeroQuizGiocati", numeroQuiz);
+		//per ultime 4 raccolte giocate prendere le prime 4 da elenco raccolte 		---- aggiungere data in cui è stata giocata in join table raccolte+giocatori
+
 		// model.addAttribute("etichetta", this.raccoltaService.getEtichettaPiuUsata(autore.getId()));
 		// model.addAttribute("categoria", this.quizService.getCategoriaPiuUsata(autore.getId()));
 

@@ -27,20 +27,15 @@ import it.uniroma3.theboys.quix.service.RaccoltaService;
 @Controller
 public class AutoreController {
 
-	@Autowired
-	private AutoreService autoreService;
+	@Autowired private AutoreService autoreService;
 
-	@Autowired
-	private RaccoltaService raccoltaService;
+	@Autowired private RaccoltaService raccoltaService;
 
-	@Autowired
-	private QuizService quizService;
+	@Autowired private QuizService quizService;
 
-	@Autowired
-	private EtichettaService etichettaService;
+	@Autowired private EtichettaService etichettaService;
 
-	@Autowired
-	private CategoriaService categoriaService;
+	@Autowired private CategoriaService categoriaService;
 
 	@GetMapping("/autore/dashboard")
 	public String getDashboardAutore(Model model) {

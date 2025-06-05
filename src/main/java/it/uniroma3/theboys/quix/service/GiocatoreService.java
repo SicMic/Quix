@@ -12,14 +12,11 @@ import it.uniroma3.theboys.quix.repository.GiocatoreRepository;
 @Service
 public class GiocatoreService {
 
-    @Autowired
-    private GiocatoreRepository giocatoreRepository;
+    @Autowired private GiocatoreRepository giocatoreRepository;
 
-    @Autowired
-    private QuizService quizService;
+    @Autowired private QuizService quizService;
 
-    @Autowired
-    private RaccoltaService raccoltaService;
+    @Autowired private RaccoltaService raccoltaService;
 
     public Iterable<Giocatore> getAllGiocatori() {
         return this.giocatoreRepository.findAll();
