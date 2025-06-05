@@ -19,6 +19,7 @@ import it.uniroma3.theboys.quix.model.Raccolta;
 import it.uniroma3.theboys.quix.service.AutoreService;
 import it.uniroma3.theboys.quix.service.CategoriaService;
 import it.uniroma3.theboys.quix.service.EtichettaService;
+import it.uniroma3.theboys.quix.service.GiocatoreService;
 import it.uniroma3.theboys.quix.service.QuizService;
 import it.uniroma3.theboys.quix.service.RaccoltaService;
 
@@ -33,6 +34,8 @@ public class GiocatoreController {
 
 	@Autowired private CategoriaService categoriaService;
 
+	@Autowired private GiocatoreService giocatoreService;
+
 	@GetMapping("/giocatore/dashboard")
 	public String getDashboardGiocatore(Model model) {
 		Giocatore giocatore = (Giocatore) model.getAttribute("utente");
@@ -46,7 +49,7 @@ public class GiocatoreController {
 		model.addAttribute("numeroQuizGiocati", numeroQuiz);
 		//per ultime 4 raccolte giocate prendere le prime 4 da elenco raccolte 		---- aggiungere data in cui è stata giocata in join table raccolte+giocatori
 
-		// model.addAttribute("etichetta", this.raccoltaService.getEtichettaPiuUsata(autore.getId()));
+		model.addAttribute("etichettaGiocata", this.giocatoreService.getEtichettaPiuGiocata(giocatore.getId()));
 		// model.addAttribute("categoria", this.quizService.getCategoriaPiuUsata(autore.getId()));
 
 		return "dashboard.html";
