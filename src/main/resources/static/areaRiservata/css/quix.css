@@ -21,3 +21,7 @@
     border-radius: 9px !important;
     padding: 4px 6px 4px 6px !important;
 }
+
+.prova{
+    text-overflow: clip !important;
+} 

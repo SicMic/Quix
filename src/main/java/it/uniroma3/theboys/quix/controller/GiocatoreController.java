@@ -40,39 +40,19 @@ public class GiocatoreController {
 	public String getDashboardGiocatore(Model model) {
 		Giocatore giocatore = (Giocatore) model.getAttribute("utente");
 		List<Raccolta> elencoRaccolte = giocatore.getElencoRaccolte();
-		model.addAttribute("raccolteGiocate", elencoRaccolte);
-		model.addAttribute("numeroRaccolteGiocate", elencoRaccolte.size());
+		model.addAttribute("numeroRaccolte", elencoRaccolte.size());  //Raccolte giocate dal giocatore
 		//vedere se funziona, se no va fatta la query in service e repository
 		int numeroQuiz = 0;
 		for(Raccolta raccolta : elencoRaccolte)
 			numeroQuiz += raccolta.getElencoQuiz().size();
-		model.addAttribute("numeroQuizGiocati", numeroQuiz);
+		model.addAttribute("numeroQuiz", numeroQuiz); //Numero quiz giocati
 		//per ultime 4 raccolte giocate prendere le prime 4 da elenco raccolte 		---- aggiungere data in cui è stata giocata in join table raccolte+giocatori
-
-		model.addAttribute("etichettaGiocata", this.giocatoreService.getEtichettaPiuGiocata(giocatore.getId()));
+		model.addAttribute("etichetta", this.giocatoreService.getEtichettaPiuGiocata(giocatore.getId())); //Etichetta più giocata
 		// model.addAttribute("categoria", this.quizService.getCategoriaPiuUsata(autore.getId()));
+		model.addAttribute("numeroRaccolte", elencoRaccolte);  //Raccolte
 
 		return "dashboard.html";
 	}
-
-	// QUIZ- START
-	//...
-	// QUIZ- END
-
-	// ELENCO QUIZ- START
-
-	// @GetMapping("/autore/elencoQuiz/{nomeCategoria}")
-	// public String getElencoQuiz(Model model, @PathVariable("nomeCategoria") String nomeCategoria) {
-	// 	Autore autore = (Autore) model.getAttribute("utente");
-	// 	model.addAttribute("nomeCategoria", nomeCategoria);
-	// 	model.addAttribute("elenco", this.autoreService
-	// 			.getAllQuizAutoreOfCategoria(autore.getId(), nomeCategoria));
-	// 	model.addAttribute("categorie", categoriaService.getAllCategorie());
-	// 	// model.addAttribute("paginaCorrente", "elencoQuiz/nomeCategoria");
-	// 	return "elencoQuiz.html";
-	// }
-
-	// ELENCO QUIZ- END
 
 	// RACCOLTE - START
 	@GetMapping("/giocatore/raccolte")
@@ -86,14 +66,12 @@ public class GiocatoreController {
 		return "raccolte.html";
 	}
 
-	// @GetMapping("/giocatore/raccolte/{nomeEtichetta}")
-	// public String getRacccolteEtichetta(Model model, @PathVariable("nomeEtichetta") String nomeEtichetta) {
-	// 	model.addAttribute("raccolte", this.raccoltaService.getAllRaccolte());
-	// 	model.addAttribute("nomeEtichetta", nomeEtichetta);
-	// 	model.addAttribute("raccolte",
-	// 			this.autoreService.getAllRaccolteAutoreOfEtichetta(autore.getId(), nomeEtichetta.replace("+", "")));
-	// 	return "raccolte.html";
-	// }
+	@GetMapping("/giocatore/raccolte/{nomeEtichetta}")
+	public String getRacccolteEtichettaAutore(Model model, @PathVariable("nomeEtichetta") String nomeEtichetta) {
+		model.addAttribute("nomeEtichetta", nomeEtichetta);
+		model.addAttribute("raccolte", this.raccoltaService.getRaccoltaByEtichettaNome(nomeEtichetta.replace("+", " ")));
+		return "raccolte.html";
+	}
 	// RACCOLTE - END
 
 

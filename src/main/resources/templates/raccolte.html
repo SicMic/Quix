@@ -26,7 +26,7 @@
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
 
-                    <div class="row mb-3" th:if="${ruolo.equals('autore')}">
+                    <div class="row mb-3">
                         <div class="col">
                             <a class="d-none d-sm-inline-block btn btn btn-primary shadow-sm mr-1" th:each="etichetta : ${etichette}" th:text="${etichetta.nome}" th:href="'/' + ${ruolo} +  @{'/raccolte' + '/' + ${mappaEtichette[etichetta.nome]}}">Eticchetta</a>
                         </div>
@@ -34,8 +34,9 @@
 
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4" th:if="${ruolo.equals('autore')}">
-                        <h1 class="h3 mb-2 text-gray-800">Le mie raccolte</h1>
-                        <a id="showRaccoltaModal" class="d-none d-sm-inline-block btn btn btn-primary shadow-sm"><i class="fas fa-plus fa-sm text-white-50"></i> Crea raccolta</a>
+                        <h1 id="categoryQuiz" class="h3 mb-2 text-gray-800" th:if="${nomeEtichetta != null}" th:text="'Le mie raccolte di ' + ${nomeEtichetta}">Le mie raccolte di una etichetta specifica</h1>
+                        <h1 id="allQuiz" class="h3 mb-2 text-gray-800" th:if="${nomeEtichetta == null}">Le mie raccolte</h1>
+                        <a id="showRaccoltaModal" class="d-none d-sm-inline-block btn btn btn-primary shadow-sm" th:if="${ruolo.equals('autore')}"><i class="fas fa-plus fa-sm text-white-50"></i> Crea raccolta</a>
                     </div>
 
                     <th:block th:replace="~{moduli/areaRiservata/raccoltaRows :: raccoltaRows}"></th:block>

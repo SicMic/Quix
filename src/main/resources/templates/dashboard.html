@@ -34,7 +34,8 @@
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Raccolte create</div>
+                                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1" th:if="${ruolo.equals('autore')}">Raccolte create</div>
+                                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1" th:if="${ruolo.equals('autore')}">Raccolte create</div>
                                             <div class="h5 mb-0 font-weight-bold text-gray-800" th:text="${numeroRaccolte}">3</div>
                                         </div>
                                     </div>
@@ -80,18 +81,13 @@
                     </div>
                     <!-- Numeri Statistiche - End -->
 
-                    <!-- Raccolte più giocate Row - Start -->
-                    <h1 class="h3 mb-3 text-gray-800">Raccolte più giocate</h1>
-                    <th:block th:replace="~{moduli/areaRiservata/raccoltaRows :: raccoltaRows}"></th:block>
-                    <!-- Raccolte più giocate Row - End -->
-
-
-                    <!-- Ultime Raccolte Row - Start -->
-                    <h1 class="h3 mb-3 text-gray-800">Ultime raccolte create</h1>
+                    <!-- Racoclte più giocate Row - Start -->
+                     
+                    <h1 class="h3 mb-3 text-gray-800" th:if="${raccolteGiocate != null && !raccolteGiocate.isEmpty()}">Raccolte più giocate</h1>
                     <div id="containerRows">
                         <div class="row">
-                            <div class="col-xl-3 col-lg-4" th:id="'raccoltaRow' + ${iterStat.index}" th:each="raccolta, iterStat : ${raccolte}">
-                                <a th:href="@{'/raccolta' + '/' + ${raccolta.id}}">
+                            <div class="col-xl-3 col-lg-4" th:each="raccolta, iterStat : ${raccolteGiocate}" th:if="${iterStat.index < 4}" th:id="'raccoltaRow' + ${iterStat.index}">
+                                <a th:if="${ruolo.equals('autore')}" th:href="@{'/' + ${ruolo} +'/raccolta' + '/' + ${raccolta.id}}">
                                     <div class="card shadow mb-4">
                                         <!-- Card Header - Dropdown -->
                                         <div class="card-header py-3 edit-raccolta">
@@ -110,16 +106,57 @@
                                                     </div>
                                                 </div>
                                             </div>
-
                                         </div>
                                         <!-- Card Body -->
                                         <div class="card-body">
                                             <div class="text-center">
-                                                <img class="img-fluid" style="width: 25rem;" alt="..." th:src="${raccolta.urlImage}">
+                                                <img class="img-fluid" style="width: 25rem;" alt="Immagine della raccolta" th:src="${raccolta.urlImage}">
                                             </div>
                                             <hr>
-                                            <a class="bg-primary text-white" th:text="${raccolta.etichetta.nome}"></a>
-                                            <p th:text="${raccolta.descrizione}"> Descrizione </p>
+                                            <a class="bg-primary text-white quix-tag" th:text="${raccolta.etichetta.nome}"></a>
+                                            <p class="mt-2" th:text="${raccolta.descrizione}">Descrizione</p>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Raccolte più giocate - End -->
+
+
+                    <!-- Ultime Raccolte Row - Start -->
+                    <h1 class="h3 mb-3 text-gray-800" th:if="${raccolte != null && !raccolte.isEmpty()}">Ultime raccolte create</h1>
+                    <div id="containerRows">
+                        <div class="row">
+                            <div class="col-xl-3 col-lg-4" th:each="raccolta, iterStat : ${raccolte}" th:if="${iterStat.index < 4}" th:id="'raccoltaRow' + ${iterStat.index}">
+                                <a th:if="${ruolo.equals('autore')}" th:href="@{'/' + ${ruolo} +'/raccolta' + '/' + ${raccolta.id}}">
+                                    <div class="card shadow mb-4">
+                                        <!-- Card Header - Dropdown -->
+                                        <div class="card-header py-3 edit-raccolta">
+                                            <div class="row">
+                                                <div class="col-10">
+                                                    <h5 class="m-0 font-weight-bold text-primary" th:id="'nomeRaccolta' + ${iterStat.index}" th:text="${raccolta.nome}">Nome raccolta</h5>
+                                                </div>
+                                                <div class="col-2 edit-raccolta-buttons">
+                                                    <div class="row">
+                                                        <div class="col-6">
+                                                            <i class="fas fa-pen fa-1x text-primary mr-3 pe-auto" style="cursor: pointer; font-size: 20px;"></i>
+                                                        </div>
+                                                        <div class="col-6">
+                                                            <i class="fas fa-trash fa-1x text-danger mr-3 pe-auto" style="cursor: pointer; font-size: 20px;"></i>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- Card Body -->
+                                        <div class="card-body">
+                                            <div class="text-center">
+                                                <img class="img-fluid" style="width: 25rem;" alt="Immagine della raccolta" th:src="${raccolta.urlImage}">
+                                            </div>
+                                            <hr>
+                                            <a class="bg-primary text-white quix-tag" th:text="${raccolta.etichetta.nome}"></a>
+                                            <p class="mt-2" th:text="${raccolta.descrizione}">Descrizione</p>
                                         </div>
                                     </div>
                                 </a>
@@ -129,21 +166,20 @@
                     <!-- Ultime Raccolte Row - End -->
 
 
-
                     <!-- Ultimi Quiz Row - Start -->
-                    <h1 class="h3 mb-2 text-gray-800">Ultimi quiz creati</h1>
+                    <h1 class="h3 mb-3 text-gray-800" th:if="${ultimiQuiz != null && !raccolte.isEmpty()}">Ultimi quiz creati</h1>
                     <div id="containerRows">
-                        <div class="row mb-4" th:id="'quizRow' + ${iterStat.index}" th:each="quiz, iterStat : ${elenco}">
+                        <div class="row mb-4" th:id="'quizRow' + ${iterStat.index}" th:each="quiz, iterStat : ${ultimiQuiz}" th:if="${iterStat.index < 4}">
                             <div class="col">
                                 <div class="card border-left-primary shadow h-100 py-2">
                                     <div class="card-body">
                                         <div class="row no-gutters align-items-center">
                                             <div class="col mr-2">
                                                 <div class="text-xs font-weight-bold text-primary text-uppercase mb-1 mr-2" style="display: inline;">
-                                                    <a class="bg-primary text-white p-1" th:text="${quiz.categoria.nome}" th:href="'/elencoQuiz/' + ${quiz.categoria.nome}">Categoria</a>
+                                                    <a class="bg-primary text-white p-1 quix-tag" th:text="${quiz.categoria.nome}" th:href="'/elencoQuiz/' + ${quiz.categoria.nome}">Categoria</a>
                                                 </div>
                                                 <div class="text-xs font-weight-bold text-primary text-uppercase mb-1" style="display: inline;">
-                                                    <a class="bg-primary text-white p-1" th:text="${quiz.raccolta.nome}" th:href="'/raccolta/' + ${quiz.raccolta.id}">Raccolta</a>
+                                                    <a class="bg-primary text-white p-1 quix-tag" th:text="${quiz.raccolta.nome}" th:href="'/raccolta/' + ${quiz.raccolta.id}">Raccolta</a>
                                                 </div>
                                                 <div class="h5 mb-0 font-weight-bold text-gray-800 mt-2" th:id="'quesito' + ${iterStat.index}" th:text="${quiz.quesito}">Quesito</div>
                                             </div>
@@ -175,7 +211,7 @@
         <a class="scroll-to-top rounded" href="#page-top">
             <i class="fas fa-angle-up"></i>
         </a>
-        
+
         <th:block th:replace="~{moduli/areaRiservata/raccoltaEditor :: raccoltaEditor}"></th:block>
 
         <th:block th:replace="~{moduli/areaRiservata/logout :: logout}"></th:block>

@@ -29,6 +29,10 @@ public class RaccoltaService {
 		return this.raccoltaRepository.findByEtichettaId(etichettaId);
 	}
 
+	public Iterable<Raccolta> getRaccoltaByEtichettaNome(String nomeEtichetta){
+		return this.raccoltaRepository.findByEtichettaNome(nomeEtichetta);
+	}
+
 	public Iterable<Raccolta> getRaccoltaByEtichettaAndAutore(Long autoreId, Long etichettaId){
 		return this.raccoltaRepository.findByAutoreIdAndEtichettaId(autoreId, etichettaId);
 	}
@@ -65,5 +69,7 @@ public class RaccoltaService {
 		}
 		return "Nessuna etichetta trovata";
 	}
+
+	
 
 }

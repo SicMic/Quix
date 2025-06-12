@@ -42,9 +42,9 @@ public class AutoreController {
 		Autore autore = (Autore) model.getAttribute("utente");
 		List<Raccolta> elencoRaccolte = autore.getElencoRaccolte();
 		model.addAttribute("numeroRaccolte", elencoRaccolte.size());
-		model.addAttribute("numeroQuiz", this.quizService.getNumeroQuizAutore(autore.getId()));
-		model.addAttribute("etichetta", this.raccoltaService.getEtichettaPiuUsata(autore.getId()));
-		model.addAttribute("categoria", this.quizService.getCategoriaPiuUsata(autore.getId()));
+		model.addAttribute("numeroQuiz", this.quizService.getNumeroQuizAutore(autore.getId())); //Numero quiz creati
+		model.addAttribute("etichetta", this.raccoltaService.getEtichettaPiuUsata(autore.getId())); //Etichetta più usata
+		model.addAttribute("categoria", this.quizService.getCategoriaPiuUsata(autore.getId())); //Categoria più usata
 		model.addAttribute("raccolteGiocate", this.autoreService.getRaccoltePiuGiocate(autore.getId()));
 		//da controllare comportamento -- se non ordinate corretamente va fatto sort con Comparator su dataCreazione
 		model.addAttribute("ultimiQuiz", this.autoreService.getAllQuizAutore(autore.getId()));
@@ -118,10 +118,10 @@ public class AutoreController {
 		Autore autore = (Autore) model.getAttribute("utente");
 		model.addAttribute("raccolte", autore.getElencoRaccolte());
 		Map<String, String> mappaEtichette = new HashMap<>();
-		for (Etichetta e : etichettaService.getAllEtichette())
+		for (Etichetta e : autore.getEtichetteAutore())
 			mappaEtichette.put(e.getNome(), e.getNome().replace(" ", "+"));
 		model.addAttribute("mappaEtichette", mappaEtichette);
-		model.addAttribute("etichette", etichettaService.getAllEtichette());
+		model.addAttribute("etichette", autore.getEtichetteAutore());
 		return "raccolte.html";
 	}
 
@@ -140,7 +140,7 @@ public class AutoreController {
 		Autore autore = (Autore) model.getAttribute("utente");
 		model.addAttribute("nomeEtichetta", nomeEtichetta);
 		model.addAttribute("raccolte",
-				this.autoreService.getAllRaccolteAutoreOfEtichetta(autore.getId(), nomeEtichetta.replace("+", "")));
+				this.autoreService.getAllRaccolteAutoreOfEtichetta(autore.getId(), nomeEtichetta.replace("+", " ")));
 		return "raccolte.html";
 	}
 

@@ -827,8 +827,7 @@ input[type=color] {
 }
 
 .quix-option:active {
-  background-color: #501ef4 !important;
-  color: #ffffff;
+  background-color: #f4511e;
 }
 
 nav .container {

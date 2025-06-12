@@ -2,6 +2,8 @@ package it.uniroma3.theboys.quix.model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
+import java.util.HashSet;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -36,5 +38,14 @@ public class Autore extends Utente {
     public void setElencoRaccolte(List<Raccolta> elencoRaccolte) {
         this.elencoRaccolte = elencoRaccolte;
     }
+
+    public Set<Etichetta> getEtichetteAutore() {
+        Set <Etichetta> etichette = new HashSet<>();  
+        for (Raccolta raccolta : this.elencoRaccolte) {
+            etichette.add(raccolta.getEtichetta());
+        }
+        return etichette;
+    }
+
 
 }

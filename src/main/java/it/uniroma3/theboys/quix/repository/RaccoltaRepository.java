@@ -39,4 +39,12 @@ public interface RaccoltaRepository extends CrudRepository<Raccolta, Long> {
             """, nativeQuery = true)
     List<Object[]> findEtichettaNomeWithMaxCountByGiocatore(@Param("giocatoreId") Long giocatoreId);
 
+    @Query(value = """
+            SELECT r.*
+            FROM raccolta r
+            JOIN etichetta e ON e.id = r.etichetta_id
+            WHERE e.nome = :etichetta
+            """, nativeQuery = true)
+    Iterable<Raccolta> findByEtichettaNome(@Param("etichetta") String nomeEtichetta);
+
 }
