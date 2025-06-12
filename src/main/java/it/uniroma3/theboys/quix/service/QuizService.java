@@ -64,5 +64,12 @@ public class QuizService {
 			return (String) risultati.get(0)[0];
 		return "Nessuna categoria trovata";
 	}
+
+	public String getCategoriaPiuGiocata(Long idGiocatore){
+		List<Object[]> risultati = this.quizRepository.countQuizGiocatorePerCategoriaOrderByDesc(idGiocatore);
+		if(! risultati.isEmpty())
+			return (String) risultati.get(0)[0];
+		return "Nessuna categoria trovata";
+	}
 	
 }

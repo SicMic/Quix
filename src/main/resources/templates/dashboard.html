@@ -35,7 +35,7 @@
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
                                             <div class="text-xs font-weight-bold text-primary text-uppercase mb-1" th:if="${ruolo.equals('autore')}">Raccolte create</div>
-                                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1" th:if="${ruolo.equals('autore')}">Raccolte create</div>
+                                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1" th:if="${ruolo.equals('giocatore')}">Raccolte giocate</div>
                                             <div class="h5 mb-0 font-weight-bold text-gray-800" th:text="${numeroRaccolte}">3</div>
                                         </div>
                                     </div>
@@ -47,7 +47,8 @@
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Quiz creati</div>
+                                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1" th:if="${ruolo.equals('autore')}">Quiz creati</div>
+                                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1" th:if="${ruolo.equals('giocatore')}">Quiz giocati</div>
                                             <div class="h5 mb-0 font-weight-bold text-gray-800" th:text="${numeroQuiz}">3</div>
                                         </div>
                                     </div>
@@ -59,7 +60,8 @@
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Etichetta più usata</div>
+                                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1" th:if="${ruolo.equals('autore')}">Etichetta più usata</div>
+                                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1" th:if="${ruolo.equals('giocatore')}">Etichetta più giocata</div>
                                             <div class="h5 mb-0 font-weight-bold text-gray-800" th:text="${etichetta}">Etichetta</div>
                                         </div>
                                     </div>
@@ -71,7 +73,8 @@
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Categoria più usata</div>
+                                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1" th:if="${ruolo.equals('autore')}">Categoria più usata</div>
+                                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1" th:if="${ruolo.equals('giocatore')}">Categoria più giocata</div>
                                             <div class="h5 mb-0 font-weight-bold text-gray-800" th:text="${categoria}">Categoria</div>
                                         </div>
                                     </div>

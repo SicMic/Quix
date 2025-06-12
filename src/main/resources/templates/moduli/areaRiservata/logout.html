@@ -19,7 +19,10 @@
             <div class="modal-body">Seleziona <b>Esci</b> per terminare la sessione corrente.</div>
             <div class="modal-footer">
                 <button class="btn btn-secondary" type="button" data-dismiss="modal">Annulla</button>
-                <a class="btn btn-primary" href="/logout">Esci</a>
+                <form action="/logout" method="post" style="display: inline;">
+                    <button class="btn btn-primary" type="submit">Esci</button>
+                </form>
+                <!-- <a class="btn btn-primary" href="/logout">Esci</a> -->
             </div>
         </div>
     </div>

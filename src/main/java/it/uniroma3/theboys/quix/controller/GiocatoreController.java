@@ -9,14 +9,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import it.uniroma3.theboys.quix.model.Giocatore;
-import it.uniroma3.theboys.quix.model.Autore;
+
 import it.uniroma3.theboys.quix.model.Etichetta;
-import it.uniroma3.theboys.quix.model.Quiz;
+import it.uniroma3.theboys.quix.model.Giocatore;
 import it.uniroma3.theboys.quix.model.Raccolta;
-import it.uniroma3.theboys.quix.service.AutoreService;
 import it.uniroma3.theboys.quix.service.CategoriaService;
 import it.uniroma3.theboys.quix.service.EtichettaService;
 import it.uniroma3.theboys.quix.service.GiocatoreService;
@@ -48,7 +44,7 @@ public class GiocatoreController {
 		model.addAttribute("numeroQuiz", numeroQuiz); //Numero quiz giocati
 		//per ultime 4 raccolte giocate prendere le prime 4 da elenco raccolte 		---- aggiungere data in cui è stata giocata in join table raccolte+giocatori
 		model.addAttribute("etichetta", this.giocatoreService.getEtichettaPiuGiocata(giocatore.getId())); //Etichetta più giocata
-		// model.addAttribute("categoria", this.quizService.getCategoriaPiuUsata(autore.getId()));
+		model.addAttribute("categoria", this.quizService.getCategoriaPiuGiocata(giocatore.getId()));
 		model.addAttribute("numeroRaccolte", elencoRaccolte);  //Raccolte
 
 		return "dashboard.html";
