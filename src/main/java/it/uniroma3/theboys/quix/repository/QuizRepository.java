@@ -53,7 +53,7 @@ public interface QuizRepository extends CrudRepository<Quiz, Long>{
         JOIN categoria c ON c.id = q.categoria_id 
         JOIN raccolta r ON r.id = q.raccolta_id
         JOIN giocatore_elenco_raccolte ger ON ger.elenco_raccolte_id = r.id
-        WHERE ger.giocatore_id = :giocareId
+        WHERE ger.giocatore_id = :giocatoreId
         GROUP BY c.nome
         ORDER BY COUNT(q) DESC
     """, nativeQuery = true)

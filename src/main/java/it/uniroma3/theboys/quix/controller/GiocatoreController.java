@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import it.uniroma3.theboys.quix.model.Etichetta;
 import it.uniroma3.theboys.quix.model.Giocatore;
 import it.uniroma3.theboys.quix.model.Raccolta;
-import it.uniroma3.theboys.quix.service.CategoriaService;
 import it.uniroma3.theboys.quix.service.EtichettaService;
 import it.uniroma3.theboys.quix.service.GiocatoreService;
 import it.uniroma3.theboys.quix.service.QuizService;
@@ -27,8 +26,6 @@ public class GiocatoreController {
 	@Autowired private QuizService quizService;
 
 	@Autowired private EtichettaService etichettaService;
-
-	@Autowired private CategoriaService categoriaService;
 
 	@Autowired private GiocatoreService giocatoreService;
 
@@ -45,7 +42,7 @@ public class GiocatoreController {
 		//per ultime 4 raccolte giocate prendere le prime 4 da elenco raccolte 		---- aggiungere data in cui è stata giocata in join table raccolte+giocatori
 		model.addAttribute("etichetta", this.giocatoreService.getEtichettaPiuGiocata(giocatore.getId())); //Etichetta più giocata
 		model.addAttribute("categoria", this.quizService.getCategoriaPiuGiocata(giocatore.getId()));
-		model.addAttribute("numeroRaccolte", elencoRaccolte);  //Raccolte
+		model.addAttribute("raccolte", elencoRaccolte);  //Raccolte
 
 		return "dashboard.html";
 	}
