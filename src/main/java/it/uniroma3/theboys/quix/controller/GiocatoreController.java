@@ -42,7 +42,7 @@ public class GiocatoreController {
 		//per ultime 4 raccolte giocate prendere le prime 4 da elenco raccolte 		---- aggiungere data in cui è stata giocata in join table raccolte+giocatori
 		model.addAttribute("etichetta", this.giocatoreService.getEtichettaPiuGiocata(giocatore.getId())); //Etichetta più giocata
 		model.addAttribute("categoria", this.quizService.getCategoriaPiuGiocata(giocatore.getId()));
-		model.addAttribute("raccolte", elencoRaccolte);  //Raccolte
+		model.addAttribute("raccolte", elencoRaccolte);  //Raccolte giocate
 
 		return "dashboard.html";
 	}

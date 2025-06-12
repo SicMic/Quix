@@ -128,11 +128,45 @@
 
 
                     <!-- Ultime Raccolte Row - Start -->
-                    <h1 class="h3 mb-3 text-gray-800" th:if="${raccolte != null && !raccolte.isEmpty()}">Ultime raccolte create</h1>
+                    <h1 class="h3 mb-3 text-gray-800" th:if="${raccolte != null && !raccolte.isEmpty() && ruolo.equals('autore')}">Ultime raccolte create</h1>
+                    <h1 class="h3 mb-3 text-gray-800" th:if="${raccolte != null && !raccolte.isEmpty() && ruolo.equals('giocatore')}">Ultime raccolte giocate</h1>
                     <div id="containerRows">
                         <div class="row">
                             <div class="col-xl-3 col-lg-4" th:each="raccolta, iterStat : ${raccolte}" th:if="${iterStat.index < 4}" th:id="'raccoltaRow' + ${iterStat.index}">
+                                <!-- AUTORE -->
                                 <a th:if="${ruolo.equals('autore')}" th:href="@{'/' + ${ruolo} +'/raccolta' + '/' + ${raccolta.id}}">
+                                    <div class="card shadow mb-4">
+                                        <!-- Card Header - Dropdown -->
+                                        <div class="card-header py-3 edit-raccolta">
+                                            <div class="row">
+                                                <div class="col-10">
+                                                    <h5 class="m-0 font-weight-bold text-primary" th:id="'nomeRaccolta' + ${iterStat.index}" th:text="${raccolta.nome}">Nome raccolta</h5>
+                                                </div>
+                                                <div class="col-2 edit-raccolta-buttons">
+                                                    <div class="row">
+                                                        <div class="col-6">
+                                                            <i class="fas fa-pen fa-1x text-primary mr-3 pe-auto" style="cursor: pointer; font-size: 20px;"></i>
+                                                        </div>
+                                                        <div class="col-6">
+                                                            <i class="fas fa-trash fa-1x text-danger mr-3 pe-auto" style="cursor: pointer; font-size: 20px;"></i>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- Card Body -->
+                                        <div class="card-body">
+                                            <div class="text-center">
+                                                <img class="img-fluid" style="width: 25rem;" alt="Immagine della raccolta" th:src="${raccolta.urlImage}">
+                                            </div>
+                                            <hr>
+                                            <a class="bg-primary text-white quix-tag" th:text="${raccolta.etichetta.nome}"></a>
+                                            <p class="mt-2" th:text="${raccolta.descrizione}">Descrizione</p>
+                                        </div>
+                                    </div>
+                                </a>
+                                <!-- GIOCATORE -->
+                                <a th:if="${ruolo.equals('giocatore')}" th:href="@{'/quiz/1/1' + '/' + ${raccolta.id}}">
                                     <div class="card shadow mb-4">
                                         <!-- Card Header - Dropdown -->
                                         <div class="card-header py-3 edit-raccolta">
