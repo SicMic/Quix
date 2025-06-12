@@ -5,7 +5,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import it.uniroma3.theboys.quix.model.Quiz;
 import it.uniroma3.theboys.quix.model.Raccolta;
 import it.uniroma3.theboys.quix.repository.RaccoltaRepository;
 
@@ -70,6 +69,12 @@ public class RaccoltaService {
 		return "Nessuna etichetta trovata";
 	}
 
-	
+	public String getEtichettaPiuGiocata(Long giocatoreId){
+		List<Object[]> risultati = raccoltaRepository.findEtichettaNomeWithMaxCountByGiocatore(giocatoreId);
+		if (!risultati.isEmpty()) {
+			return (String) risultati.get(0)[0];
+		}
+		return "Nessuna etichetta trovata";
+	}	
 
 }

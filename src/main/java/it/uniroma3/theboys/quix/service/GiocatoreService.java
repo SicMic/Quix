@@ -1,15 +1,9 @@
 package it.uniroma3.theboys.quix.service;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import it.uniroma3.theboys.quix.model.Etichetta;
 import it.uniroma3.theboys.quix.model.Giocatore;
-import it.uniroma3.theboys.quix.model.Quiz;
-import it.uniroma3.theboys.quix.model.Raccolta;
-import it.uniroma3.theboys.quix.repository.AutoreRepository;
 import it.uniroma3.theboys.quix.repository.GiocatoreRepository;
 
 @Service
@@ -33,17 +27,9 @@ public class GiocatoreService {
         return this.giocatoreRepository.save(giocatore);
     }
 
-    // public Etichetta getEtichettaPiuGiocata(Long giocatoreId){
-    //     return this.giocatoreRepository.findEtichettaNomeWithMaxCountByGiocatore(giocatoreId);    
-    // }
-
     public String getEtichettaPiuGiocata(Long giocatoreId){
-		return this.raccoltaService.getEtichettaPiuUsata(giocatoreId);
+		return this.raccoltaService.getEtichettaPiuGiocata(giocatoreId);
         
     }
-
-    // public Iterable<Quiz> getAllQuizGiocatore(Long giocatoreId) {
-    //     return this.quizService.getQuizByGiocatoreId(giocatoreId);
-    // }
 
 }
