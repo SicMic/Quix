@@ -9,72 +9,122 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 import it.uniroma3.theboys.quix.model.Autore;
+import it.uniroma3.theboys.quix.model.Giocatore;
+import it.uniroma3.theboys.quix.service.AutoreService;
 import it.uniroma3.theboys.quix.model.Credenziali;
 import it.uniroma3.theboys.quix.service.CredenzialiService;
+import it.uniroma3.theboys.quix.service.GiocatoreService;
+import jakarta.validation.Valid;
 
 @Controller
 public class AuthenticationController {
-	
+
+	@Autowired
+    private AutoreService autoreService;
+
+	@Autowired
+    private GiocatoreService giocatoreService;
+
 	@Autowired
 	private CredenzialiService credenzialiService;
-	
-	@GetMapping(value = "/register") 
-	public String showRegisterForm (Model model) {
-		model.addAttribute("user", new Autore());
-		model.addAttribute("credentials", new Credenziali());
-		return "formRegisterUser";
+
+    AuthenticationController(AutoreService autoreService) {
+        this.autoreService = autoreService;
+    }
+
+	@GetMapping("/login")
+	public String login(Model model) {
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		if (authentication != null && authentication.isAuthenticated()
+				&& !(authentication instanceof AnonymousAuthenticationToken)) {
+			// Reindirizza l'utente a un'altra pagina se è già autenticato
+			return "redirect:/" + model.getAttribute("ruolo") + "/dashboard";
+		}
+		return "login.html"; // Mostra la pagina di login se non autenticato
 	}
 
-	// @PostMapping(value = { "/register" })
-    // public String registerUser(@Valid @ModelAttribute("user") Autore autore,
-    //              BindingResult userBindingResult, @Valid
-    //              @ModelAttribute("credentials") Credenziali credenziali,
-    //              BindingResult credentialsBindingResult,
-    //              Model model) {
-
-	// 	// se user e credential hanno entrambi contenuti validi, memorizza User e Credentials nel DB
-    //     if(!userBindingResult.hasErrors() && !credentialsBindingResult.hasErrors()) {
-    //         utenteService.saveUser(autore);
-    //         credenziali.setUser(autore);
-    //         credenzialiService.saveCredenziali(credenziali);
-    //         model.addAttribute("user", autore);
-    //         return "registrationSuccessful";
-    //     }
-    //     return "formRegisterUser";
-    // }
-	
-	@GetMapping("/login") 
-	public String showLoginForm (Model model) {
-		return "login.html";
+	@GetMapping("/autore/registrazione")
+	public String registrazioneAutore(Model model) {
+		model.addAttribute("ruolo", new String("autore"));
+		model.addAttribute("autore", new Autore());
+		model.addAttribute("credenziali", new Credenziali());
+		return "registrazione.html";
 	}
 
-	@GetMapping("/") 
+	@GetMapping("/giocatore/registrazione")
+	public String registrazioneGiocatore(Model model) {
+		model.addAttribute("ruolo", new String("giocatore"));
+		model.addAttribute("giocatore", new Giocatore());
+		model.addAttribute("credenziali", new Credenziali());
+		return "registrazione.html";
+	}
+
+	@PostMapping("/autore/registrazione")
+	public String registrazioneAutore(@Valid @ModelAttribute("autore") Autore autore,
+			BindingResult userBindingResult, @Valid @ModelAttribute("credenziali") Credenziali credenziali,
+			BindingResult credentialsBindingResult,
+			Model model) {
+		// se user e credential hanno entrambi contenuti validi, memorizza User e
+		// Credentials nel DB
+		if (!userBindingResult.hasErrors() && !credentialsBindingResult.hasErrors()) {
+			autoreService.saveNewAutore(autore);
+			credenziali.setUtente(autore);
+			credenzialiService.saveCredenziali(credenziali);
+			model.addAttribute("user", autore); // DA RIVEDERE
+			return "registrationSuccessful";
+		}
+		return "errore";
+	}
+
+
+	@PostMapping("/giocatore/registrazione")
+	public String registrazioneGiocatore(@Valid @ModelAttribute("giocatore") Giocatore giocatore,
+			BindingResult userBindingResult, @Valid @ModelAttribute("credenziali") Credenziali credenziali,
+			BindingResult credentialsBindingResult,
+			Model model) {
+		// se user e credential hanno entrambi contenuti validi, memorizza User e
+		// Credentials nel DB
+		if (!userBindingResult.hasErrors() && !credentialsBindingResult.hasErrors()) {
+			giocatoreService.saveNewGiocatore(giocatore);
+			credenziali.setUtente(giocatore);
+			credenzialiService.saveCredenziali(credenziali);
+			model.addAttribute("user", giocatore); // DA RIVEDERE
+			return "registrationSuccessful";
+		}
+		return "errore";
+	}
+
+	@GetMapping("/")
 	public String index(Model model) {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		if (authentication instanceof AnonymousAuthenticationToken) {
-	        return "index.html";
-		}
-		else {		
-			UserDetails userDetails = (UserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+			return "index.html";
+		} else {
+			UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication()
+					.getPrincipal();
 			Credenziali credenziali = credenzialiService.getCredenziali(userDetails.getUsername());
 			if (credenziali.getRole().equals(Credenziali.AUTORE_ROLE)) {
 				return "redirect:/autore/dashboard";
 			}
 		}
-        return "index.html";
+		return "index.html";
 	}
-		
-    @GetMapping("/success")
-    public String defaultAfterLogin(Model model) {
-    	UserDetails userDetails = (UserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-    	Credenziali credenziali = credenzialiService.getCredenziali(userDetails.getUsername());
-    	if (credenziali.getRole().equals(Credenziali.AUTORE_ROLE))
-            return "redirect:/autore/dashboard";
-    	if (credenziali.getRole().equals(Credenziali.GIOCATORE_ROLE))
-            return "redirect:/giocatore/dashboard";
-        return "index.html";
-    }
+
+	@GetMapping("/success")
+	public String defaultAfterLogin(Model model) {
+		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		Credenziali credenziali = credenzialiService.getCredenziali(userDetails.getUsername());
+		if (credenziali.getRole().equals(Credenziali.AUTORE_ROLE))
+			return "redirect:/autore/dashboard";
+		if (credenziali.getRole().equals(Credenziali.GIOCATORE_ROLE))
+			return "redirect:/giocatore/dashboard";
+		return "index.html";
+	}
 }

@@ -99,9 +99,36 @@ document.addEventListener("keyup", function (e) {
 
 /***  Funzioni POST js - START ***/
 
+// function eliminazioneRaccolta(idRaccolta) {
+//     console.log(idRaccolta)
+//     fetch('/autore/eliminazioneRaccolta', {
+//         method: 'POST',
+//         headers: {
+//             'Content-Type': 'application/x-www-form-urlencoded'
+//         },
+//         body: new URLSearchParams({
+//             'idRaccolta': idRaccolta
+//         })
+//     })
+//         .then(response => response.text())
+//         .then(data => {
+//             console.log(data)
+//             //window.location.reload()
+//         })
+//         .catch(error => console.error('Errore:', error));
+// }
+
 function eliminazioneRaccolta(idRaccolta) {
-    console.log(idRaccolta)
-    fetch('/eliminazioneRaccolta', {
+
+    idRaccolta = (Number(idRaccolta))
+
+    // Controlla se idRaccolta è valido
+    if (!idRaccolta || idRaccolta <= 0) {
+        console.error("ID raccolta non valido");
+        return;
+    }
+
+    fetch('/autore/eliminazioneRaccolta', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded'
@@ -110,17 +137,29 @@ function eliminazioneRaccolta(idRaccolta) {
             'idRaccolta': idRaccolta
         })
     })
-        .then(response => response.text())
-        .then(data => {
-            console.log(data)
-            window.location.reload()
-        })
-        .catch(error => console.error('Errore:', error));
+    .then(response => {
+        if (!response.ok) {
+            // Gestisci gli errori di risposta
+            return response.json().then(errorData => {
+                throw new Error(errorData.error || 'Errore sconosciuto');
+            });
+        }
+        return response.json(); // Assumiamo che la risposta sia in formato JSON
+    })
+    .then(data => {
+        console.log(data.message); // Mostra il messaggio di successo
+        // Puoi anche aggiornare l'interfaccia utente qui, se necessario
+        // window.location.reload(); // Ricarica la pagina se necessario
+    })
+    .catch(error => {
+        console.error('Errore:', error.message); // Mostra l'errore in console
+        // Puoi anche mostrare un messaggio di errore all'utente qui
+    });
 }
 
 
 function eliminazioneQuiz(idQuiz) {
-    fetch('/eliminazioneQuiz', {
+    fetch('/autore/eliminazioneQuiz', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded'
@@ -132,13 +171,13 @@ function eliminazioneQuiz(idQuiz) {
         .then(response => response.text())
         .then(data => {
             console.log(data)
-            window.location.reload()
+            //window.location.reload()
         })
         .catch(error => console.error('Errore:', error));
 }
 
 function aggiornamentoRaccolta(idRaccolta, nome, descrizione, urlImage, etichetta) {
-    fetch('/aggiornamentoRaccolta', {
+    fetch('/autore/aggiornamentoRaccolta', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded'
@@ -155,14 +194,14 @@ function aggiornamentoRaccolta(idRaccolta, nome, descrizione, urlImage, etichett
     })
         .then(response => response.text())
         .then(data => {
-            window.location.reload()
+            //window.location.reload()
         })
         .catch(error => console.error('Errore:', error));
 }
 
 
 function aggiornamentoQuiz(idQuiz, quesito, opzioneUno, opzioneDue, opzioneTre, opzioneQuattro, categoria) {
-    fetch('/aggiornamentoQuiz', {
+    fetch('/autore/aggiornamentoQuiz', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded'
@@ -179,7 +218,7 @@ function aggiornamentoQuiz(idQuiz, quesito, opzioneUno, opzioneDue, opzioneTre, 
     })
         .then(response => response.text())
         .then(data => {
-            window.location.reload()
+            //window.location.reload()
         })
         .catch(error => console.error('Errore:', error));
 }

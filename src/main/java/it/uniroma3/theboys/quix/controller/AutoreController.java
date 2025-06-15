@@ -69,14 +69,15 @@ public class AutoreController {
 	}
 
 	@PostMapping("/autore/eliminazioneQuiz")
-	public ResponseEntity<String> eliminazioneQuizAutore(@RequestParam Long idQuiz) {
-		try {
-			this.quizService.deleteQuiz(idQuiz);
-			return ResponseEntity.ok("Quiz eliminato con successo");
-		} catch (Exception e) {
-			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-					.body("Errore durante l'eliminazione del quiz: " + e.getMessage());
-		}
+	public String eliminazioneQuizAutore(@RequestParam String idQuiz) {
+		return "redirect:/index";
+		// try {
+		// 	this.quizService.deleteQuiz(idQuiz);
+		// 	return ResponseEntity.ok("Quiz eliminato con successo");
+		// } catch (Exception e) {
+		// 	return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+		// 			.body("Errore durante l'eliminazione del quiz: " + e.getMessage());
+		// }
 	}
 	// QUIZ- END
 
@@ -168,6 +169,13 @@ public class AutoreController {
 		}
 	}
 
+
+	@PostMapping("/autore/prova")
+	public String prova(@RequestParam String page) {
+		return "redirect:/index";
+	}
+
+
 	@PostMapping("/autore/aggiornamentoRaccolta")
 	public void postAggiornamentoRaccoltaAutore(@RequestParam Long idRaccolta,
 			@RequestParam String nome,
@@ -188,6 +196,11 @@ public class AutoreController {
 	@GetMapping("/autore/impostazioni")
 	public String getImpostazioniAutore(Model model) {
 		return "impostazioni.html";
+	}
+
+		@GetMapping("/lol")
+	public String lol(Model model) {
+		return "lol.html";
 	}
 
 	// @GetMapping("/logout")

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+    <title th:if="${ruolo.equals('autore')}">Registrazione autore</title>
+    <title th:if="${ruolo.equals('giocatore')}">Registrazione giocatore</title>
+    <th:block th:replace="/moduli/areaRiservata/head:: head"></th:block>
+</head>
+
+<body class="bg-gradient-primary">
+
+    <div class="container">
+
+        <div class="card o-hidden border-0 shadow-lg my-5">
+            <div class="card-body p-0">
+                <div class="row">
+                    <div class="col-lg-5 d-none d-lg-block bg-register-image"></div>
+                    <div class="col-lg-7">
+                        <div class="p-5">
+                            <div class="text-center">
+                                <h1 class="h4 text-gray-900 mb-4" th:if="${ruolo.equals('autore')}">Registrazione autore</h1>
+                                <h1 class="h4 text-gray-900 mb-4" th:if="${ruolo.equals('giocatore')}">Registrazione giocatore</h1>
+                            </div>
+                            <form class="user" th:action="@{/registrazione}" method="POST">
+                                <div class="form-group row">
+                                    <div class="col-sm-6 mb-3 mb-sm-0">
+                                        <input th:if="${ruolo.equals('autore')}" th:field="${autore.nome}" type="text" class="form-control form-control-user" placeholder="Nome" pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" required>
+                                        <input th:if="${ruolo.equals('giocatore')}" th:field="${giocatore.nome}" type="text" class="form-control form-control-user" placeholder="Nome" pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" required>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <input th:if="${ruolo.equals('autore')}" th:field="${autore.cognome}" type="text" class="form-control form-control-user" placeholder="Cognome">
+                                        <input th:if="${ruolo.equals('giocatore')}" th:field="${giocatore.cognome}" type="text" class="form-control form-control-user" placeholder="Cognome">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" class="form-control form-control-user" placeholder="Biografia" th:field="${autore.biografia}">
+                                </div>
+                                <div class="form-group">
+                                    <input th:if="${ruolo.equals('autore')}" th:field="${autore.email}" type="email" class="form-control form-control-user" placeholder="Email">
+                                    <input th:if="${ruolo.equals('giocatore')}" th:field="${giocatore.email}" type="email" class="form-control form-control-user" placeholder="Email">
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" class="form-control form-control-user" placeholder="Username" th:field="${credenziali.username}">
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-6 mb-3 mb-sm-0">
+                                        <input id="password1" type="password" class="form-control form-control-user" placeholder="Password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" required th:field="${credenziali.password}">
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <input id="password2" type="password" class="form-control form-control-user" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" required placeholder="Ripeti Password">
+                                    </div>
+                                </div>
+                                <p id="message" style="text-align: center; color: red; display: none;">Le password non sono uguali</p>
+                                <button  id="sub" type="submit" class="btn btn-primary btn-user btn-block">
+                                    Registrati
+                                </button>
+                            </form>
+                            <hr>
+                            <div class="text-center">
+                                <a class="small" href="dashboardAutore.html">Accedi</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <th:block th:replace="moduli/areaRiservata/scripts :: scripts"></th:block>
+
+</body>
+
+    <script type="text/javascript">
+
+   // Function to check password match
+    function checkPasswordMatch() {
+        const password1 = document.getElementById("password1").value;
+        const password2 = document.getElementById("password2").value;
+
+        if (password1 === password2) {
+            document.getElementById("message").style.display = "none"; // Hide message
+            document.getElementById("sub").disabled = false; // Disable button
+        } else {
+            document.getElementById("message").style.display = "block"; // Show message
+            document.getElementById("sub").disabled = true; // Disable button
+        }
+    }
+
+    // Add event listeners to both password fields
+    document.getElementById("password1").addEventListener("keyup", checkPasswordMatch);
+    document.getElementById("password2").addEventListener("keyup", checkPasswordMatch);
+    </script>
+
+</html>

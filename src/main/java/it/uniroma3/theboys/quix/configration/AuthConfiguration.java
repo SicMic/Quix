@@ -53,11 +53,14 @@ public class AuthConfiguration {
             .cors(cors -> cors.disable())
             .authorizeHttpRequests(requests -> requests
                 // Pagine pubbliche e risorse statiche
-                .requestMatchers(HttpMethod.GET, "/", "/index", "/register", "/login", "/areaRiservata/**", "/landingPage/**", "/favicon.ico").permitAll()
+                .requestMatchers(HttpMethod.GET, "/", "/index", "/login", "/areaRiservata/**", "/landingPage/**", "/favicon.ico").permitAll()
                 // Registrazione e login aperti a tutti (POST)
-                .requestMatchers(HttpMethod.POST, "/register", "/login").permitAll()
+                .requestMatchers(HttpMethod.GET, "/autore/registrazione").permitAll()
+                .requestMatchers(HttpMethod.GET, "/giocatore/registrazione").permitAll()
                 // Area amministrativa solo per autore
                 .requestMatchers("/autore/**").hasAuthority(AUTORE_ROLE)
+                // Endpoint di eliminazione raccolta
+                .requestMatchers(HttpMethod.POST, "/autore/prova").hasAuthority(AUTORE_ROLE)
                 // Area amministrativa solo per giocatore
                 .requestMatchers("/giocatore/**").hasAuthority(GIOCATORE_ROLE)
                 // Tutte le altre richieste devono essere autenticate
