@@ -27,27 +27,16 @@ import jakarta.validation.Valid;
 public class AuthenticationController {
 
 	@Autowired
-    private AutoreService autoreService;
+	private AutoreService autoreService;
 
 	@Autowired
-    private GiocatoreService giocatoreService;
+	private GiocatoreService giocatoreService;
 
 	@Autowired
 	private CredenzialiService credenzialiService;
 
-    AuthenticationController(AutoreService autoreService) {
-        this.autoreService = autoreService;
-    }
-
-	@GetMapping("/login")
-	public String login(Model model) {
-		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-		if (authentication != null && authentication.isAuthenticated()
-				&& !(authentication instanceof AnonymousAuthenticationToken)) {
-			// Reindirizza l'utente a un'altra pagina se è già autenticato
-			return "redirect:/" + model.getAttribute("ruolo") + "/dashboard";
-		}
-		return "login.html"; // Mostra la pagina di login se non autenticato
+	AuthenticationController(AutoreService autoreService) {
+		this.autoreService = autoreService;
 	}
 
 	@GetMapping("/autore/registrazione")
@@ -71,34 +60,50 @@ public class AuthenticationController {
 			BindingResult userBindingResult, @Valid @ModelAttribute("credenziali") Credenziali credenziali,
 			BindingResult credentialsBindingResult,
 			Model model) {
-		// se user e credential hanno entrambi contenuti validi, memorizza User e
-		// Credentials nel DB
 		if (!userBindingResult.hasErrors() && !credentialsBindingResult.hasErrors()) {
-			autoreService.saveNewAutore(autore);
-			credenziali.setUtente(autore);
+			credenziali.setRole("AUTORE");
+			// Salva prima le credenziali
 			credenzialiService.saveCredenziali(credenziali);
+			// Ora puoi impostare l'utente nelle credenziali
+			credenziali.setUtente(autore);
+			autore.setCredenziali(credenziali);
+			// Salva l'autore
+			autoreService.saveNewAutore(autore);
 			model.addAttribute("user", autore); // DA RIVEDERE
-			return "registrationSuccessful";
+			return "redirect:/login";
 		}
 		return "errore";
 	}
-
 
 	@PostMapping("/giocatore/registrazione")
 	public String registrazioneGiocatore(@Valid @ModelAttribute("giocatore") Giocatore giocatore,
 			BindingResult userBindingResult, @Valid @ModelAttribute("credenziali") Credenziali credenziali,
 			BindingResult credentialsBindingResult,
 			Model model) {
-		// se user e credential hanno entrambi contenuti validi, memorizza User e
-		// Credentials nel DB
 		if (!userBindingResult.hasErrors() && !credentialsBindingResult.hasErrors()) {
-			giocatoreService.saveNewGiocatore(giocatore);
-			credenziali.setUtente(giocatore);
+			credenziali.setRole("GIOCATORE");
+			// Salva prima le credenziali
 			credenzialiService.saveCredenziali(credenziali);
+			// Ora puoi impostare l'utente nelle credenziali
+			credenziali.setUtente(giocatore);
+			giocatore.setCredenziali(credenziali);
+			// Salva il giocatore
+			giocatoreService.saveNewGiocatore(giocatore);
 			model.addAttribute("user", giocatore); // DA RIVEDERE
-			return "registrationSuccessful";
+			return "redirect:/login";
 		}
 		return "errore";
+	}
+
+	@GetMapping("/login")
+	public String login(Model model) {
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		if (authentication != null && authentication.isAuthenticated()
+				&& !(authentication instanceof AnonymousAuthenticationToken)) {
+			// Reindirizza l'utente a un'altra pagina se è già autenticato
+			return "redirect:/" + model.getAttribute("ruolo") + "/dashboard";
+		}
+		return "login.html"; // Mostra la pagina di login se non autenticato
 	}
 
 	@GetMapping("/")

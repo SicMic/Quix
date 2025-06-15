@@ -57,6 +57,8 @@ public class AuthConfiguration {
                 // Registrazione e login aperti a tutti (POST)
                 .requestMatchers(HttpMethod.GET, "/autore/registrazione").permitAll()
                 .requestMatchers(HttpMethod.GET, "/giocatore/registrazione").permitAll()
+                .requestMatchers(HttpMethod.POST, "/autore/registrazione").permitAll()
+                .requestMatchers(HttpMethod.POST, "/giocatore/registrazione").permitAll()
                 // Area amministrativa solo per autore
                 .requestMatchers("/autore/**").hasAuthority(AUTORE_ROLE)
                 // Endpoint di eliminazione raccolta
