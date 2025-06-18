@@ -20,7 +20,7 @@
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Annulla</button>
                     <form action="/logout" method="post" style="display: inline;">
-                        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+                        <input type="hidden" name="_csrf" th:value="${_csrf.token}"/>
                         <button type="submit">Logout</button>
                     </form>
 
