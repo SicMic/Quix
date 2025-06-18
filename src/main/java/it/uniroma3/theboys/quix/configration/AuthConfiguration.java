@@ -64,7 +64,7 @@ public class AuthConfiguration {
                 // Endpoint di eliminazione raccolta
                 .requestMatchers(HttpMethod.POST, "/autore/prova").hasAuthority(AUTORE_ROLE)
                 // Area amministrativa solo per giocatore
-                .requestMatchers(HttpMethod.POST, "/autore/eliminazioneQuiz").hasAuthority(AUTORE_ROLE)
+                .requestMatchers(HttpMethod.POST, "/autore/**").hasAuthority(AUTORE_ROLE)
                 .requestMatchers(HttpMethod.POST, "/giocatore/**").hasAuthority(GIOCATORE_ROLE)
                 // Tutte le altre richieste devono essere autenticate
                 .anyRequest().authenticated()

@@ -56,6 +56,13 @@ document.addEventListener("click", function (e) {
         const categoria = document.getElementById("categoria-quiz" + e.target.id.replace("update-quiz", ""))
         aggiornamentoQuiz(e.target.id.replace("update-quiz", ""), quesito.innerText, opzioneUno.innerText, opzioneDue.innerText, opzioneTre.innerText, opzioneQuattro.innerText, categoria.value)
     }
+    if (e.target.id.includes("update-raccolta")) {
+        const nome = document.getElementById("nome-raccolta" + e.target.id.replace("update-raccolta", ""))
+        const descrizione = document.getElementById("descrizione-raccolta" + e.target.id.replace("update-raccolta", ""))
+        const urlImage = document.getElementById("urlImage-raccolta" + e.target.id.replace("update-raccolta", ""))
+        const etichetta = document.getElementById("etichetta-raccolta" + e.target.id.replace("update-raccolta", ""))
+        aggiornamentoRaccolta(e.target.id.replace("update-quiz", ""), nome, descrizione.innerText, urlImage.innerText, etichetta.value)
+    }
     //Modifica e Eliminazione quiz in elencoQuiz.html e raccolta.html - end
 
     //raccolta.html - start
@@ -103,24 +110,6 @@ document.addEventListener("keyup", function (e) {
 
 /***  Funzioni POST js - START ***/
 
-// function eliminazioneRaccolta(idRaccolta) {
-//     console.log(idRaccolta)
-//     fetch('/autore/eliminazioneRaccolta', {
-//         method: 'POST',
-//         headers: {
-//             'Content-Type': 'application/x-www-form-urlencoded'
-//         },
-//         body: new URLSearchParams({
-//             'idRaccolta': idRaccolta
-//         })
-//     })
-//         .then(response => response.text())
-//         .then(data => {
-//             console.log(data)
-//             //window.location.reload()
-//         })
-//         .catch(error => console.error('Errore:', error));
-// }
 
 function eliminazioneRaccolta(idRaccolta) {
 
@@ -135,34 +124,31 @@ function eliminazioneRaccolta(idRaccolta) {
     fetch('/autore/eliminazioneRaccolta', {
         method: 'POST',
         headers: {
-            'Content-Type': 'application/x-www-form-urlencoded'
+            'Content-Type': 'application/x-www-form-urlencoded',
+            [header]: token
         },
         body: new URLSearchParams({
             'idRaccolta': idRaccolta
         })
     })
-    .then(response => {
-        if (!response.ok) {
-            // Gestisci gli errori di risposta
-            return response.json().then(errorData => {
-                throw new Error(errorData.error || 'Errore sconosciuto');
-            });
-        }
-        return response.json(); // Assumiamo che la risposta sia in formato JSON
-    })
-    .then(data => {
-        console.log(data.message); // Mostra il messaggio di successo
-        // Puoi anche aggiornare l'interfaccia utente qui, se necessario
-        // window.location.reload(); // Ricarica la pagina se necessario
-    })
-    .catch(error => {
-        console.error('Errore:', error.message); // Mostra l'errore in console
-        // Puoi anche mostrare un messaggio di errore all'utente qui
-    });
+        .then(response => response.text())
+        .then(data => {
+            console.log(data)
+            window.location.reload()
+        })
+        .catch(error => console.error('Errore:', error));
 }
 
-
 function eliminazioneQuiz(idQuiz) {
+
+    idQuiz = (Number(idQuiz))
+
+    // Controlla se idRaccolta è valido
+    if (!idQuiz || idQuiz <= 0) {
+        console.error("ID raccolta non valido");
+        return;
+    }
+
     fetch('/autore/eliminazioneQuiz', {
         method: 'POST',
         headers: {
@@ -170,7 +156,33 @@ function eliminazioneQuiz(idQuiz) {
             [header]: token
         },
         body: new URLSearchParams({
-            'idQuiz': 1
+            'idQuiz': idQuiz
+        })
+    })
+        .then(response => response.text())
+        .then(data => {
+            console.log(data)
+            window.location.reload()
+        })
+        .catch(error => console.error('Errore:', error));
+}
+
+function aggiornamentoRaccolta(idRaccolta, nome, descrizione, urlImage, etichetta) {
+    if(idRaccolta == null || nome == null || descrizione == null || urlImage == null || etichetta == null)
+        console.log("Errore parametri nulli")
+    alert("ss")
+    fetch('/autore/aggiornamentoRaccolta', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+            [header]: token
+        },
+        body: new URLSearchParams({
+            'idRaccolta': idRaccolta,
+            'nome': nome,
+            'descrizione': descrizione,
+            'urlImage': urlImage,
+            'etichetta': etichetta
         })
     })
         .then(response => response.text())
@@ -181,35 +193,15 @@ function eliminazioneQuiz(idQuiz) {
         .catch(error => console.error('Errore:', error));
 }
 
-function aggiornamentoRaccolta(idRaccolta, nome, descrizione, urlImage, etichetta) {
-    fetch('/autore/aggiornamentoRaccolta', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/x-www-form-urlencoded'
-        },
-        body: new URLSearchParams({
-            'idQuiz': idQuiz,
-            'quesito': quesito,
-            'opzioneUno': opzioneUno,
-            'opzioneDue': opzioneDue,
-            'opzioneTre': opzioneTre,
-            'opzioneQuattro': opzioneQuattro,
-            'categoria': categoria
-        })
-    })
-        .then(response => response.text())
-        .then(data => {
-            //window.location.reload()
-        })
-        .catch(error => console.error('Errore:', error));
-}
-
 
 function aggiornamentoQuiz(idQuiz, quesito, opzioneUno, opzioneDue, opzioneTre, opzioneQuattro, categoria) {
+    if(idQuiz == null || quesito == null || opzioneUno == null || opzioneDue == null || opzioneTre == null || opzioneQuattro == null || categoria == null)
+        console.log("Errore parametri nulli")
     fetch('/autore/aggiornamentoQuiz', {
         method: 'POST',
         headers: {
-            'Content-Type': 'application/x-www-form-urlencoded'
+            'Content-Type': 'application/x-www-form-urlencoded',
+            [header]: token
         },
         body: new URLSearchParams({
             'idQuiz': idQuiz,
@@ -223,7 +215,8 @@ function aggiornamentoQuiz(idQuiz, quesito, opzioneUno, opzioneDue, opzioneTre, 
     })
         .then(response => response.text())
         .then(data => {
-            //window.location.reload()
+            console.log(data)
+            window.location.reload()
         })
         .catch(error => console.error('Errore:', error));
 }

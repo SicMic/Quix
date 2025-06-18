@@ -18,17 +18,17 @@
                     <div class="modal-body">
                         <div class="form-group row">
                             <div class="col-sm">
-                                <p type="text" class="form-control form-control-user" contenteditable="true" required th:text="${raccolta.descrizione}" th:id="'descrizione' + ${raccolta.id}">Descrizione</p>
+                                <p type="text" class="form-control form-control-user" contenteditable="true" required th:text="${raccolta.descrizione}" th:id="'descrizione-raccolta' + ${raccolta.id}">Descrizione</p>
                             </div>
                         </div>
                         <div class="form-group row">
                             <div class="col-sm">
-                                <p type="text" class="form-control form-control-user" contenteditable="true" required th:text="${raccolta.urlImage}" th:id="'urlImage' + ${raccolta.id}">Descrizione</p>
+                                <p type="text" class="form-control form-control-user" contenteditable="true" required th:text="${raccolta.urlImage}" th:id="'urlImage-raccolta' + ${raccolta.id}">Descrizione</p>
                             </div>
                         </div>
                         <div class="form-group row">
                             <div class="col-sm">
-                                <select name="etichetta" class="form-control">
+                                <select th:id="'etichetta-raccolta' + ${raccolta.id}" name="etichetta" class="form-control">
                                     <option th:each="etichetta : ${etichette}" th:value="${etichetta.nome}" th:text="${etichetta.nome}"  th:selected="${etichetta.nome == raccolta.etichetta.nome}"></option>
                                 </select>
                             </div>
@@ -36,7 +36,7 @@
                     </div>
                     <div class="modal-footer">
                         <button th:id="'hide-editor-raccolta' + ${raccolta.id}" class="btn btn-secondary" type="reset" data-dismiss="modal">Annulla</button>
-                        <button class="btn btn-primary" type="button" data-dismiss="modal">Aggiorna</button>
+                        <button th:id="'update-raccolta' + ${raccolta.id}" class="btn btn-primary" type="button" data-dismiss="modal">Aggiorna</button>
                     </div>
                 </div>
             </div>

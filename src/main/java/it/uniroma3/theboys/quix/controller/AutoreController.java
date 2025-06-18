@@ -9,17 +9,13 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import it.uniroma3.theboys.quix.model.Autore;
-import it.uniroma3.theboys.quix.model.Credenziali;
 import it.uniroma3.theboys.quix.model.Etichetta;
-import it.uniroma3.theboys.quix.model.Giocatore;
 import it.uniroma3.theboys.quix.model.Quiz;
 import it.uniroma3.theboys.quix.model.Raccolta;
 import it.uniroma3.theboys.quix.service.AutoreService;
@@ -27,7 +23,6 @@ import it.uniroma3.theboys.quix.service.CategoriaService;
 import it.uniroma3.theboys.quix.service.EtichettaService;
 import it.uniroma3.theboys.quix.service.QuizService;
 import it.uniroma3.theboys.quix.service.RaccoltaService;
-import jakarta.validation.Valid;
 
 @Controller
 public class AutoreController {
@@ -80,35 +75,28 @@ public class AutoreController {
 		return "redirect:/raccolta/" + idRaccolta;
 	}
 
-	// @PostMapping("/autore/eliminazioneQuiz")
-	// public ResponseEntity<String> eliminazioneQuiz(@RequestParam Long idQuiz) {
-	// // Logica per eliminare il quiz
-	// return ResponseEntity.ok("Quiz eliminato con successo");
-	// }
-
-	// @GetMapping("/autore/eliminazioneQuiz")
-	// public String provaGet(Model model) {
-	// model.addAttribute("idQuiz", new Long(0));
-	// return "registrazione.html";
-	// }
-
-	// @PostMapping("/autore/eliminazioneQuiz")
-	// public String provaPost(@Valid @ModelAttribute("idQuiz") Long idQuiz, Model
-	// model) {
-	// return "errore";
-	// }
-
-	// @PostMapping("/autore/eliminazioneQuiz")
-	// public String eliminazioneQuiz(@RequestParam Long idQuiz) {
-	// quizService.deleteQuiz(idQuiz);
-	// return "OK";
-	// }
-
 	@PostMapping("/autore/eliminazioneQuiz")
-	public String eliminazioneQuizAutore(@RequestParam("idQuiz") Long idQuiz) {
-		this.quizService.deleteQuiz(idQuiz);
-		return "OK";
+	public ResponseEntity<Map<String, String>> eliminazioneQuizAutore(@RequestParam("idQuiz") Long idQuiz) {
+		Map<String, String> response = new HashMap<>();
+		if (idQuiz == null || idQuiz < 1) {
+			response.put("error", "ID Quiz non valido");
+			return ResponseEntity.badRequest().body(response);
+		}
+		try {
+			if (quizService.getQuizById(idQuiz) == null) {
+				response.put("error", "Quiz non trovato nel database");
+				return ResponseEntity.ok(response);
+			}
+			this.quizService.deleteQuiz(idQuiz);
+			response.put("message", "Quiz eliminato con successo");
+			return ResponseEntity.ok(response);
+		} catch (Exception e) {
+			response.put("error", "Errore durante l'eliminazione del quiz: " +
+					e.getMessage());
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
+		}
 	}
+
 	// QUIZ- END
 
 	// ELENCO QUIZ- START
@@ -129,19 +117,39 @@ public class AutoreController {
 		model.addAttribute("elenco", this.autoreService
 				.getAllQuizAutoreOfCategoria(autore.getId(), nomeCategoria));
 		model.addAttribute("categorie", categoriaService.getAllCategorie());
-		// model.addAttribute("paginaCorrente", "elencoQuiz/nomeCategoria");
 		return "elencoQuiz.html";
 	}
 
 	@PostMapping("/autore/aggiornamentoQuiz")
-	public void postAggiornamentoQuizAutore(@RequestParam Long idQuiz, @RequestParam String quesito,
+	public ResponseEntity<Map<String, String>> aggiornamentoQuizAutore(@RequestParam Long idQuiz,
+			@RequestParam String quesito,
 			@RequestParam String opzioneUno, @RequestParam String opzioneDue,
 			@RequestParam String opzioneTre,
 			@RequestParam String opzioneQuattro, @RequestParam String categoria) {
-		this.quizService.updateQuiz(idQuiz, quesito, opzioneUno, opzioneDue,
-				opzioneTre, opzioneQuattro, categoria);
+		Map<String, String> response = new HashMap<>();
+		if (idQuiz == null || quesito == null || opzioneUno == null || opzioneDue == null || opzioneTre == null
+				|| opzioneQuattro == null || categoria == null) {
+			response.put("error", "Errore alcuni parametri sono nulli");
+			return ResponseEntity.badRequest().body(response);
+		}
+		if (idQuiz < 1) {
+			response.put("error", "ID Quiz non valido");
+			return ResponseEntity.badRequest().body(response);
+		}
+		try {
+			if (quizService.getQuizById(idQuiz) == null) {
+				response.put("error", "Quiz non trovato nel database");
+				return ResponseEntity.ok(response);
+			}
+			this.quizService.updateQuiz(idQuiz, quesito, opzioneUno, opzioneDue, opzioneTre, opzioneQuattro, categoria);
+			response.put("message", "Quiz aggiornato con successo");
+			return ResponseEntity.ok(response);
+		} catch (Exception e) {
+			response.put("error", "Errore durante l'aggiornamento del quiz: " +
+					e.getMessage());
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
+		}
 	}
-	// ELENCO QUIZ- END
 
 	// RACCOLTE - START
 	@GetMapping("/autore/raccolte")
@@ -185,9 +193,17 @@ public class AutoreController {
 	}
 
 	@PostMapping("/autore/eliminazioneRaccolta")
-	public ResponseEntity<Map<String, String>> eliminazioneRaccoltaAutore(@RequestParam Long idRaccolta) {
+	public ResponseEntity<Map<String, String>> eliminazioneRaccoltaAutore(@RequestParam("idRaccolta") Long idRaccolta) {
 		Map<String, String> response = new HashMap<>();
+		if (idRaccolta == null || idRaccolta < 1) {
+			response.put("error", "ID Raccolta non valido");
+			return ResponseEntity.badRequest().body(response);
+		}
 		try {
+			if (raccoltaService.getRaccoltaById(idRaccolta) == null) {
+				response.put("error", "Raccolta non trovata nel database");
+				return ResponseEntity.ok(response);
+			}
 			this.raccoltaService.deleteRaccolta(idRaccolta);
 			response.put("message", "Raccolta eliminata con successo");
 			return ResponseEntity.ok(response);
@@ -198,18 +214,36 @@ public class AutoreController {
 		}
 	}
 
-	// @PostMapping("/autore/prova")
-	// public String prova(@RequestParam String page) {
-	// return "redirect:/index";
-	// }
-
 	@PostMapping("/autore/aggiornamentoRaccolta")
-	public void postAggiornamentoRaccoltaAutore(@RequestParam Long idRaccolta,
+	public ResponseEntity<Map<String, String>> postAggiornamentoRaccoltaAutore(@RequestParam Long idRaccolta,
 			@RequestParam String nome,
-			@RequestParam String descrizione, @RequestParam String urlImage,
+			@RequestParam String descrizione,
+			@RequestParam String urlImage,
 			@RequestParam String etichetta) {
-		this.raccoltaService.updateRaccolta(idRaccolta, nome, descrizione, urlImage, etichetta);
+		Map<String, String> response = new HashMap<>();
+		if (idRaccolta == null || nome == null || descrizione == null || urlImage == null || etichetta == null) {
+			response.put("error", "Errore alcuni parametri sono nulli");
+			return ResponseEntity.badRequest().body(response);
+		}
+		if (idRaccolta < 1) {
+			response.put("error", "ID Raccolta non valido");
+			return ResponseEntity.badRequest().body(response);
+		}
+		try {
+			if (raccoltaService.getRaccoltaById(idRaccolta) == null) {
+				response.put("error", "Raccolta non trovato nel database");
+				return ResponseEntity.ok(response);
+			}
+			//this.raccoltaService.updateRaccolta(idRaccolta, nome, descrizione, urlImage, etichetta);
+			response.put("message", "Raccolta aggiornato con successo");
+			return ResponseEntity.ok(response);
+		} catch (Exception e) {
+			response.put("error", "Errore durante l'aggiornamento della raccolta: " +
+					e.getMessage());
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
+		}
 	}
+
 	// RACCOLTE - END
 
 	// ALTRO - START
