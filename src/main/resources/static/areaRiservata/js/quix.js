@@ -5,10 +5,10 @@ const header = document.querySelector('meta[name="_csrf_header"]').getAttribute(
 /*** - START ***/
 
 // Creazione input hidden con valore idRaccolta
-if (window.location.pathname.includes("raccolta")) {
-    const idRaccolta = document.getElementById("idRaccolta")
-    idRaccolta.value = window.location.pathname.split("/")[2]
-}
+// if (window.location.pathname.includes("raccolta")) {
+//     const idRaccolta = document.getElementById("idRaccolta")
+//     idRaccolta.value = window.location.pathname.split("/")[2]
+// }
 
 // Imposta nel tag con id containerRows il numero di figli come attributo valore 
 if (window.location.pathname.includes("elencoQuiz") || window.location.pathname.includes("raccolta") || window.location.pathname.includes("raccolte")) {
@@ -24,6 +24,10 @@ document.addEventListener("click", function (e) {
 
     //raccolte.html - start
     if (window.location.pathname.includes("raccolte") || window.location.pathname.includes("dashboardAutore")) {
+        if (e.target.id.includes("showQuizModal"))
+            document.getElementById("newQuizModal").style.display = "block"
+        if (e.target.id.includes("hideQuizModal"))
+            document.getElementById("newQuizModal").style.display = "none"
         if (e.target.id.includes("showRaccoltaModal"))
             document.getElementById("newRaccoltaModal").style.display = "block"
         if (e.target.id.includes("hideRaccoltaModal"))

@@ -9,7 +9,6 @@
     <!-- Raccolta Editor - Start ZIOS-->
     <div th:each="raccolta : ${raccolte}">
         <div class="overlay" th:id="'editor-raccolta' + ${raccolta.id}">
-            <!-- <form th:action="@{/aggiuntaRaccolta}" method="post"> -->
             <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -40,7 +39,6 @@
                     </div>
                 </div>
             </div>
-            <!-- </form> -->
         </div>
     </div>
 

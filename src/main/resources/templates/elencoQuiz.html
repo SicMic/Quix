@@ -25,16 +25,12 @@
 
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
-
-
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
                         <h1 id="categoryQuiz" class="h3 mb-2 text-gray-800" th:if="${nomeCategoria != null}" th:text="'Lista quiz della categoria ' + ${nomeCategoria}">Lista completa categoria</h1>
                         <h1 id="allQuiz" class="h3 mb-2 text-gray-800" th:if="${nomeCategoria == null}">Lista completa quesiti</h1>
                     </div>
-
                     <th:block th:replace="~{moduli/areaRiservata/quizRows :: quizRows}"></th:block>
-
                 </div>
                 <!-- /.container-fluid -->
 
@@ -48,6 +44,8 @@
 
     </div>
     <!-- End of Page Wrapper -->
+
+    <th:block th:replace="~{moduli/areaRiservata/quizNew :: quizNew}"></th:block>
 
     <th:block th:replace="~{moduli/areaRiservata/quizEditor :: quizEditor}"></th:block>
 

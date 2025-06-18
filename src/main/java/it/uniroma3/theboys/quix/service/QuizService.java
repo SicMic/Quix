@@ -50,7 +50,7 @@ public class QuizService {
 		q.setOpzioneDue(opzioneDue);
 		q.setOpzioneTre(opzioneTre);
 		q.setOpzioneQuattro(opzioneQuattro);
-		q.setCategoria(categoriaService.getQuizByNome(nomeCategoria));
+		q.setCategoria(categoriaService.getCategoriaByNome(nomeCategoria));
 		this.quizRepository.save(q);
 	}
 

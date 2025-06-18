@@ -11,11 +11,11 @@ import it.uniroma3.theboys.quix.repository.CategoriaRepository;
 public class CategoriaService {
 	@Autowired private CategoriaRepository categoriaRepository;	//istanza costruita e inizializzata dal framework
 
-    public Categoria getQuizById(Long id) {
+    public Categoria getCategoriaById(Long id) {
         return this.categoriaRepository.findById(id).get();
     }
 
-	public Categoria getQuizByNome(String nome) {
+	public Categoria getCategoriaByNome(String nome) {
         return this.categoriaRepository.findByNome(nome).get();
     }
 
@@ -26,4 +26,5 @@ public class CategoriaService {
 	public Categoria saveNewCategoria(Categoria c){
 		return this.categoriaRepository.save(c);
 	}
+
 }

@@ -30,7 +30,7 @@
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
                         <h1 class="h3 mb-3 text-gray-800" th:text="'Lista dei quesiti della raccolta `' + ${nomeRaccolta} + '`'">Lista dei quesiti della raccolta X</h1>
-                        <a id="showQuizModal" class="d-none d-sm-inline-block btn btn btn-primary shadow-sm"><i class="fas fa-plus fa-sm text-white-50"></i> Aggiungi quiz</a>
+                        <a id="showQuizModal" class="d-none d-sm-inline-block btn btn btn-primary shadow-sm" th:if="${ruolo.equals('autore')}"><i class="fas fa-plus fa-sm text-white-50"></i> Aggiungi quiz</a>
                     </div>
 
                     <th:block th:replace="~{moduli/areaRiservata/quizRows :: quizRows}"></th:block>
