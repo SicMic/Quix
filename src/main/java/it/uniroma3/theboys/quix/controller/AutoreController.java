@@ -9,13 +9,17 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import it.uniroma3.theboys.quix.model.Autore;
+import it.uniroma3.theboys.quix.model.Credenziali;
 import it.uniroma3.theboys.quix.model.Etichetta;
+import it.uniroma3.theboys.quix.model.Giocatore;
 import it.uniroma3.theboys.quix.model.Quiz;
 import it.uniroma3.theboys.quix.model.Raccolta;
 import it.uniroma3.theboys.quix.service.AutoreService;
@@ -23,30 +27,38 @@ import it.uniroma3.theboys.quix.service.CategoriaService;
 import it.uniroma3.theboys.quix.service.EtichettaService;
 import it.uniroma3.theboys.quix.service.QuizService;
 import it.uniroma3.theboys.quix.service.RaccoltaService;
+import jakarta.validation.Valid;
 
 @Controller
 public class AutoreController {
 
-	@Autowired private AutoreService autoreService;
+	@Autowired
+	private AutoreService autoreService;
 
-	@Autowired private RaccoltaService raccoltaService;
+	@Autowired
+	private RaccoltaService raccoltaService;
 
-	@Autowired private QuizService quizService;
+	@Autowired
+	private QuizService quizService;
 
-	@Autowired private EtichettaService etichettaService;
+	@Autowired
+	private EtichettaService etichettaService;
 
-	@Autowired private CategoriaService categoriaService;
+	@Autowired
+	private CategoriaService categoriaService;
 
 	@GetMapping("/autore/dashboard")
 	public String getDashboardAutore(Model model) {
 		Autore autore = (Autore) model.getAttribute("utente");
 		List<Raccolta> elencoRaccolte = autore.getElencoRaccolte();
 		model.addAttribute("numeroRaccolte", elencoRaccolte.size());
-		model.addAttribute("numeroQuiz", this.quizService.getNumeroQuizAutore(autore.getId())); //Numero quiz creati
-		model.addAttribute("etichetta", this.raccoltaService.getEtichettaPiuUsata(autore.getId())); //Etichetta più usata
-		model.addAttribute("categoria", this.quizService.getCategoriaPiuUsata(autore.getId())); //Categoria più usata
+		model.addAttribute("numeroQuiz", this.quizService.getNumeroQuizAutore(autore.getId())); // Numero quiz creati
+		model.addAttribute("etichetta", this.raccoltaService.getEtichettaPiuUsata(autore.getId())); // Etichetta più
+																									// usata
+		model.addAttribute("categoria", this.quizService.getCategoriaPiuUsata(autore.getId())); // Categoria più usata
 		model.addAttribute("raccolteGiocate", this.autoreService.getRaccoltePiuGiocate(autore.getId()));
-		//da controllare comportamento -- se non ordinate corretamente va fatto sort con Comparator su dataCreazione
+		// da controllare comportamento -- se non ordinate corretamente va fatto sort
+		// con Comparator su dataCreazione
 		model.addAttribute("ultimiQuiz", this.autoreService.getAllQuizAutore(autore.getId()));
 		model.addAttribute("raccolte", elencoRaccolte);
 
@@ -68,16 +80,34 @@ public class AutoreController {
 		return "redirect:/raccolta/" + idRaccolta;
 	}
 
+	// @PostMapping("/autore/eliminazioneQuiz")
+	// public ResponseEntity<String> eliminazioneQuiz(@RequestParam Long idQuiz) {
+	// // Logica per eliminare il quiz
+	// return ResponseEntity.ok("Quiz eliminato con successo");
+	// }
+
+	// @GetMapping("/autore/eliminazioneQuiz")
+	// public String provaGet(Model model) {
+	// model.addAttribute("idQuiz", new Long(0));
+	// return "registrazione.html";
+	// }
+
+	// @PostMapping("/autore/eliminazioneQuiz")
+	// public String provaPost(@Valid @ModelAttribute("idQuiz") Long idQuiz, Model
+	// model) {
+	// return "errore";
+	// }
+
+	// @PostMapping("/autore/eliminazioneQuiz")
+	// public String eliminazioneQuiz(@RequestParam Long idQuiz) {
+	// quizService.deleteQuiz(idQuiz);
+	// return "OK";
+	// }
+
 	@PostMapping("/autore/eliminazioneQuiz")
-	public String eliminazioneQuizAutore(@RequestParam String idQuiz) {
-		return "redirect:/index";
-		// try {
-		// 	this.quizService.deleteQuiz(idQuiz);
-		// 	return ResponseEntity.ok("Quiz eliminato con successo");
-		// } catch (Exception e) {
-		// 	return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-		// 			.body("Errore durante l'eliminazione del quiz: " + e.getMessage());
-		// }
+	public String eliminazioneQuizAutore(@RequestParam("idQuiz") Long idQuiz) {
+		this.quizService.deleteQuiz(idQuiz);
+		return "OK";
 	}
 	// QUIZ- END
 
@@ -87,8 +117,8 @@ public class AutoreController {
 		Autore autore = (Autore) model.getAttribute("utente");
 		model.addAttribute("elenco", this.autoreService.getAllQuizAutore(autore.getId()));
 		model.addAttribute("categorie", categoriaService.getAllCategorie());
+		// model.addAttribute(null, autore); //
 		// model.addAttribute("paginaCorrente", "elencoQuiz");
-
 		return "elencoQuiz.html";
 	}
 
@@ -132,7 +162,6 @@ public class AutoreController {
 		model.addAttribute("elenco", raccoltaService.getRaccoltaById(idRaccolta).getElencoQuiz());
 		model.addAttribute("categorie", categoriaService.getAllCategorie());
 		model.addAttribute("paginaCorrente", "raccolta");
-
 		return "raccolta.html";
 	}
 
@@ -169,12 +198,10 @@ public class AutoreController {
 		}
 	}
 
-
-	@PostMapping("/autore/prova")
-	public String prova(@RequestParam String page) {
-		return "redirect:/index";
-	}
-
+	// @PostMapping("/autore/prova")
+	// public String prova(@RequestParam String page) {
+	// return "redirect:/index";
+	// }
 
 	@PostMapping("/autore/aggiornamentoRaccolta")
 	public void postAggiornamentoRaccoltaAutore(@RequestParam Long idRaccolta,
@@ -198,7 +225,7 @@ public class AutoreController {
 		return "impostazioni.html";
 	}
 
-		@GetMapping("/lol")
+	@GetMapping("/lol")
 	public String lol(Model model) {
 		return "lol.html";
 	}

@@ -20,6 +20,7 @@
                             <div class="text-center">
                                 <h1 class="h4 text-gray-900 mb-4" th:if="${ruolo.equals('autore')}">Registrazione autore</h1>
                                 <h1 class="h4 text-gray-900 mb-4" th:if="${ruolo.equals('giocatore')}">Registrazione giocatore</h1>
+                                <p th:if="${errore != null}" style="color: red;">Errore durante la registrazione - utente già esistente</p>
                             </div>
                             <form th:action="${ruolo.equals('autore') ? '/autore/registrazione' : '/giocatore/registrazione'}" class="user" method="POST">
                                 <div class="form-group row">

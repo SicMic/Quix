@@ -6,6 +6,7 @@
 </head>
 
 <div th:fragment="quizRows">
+
     <!-- Quiz Row - Start -->
     <div id="containerRows">
         <div class="row mb-4" th:id="'quizRow' + ${iterStat.index}" th:each="quiz, iterStat : ${elenco}">

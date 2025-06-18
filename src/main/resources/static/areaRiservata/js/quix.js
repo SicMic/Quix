@@ -1,3 +1,7 @@
+const token = document.querySelector('meta[name="_csrf"]').getAttribute('content')
+const header = document.querySelector('meta[name="_csrf_header"]').getAttribute('content')
+
+
 /*** - START ***/
 
 // Creazione input hidden con valore idRaccolta
@@ -162,10 +166,11 @@ function eliminazioneQuiz(idQuiz) {
     fetch('/autore/eliminazioneQuiz', {
         method: 'POST',
         headers: {
-            'Content-Type': 'application/x-www-form-urlencoded'
+            'Content-Type': 'application/x-www-form-urlencoded',
+            [header]: token
         },
         body: new URLSearchParams({
-            'idQuiz': idQuiz
+            'idQuiz': 1
         })
     })
         .then(response => response.text())

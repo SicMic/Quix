@@ -55,8 +55,8 @@ public class AuthConfiguration {
                 // Pagine pubbliche e risorse statiche
                 .requestMatchers(HttpMethod.GET, "/", "/index", "/login", "/areaRiservata/**", "/landingPage/**", "/favicon.ico").permitAll()
                 // Registrazione e login aperti a tutti (POST)
-                .requestMatchers(HttpMethod.GET, "/autore/registrazione").permitAll()
-                .requestMatchers(HttpMethod.GET, "/giocatore/registrazione").permitAll()
+                .requestMatchers(HttpMethod.GET, "/autore/registrazione/**").permitAll()
+                .requestMatchers(HttpMethod.GET, "/giocatore/registrazione/**").permitAll()
                 .requestMatchers(HttpMethod.POST, "/autore/registrazione").permitAll()
                 .requestMatchers(HttpMethod.POST, "/giocatore/registrazione").permitAll()
                 // Area amministrativa solo per autore
@@ -64,7 +64,8 @@ public class AuthConfiguration {
                 // Endpoint di eliminazione raccolta
                 .requestMatchers(HttpMethod.POST, "/autore/prova").hasAuthority(AUTORE_ROLE)
                 // Area amministrativa solo per giocatore
-                .requestMatchers("/giocatore/**").hasAuthority(GIOCATORE_ROLE)
+                .requestMatchers(HttpMethod.POST, "/autore/eliminazioneQuiz").hasAuthority(AUTORE_ROLE)
+                .requestMatchers(HttpMethod.POST, "/giocatore/**").hasAuthority(GIOCATORE_ROLE)
                 // Tutte le altre richieste devono essere autenticate
                 .anyRequest().authenticated()
             )

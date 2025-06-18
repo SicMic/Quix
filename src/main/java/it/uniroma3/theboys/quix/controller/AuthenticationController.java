@@ -3,8 +3,6 @@ package it.uniroma3.theboys.quix.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
-// import org.springframework.security.authentication.AnonymousAuthenticationToken;
-// import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
@@ -13,7 +11,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.servlet.ModelAndView;
 
 import it.uniroma3.theboys.quix.model.Autore;
 import it.uniroma3.theboys.quix.model.Giocatore;
@@ -61,6 +58,8 @@ public class AuthenticationController {
 			BindingResult credentialsBindingResult,
 			Model model) {
 		if (!userBindingResult.hasErrors() && !credentialsBindingResult.hasErrors()) {
+			if(credenzialiService.getCredenziali(credenziali.getUsername()) != null)
+				return "redirect:/autore/registrazione/errore ";
 			credenziali.setRole("AUTORE");
 			// Salva prima le credenziali
 			credenzialiService.saveCredenziali(credenziali);
@@ -81,6 +80,8 @@ public class AuthenticationController {
 			BindingResult credentialsBindingResult,
 			Model model) {
 		if (!userBindingResult.hasErrors() && !credentialsBindingResult.hasErrors()) {
+			if(credenzialiService.getCredenziali(credenziali.getUsername()) != null)
+				return "redirect:/autore/registrazione/errore ";
 			credenziali.setRole("GIOCATORE");
 			// Salva prima le credenziali
 			credenzialiService.saveCredenziali(credenziali);
@@ -93,6 +94,24 @@ public class AuthenticationController {
 			return "redirect:/login";
 		}
 		return "errore";
+	}
+
+	@GetMapping("/autore/registrazione/errore")
+	public String registrazioneAutoreErrore(Model model) {
+		model.addAttribute("errore", new String("errore"));
+		model.addAttribute("ruolo", new String("autore"));
+		model.addAttribute("autore", new Autore());
+		model.addAttribute("credenziali", new Credenziali());
+		return "registrazione.html";
+	}
+
+	@GetMapping("/giocatore/registrazione/errore")
+	public String registrazioneGiocatorereErrore(Model model) {
+		model.addAttribute("errore", new String("errore"));
+		model.addAttribute("ruolo", new String("autore"));
+		model.addAttribute("giocatore", new Giocatore());
+		model.addAttribute("credenziali", new Credenziali());
+		return "registrazione.html";
 	}
 
 	@GetMapping("/login")
