@@ -32,4 +32,9 @@ public class GiocatoreService {
         
     }
 
+    public void rimuoviTutteLeEntryPerRaccolta(Long raccoltaId) {
+        int rowsDeleted = giocatoreRepository.deleteAllByRaccoltaId(raccoltaId);
+        System.out.println("Record eliminati: " + rowsDeleted);
+    }
+
 }
