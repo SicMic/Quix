@@ -1,19 +1,21 @@
+const token = document.querySelector('meta[name="_csrf"]').getAttribute('content')
+const header = document.querySelector('meta[name="_csrf_header"]').getAttribute('content')
+
 let interruzioneCountdown = false
 
 document.addEventListener('click', function(e) {
     if(e.target.nodeName == "BUTTON") {
         const path = window.location.pathname
         const idRaccolta = path.split('/')[2]
-        const indiceQuiz = path.split('/')[3]
         const risposta = document.getElementById("answer").value
-        let punteggio = parseInt(document.getElementById("score").innerText)
+        let punteggio = 0
         interruzioneCountdown = true
         if(risposta == e.target.value)
             document.getElementById("quiz-card").style.backgroundColor = "green" 
         else
             document.getElementById("quiz-card").style.backgroundColor = "red"
-        if(e.target.value == risposta) punteggio += 1
-        setTimeout(()=> {sendAnswer(idRaccolta, indiceQuiz, punteggio)}, 1000) 
+        if(e.target.value == risposta) punteggio = 10
+        setTimeout(()=> {sendAnswer(idRaccolta, punteggio)}, 1000) 
     }
 });
 
@@ -26,7 +28,7 @@ document.addEventListener("DOMContentLoaded", function() {
         if (timeLeft <= 0) {
             clearInterval(countdown); // Ferma il countdown quando raggiunge 0
             const path = window.location.pathname
-            sendAnswer(null, path.split('/')[2], path.split('/')[3])
+            sendAnswer(path.split('/')[2], 0)
         } else {
             if (!interruzioneCountdown){
                 timeLeft--; // Decrementa il tempo rimanente
@@ -38,22 +40,23 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 
 
-function sendAnswer(idRaccolta, indiceQuiz, punteggio) {
+function sendAnswer(idRaccolta, punteggio) {
+    idRaccolta = Number (idRaccolta)
     fetch('/quiz', {
         method: 'POST',
         headers: {
-            'Content-Type': 'application/x-www-form-urlencoded'
+            'Content-Type': 'application/x-www-form-urlencoded', 
+            [header]: token
         },
         body: new URLSearchParams({
             'idRaccolta': idRaccolta,
-            'indiceQuiz': indiceQuiz,
             'punteggio': punteggio
         })
     })
         .then(response => response.text())
         .then(data => {
             console.log(data)
-            window.location.replace(data)
+            window.location.reload()
         })
         .catch(error => console.error('Errore:', error));
 }
