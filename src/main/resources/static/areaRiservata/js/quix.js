@@ -65,7 +65,7 @@ document.addEventListener("click", function (e) {
         const descrizione = document.getElementById("descrizione-raccolta" + e.target.id.replace("update-raccolta", ""))
         const urlImage = document.getElementById("urlImage-raccolta" + e.target.id.replace("update-raccolta", ""))
         const etichetta = document.getElementById("etichetta-raccolta" + e.target.id.replace("update-raccolta", ""))
-        aggiornamentoRaccolta(e.target.id.replace("update-quiz", ""), nome, descrizione.innerText, urlImage.innerText, etichetta.value)
+        aggiornamentoRaccolta(e.target.id.replace("update-raccolta", ""), nome.innerText, descrizione.innerText, urlImage.innerText, etichetta.value)
     }
     //Modifica e Eliminazione quiz in elencoQuiz.html e raccolta.html - end
 
@@ -174,7 +174,6 @@ function eliminazioneQuiz(idQuiz) {
 function aggiornamentoRaccolta(idRaccolta, nome, descrizione, urlImage, etichetta) {
     if(idRaccolta == null || nome == null || descrizione == null || urlImage == null || etichetta == null)
         console.log("Errore parametri nulli")
-    alert("ss")
     fetch('/autore/aggiornamentoRaccolta', {
         method: 'POST',
         headers: {
@@ -192,7 +191,7 @@ function aggiornamentoRaccolta(idRaccolta, nome, descrizione, urlImage, etichett
         .then(response => response.text())
         .then(data => {
             console.log(data)
-            //window.location.reload()
+            window.location.reload()
         })
         .catch(error => console.error('Errore:', error));
 }
