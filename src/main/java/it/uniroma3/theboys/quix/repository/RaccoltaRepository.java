@@ -2,11 +2,13 @@ package it.uniroma3.theboys.quix.repository;
 
 import java.util.List;
 
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 
 import it.uniroma3.theboys.quix.model.Raccolta;
+import jakarta.transaction.Transactional;
 
 //classe per le operazioni della persistenza (CRUD: CREATE, READ, UPDATE, DELETE)
 public interface RaccoltaRepository extends CrudRepository<Raccolta, Long> {
@@ -46,5 +48,10 @@ public interface RaccoltaRepository extends CrudRepository<Raccolta, Long> {
             WHERE e.nome = :etichetta
             """, nativeQuery = true)
     Iterable<Raccolta> findByEtichettaNome(@Param("etichetta") String nomeEtichetta);
+
+    @Modifying
+    @Transactional
+    @Query(value = "DELETE FROM giocatore_elenco_raccolte WHERE elenco_raccolte_id = :raccoltaId", nativeQuery = true)
+    int deleteAllRaccoltaId(@Param("raccoltaId") Long raccoltaId);
 
 }

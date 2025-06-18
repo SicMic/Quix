@@ -11,8 +11,6 @@ public class GiocatoreService {
 
     @Autowired private GiocatoreRepository giocatoreRepository;
 
-    @Autowired private QuizService quizService;
-
     @Autowired private RaccoltaService raccoltaService;
 
     public Iterable<Giocatore> getAllGiocatori() {
@@ -32,9 +30,6 @@ public class GiocatoreService {
         
     }
 
-    public void rimuoviTutteLeEntryPerRaccolta(Long raccoltaId) {
-        int rowsDeleted = giocatoreRepository.deleteAllByRaccoltaId(raccoltaId);
-        System.out.println("Record eliminati: " + rowsDeleted);
-    }
+    
 
 }
