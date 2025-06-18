@@ -1,8 +1,8 @@
 package it.uniroma3.theboys.quix.controller;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -32,7 +32,7 @@ public class GiocatoreController {
 	@GetMapping("/giocatore/dashboard")
 	public String getDashboardGiocatore(Model model) {
 		Giocatore giocatore = (Giocatore) model.getAttribute("utente");
-		List<Raccolta> elencoRaccolte = giocatore.getElencoRaccolte();
+		Set<Raccolta> elencoRaccolte = giocatore.getElencoRaccolte();
 		model.addAttribute("numeroRaccolte", elencoRaccolte.size());  //Raccolte giocate dal giocatore
 		//vedere se funziona, se no va fatta la query in service e repository
 		int numeroQuiz = 0;
@@ -80,16 +80,5 @@ public class GiocatoreController {
 	public String getImpostazioniGiocatore(Model model) {
 		return "impostazioni.html";
 	}
-
-	// @GetMapping("/logout")
-	// public String logout() {
-	// // if (session.getAttribute("user") == null)
-	// // return "redirect:/login";
-
-	// // session.invalidate();
-	// return "redirect:/";
-
-	// }
-	// ALTRO - END
 
 }

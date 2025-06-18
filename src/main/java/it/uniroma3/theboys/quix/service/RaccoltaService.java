@@ -16,6 +16,8 @@ public class RaccoltaService {
 
 	@Autowired private EtichettaService etichettaService;
 
+	@Autowired private GiocatoreService giocatoreService;
+
     public Raccolta getRaccoltaById(Long id) {
         return this.raccoltaRepository.findById(id).get();
     }
@@ -45,6 +47,7 @@ public class RaccoltaService {
 	}
 
 	public void deleteRaccolta(Long id){
+		this.giocatoreService.rimuoviTutteLeEntryPerRaccolta(id);
 		this.raccoltaRepository.deleteById(id);
 	}
 

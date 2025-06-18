@@ -1,6 +1,7 @@
 package it.uniroma3.theboys.quix.model;
 
-import java.util.List;
+import java.util.Set;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.ManyToMany;
 
@@ -8,13 +9,13 @@ import jakarta.persistence.ManyToMany;
 public class Giocatore extends Utente {
 
     @ManyToMany
-    private List<Raccolta> elencoRaccolte;
+    private Set<Raccolta> elencoRaccolte;
 
-    public List<Raccolta> getElencoRaccolte() {
+    public Set<Raccolta> getElencoRaccolte() {
         return elencoRaccolte;
     }
 
-    public void setElencoRaccolte(List<Raccolta> elencoRaccolte) {
+    public void setElencoRaccolte(Set<Raccolta> elencoRaccolte) {
         this.elencoRaccolte = elencoRaccolte;
     }
 
