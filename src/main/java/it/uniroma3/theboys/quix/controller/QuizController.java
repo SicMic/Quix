@@ -37,6 +37,8 @@ public class QuizController {
 		if (session.getAttribute("indiceQuiz") == null){
 			session.setAttribute("indiceQuiz", 0);
 			session.setAttribute("punteggio", new Integer(0));
+			Giocatore giocatore = (Giocatore) model.getAttribute("utente");
+			giocatore.getElencoRaccolte().add(raccoltaService.getRaccoltaById(idRaccolta));
 		}
 		Raccolta raccolta = raccoltaService.getRaccoltaById(idRaccolta);
 		ArrayList<Quiz> quizzes = new ArrayList<>(raccolta.getElencoQuiz());
@@ -59,7 +61,7 @@ public class QuizController {
 	}
 	
 	@PostMapping("/quiz")
-	public ResponseEntity<String> postQuiz(@RequestParam Long idRaccolta, HttpSession session, @RequestParam Long punteggio) {
+	public ResponseEntity<String> postQuiz(@RequestParam Long idRaccolta, HttpSession session, @RequestParam int punteggio) {
 		try {
 			int indiceQuiz = (int) session.getAttribute("indiceQuiz");
 			session.setAttribute("indiceQuiz", indiceQuiz += 1);

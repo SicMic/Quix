@@ -78,4 +78,8 @@ public class RaccoltaService {
 		return "Nessuna etichetta trovata";
 	}	
 
+	public Iterable<Raccolta> getRaccoltePiuGiocate(){
+		return this.raccoltaRepository.findRaccoltePiuGiocate();
+	}
+
 }

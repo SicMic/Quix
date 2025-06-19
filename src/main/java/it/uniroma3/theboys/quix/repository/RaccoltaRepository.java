@@ -28,7 +28,7 @@ public interface RaccoltaRepository extends CrudRepository<Raccolta, Long> {
             GROUP BY e.nome, r.etichetta_id
             ORDER BY COUNT(r) DESC
             """, nativeQuery = true)
-    List<Object[]> findEtichettaNomeWithMaxCountByAutore(@Param("autoreId") Long autoreId);
+    public List<Object[]> findEtichettaNomeWithMaxCountByAutore(@Param("autoreId") Long autoreId);
 
     @Query(value = """
             SELECT e.nome, COUNT(ger.giocatore_id)
@@ -39,7 +39,7 @@ public interface RaccoltaRepository extends CrudRepository<Raccolta, Long> {
             GROUP BY e.nome
             ORDER BY COUNT(ger.giocatore_id) DESC
             """, nativeQuery = true)
-    List<Object[]> findEtichettaNomeWithMaxCountByGiocatore(@Param("giocatoreId") Long giocatoreId);
+    public List<Object[]> findEtichettaNomeWithMaxCountByGiocatore(@Param("giocatoreId") Long giocatoreId);
 
     @Query(value = """
             SELECT r.*
@@ -47,11 +47,26 @@ public interface RaccoltaRepository extends CrudRepository<Raccolta, Long> {
             JOIN etichetta e ON e.id = r.etichetta_id
             WHERE e.nome = :etichetta
             """, nativeQuery = true)
-    Iterable<Raccolta> findByEtichettaNome(@Param("etichetta") String nomeEtichetta);
+    public Iterable<Raccolta> findByEtichettaNome(@Param("etichetta") String nomeEtichetta);
 
     @Modifying
     @Transactional
     @Query(value = "DELETE FROM giocatore_elenco_raccolte WHERE elenco_raccolte_id = :raccoltaId", nativeQuery = true)
-    int deleteAllRaccoltaId(@Param("raccoltaId") Long raccoltaId);
+    public int deleteAllRaccoltaId(@Param("raccoltaId") Long raccoltaId);
 
+
+
+//     SELECT raccolta.id, raccolta.nome , COUNT(giocatore_elenco_raccolte.giocatore_id) FROM raccolta
+// JOIN giocatore_elenco_raccolte ON raccolta.id = giocatore_elenco_raccolte.elenco_raccolte_id
+// GROUP BY raccolta.id
+// ORDER BY COUNT(giocatore_elenco_raccolte.giocatore_id) DESC
+
+    @Query(value = """
+            SELECT r.*
+            FROM raccolta r
+            JOIN giocatore_elenco_raccolte gre ON r.id = gre.elenco_raccolte_id
+            GROUP BY r.id
+            ORDER BY COUNT(gre.giocatore_id) DESC
+            """, nativeQuery = true)
+    public Iterable<Raccolta> findRaccoltePiuGiocate();
 }
