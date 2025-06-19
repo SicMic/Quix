@@ -1,5 +1,7 @@
 package it.uniroma3.theboys.quix.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -30,6 +32,12 @@ public class GiocatoreService {
         
     }
 
+    public Giocatore updatePunteggio(Giocatore giocatore){
+        return this.giocatoreRepository.save(giocatore);
+    }
     
+    public List<Object[]> getClassifica(){
+        return this.giocatoreRepository.getUsernameEPunteggi();
+    }
 
 }

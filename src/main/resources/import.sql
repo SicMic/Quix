@@ -19,7 +19,7 @@ INSERT INTO autore (id, biografia) VALUES (2,  'Salve, sono Michela, un esperta 
 -- GIOCATORE (sottoclasse di UTENTE)
 INSERT INTO giocatore (id, punteggio) VALUES (3, 30);
 INSERT INTO giocatore (id, punteggio) VALUES (4, 10);
-INSERT INTO giocatore (id. punteggio) VALUES (5, 0);
+INSERT INTO giocatore (id, punteggio) VALUES (5, 0);
 
 -- Etichette
 INSERT INTO etichetta (id, nome, descrizione) VALUES (1, 'Cultura generale', '');
@@ -39,16 +39,6 @@ INSERT INTO categoria (id, nome, descrizione) VALUES (7, 'Fisica', '');
 INSERT INTO categoria (id, nome, descrizione) VALUES (8, 'Informatica', '');
 
 -- Raccolta
--- INSERT INTO raccolta (id, nome, descrizione, etichetta_id, autore_id, url_image) VALUES (1, 'Raccolta uno', 'Descrizione', 1, 1, 'https://plus.unsplash.com/premium_photo-1661432575489-b0400f4fea58?q=80&w=2072&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
--- INSERT INTO raccolta (id, nome, descrizione, etichetta_id, autore_id, url_image) VALUES (2, 'Raccolta due', 'Descrizione', 3, 1, 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2072&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
--- INSERT INTO raccolta (id, nome, descrizione, etichetta_id, autore_id, url_image) VALUES (3, 'Raccolta tre', 'Descrizione', 5, 1, 'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fimages.ctfassets.net%2Frt5zmd3ipxai%2F25pHfG94sGlRALOqbRvSxl%2F9f591d8263607fdf923b962cbfcde2a9%2FNVA-panda.jpg&f=1&nofb=1&ipt=cf2500d344cc765544f816d037cd99ac8bfa6af4d965366eafb4e82426c16bf3');
--- INSERT INTO raccolta (id, nome, descrizione, etichetta_id, autore_id, url_image) VALUES (4, 'Raccolta quattro', 'Descrizione', 5, 1, 'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fcdn.pixabay.com%2Fphoto%2F2022%2F07%2F10%2F17%2F55%2Fsunflowers-7313486__480.jpg&f=1&nofb=1&ipt=b52eb28d8b9d0ae9c3fd57a1ff10f55df53d0814ad385deea235fcd13e8b01a5');
--- INSERT INTO raccolta (id, nome, descrizione, etichetta_id, autore_id, url_image) VALUES (5, 'Raccolta cinque', 'Descrizione', 4, 1, 'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fquifinanza.it%2Fwp-content%2Fuploads%2Fsites%2F5%2F2023%2F02%2Fdati-spreco-alimentare-Italia.jpg&f=1&nofb=1&ipt=16f4864c2908f280f4d36e013de1e9963da9a9a49b8fe0b887f5d303e6df27bb');
--- INSERT INTO raccolta (id, nome, descrizione, etichetta_id, autore_id, url_image) VALUES (6, 'Raccolta uno', 'Descrizione', 2, 2, 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2072&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
--- INSERT INTO raccolta (id, nome, descrizione, etichetta_id, autore_id, url_image) VALUES (7, 'Raccolta forti', 'Descrizione', 2, 2, 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2072&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
--- INSERT INTO raccolta (id, nome, descrizione, etichetta_id, autore_id, url_image) VALUES (8, 'Raccolta pappapero', 'Descrizione', 2, 2, 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2072&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
-
-
 INSERT INTO raccolta (id, nome, descrizione, etichetta_id, autore_id, data_creazione, url_image) VALUES (1, 'Raccolta uno', 'Descrizione', 1, 1, '2021-03-17', 'https://plus.unsplash.com/premium_photo-1661432575489-b0400f4fea58?q=80&w=2072&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
 INSERT INTO raccolta (id, nome, descrizione, etichetta_id, autore_id, data_creazione, url_image) VALUES (2, 'Raccolta due', 'Descrizione', 3, 1, '2022-08-24', 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2072&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
 INSERT INTO raccolta (id, nome, descrizione, etichetta_id, autore_id, data_creazione, url_image) VALUES (3, 'Raccolta tre', 'Descrizione', 5, 1, '2020-06-09', 'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fimages.ctfassets.net%2Frt5zmd3ipxai%2F25pHfG94sGlRALOqbRvSxl%2F9f591d8263607fdf923b962cbfcde2a9%2FNVA-panda.jpg&f=1&nofb=1&ipt=cf2500d344cc765544f816d037cd99ac8bfa6af4d965366eafb4e82426c16bf3');

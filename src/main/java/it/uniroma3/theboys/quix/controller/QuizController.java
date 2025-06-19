@@ -3,6 +3,7 @@ package it.uniroma3.theboys.quix.controller;
 import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -16,6 +17,7 @@ import it.uniroma3.theboys.quix.model.Autore;
 import it.uniroma3.theboys.quix.model.Giocatore;
 import it.uniroma3.theboys.quix.model.Quiz;
 import it.uniroma3.theboys.quix.model.Raccolta;
+import it.uniroma3.theboys.quix.service.GiocatoreService;
 import it.uniroma3.theboys.quix.service.QuizService;
 import it.uniroma3.theboys.quix.service.RaccoltaService;
 import jakarta.servlet.http.HttpSession;
@@ -24,11 +26,12 @@ import jakarta.servlet.http.HttpSession;
 @Controller
 public class QuizController {
 
-	@Autowired
-	QuizService quizService;
-	@Autowired
-	RaccoltaService raccoltaService;
+	@Autowired QuizService quizService;
 
+	@Autowired RaccoltaService raccoltaService;
+
+	@Autowired GiocatoreService giocatoreService;
+	
 	@GetMapping("/quiz/{idRaccolta}")
 	public String getQuiz(@PathVariable("idRaccolta") Long idRaccolta, Model model, HttpSession session) {
 		if (session.getAttribute("indiceQuiz") == null){
@@ -48,6 +51,7 @@ public class QuizController {
 		model.addAttribute("punteggio", session.getAttribute("punteggio"));
 		Giocatore giocatore = (Giocatore) model.getAttribute("utente");
 		giocatore.sommaPunteggio((Long) session.getAttribute("punteggio"));
+		this.giocatoreService.updatePunteggio(giocatore);
 
 		session.removeAttribute("indiceQuiz");
 		session.removeAttribute("punteggio");

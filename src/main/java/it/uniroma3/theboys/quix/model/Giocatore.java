@@ -11,15 +11,15 @@ public class Giocatore extends Utente {
     @ManyToMany
     private Set<Raccolta> elencoRaccolte;
 
-    private Long punteggio = new Long(0);
+    private Long punteggio;
 
     public Set<Raccolta> getElencoRaccolte() {
         return elencoRaccolte;
     }
 
-    // public Giocatore(){
-    //     this.punteggio = new Long(0);
-    // }
+    public Giocatore(){
+        this.punteggio = new Long(0);
+    }
 
     public void setElencoRaccolte(Set<Raccolta> elencoRaccolte) {
         this.elencoRaccolte = elencoRaccolte;

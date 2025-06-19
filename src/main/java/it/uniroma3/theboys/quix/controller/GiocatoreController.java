@@ -18,6 +18,7 @@ import it.uniroma3.theboys.quix.service.GiocatoreService;
 import it.uniroma3.theboys.quix.service.QuizService;
 import it.uniroma3.theboys.quix.service.RaccoltaService;
 
+
 @Controller
 public class GiocatoreController {
 
@@ -67,6 +68,18 @@ public class GiocatoreController {
 		return "raccolte.html";
 	}
 	// RACCOLTE - END
+
+
+	//CLASSIFICA - START
+
+	@GetMapping("/giocatore/classifica")
+	public String getClassifica(Model model) {
+		
+		model.addAttribute("classifica", giocatoreService.getClassifica());
+		return "classifica.html";
+	}
+	
+	//CLASSIFICA - END
 
 
 	// ALTRO - START
