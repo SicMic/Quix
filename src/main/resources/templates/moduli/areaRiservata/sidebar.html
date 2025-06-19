@@ -41,6 +41,13 @@
                 <span>ElencoQuiz</span></a>
         </li>
 
+        <!-- Nav Item - Classifica -->
+        <li class="nav-item" th:if="${ruolo.equals('giocatore')}">
+            <a class="nav-link" th:href="'/' + ${ruolo} + '/classifica'">
+                <i class="fas fa-fw fa-list"></i>
+                <span>Classifica</span></a>
+        </li>
+
     </ul>
 </body>
 

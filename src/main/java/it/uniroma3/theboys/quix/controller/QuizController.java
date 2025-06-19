@@ -36,7 +36,7 @@ public class QuizController {
 	public String getQuiz(@PathVariable("idRaccolta") Long idRaccolta, Model model, HttpSession session) {
 		if (session.getAttribute("indiceQuiz") == null){
 			session.setAttribute("indiceQuiz", 0);
-			session.setAttribute("punteggio", new Long(0));
+			session.setAttribute("punteggio", new Integer(0));
 		}
 		Raccolta raccolta = raccoltaService.getRaccoltaById(idRaccolta);
 		ArrayList<Quiz> quizzes = new ArrayList<>(raccolta.getElencoQuiz());
@@ -50,7 +50,7 @@ public class QuizController {
 
 		model.addAttribute("punteggio", session.getAttribute("punteggio"));
 		Giocatore giocatore = (Giocatore) model.getAttribute("utente");
-		giocatore.sommaPunteggio((Long) session.getAttribute("punteggio"));
+		giocatore.sommaPunteggio((Integer) session.getAttribute("punteggio"));
 		this.giocatoreService.updatePunteggio(giocatore);
 
 		session.removeAttribute("indiceQuiz");
@@ -63,7 +63,7 @@ public class QuizController {
 		try {
 			int indiceQuiz = (int) session.getAttribute("indiceQuiz");
 			session.setAttribute("indiceQuiz", indiceQuiz += 1);
-			Long punteggioTotale = (Long) session.getAttribute("punteggio");
+			Integer punteggioTotale = (Integer) session.getAttribute("punteggio");
 			session.setAttribute("punteggio", punteggioTotale+punteggio);
 			return ResponseEntity.ok("tutto apposto fra");
 		} catch (Exception e) {

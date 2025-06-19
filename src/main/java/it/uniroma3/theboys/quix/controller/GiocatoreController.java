@@ -3,7 +3,7 @@ package it.uniroma3.theboys.quix.controller;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
-
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,11 +13,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import it.uniroma3.theboys.quix.model.Etichetta;
 import it.uniroma3.theboys.quix.model.Giocatore;
 import it.uniroma3.theboys.quix.model.Raccolta;
+import it.uniroma3.theboys.quix.service.ClassificaDTO;
 import it.uniroma3.theboys.quix.service.EtichettaService;
 import it.uniroma3.theboys.quix.service.GiocatoreService;
 import it.uniroma3.theboys.quix.service.QuizService;
 import it.uniroma3.theboys.quix.service.RaccoltaService;
-
 
 @Controller
 public class GiocatoreController {
@@ -74,8 +74,10 @@ public class GiocatoreController {
 
 	@GetMapping("/giocatore/classifica")
 	public String getClassifica(Model model) {
-		
-		model.addAttribute("classifica", giocatoreService.getClassifica());
+		List<ClassificaDTO> classifica = giocatoreService.getClassifica();
+		model.addAttribute("classifica", classifica);
+		Giocatore giocatore = (Giocatore) model.getAttribute("utente");
+		model.addAttribute("usernameGiocatore", giocatore.getCredenziali().getUsername());
 		return "classifica.html";
 	}
 	

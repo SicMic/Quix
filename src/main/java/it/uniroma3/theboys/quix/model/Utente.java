@@ -1,5 +1,8 @@
 package it.uniroma3.theboys.quix.model;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -25,6 +28,8 @@ abstract public class Utente {
 
     @Column(unique = true, nullable = false)
     private String email;
+
+	private LocalDateTime dataRegistrazione;
 
     @Column(length = 500)
     private String urlImage;
@@ -72,6 +77,15 @@ abstract public class Utente {
         this.credenziali = credenziali;
     }
 
+    public String getDataRegistrazione() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
+        return dataRegistrazione.format(formatter);
+    }
+
+    public void setDataRegistrazione(LocalDateTime dataRegistrazione) {
+        this.dataRegistrazione = dataRegistrazione;
+    }
+
     public String getUrlImage() {
         return urlImage;
     }
@@ -79,6 +93,7 @@ abstract public class Utente {
     public void setUrlImage(String urlImage) {
         this.urlImage = urlImage;
     }
+
 
     @Override
     public int hashCode() {

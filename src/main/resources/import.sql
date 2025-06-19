@@ -3,14 +3,52 @@ INSERT INTO credenziali (id, username, role, password) VALUES (1, 'lorenzo', 'AU
 INSERT INTO credenziali (id, username, role, password) VALUES (2, 'michela','AUTORE', '$2a$12$HtNgYhzZ0Gy.Si8DF9dHfOvTZBAc9E7c6rsqfBE90a3Mt21LZAkhi');
 INSERT INTO credenziali (id, username, role, password) VALUES (3, 'filippo', 'GIOCATORE', '$2a$12$HtNgYhzZ0Gy.Si8DF9dHfOvTZBAc9E7c6rsqfBE90a3Mt21LZAkhi');
 INSERT INTO credenziali (id, username, role, password) VALUES (4, 'marco', 'GIOCATORE', '$2a$12$HtNgYhzZ0Gy.Si8DF9dHfOvTZBAc9E7c6rsqfBE90a3Mt21LZAkhi');
-INSERT INTO credenziali (id, username, role, password) VALUES (5, 'mirco', 'GIOCATORE', '$2a$12$HtNgYhzZ0Gy.Si8DF9dHfOvTZBAc9E7c6rsqfBE90a3Mt21LZAkhi');
+INSERT INTO credenziali (id, username, role, password) VALUES (5, 'lauramiao', 'GIOCATORE', '$2a$12$HtNgYhzZ0Gy.Si8DF9dHfOvTZBAc9E7c6rsqfBE90a3Mt21LZAkhi');
+INSERT INTO credenziali (id, username, role, password) VALUES (6, 'alexu', 'GIOCATORE', '$2a$12$HtNgYhzZ0Gy.Si8DF9dHfOvTZBAc9E7c6rsqfBE90a3Mt21LZAkhi');
+INSERT INTO credenziali (id, username, role, password) VALUES (7, 'giulietta', 'GIOCATORE', '$2a$12$HtNgYhzZ0Gy.Si8DF9dHfOvTZBAc9E7c6rsqfBE90a3Mt21LZAkhi');
+INSERT INTO credenziali (id, username, role, password) VALUES (8, 'davide22', 'GIOCATORE', '$2a$12$HtNgYhzZ0Gy.Si8DF9dHfOvTZBAc9E7c6rsqfBE90a3Mt21LZAkhi');
+INSERT INTO credenziali (id, username, role, password) VALUES (9, 'francesca18', 'GIOCATORE', '$2a$12$HtNgYhzZ0Gy.Si8DF9dHfOvTZBAc9E7c6rsqfBE90a3Mt21LZAkhi');
+INSERT INTO credenziali (id, username, role, password) VALUES (10, 'simone', 'GIOCATORE', '$2a$12$HtNgYhzZ0Gy.Si8DF9dHfOvTZBAc9E7c6rsqfBE90a3Mt21LZAkhi');
+INSERT INTO credenziali (id, username, role, password) VALUES (11, 'chiara02', 'GIOCATORE', '$2a$12$HtNgYhzZ0Gy.Si8DF9dHfOvTZBAc9E7c6rsqfBE90a3Mt21LZAkhi');
+INSERT INTO credenziali (id, username, role, password) VALUES (12, 'matteo', 'GIOCATORE', '$2a$12$HtNgYhzZ0Gy.Si8DF9dHfOvTZBAc9E7c6rsqfBE90a3Mt21LZAkhi');
+INSERT INTO credenziali (id, username, role, password) VALUES (13, 'elena11', 'GIOCATORE', '$2a$12$HtNgYhzZ0Gy.Si8DF9dHfOvTZBAc9E7c6rsqfBE90a3Mt21LZAkhi');
+INSERT INTO credenziali (id, username, role, password) VALUES (14, 'ziona3', 'GIOCATORE', '$2a$12$HtNgYhzZ0Gy.Si8DF9dHfOvTZBAc9E7c6rsqfBE90a3Mt21LZAkhi');
+INSERT INTO credenziali (id, username, role, password) VALUES (15, 'fiona', 'GIOCATORE', '$2a$12$HtNgYhzZ0Gy.Si8DF9dHfOvTZBAc9E7c6rsqfBE90a3Mt21LZAkhi');
+INSERT INTO credenziali (id, username, role, password) VALUES (16, 'matteo99', 'GIOCATORE', '$2a$12$HtNgYhzZ0Gy.Si8DF9dHfOvTZBAc9E7c6rsqfBE90a3Mt21LZAkhi');
+INSERT INTO credenziali (id, username, role, password) VALUES (17, 'chiara_22', 'GIOCATORE', '$2a$12$HtNgYhzZ0Gy.Si8DF9dHfOvTZBAc9E7c6rsqfBE90a3Mt21LZAkhi');
+INSERT INTO credenziali (id, username, role, password) VALUES (18, 'luca_88', 'GIOCATORE', '$2a$12$HtNgYhzZ0Gy.Si8DF9dHfOvTZBAc9E7c6rsqfBE90a3Mt21LZAkhi');
+INSERT INTO credenziali (id, username, role, password) VALUES (19, 'sara_77', 'GIOCATORE', '$2a$12$HtNgYhzZ0Gy.Si8DF9dHfOvTZBAc9E7c6rsqfBE90a3Mt21LZAkhi');
+INSERT INTO credenziali (id, username, role, password) VALUES (20, 'alessandro_5', 'GIOCATORE', '$2a$12$HtNgYhzZ0Gy.Si8DF9dHfOvTZBAc9E7c6rsqfBE90a3Mt21LZAkhi');
+INSERT INTO credenziali (id, username, role, password) VALUES (21, 'giulia_10', 'GIOCATORE', '$2a$12$HtNgYhzZ0Gy.Si8DF9dHfOvTZBAc9E7c6rsqfBE90a3Mt21LZAkhi');
+INSERT INTO credenziali (id, username, role, password) VALUES (22, 'marco_33', 'GIOCATORE', '$2a$12$HtNgYhzZ0Gy.Si8DF9dHfOvTZBAc9E7c6rsqfBE90a3Mt21LZAkhi');
+INSERT INTO credenziali (id, username, role, password) VALUES (23, 'elena_45', 'GIOCATORE', '$2a$12$HtNgYhzZ0Gy.Si8DF9dHfOvTZBAc9E7c6rsqfBE90a3Mt21LZAkhi');
+INSERT INTO credenziali (id, username, role, password) VALUES (24, 'federico_99', 'GIOCATORE', '$2a$12$HtNgYhzZ0Gy.Si8DF9dHfOvTZBAc9E7c6rsqfBE90a3Mt21LZAkhi');
 
 -- UTENTE
-INSERT INTO utente (id, credenziali_id, nome, cognome, email, url_image) VALUES (1, 1, 'Lorenzo', 'Rossi', 'lorenzo@example.com', 'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fres.cloudinary.com%2Fteepublic%2Fimage%2Fprivate%2Fs--xAPAsZWI--%2Ft_Preview%2Fb_rgb%3Ac8e0ec%2Cc_limit%2Cf_jpg%2Ch_630%2Cq_90%2Cw_630%2Fv1522894149%2Fproduction%2Fdesigns%2F2560124_0.jpg&f=1&nofb=1&ipt=3f717e8d9313e86bdef943c05fc5216bc2ba4cb902f41e06d8175aa80565c900');
-INSERT INTO utente (id, credenziali_id, nome, cognome, email, url_image) VALUES (2, 2, 'Michela', 'Bianchi', 'michela@example.com',  'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fpng.pngtree.com%2Fpng-clipart%2F20230405%2Foriginal%2Fpngtree-cat-cartoon-png-image_9029157.png&f=1&nofb=1&ipt=c8531a4dd100289a5b229a9344f2036dd412143a05aa738b9fac7a57eb554474');
-INSERT INTO utente (id, credenziali_id, nome, cognome, email, url_image) VALUES (3, 3, 'Filippo', 'Maialino', 'filippo@example.com', 'https://media.licdn.com/dms/image/v2/D4D03AQEHCIheojtWSw/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1724238234684?e=2147483647&v=beta&t=w3L5dsK4axuQhPQMDrP8JRbJjJLFMvuvW3kaVesa3LY');
-INSERT INTO utente (id, credenziali_id, nome, cognome, email, url_image) VALUES (4, 4, 'Marco', 'Chiodino', 'marco@example.com', 'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fpngimg.com%2Fuploads%2Fflags%2Fflags_PNG14629.png&f=1&nofb=1&ipt=6018221fccb258f46e875a28897b0a4026756f78ab53705259e5d307cbf2edab');
-INSERT INTO utente (id, credenziali_id, nome, cognome, email, url_image) VALUES (5, 5, 'Laura', 'Straccetti', 'laura@example.com', 'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fpngimg.com%2Fuploads%2Fflags%2Fflags_PNG14629.png&f=1&nofb=1&ipt=6018221fccb258f46e875a28897b0a4026756f78ab53705259e5d307cbf2edab');
+INSERT INTO utente (id, credenziali_id, nome, cognome, email, data_registrazione, url_image) VALUES (1, 1, 'Lorenzo', 'Rossi', 'lorenzo@example.com', '2025-03-17', 'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fres.cloudinary.com%2Fteepublic%2Fimage%2Fprivate%2Fs--xAPAsZWI--%2Ft_Preview%2Fb_rgb%3Ac8e0ec%2Cc_limit%2Cf_jpg%2Ch_630%2Cq_90%2Cw_630%2Fv1522894149%2Fproduction%2Fdesigns%2F2560124_0.jpg&f=1&nofb=1&ipt=3f717e8d9313e86bdef943c05fc5216bc2ba4cb902f41e06d8175aa80565c900');
+INSERT INTO utente (id, credenziali_id, nome, cognome, email, data_registrazione, url_image) VALUES (2, 2, 'Michela', 'Bianchi', 'michela@example.com', '2025-04-17', 'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fpng.pngtree.com%2Fpng-clipart%2F20230405%2Foriginal%2Fpngtree-cat-cartoon-png-image_9029157.png&f=1&nofb=1&ipt=c8531a4dd100289a5b229a9344f2036dd412143a05aa738b9fac7a57eb554474');
+INSERT INTO utente (id, credenziali_id, nome, cognome, email, data_registrazione,  url_image) VALUES (3, 3, 'Filippo', 'Maialino', 'filippo@example.com', '2025-03-13', 'https://media.licdn.com/dms/image/v2/D4D03AQEHCIheojtWSw/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1724238234684?e=2147483647&v=beta&t=w3L5dsK4axuQhPQMDrP8JRbJjJLFMvuvW3kaVesa3LY');
+INSERT INTO utente (id, credenziali_id, nome, cognome, email, data_registrazione, url_image) VALUES (4, 4, 'Marco', 'Chiodino', 'marco@example.com', '2025-04-15', 'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fpngimg.com%2Fuploads%2Fflags%2Fflags_PNG14629.png&f=1&nofb=1&ipt=6018221fccb258f46e875a28897b0a4026756f78ab53705259e5d307cbf2edab');
+INSERT INTO utente (id, credenziali_id, nome, cognome, email, data_registrazione, url_image) VALUES (5, 5, 'Laura', 'Straccetti', 'laura@example.com', '2025-03-27', 'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fpngimg.com%2Fuploads%2Fflags%2Fflags_PNG14629.png&f=1&nofb=1&ipt=6018221fccb258f46e875a28897b0a4026756f78ab53705259e5d307cbf2edab');
+INSERT INTO utente (id, credenziali_id, nome, cognome, email, data_registrazione, url_image) VALUES (6, 6, 'Alex', 'Fortini', 'alex32@example.com', '2025-06-17', 'https://media.licdn.com/dms/image/v2/D4D03AQEHCIheojtWSw/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1724238234684?e=2147483647&v=beta&t=w3L5dsK4axuQhPQMDrP8JRbJjJLFMvuvW3kaVesa3LY');
+INSERT INTO utente (id, credenziali_id, nome, cognome, email, data_registrazione, url_image) VALUES (7, 7, 'Giulia', 'Martino', 'giulia32@example.com', '2025-04-11', 'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fpngimg.com%2Fuploads%2Fflags%2Fflags_PNG14629.png&f=1&nofb=1&ipt=6018221fccb258f46e875a28897b0a4026756f78ab53705259e5d307cbf2edab');
+INSERT INTO utente (id, credenziali_id, nome, cognome, email, data_registrazione, url_image) VALUES (8, 8, 'Davide', 'Fregola', 'david@example.com', '2025-05-22', 'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fpngimg.com%2Fuploads%2Fflags%2Fflags_PNG14629.png&f=1&nofb=1&ipt=6018221fccb258f46e875a28897b0a4026756f78ab53705259e5d307cbf2edab');
+INSERT INTO utente (id, credenziali_id, nome, cognome, email, data_registrazione, url_image) VALUES (9, 9, 'Francesca', 'Mersi', 'mersina@example.com', '2025-05-03', 'https://media.licdn.com/dms/image/v2/D4D03AQEHCIheojtWSw/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1724238234684?e=2147483647&v=beta&t=w3L5dsK4axuQhPQMDrP8JRbJjJLFMvuvW3kaVesa3LY');
+INSERT INTO utente (id, credenziali_id, nome, cognome, email, data_registrazione, url_image) VALUES (10, 10, 'Simone', 'Chioso', 'simonchi@example.com', '2025-05-23', 'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fpngimg.com%2Fuploads%2Fflags%2Fflags_PNG14629.png&f=1&nofb=1&ipt=6018221fccb258f46e875a28897b0a4026756f78ab53705259e5d307cbf2edab');
+INSERT INTO utente (id, credenziali_id, nome, cognome, email, data_registrazione, url_image) VALUES (11, 11, 'Chaira', 'Straccetto', 'chiaretta02@example.com', '2025-06-17', 'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fpngimg.com%2Fuploads%2Fflags%2Fflags_PNG14629.png&f=1&nofb=1&ipt=6018221fccb258f46e875a28897b0a4026756f78ab53705259e5d307cbf2edab');
+INSERT INTO utente (id, credenziali_id, nome, cognome, email, data_registrazione, url_image) VALUES (12, 12, 'Matteo', 'Maia', 'matto@example.com', '2025-05-25', 'https://media.licdn.com/dms/image/v2/D4D03AQEHCIheojtWSw/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1724238234684?e=2147483647&v=beta&t=w3L5dsK4axuQhPQMDrP8JRbJjJLFMvuvW3kaVesa3LY');
+INSERT INTO utente (id, credenziali_id, nome, cognome, email, data_registrazione, url_image) VALUES (13, 13, 'Matteo', 'Burro', 'matteo@example.com', '2025-06-24', 'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fpngimg.com%2Fuploads%2Fflags%2Fflags_PNG14629.png&f=1&nofb=1&ipt=6018221fccb258f46e875a28897b0a4026756f78ab53705259e5d307cbf2edab');
+INSERT INTO utente (id, credenziali_id, nome, cognome, email, data_registrazione, url_image) VALUES (14, 14, 'Milena', 'Milzo', 'mielna@example.com', '2025-06-17', 'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fpngimg.com%2Fuploads%2Fflags%2Fflags_PNG14629.png&f=1&nofb=1&ipt=6018221fccb258f46e875a28897b0a4026756f78ab53705259e5d307cbf2edab');
+INSERT INTO utente (id, credenziali_id, nome, cognome, email, data_registrazione, url_image) VALUES (15, 15, 'Fiona', 'Fiori', 'fii@example.com', '2025-06-17', 'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fpngimg.com%2Fuploads%2Fflags%2Fflags_PNG14629.png&f=1&nofb=1&ipt=6018221fccb258f46e875a28897b0a4026756f78ab53705259e5d307cbf2edab');
+INSERT INTO utente (id, credenziali_id, nome, cognome, email, data_registrazione, url_image) VALUES (16, 16, 'Luca', 'Rossi', 'luca.rossi@example.com', '2025-06-18', 'https://media.licdn.com/dms/image/v2/D4D03AQEHCIheojtWSw/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1724238234684?e=2147483647&v=beta&t=w3L5dsK4axuQhPQMDrP8JRbJjJLFMvuvW3kaVesa3LY');
+INSERT INTO utente (id, credenziali_id, nome, cognome, email, data_registrazione, url_image) VALUES (17, 17, 'Giulia', 'Verdi', 'giulia.verdi@example.com', '2025-06-19', 'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fpngimg.com%2Fuploads%2Fflags%2Fflags_PNG14629.png&f=1&nofb=1&ipt=6018221fccb258f46e875a28897b0a4026756f78ab53705259e5d307cbf2edab');
+INSERT INTO utente (id, credenziali_id, nome, cognome, email, data_registrazione, url_image) VALUES (18, 18, 'Marco', 'Bianchi', 'marco.bianchi@example.com', '2025-06-20', 'https://media.licdn.com/dms/image/v2/D4D03AQEHCIheojtWSw/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1724238234684?e=2147483647&v=beta&t=w3L5dsK4axuQhPQMDrP8JRbJjJLFMvuvW3kaVesa3LY');
+INSERT INTO utente (id, credenziali_id, nome, cognome, email, data_registrazione, url_image) VALUES (19, 19, 'Sara', 'Neri', 'sara.neri@example.com', '2025-06-21', 'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fpngimg.com%2Fuploads%2Fflags%2Fflags_PNG14629.png&f=1&nofb=1&ipt=6018221fccb258f46e875a28897b0a4026756f78ab53705259e5d307cbf2edab');
+INSERT INTO utente (id, credenziali_id, nome, cognome, email, data_registrazione, url_image) VALUES (20, 20, 'Alessandro', 'Gallo', 'alessandro.gallo@example.com', '2025-06-22', 'https://media.licdn.com/dms/image/v2/D4D03AQEHCIheojtWSw/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1724238234684?e=2147483647&v=beta&t=w3L5dsK4axuQhPQMDrP8JRbJjJLFMvuvW3kaVesa3LY');
+INSERT INTO utente (id, credenziali_id, nome, cognome, email, data_registrazione, url_image) VALUES (21, 21, 'Francesca', 'Neri', 'francesca.neri@example.com', '2025-06-23', 'https://media.licdn.com/dms/image/v2/D4D03AQEHCIheojtWSw/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1724238234684?e=2147483647&v=beta&t=w3L5dsK4axuQhPQMDrP8JRbJjJLFMvuvW3kaVesa3LY');
+INSERT INTO utente (id, credenziali_id, nome, cognome, email, data_registrazione, url_image) VALUES (22, 22, 'Simone', 'Bianchi', 'simone.bianchi@example.com', '2025-06-24', 'https://media.licdn.com/dms/image/v2/D4D03AQEHCIheojtWSw/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1724238234684?e=2147483647&v=beta&t=w3L5dsK4axuQhPQMDrP8JRbJjJLFMvuvW3kaVesa3LY');
+INSERT INTO utente (id, credenziali_id, nome, cognome, email, data_registrazione, url_image) VALUES (23, 23, 'Elena', 'Rossi', 'elena.rossi@example.com', '2025-06-25', 'https://media.licdn.com/dms/image/v2/D4D03AQEHCIheojtWSw/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1724238234684?e=2147483647&v=beta&t=w3L5dsK4axuQhPQMDrP8JRbJjJLFMvuvW3kaVesa3LY');
+INSERT INTO utente (id, credenziali_id, nome, cognome, email, data_registrazione, url_image) VALUES (24, 24, 'Giorgio', 'Verdi', 'giorgio.verdi@example.com', '2025-06-26', 'https://media.licdn.com/dms/image/v2/D4D03AQEHCIheojtWSw/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1724238234684?e=2147483647&v=beta&t=w3L5dsK4axuQhPQMDrP8JRbJjJLFMvuvW3kaVesa3LY');
 
 -- AUTORE (sottoclasse di UTENTE)
 INSERT INTO autore (id, biografia) VALUES (1, 'Ciao, sono Lorenzo, un`appassionato di educazione e tecnologia. Da anni creo quiz interattivi per aiutare gli studenti a imparare in modo divertente e coinvolgente. Credo che l`apprendimento debba essere un`esperienza stimolante e cerco sempre di innovare nei miei contenuti.');
@@ -20,6 +58,25 @@ INSERT INTO autore (id, biografia) VALUES (2,  'Salve, sono Michela, un esperta 
 INSERT INTO giocatore (id, punteggio) VALUES (3, 30);
 INSERT INTO giocatore (id, punteggio) VALUES (4, 10);
 INSERT INTO giocatore (id, punteggio) VALUES (5, 0);
+INSERT INTO giocatore (id, punteggio) VALUES (6, 30);
+INSERT INTO giocatore (id, punteggio) VALUES (7, 10);
+INSERT INTO giocatore (id, punteggio) VALUES (8, 0);
+INSERT INTO giocatore (id, punteggio) VALUES (9, 40);
+INSERT INTO giocatore (id, punteggio) VALUES (10, 30);
+INSERT INTO giocatore (id, punteggio) VALUES (11, 10);
+INSERT INTO giocatore (id, punteggio) VALUES (12, 20);
+INSERT INTO giocatore (id, punteggio) VALUES (13, 210);
+INSERT INTO giocatore (id, punteggio) VALUES (14, 110);
+INSERT INTO giocatore (id, punteggio) VALUES (15, 0);
+INSERT INTO giocatore (id, punteggio) VALUES (16, 40);
+INSERT INTO giocatore (id, punteggio) VALUES (17, 30);
+INSERT INTO giocatore (id, punteggio) VALUES (18, 20);
+INSERT INTO giocatore (id, punteggio) VALUES (19, 0);
+INSERT INTO giocatore (id, punteggio) VALUES (20, 20);
+INSERT INTO giocatore (id, punteggio) VALUES (21, 40);
+INSERT INTO giocatore (id, punteggio) VALUES (22, 30);
+INSERT INTO giocatore (id, punteggio) VALUES (23, 20);
+INSERT INTO giocatore (id, punteggio) VALUES (24, 0);
 
 -- Etichette
 INSERT INTO etichetta (id, nome, descrizione) VALUES (1, 'Cultura generale', '');
@@ -100,7 +157,6 @@ INSERT INTO giocatore_elenco_raccolte (giocatore_id, elenco_raccolte_id) VALUES(
 INSERT INTO giocatore_elenco_raccolte (giocatore_id, elenco_raccolte_id) VALUES(5,6);
 INSERT INTO giocatore_elenco_raccolte (giocatore_id, elenco_raccolte_id) VALUES(5,1);
 INSERT INTO giocatore_elenco_raccolte (giocatore_id, elenco_raccolte_id) VALUES(5,3);
-INSERT INTO giocatore_elenco_raccolte (giocatore_id, elenco_raccolte_id) VALUES(5,6);
 
 -- Aggiorna il counter degli id delle varie tabelle
 SELECT setval('credenziali_seq', (SELECT MAX(id) FROM credenziali));
