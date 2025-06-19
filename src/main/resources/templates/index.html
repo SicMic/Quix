@@ -25,7 +25,9 @@
             <div class="container px-4 text-center">
                 <h1 class="fw-bolder">Benvenuto su Quix</h1>
                 <p class="lead">Ti stai annoiando? Vuoi divertiri? Prova uno dei nostri quiz!</p>
-                <a class="btn btn-lg btn-light" href="#about">Iniziamo!</a>
+                <a th:if="${ruolo.equals('autore')}" class="btn btn-lg btn-light" href="/autore/dashboard">Iniziamo!</a>
+                <a th:if="${ruolo.equals('giocatore')}" class="btn btn-lg btn-light" href="/quiz/1">Iniziamo!</a>
+                <a th:if="${!ruolo.equals('autore') && !ruolo.equals('giocatore') }" class="btn btn-lg btn-light" href="/login">Iniziamo!</a>
             </div>
         </header>
         <!-- About section-->

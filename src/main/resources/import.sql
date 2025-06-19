@@ -17,9 +17,9 @@ INSERT INTO autore (id, biografia) VALUES (1, 'Ciao, sono Lorenzo, un`appassiona
 INSERT INTO autore (id, biografia) VALUES (2,  'Salve, sono Michela, un esperta di gamification e creazione di contenuti. Mi dedico a progettare quiz che sfidano le persone a testare le loro conoscenze su vari argomenti, rendendo l`apprendimento un gioco. La mia missione è rendere l`educazione accessibile e divertente per tutti!');
 
 -- GIOCATORE (sottoclasse di UTENTE)
-INSERT INTO giocatore (id) VALUES (3);
-INSERT INTO giocatore (id) VALUES (4);
-INSERT INTO giocatore (id) VALUES (5);
+INSERT INTO giocatore (id, punteggio) VALUES (3, 30);
+INSERT INTO giocatore (id, punteggio) VALUES (4, 10);
+INSERT INTO giocatore (id. punteggio) VALUES (5, 0);
 
 -- Etichette
 INSERT INTO etichetta (id, nome, descrizione) VALUES (1, 'Cultura generale', '');
@@ -107,8 +107,6 @@ INSERT INTO giocatore_elenco_raccolte (giocatore_id, elenco_raccolte_id) VALUES(
 INSERT INTO giocatore_elenco_raccolte (giocatore_id, elenco_raccolte_id) VALUES(4,3);
 INSERT INTO giocatore_elenco_raccolte (giocatore_id, elenco_raccolte_id) VALUES(4,4);
 INSERT INTO giocatore_elenco_raccolte (giocatore_id, elenco_raccolte_id) VALUES(4,5);
-INSERT INTO giocatore_elenco_raccolte (giocatore_id, elenco_raccolte_id) VALUES(4,1);
-INSERT INTO giocatore_elenco_raccolte (giocatore_id, elenco_raccolte_id) VALUES(5,2);
 INSERT INTO giocatore_elenco_raccolte (giocatore_id, elenco_raccolte_id) VALUES(5,6);
 INSERT INTO giocatore_elenco_raccolte (giocatore_id, elenco_raccolte_id) VALUES(5,1);
 INSERT INTO giocatore_elenco_raccolte (giocatore_id, elenco_raccolte_id) VALUES(5,3);

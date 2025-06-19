@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import it.uniroma3.theboys.quix.model.Autore;
+import it.uniroma3.theboys.quix.model.Giocatore;
 import it.uniroma3.theboys.quix.model.Quiz;
 import it.uniroma3.theboys.quix.model.Raccolta;
 import it.uniroma3.theboys.quix.service.QuizService;
@@ -44,8 +46,8 @@ public class QuizController {
 		}
 
 		model.addAttribute("punteggio", session.getAttribute("punteggio"));
-
-		//aggiungere il punteggio del quiz corrente al punteggio totale del giocatore
+		Giocatore giocatore = (Giocatore) model.getAttribute("utente");
+		giocatore.sommaPunteggio((Long) session.getAttribute("punteggio"));
 
 		session.removeAttribute("indiceQuiz");
 		session.removeAttribute("punteggio");

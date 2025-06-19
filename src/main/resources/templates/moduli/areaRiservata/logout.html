@@ -21,10 +21,9 @@
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Annulla</button>
                     <form action="/logout" method="post" style="display: inline;">
                         <input type="hidden" name="_csrf" th:value="${_csrf.token}"/>
-                        <button type="submit">Logout</button>
+                        <button class="btn btn-primary" type="submit">Esci</button>
                     </form>
 
-                    <!-- <a class="btn btn-primary" href="/logout">Esci</a> -->
                 </div>
             </div>
         </div>

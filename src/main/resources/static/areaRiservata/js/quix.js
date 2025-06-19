@@ -23,7 +23,7 @@ if (window.location.pathname.includes("elencoQuiz") || window.location.pathname.
 document.addEventListener("click", function (e) {
 
     //raccolte.html - start
-    if (window.location.pathname.includes("raccolte") || window.location.pathname.includes("dashboardAutore")) {
+    if (window.location.pathname.includes("raccolte") || window.location.pathname.includes("dashboard")) {
         if (e.target.id.includes("showQuizModal"))
             document.getElementById("newQuizModal").style.display = "block"
         if (e.target.id.includes("hideQuizModal"))
@@ -82,6 +82,7 @@ document.addEventListener("click", function (e) {
 
 // Topbar search input
 document.addEventListener("keyup", function (e) {
+    if(!window.location.pathname.includes("login") && !window.location.pathname.includes("index")){
     const righe = document.getElementById("containerRows").getAttribute("valore")
     if (e.target.id == "searchInput")
         if (window.location.pathname.includes("elencoQuiz") || window.location.pathname.includes("raccolta")) {
@@ -106,6 +107,7 @@ document.addEventListener("keyup", function (e) {
                 }
             }
         }
+    }
 })
 
 /***  Listener - END ***/
