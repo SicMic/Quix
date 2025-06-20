@@ -1,4 +1,4 @@
-package it.uniroma3.theboys.quix.configration;
+package it.uniroma3.theboys.quix.configuration;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;

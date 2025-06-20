@@ -17,24 +17,23 @@ public class CredenzialiService {
     protected PasswordEncoder passwordEncoder;
 
     @Autowired
-    protected CredenzialiRepository credenzialiCredenzialiRepository;
+    protected CredenzialiRepository credenzialiRepository;
 
     @Transactional
     public Credenziali getCredenziali(Long id) {
-        Optional<Credenziali> result = this.credenzialiCredenzialiRepository.findById(id);
+        Optional<Credenziali> result = this.credenzialiRepository.findById(id);
         return result.orElse(null);
     }
 
     @Transactional
     public Credenziali getCredenziali(String username) {
-        Optional<Credenziali> result = this.credenzialiCredenzialiRepository.findByUsername(username);
+        Optional<Credenziali> result = this.credenzialiRepository.findByUsername(username);
         return result.orElse(null);
     }
 
     @Transactional
-    public Credenziali saveCredenziali(Credenziali credenzialiCredenziali) {
-        credenzialiCredenziali.setRole(Credenziali.AUTORE_ROLE);
-        credenzialiCredenziali.setPassword(this.passwordEncoder.encode(credenzialiCredenziali.getPassword()));
-        return this.credenzialiCredenzialiRepository.save(credenzialiCredenziali);
+    public Credenziali saveCredenziali(Credenziali credenziali) {
+        credenziali.setPassword(this.passwordEncoder.encode(credenziali.getPassword()));
+        return this.credenzialiRepository.save(credenziali);
     }
 }

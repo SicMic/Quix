@@ -3,7 +3,6 @@ package it.uniroma3.theboys.quix.controller;
 import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -13,7 +12,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import it.uniroma3.theboys.quix.model.Autore;
 import it.uniroma3.theboys.quix.model.Giocatore;
 import it.uniroma3.theboys.quix.model.Quiz;
 import it.uniroma3.theboys.quix.model.Raccolta;
