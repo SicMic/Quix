@@ -163,6 +163,8 @@ public class AutoreController {
 			mappaEtichette.put(e.getNome(), e.getNome().replace(" ", "+"));
 		model.addAttribute("mappaEtichette", mappaEtichette);
 		model.addAttribute("etichette", autore.getEtichetteAutore());
+		model.addAttribute("elencoEtichette", etichettaService.getAllEtichette());
+
 		return "raccolte.html";
 	}
 
@@ -237,8 +239,7 @@ public class AutoreController {
 				response.put("error", "Raccolta non trovato nel database");
 				return ResponseEntity.ok(response);
 			}
-			// this.raccoltaService.updateRaccolta(idRaccolta, nome, descrizione, urlImage,
-			// etichetta);
+			this.raccoltaService.updateRaccolta(idRaccolta, nome, descrizione, urlImage, etichetta);
 			response.put("message", "Raccolta aggiornato con successo");
 			return ResponseEntity.ok(response);
 		} catch (Exception e) {
@@ -261,21 +262,5 @@ public class AutoreController {
 	public String getImpostazioniAutore(Model model) {
 		return "impostazioni.html";
 	}
-
-	@GetMapping("/lol")
-	public String lol(Model model) {
-		return "lol.html";
-	}
-
-	// @GetMapping("/logout")
-	// public String logout() {
-	// // if (session.getAttribute("user") == null)
-	// // return "redirect:/login";
-
-	// // session.invalidate();
-	// return "redirect:/";
-
-	// }
-	// ALTRO - END
 
 }

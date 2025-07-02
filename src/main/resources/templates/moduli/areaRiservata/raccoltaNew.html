@@ -28,7 +28,7 @@
                         <div class="form-group row">
                             <div class="col-sm">
                                 <select name="etichetta" class="form-control">
-                                    <option th:each="etichetta : ${etichette}" th:value="${etichetta.nome}" th:text="${etichetta.nome}"></option>
+                                    <option th:each="etichetta : ${elencoEtichette}" th:value="${etichetta.nome}" th:text="${etichetta.nome}"></option>
                                 </select>
                             </div>
                         </div>

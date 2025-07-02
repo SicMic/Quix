@@ -19,6 +19,7 @@ public interface QuizRepository extends CrudRepository<Quiz, Long>{
         JOIN raccolta r ON q.raccolta_id = r.id
         JOIN autore a ON r.autore_id = a.id
         WHERE a.id = :autoreId
+        ORDER BY r.data_creazione DESC
     """, nativeQuery = true)
     public Iterable<Quiz> findByAutoreId(@Param("autoreId") Long autoreId);
 

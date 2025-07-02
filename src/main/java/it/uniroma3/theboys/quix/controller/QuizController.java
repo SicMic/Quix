@@ -37,6 +37,7 @@ public class QuizController {
 			session.setAttribute("punteggio", new Integer(0));
 			Giocatore giocatore = (Giocatore) model.getAttribute("utente");
 			giocatore.getElencoRaccolte().add(raccoltaService.getRaccoltaById(idRaccolta));
+			giocatoreService.updateGiocatore(giocatore);
 		}
 		Raccolta raccolta = raccoltaService.getRaccoltaById(idRaccolta);
 		ArrayList<Quiz> quizzes = new ArrayList<>(raccolta.getElencoQuiz());
@@ -51,7 +52,7 @@ public class QuizController {
 		model.addAttribute("punteggio", session.getAttribute("punteggio"));
 		Giocatore giocatore = (Giocatore) model.getAttribute("utente");
 		giocatore.sommaPunteggio((Integer) session.getAttribute("punteggio"));
-		this.giocatoreService.updatePunteggio(giocatore);
+		this.giocatoreService.updateGiocatore(giocatore);
 
 		session.removeAttribute("indiceQuiz");
 		session.removeAttribute("punteggio");

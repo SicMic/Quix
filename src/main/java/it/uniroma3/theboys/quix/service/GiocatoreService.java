@@ -36,7 +36,7 @@ public class GiocatoreService {
 
     }
 
-    public Giocatore updatePunteggio(Giocatore giocatore) {
+    public Giocatore updateGiocatore(Giocatore giocatore) {
         return this.giocatoreRepository.save(giocatore);
     }
 

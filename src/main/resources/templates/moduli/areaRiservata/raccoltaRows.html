@@ -45,7 +45,7 @@
                             <p class="mt-2" th:text="${raccolta.descrizione}"> Descrizione </p>
                         </div>
                     </a>
-                    <a th:if="${ruolo.equals('giocatore')}" th:href="@{'/quiz/' + ${raccolta.id} + '/1/1'}" style="text-decoration: none;">
+                    <a th:if="${ruolo.equals('giocatore')}" th:href="@{'/quiz/' + ${raccolta.id}}" style="text-decoration: none;">
                         <!-- Card Body -->
                         <div class="card-body">
                             <div class="text-center">
