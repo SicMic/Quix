@@ -157,7 +157,7 @@ sequenceDiagram
     participant S as Sistema
 
     A->>S: inserisciQuiz(nome, opzioneUno, opzioneDue, opzioneTre, opzioneQuattro, categoria)
-    S-->>A: Creazione della raccolta avvenuta con successo
+    S-->>A: Creazione del quiz avvenuta con successo
 ```
 
 #### e. Modifica di una raccolta
@@ -166,10 +166,10 @@ sequenceDiagram
 sequenceDiagram
     participant A as Autore
     participant S as Sistema
-    
-    A->>S: slezionaRaccolta(nome, opzioneUno, opzioneDue, opzioneTre, opzioneQuattro, categoria)
-    A->>S: inserisciQuiz(nome, opzioneUno, opzioneDue, opzioneTre, opzioneQuattro, categoria)
-    S-->>A: Creazione della raccolta avvenuta con successo
+
+    A->>S: slezionaRaccolta(idRaccolta)
+    A->>S: modificaRaccolta(nome, etichetta, descrizione, copertina)
+    S-->>A: Modifica della raccolta avvenuta con successo
 ```
 
 #### f. Modifica di un quiz
@@ -179,10 +179,9 @@ sequenceDiagram
     participant A as Autore
     participant S as Sistema
 
-    A->>S: login()
-    A->>S: iniziaModificaQuiz(quesito, opzioneUno, opzioneDue, opzioneTre, opzioneQuattro, categoria)
-    A->>S: confermaModificaQuiz()
-    S-->>A: Messaggio di sistema
+    A->>S: slezionaQuiz(idQuiz)
+    A->>S: modificaQuiz(quesito, opzioneUno, opzioneDue, opzioneTre, opzioneQuattro, categoria)
+    S-->>A: Modifica del quiz avvenuta con successo
 ```
 ### Casi d'uso del Giocatore
 #### a. Registrazione di un giocatore
@@ -211,41 +210,7 @@ sequenceDiagram
     S-->>G: Login avvenuto con successo
 ```
 
-## Contratti
-### Registrazione
-#### operazione()
-**pre-condizioni:**
-- ...
-- ...
-**post-condizioni:**
-- testo 
 
-
-## Diagramma di comunicazione
-### b. Login di un giocatore
-
-```mermaid
-
-flowchart LR
-    O{" "}-->|"login(id, pwd)"| A
-    A[: ACME Pizza] -->|"t = getTitolare(id)"| B
-    B[: Pizza Delivery]-->|"t = find()"| C 
-    C[titolari : Collection<'Titolare>]
-
-    %% Commenti visibili
-    subgraph Commenti
-        direction TB
-        C1["Commento: Inizio del flusso di login"]
-        C2["Commento: Recupero del titolare"]
-        C3["Commento: Ricerca dei titolari"]
-    end
-
-    %% Posizionamento dei commenti
-    C1 --> O
-    C2 --> A
-    C3 --> B
-
-```
 
 ## Diagramma delle classi
 

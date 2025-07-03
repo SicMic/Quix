@@ -8,7 +8,7 @@
 <div th:fragment="raccoltaRows">
     <!-- Quiz Row - Start -->
     <div id="containerRows">
-        <div class="row">
+        <div id="numeroRighe" class="row">
             <div class="col-xl-3 col-lg-4" th:id="'raccoltaRow' + ${iterStat.index}" th:each="raccolta, iterStat : ${raccolte}">
                 <div class="card shadow mb-4">
                     <!-- Card Header - Dropdown -->

@@ -83,7 +83,7 @@ document.addEventListener("click", function (e) {
 // Topbar search input
 document.addEventListener("keyup", function (e) {
     if(!window.location.pathname.includes("login") && !window.location.pathname.includes("index")){
-    const righe = document.getElementById("containerRows").getAttribute("valore")
+    const righe = document.getElementById("numeroRighe").childElementCount
     if (e.target.id == "searchInput")
         if (window.location.pathname.includes("elencoQuiz") || window.location.pathname.includes("raccolta")) {
             const ricerca = e.target.value.toUpperCase()
